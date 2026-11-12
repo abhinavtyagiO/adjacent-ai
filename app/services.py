@@ -80,6 +80,13 @@ class BrandService:
 
         brand = self.require_brand(brand_id)
         profile = self.require_profile(brand_id)
+        validation = profile.pipeline_metadata.get("evidence_validation", {})
+        stages = dict(profile.pipeline_metadata.get("stages", {}))
+        # Older SUCCEEDED marketing outcomes measured JSON parsing, not retained evidence.
+        if stages.get("marketing") == "SUCCEEDED" and not validation.get("marketing"):
+            stages["marketing"] = "UNKNOWN"
+        for stage in ("facts", "marketing"):
+            stages.setdefault(stage, "UNKNOWN")
         return {
             "brand_id": brand.id,
             "revision": brand.revision,
@@ -97,10 +104,16 @@ class BrandService:
             "creative_readiness": creative_readiness(
                 self.repo.bip(profile),
                 profile.pipeline_metadata.get("creative_readiness", {}).get(
+                    "requested_offering_key"
+                )
+                or profile.pipeline_metadata.get("creative_readiness", {}).get(
                     "selected_offering_key"
                 ),
+                profile.provenance,
             ),
             "extraction_metrics": profile.pipeline_metadata.get("extraction_metrics", {}),
+            "stages": stages,
+            "evidence_validation": validation,
         }
 
     def update(self, brand_id: uuid.UUID, request: ProfilePatch) -> dict:

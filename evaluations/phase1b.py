@@ -181,6 +181,12 @@ async def main(args):
             result = await run_pipeline(RecordedProvider(facts, prior), settings, url, bundle)
             result.metadata["extraction_metrics"] = prior["extraction_metrics"]
             result.metadata["recorded_stages"] = prior["stages"]
+            result.metadata["evidence_validation"]["facts"]["input_basis"] = (
+                "SAVED_FACTUAL_RESPONSE"
+            )
+            result.metadata["evidence_validation"]["marketing"]["input_basis"] = (
+                "PREVIOUSLY_RETAINED_FIELDS_ONLY"
+            )
             result.metadata["replay_note"] = (
                 "No new model calls. Audience replay uses only previously "
                 "retained brand-level insights, not raw stage-2 output."

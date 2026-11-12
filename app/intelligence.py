@@ -1,13 +1,17 @@
 """Deterministic business consistency checks and two-stage intelligence orchestration."""
 
 import asyncio
+import logging
 import re
 import time
 from collections import Counter
 from dataclasses import dataclass
 from decimal import Decimal
 
+from pydantic import ValidationError
+
 from app.crawling.website import CATEGORIES, page_category
+from app.diagnostics import EvidenceAudit, unavailable_evidence
 from app.enrichment import SourceBundle
 from app.errors import DomainError
 from app.provenance import leaves, normalized, validated_profile
@@ -20,6 +24,7 @@ MARKETING_ROOTS = {
     "brand_voice",
     "creative_context",
 }
+logger = logging.getLogger(__name__)
 
 
 def slug(name: str) -> str:
@@ -130,7 +135,9 @@ def literal_catalog_evidence(result: ExtractionResult, sources: SourceBundle) ->
     return result.model_copy(update={"evidence": [*result.evidence, *additions]})
 
 
-def factual_consistency(result: ExtractionResult, sources: SourceBundle, warnings: list[str]):
+def factual_consistency(
+    result: ExtractionResult, sources: SourceBundle, warnings: list[str], audit=None
+):
     """Reject known scope/classification contradictions before general citation validation.
 
     This is targeted checking, not a claim of universal semantic entailment. User review
@@ -139,6 +146,11 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
     data = result.profile.model_dump()
     evidence = {e.path: e for e in result.evidence}
     rejected = set()
+
+    def reject(path, reason):
+        rejected.add(path)
+        if audit:
+            audit.reject(path, reason)
 
     def support(path):
         entry = evidence.get(path)
@@ -156,7 +168,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
         if offering["kind"] == "OTHER" and re.search(
             r"newsletter|ingredient.*look.?up|tool to look up", offering["description"] or "", re.I
         ):
-            rejected.add(prefix)
+            reject(prefix, "NON_MARKETABLE_RESOURCE")
             warnings.append(
                 f"{prefix}: editorial/supporting resource omitted from marketable catalog."
             )
@@ -174,6 +186,15 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
                         "features": offering["features"],
                     }
                 )
+                if audit:
+                    for old_path in leaves(
+                        {k: offering[k] for k in ("name", "pricing", "features")}, prefix
+                    ):
+                        audit.alias(
+                            old_path,
+                            f"/offerings/{target}/pricing_tiers/{tier_index}"
+                            + old_path[len(prefix) :],
+                        )
                 for entry in result.evidence:
                     for field in ("name", "pricing", "features"):
                         original = prefix + "/" + field
@@ -186,7 +207,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
                                     }
                                 )
                             )
-            rejected.add(prefix)
+            reject(prefix, "SUBSCRIPTION_TIER_RELOCATED_OR_OMITTED")
             warnings.append(
                 f"{prefix}: subscription tier omitted from products; "
                 "tiers belong under the actual product."
@@ -196,7 +217,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
             if field == "kind" and offering[field] and name_support:
                 expected = kind_from_context(name_support + " " + support(path))
                 if expected and offering[field] != expected:
-                    rejected.add(path)
+                    reject(path, "CONTRADICTORY_CLASSIFICATION")
                     warnings.append(f"{path}: contradictory classification omitted.")
     for path, value in leaves(data).items():
         quote = support(path)
@@ -210,7 +231,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
             or path.startswith("/trust_and_proof/metrics/")
         ):
             if quote and not quantities(str(value)).issubset(quantities(quote)):
-                rejected.add(path)
+                reject(path, "NUMERIC_CLAIM_MISMATCH")
                 warnings.append(
                     f"{path}: numeric advertising claim does not match its cited qualifiers."
                 )
@@ -221,7 +242,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
                 quote,
                 re.I,
             ):
-                rejected.add(path)
+                reject(path, "MARKETING_CHANNEL_NOT_EXPLICIT")
                 warnings.append(
                     f"{path}: supported platform is not an explicit brand marketing preference."
                 )
@@ -229,7 +250,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
             text_path = path.rsplit("/", 1)[0] + "/text"
             actual = detected_scope(support(text_path) + " " + quote)
             if actual and value != actual:
-                rejected.add(path.rsplit("/", 1)[0])
+                reject(path.rsplit("/", 1)[0], "CLAIM_SCOPE_MISMATCH")
                 warnings.append(
                     f"{path}: claim scope contradicts the cited "
                     "facility/newsletter/customer context."
@@ -242,6 +263,8 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
                 scoped = data["trust_and_proof"]["scoped_claims"]
                 index = len(scoped)
                 scoped.append({"text": str(value), "scope": detected_scope(quote), "subject": None})
+                if audit:
+                    audit.alias(path, f"/trust_and_proof/scoped_claims/{index}/text")
                 additions.extend(
                     [
                         entry.model_copy(
@@ -259,7 +282,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
                         ),
                     ]
                 )
-            rejected.add(path)
+            reject(path, "SCOPED_CLAIM_RELOCATED_OR_OMITTED")
             warnings.append(
                 f"{path}: scoped claim omitted from company-wide proof; use scoped_claims."
             )
@@ -275,7 +298,7 @@ def factual_consistency(result: ExtractionResult, sources: SourceBundle, warning
 
 
 def add_catalog_classifications(
-    profile: BIP, provenance: list[dict], sources: SourceBundle, warnings
+    profile: BIP, provenance: list[dict], sources: SourceBundle, warnings, audit=None
 ):
     proof = {p["path"]: p for p in provenance}
     keys = set()
@@ -317,11 +340,13 @@ def add_catalog_classifications(
                         ),
                     }
                 )
-    for offering in profile.offerings:
+    for i, offering in enumerate(profile.offerings):
         if offering.parent_offering_key and (
             offering.parent_offering_key not in keys or offering.parent_offering_key == offering.key
         ):
             offering.parent_offering_key = None
+            if audit:
+                audit.discard(f"/offerings/{i}/parent_offering_key", "UNRESOLVED_PARENT_OFFERING")
             warnings.append(f"{offering.key}: unresolved product-family relationship omitted.")
 
 
@@ -337,8 +362,27 @@ def source_coverage(sources: SourceBundle) -> dict:
     }
 
 
-def creative_readiness(profile: BIP, selected_offering_key: str | None = None) -> dict:
+def creative_readiness(
+    profile: BIP, selected_offering_key: str | None = None, provenance: list[dict] | None = None
+) -> dict:
+    """Assess retained content, with product-specific checks only for explicit selection.
+
+    Claim support requires validated website provenance or an explicitly user-confirmed
+    assertion. Hypotheses, other products' claims and facility/newsletter proof do not
+    establish an offering claim. This is a review aid, never a save/confirmation gate.
+    """
     missing = []
+    selected = next(
+        (o for o in profile.offerings if selected_offering_key and o.key == selected_offering_key),
+        None,
+    )
+    audience = selected.audiences if selected else profile.customer_personas_and_audience_segments
+
+    def audience_details(value):
+        return any(
+            p.description or p.roles or p.goals or p.pain_points for p in value.personas
+        ) or any(s.description or s.needs for s in value.segments)
+
     checks = [
         (
             profile.brand_identity.name,
@@ -352,8 +396,7 @@ def creative_readiness(profile: BIP, selected_offering_key: str | None = None) -
             "What makes your offering meaningfully different?",
         ),
         (
-            profile.customer_personas_and_audience_segments.personas
-            or profile.customer_personas_and_audience_segments.segments,
+            audience_details(audience),
             "audience",
             "Who is the intended buyer and what are they trying to achieve?",
         ),
@@ -373,13 +416,87 @@ def creative_readiness(profile: BIP, selected_offering_key: str | None = None) -
                     "suggested_question": question,
                 }
             )
-    selected = next((o for o in profile.offerings if o.key == selected_offering_key), None)
-    if not selected:
+    assessment = None
+    if selected:
+        index = profile.offerings.index(selected)
+        proof = {p["path"]: p for p in provenance or []}
+
+        def supported(path, classification=False):
+            entry = proof.get(path, {})
+            return (
+                (entry.get("origin") == "WEBSITE" and bool(entry.get("citations")))
+                or (entry.get("origin") == "USER" and entry.get("confirmed_by_user") is True)
+                or (
+                    classification
+                    and entry.get("origin") == "CLASSIFIED"
+                    and bool(entry.get("citations"))
+                    and bool(entry.get("reasoning"))
+                )
+            )
+
+        def supported_claim(claim, prefix):
+            return (
+                claim.scope == "OFFERING"
+                and (not claim.subject or claim.subject in {selected.key, selected.name})
+                and all(
+                    supported(prefix + "/" + field, field == "scope")
+                    for field in (
+                        ["text", "scope", "subject"] if claim.subject else ["text", "scope"]
+                    )
+                )
+            )
+
+        has_claim = any(
+            supported_claim(c, f"/offerings/{index}/claims/{i}")
+            for i, c in enumerate(selected.claims)
+        ) or any(
+            c.subject in {selected.key, selected.name}
+            and supported_claim(c, f"/trust_and_proof/scoped_claims/{i}")
+            for i, c in enumerate(profile.trust_and_proof.scoped_claims)
+        )
+        # Scope labels are classifications, not new advertising assertions.
+        # A source-grounded CLASSIFIED scope is allowed, but inferred claim text is not.
+        assessment = {
+            "benefits": bool(selected.benefits or selected.value_propositions),
+            "target_audience": bool(audience_details(selected.audiences)),
+            "motivations": bool(selected.customer_psychology.motivations),
+            "supported_marketing_claims": bool(has_claim),
+        }
+        questions = {
+            "benefits": ("benefits", "Which concrete benefits does this offering deliver?"),
+            "target_audience": (
+                "audiences",
+                "Who buys this specific offering and what do they need?",
+            ),
+            "motivations": (
+                "customer_psychology.motivations",
+                "Why would this offering matter to the intended buyer?",
+            ),
+            "supported_marketing_claims": (
+                "claims",
+                "Which product-specific claims have source evidence or explicit customer approval?",
+            ),
+        }
+        for check, present in assessment.items():
+            if not present:
+                field, question = questions[check]
+                missing.append(
+                    {
+                        "field": f"offerings.{selected.key}.{field}",
+                        "reason": "Selected offering lacks sufficient "
+                        + check.replace("_", " ")
+                        + ".",
+                        "suggested_question": question,
+                    }
+                )
+    else:
         missing.append(
             {
                 "field": "selected_offering_key",
                 "reason": (
-                    "Brand-level brief only; offering-specific targeting "
+                    "The requested offering key was not found."
+                    if selected_offering_key
+                    else "Brand-level brief only; offering-specific targeting "
                     "still needs a selected offering."
                 ),
                 "suggested_question": "Which offering should the next creative brief target?",
@@ -389,6 +506,8 @@ def creative_readiness(profile: BIP, selected_offering_key: str | None = None) -
         "status": "NEEDS_REVIEW" if missing else "READY_FOR_CREATIVE_BRIEF",
         "scope": "OFFERING" if selected else "BRAND",
         "selected_offering_key": selected.key if selected else None,
+        "requested_offering_key": selected_offering_key,
+        "offering_assessment": assessment,
         "missing_information": missing,
         "requires_human_review": True,
     }
@@ -469,13 +588,22 @@ async def run_pipeline(
         ],
         warnings=facts.warnings,
     )
-    checked = factual_consistency(literal_catalog_evidence(facts, sources), sources, warnings)
+    factual_audit = EvidenceAudit(
+        p
+        for p in leaves(facts.profile.model_dump())
+        if p != "/brand_identity/website_url"
+        and not (registered_name and p == "/brand_identity/name")
+    )
+    checked = factual_consistency(
+        literal_catalog_evidence(facts, sources), sources, warnings, factual_audit
+    )
     bip, provenance = validated_profile(
-        checked, sources, website_url, registered_name, warnings=warnings
+        checked, sources, website_url, registered_name, warnings=warnings, audit=factual_audit
     )
     warnings.extend(facts.warnings)
-    add_catalog_classifications(bip, provenance, sources, warnings)
+    add_catalog_classifications(bip, provenance, sources, warnings, factual_audit)
     marketing_status = "SUCCEEDED"
+    marketing_audit = None
     try:
         remaining = max(
             1,
@@ -486,17 +614,37 @@ async def run_pipeline(
         )
         async with asyncio.timeout(remaining):
             reasoning = await provider.infer_marketing(bip, sources, selected_offering_key)
+        marketing_audit = EvidenceAudit(
+            p
+            for p in leaves(reasoning.model_dump(exclude={"evidence", "warnings"}))
+            if not p.endswith("/offering_key")
+        )
         data = bip.model_dump()
         for root in MARKETING_ROOTS:
             data[root] = getattr(reasoning, root).model_dump()
         mapped = []
         key_indexes = {o.key: i for i, o in enumerate(bip.offerings)}
+        insight_indexes, seen_keys = {}, set()
+        for i, insight in enumerate(reasoning.offering_insights):
+            prefix = f"/offering_insights/{i}"
+            if insight.offering_key not in key_indexes:
+                marketing_audit.reject(prefix, "UNKNOWN_OFFERING_REFERENCE")
+            elif insight.offering_key in seen_keys:
+                marketing_audit.reject(prefix, "DUPLICATE_OFFERING_REFERENCE")
+            else:
+                index = key_indexes[insight.offering_key]
+                insight_indexes[i] = index
+                seen_keys.add(insight.offering_key)
+                for path in marketing_audit.generated:
+                    if path.startswith(prefix + "/"):
+                        marketing_audit.alias(path, f"/offerings/{index}" + path[len(prefix) :])
         for entry in reasoning.evidence:
             parts = entry.path.split("/")
             if len(parts) > 3 and parts[1] == "offering_insights":
                 try:
-                    insight = reasoning.offering_insights[int(parts[2])]
-                    index = key_indexes[insight.offering_key]
+                    if not parts[2].isdigit():
+                        raise ValueError("Invalid insight index")
+                    index = insight_indexes[int(parts[2])]
                     if parts[3] not in {"audiences", "customer_psychology"}:
                         continue
                     mapped.append(
@@ -508,9 +656,11 @@ async def run_pipeline(
                     warnings.append("Unknown offering insight reference omitted.")
             elif len(parts) > 1 and parts[1] in MARKETING_ROOTS:
                 mapped.append(entry)
-        for insight in reasoning.offering_insights:
-            if insight.offering_key in key_indexes:
-                index = key_indexes[insight.offering_key]
+            else:
+                marketing_audit.ignored_evidence_entries += 1
+        for i, insight in enumerate(reasoning.offering_insights):
+            if i in insight_indexes:
+                index = insight_indexes[i]
                 data["offerings"][index]["audiences"] = insight.audiences.model_dump()
                 data["offerings"][index]["customer_psychology"] = (
                     insight.customer_psychology.model_dump()
@@ -548,17 +698,21 @@ async def run_pipeline(
             website_url,
             None,
             warnings=warnings,
+            audit=marketing_audit,
         )
+        if len(insights.offerings) != len(bip.offerings):
+            raise DomainError(
+                "MARKETING_ANCHOR_INVALID", "Marketing offering anchors did not validate"
+            )
         for root in MARKETING_ROOTS:
             setattr(bip, root, getattr(insights, root))
-        # Names keep list indexes stable; use only insights with a verified anchor.
-        for offering in insights.offerings:
-            original = next((o for o in bip.offerings if o.name == offering.name), None)
-            if original:
-                original.audiences, original.customer_psychology = (
-                    offering.audiences,
-                    offering.customer_psychology,
-                )
+        # Verified anchors preserve order. Names can repeat; merging by name corrupts
+        # offering-specific targeting and disagrees with the remapped provenance.
+        for original, offering in zip(bip.offerings, insights.offerings, strict=True):
+            original.audiences, original.customer_psychology = (
+                offering.audiences,
+                offering.customer_psychology,
+            )
         provenance.extend(
             p
             for p in insight_proof
@@ -567,15 +721,46 @@ async def run_pipeline(
             or "/customer_psychology/" in p["path"]
         )
         warnings.extend(reasoning.warnings)
-    except (DomainError, TimeoutError) as error:
+        evidence_result = marketing_audit.report()
+        if (
+            not evidence_result["accepted"]
+            or evidence_result["accepted"] * 2 < evidence_result["generated"]
+        ):
+            marketing_status = "INSUFFICIENT_EVIDENCE"
+            warnings.append(
+                "Audience/creative stage has insufficient retained evidence; "
+                "review the validation diagnostics. Verified factual draft retained."
+            )
+    except (DomainError, TimeoutError, ValidationError) as error:
         marketing_status = "FAILED"
+        if marketing_audit:
+            marketing_audit.accepted.clear()
+            marketing_audit.reject("", "MARKETING_STAGE_FAILED")
+        code = (
+            error.code
+            if isinstance(error, DomainError)
+            else "MARKETING_TIMEOUT"
+            if isinstance(error, TimeoutError)
+            else "MARKETING_INVALID_OUTPUT"
+        )
         warnings.append(
-            "Audience/creative stage unavailable "
-            f"({error.code if isinstance(error, DomainError) else 'MARKETING_TIMEOUT'}); "
-            "verified factual draft retained."
+            f"Audience/creative stage unavailable ({code}); verified factual draft retained."
         )
     current = leaves(bip.model_dump())
     provenance = list({p["path"]: p for p in provenance if p["path"] in current}.values())
+    validation = {
+        "facts": factual_audit.report(),
+        "marketing": marketing_audit.report() if marketing_audit else unavailable_evidence(),
+    }
+    for stage, report in validation.items():
+        logger.info(
+            "evidence_validation stage=%s generated=%s accepted=%s rejected=%s reasons=%s",
+            stage,
+            report["generated"],
+            report["accepted"],
+            report["rejected"],
+            report["rejection_reasons"],
+        )
     return PipelineResult(
         bip,
         provenance,
@@ -583,10 +768,11 @@ async def run_pipeline(
         {
             "pipeline_version": 2,
             "source_coverage": source_coverage(sources),
-            "creative_readiness": creative_readiness(bip, selected_offering_key),
+            "creative_readiness": creative_readiness(bip, selected_offering_key, provenance),
             "extraction_metrics": metrics(
                 getattr(provider, "usage_records", []), settings, time.monotonic() - started
             ),
             "stages": {"facts": "SUCCEEDED", "marketing": marketing_status},
+            "evidence_validation": validation,
         },
     )

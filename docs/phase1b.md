@@ -116,3 +116,10 @@ Constructed supported-example fixtures are explicitly labeled and exercise targe
 checks deterministically. Recorded model results were nondeterministic at generation time. Revalidation of frozen data is deterministic. See
 `evaluations/REPORT.md` for measured results and precision/usefulness limitations. Offline
 unit and PostgreSQL tests never need a model key or paid request.
+
+## Evidence-quality follow-up
+
+The [evidence-quality guide](evidence-quality.md) defines `INSUFFICIENT_EVIDENCE`, additive
+profile stage/audit fields, count semantics and stricter explicit-offering readiness. These
+outcomes describe extraction history, while readiness reflects the current edited profile.
+Zero retained marketing insights are never reported as a fully successful marketing stage.

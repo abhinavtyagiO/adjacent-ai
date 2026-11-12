@@ -391,3 +391,7 @@ class ProfileResponse(Schema):
     source_coverage: dict[str, Any] = Field(default_factory=dict)
     creative_readiness: dict[str, Any] = Field(default_factory=dict)
     extraction_metrics: dict[str, Any] = Field(default_factory=dict)
+    stages: dict[str, Literal["SUCCEEDED", "FAILED", "INSUFFICIENT_EVIDENCE", "UNKNOWN"]] = Field(
+        default_factory=dict
+    )
+    evidence_validation: dict[str, Any] = Field(default_factory=dict)

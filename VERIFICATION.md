@@ -85,3 +85,22 @@ Independent stage reasoning/model overrides and the retained OpenAI strategy are
 by free mocked transport tests. The low-effort comparison is incomplete and is not presented
 as evidence that reasoning improves quality. Newton marketing evidence remains a documented
 limitation of the recorded sample. No further paid call is needed to reproduce the checks.
+
+## Evidence-quality review — offline only
+
+- **173 tests passed** against isolated PostgreSQL 16 (35 additional quality/API cases).
+- Marketing outcomes distinguish parsed-but-empty/mostly-rejected responses with
+  `INSUFFICIENT_EVIDENCE`; provider/schema/timeouts remain `FAILED`. Both preserve facts.
+- Profile API responses expose stage outcomes and per-stage/per-section validation counts,
+  including rejection reasons and safe defaults for unaudited historical profiles.
+- Product readiness checks benefits, detailed audience, motivations and properly scoped
+  source-backed or explicitly user-confirmed claims; null keys never imply selection.
+- Existing Newton/Fastlane/Whole Truth fixtures were replayed without live crawling or
+  model inference. Newton's empty retained marketing projection is insufficient evidence.
+- Ruff lint/format, Alembic check, dependency consistency and diff checks passed. No BIP
+  schema change or database migration is required. One existing Starlette/httpx test-client
+  deprecation warning remains.
+
+No paid inference calls were made during this review. Original raw marketing responses were
+not archived, so original rejected counts cannot be reconstructed from retained-only replays.
+See `evaluations/PHASE1B_REVIEW.md` for detailed counts and remaining limitations.

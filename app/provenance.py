@@ -13,6 +13,14 @@ logger = logging.getLogger(__name__)
 LEGAL_NAME_PATH = "/brand_identity/legal_name"
 
 
+class EvidenceError(DomainError):
+    """Stable rejection category, without raw provider/source content."""
+
+    def __init__(self, reason: str, message: str):
+        self.reason = reason
+        super().__init__("LLM_EVIDENCE_INVALID", message)
+
+
 def leaves(value: Any, path: str = "") -> dict[str, Any]:
     if isinstance(value, dict):
         result = {}
@@ -61,9 +69,14 @@ def checked_evidence(
 ) -> dict:
     """Validate one populated fact without deciding whether its failure is blocking."""
     if not entry or not entry.citations:
-        raise DomainError("LLM_EVIDENCE_INVALID", f"Missing source evidence for {path}")
-    if entry.origin == "INFERRED" and (not inference_allowed(path) or not entry.reasoning):
-        raise DomainError("LLM_EVIDENCE_INVALID", f"Unsupported inference for {path}")
+        raise EvidenceError(
+            "MISSING_EVIDENCE" if not entry else "MISSING_CITATIONS",
+            f"Missing source evidence for {path}",
+        )
+    if entry.origin == "INFERRED" and not inference_allowed(path):
+        raise EvidenceError("INFERENCE_NOT_ALLOWED", f"Unsupported inference for {path}")
+    if entry.origin in {"INFERRED", "CLASSIFIED"} and not entry.reasoning:
+        raise EvidenceError("MISSING_RATIONALE", f"Missing rationale for {path}")
     if entry.origin == "CLASSIFIED" and (
         not entry.reasoning
         or not (
@@ -71,12 +84,14 @@ def checked_evidence(
             or path.startswith(("/business_positioning/", "/brand_voice/"))
         )
     ):
-        raise DomainError("LLM_EVIDENCE_INVALID", f"Unsupported classification for {path}")
+        raise EvidenceError("CLASSIFICATION_NOT_ALLOWED", f"Unsupported classification for {path}")
     citations = []
     for citation in entry.citations:
         document = documents.get(citation.source_url)
-        if not document or normalized(citation.quote) not in normalized(document.text):
-            raise DomainError("LLM_EVIDENCE_INVALID", f"Unverifiable source citation for {path}")
+        if not document:
+            raise EvidenceError("UNKNOWN_SOURCE", f"Unverifiable source citation for {path}")
+        if normalized(citation.quote) not in normalized(document.text):
+            raise EvidenceError("QUOTE_NOT_FOUND", f"Unverifiable source citation for {path}")
         citations.append({**citation.model_dump(), "fetched_at": document.fetched_at.isoformat()})
     # Exact names and pricing amounts must actually occur in their supporting quotes.
     exact = (
@@ -93,7 +108,7 @@ def checked_evidence(
     if exact and not any(
         normalized(str(value)).casefold() in normalized(c["quote"]).casefold() for c in citations
     ):
-        raise DomainError("LLM_EVIDENCE_INVALID", f"Source does not contain the value at {path}")
+        raise EvidenceError("EXACT_VALUE_MISMATCH", f"Source does not contain the value at {path}")
     return {**entry.model_dump(), "citations": citations, "recorded_at": timestamp}
 
 
@@ -104,6 +119,7 @@ def validated_profile(
     registered_name: str | None,
     *,
     warnings: list[str] | None = None,
+    audit=None,
 ) -> tuple[BIP, list[dict]]:
     """Keep verified enrichment and omit unsupported content without blocking a draft.
 
@@ -129,10 +145,13 @@ def validated_profile(
     rejected = set()
 
     def warn(path: str, reason: str):
-        label = "Legal name" if path == LEGAL_NAME_PATH else path
+        known = bool(path) and (path in values or any(p.startswith(path + "/") for p in values))
+        label = path if known else "Unknown evidence path"
+        if path == LEGAL_NAME_PATH:
+            label = "Legal name"
         if warnings is not None:
             warnings.append(f"{label}: {reason}")
-        logger.warning("optional_field_omitted path=%s", path)
+        logger.warning("optional_field_omitted path=%s", path if known else "UNKNOWN")
 
     for path, value in values.items():
         if path == "/brand_identity/website_url" or (
@@ -148,18 +167,26 @@ def validated_profile(
             continue
         try:
             if path in duplicates:
-                raise DomainError("LLM_EVIDENCE_INVALID", "Duplicate field evidence")
+                raise EvidenceError("DUPLICATE_EVIDENCE", "Duplicate field evidence")
             verified[path] = checked_evidence(path, value, evidence.get(path), documents, timestamp)
-        except DomainError:
+        except EvidenceError as error:
             rejected.add(path)
+            if audit:
+                audit.reject(path, error.reason)
             warn(path, "omitted because its source evidence could not be verified.")
 
     for path in sorted(set(evidence) - set(values)):
         # Stale/section-level citations are not evidence for other populated leaves.
         if path != LEGAL_NAME_PATH:
+            if audit:
+                audit.ignored_evidence_entries += 1
             warn(path, "ignored evidence for an empty or unknown field.")
 
     missing = object()
+
+    def discard(path, reason):
+        if audit:
+            audit.reject(path, reason)
 
     def clean(value, old_path="", new_path=""):
         if isinstance(value, dict):
@@ -169,25 +196,30 @@ def validated_profile(
                 and old_path + "/name" not in verified
             ):
                 warn(old_path, "pricing tier omitted because it has no verified name.")
+                discard(old_path, "CONTAINER_NAME_UNVERIFIED")
                 return missing, []
             if re.fullmatch(
                 r"/(?:trust_and_proof/scoped_claims|offerings/\d+/claims)/\d+", old_path
             ):
                 if any(old_path + suffix not in verified for suffix in ("/text", "/scope")):
                     warn(old_path, "claim omitted because its text or scope is unsupported.")
+                    discard(old_path, "CLAIM_UNSUPPORTED")
                     return missing, []
             if len(parts) == 3 and parts[1] == "offerings" and old_path + "/name" not in verified:
                 warn(old_path, "offering omitted because it has no verified name.")
+                discard(old_path, "CONTAINER_NAME_UNVERIFIED")
                 return missing, []
             if old_path.startswith("/trust_and_proof/testimonials/") and len(parts) == 4:
                 if old_path + "/quote" not in verified:
                     warn(old_path, "testimonial omitted because it has no verified quote.")
+                    discard(old_path, "TESTIMONIAL_QUOTE_UNVERIFIED")
                     return missing, []
             if old_path.startswith("/offerings/") and old_path.endswith("/pricing"):
                 if any(path.startswith(old_path + "/") for path in rejected):
                     # Avoid displaying a verified amount with an unverified currency/period.
                     from app.schemas import Pricing
 
+                    discard(old_path, "PRICING_INCONSISTENT")
                     return Pricing().model_dump(), []
             output, provenance = {}, []
             for key, child in value.items():
@@ -209,6 +241,8 @@ def validated_profile(
             return None, []
         if old_path not in verified:
             return missing, []
+        if audit:
+            audit.accept(old_path, new_path)
         return value, [{**verified[old_path], "path": new_path}]
 
     cleaned, provenance = clean(raw)

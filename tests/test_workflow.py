@@ -616,3 +616,97 @@ async def test_pipeline_metadata_pg_jsonb_and_confirmed_provenance(
     }
     assert client.get(f"/v1/extractions/{job_id}").json()["metrics"] == draft["extraction_metrics"]
     worker.provider.infer_marketing = AsyncMock(return_value=MarketingResult())
+
+
+@pytest.mark.parametrize("response_type", ["empty", "rejected", "failed"])
+async def test_quality_outcomes_and_diagnostics_persist_in_profile_api(
+    client, factory, settings, bundle, extraction_result, response_type
+):
+    from app.models import Profile
+    from app.schemas import MarketingResult
+
+    worker = make_worker(factory, settings, bundle, extraction_result)
+    if response_type == "failed":
+        worker.provider.infer_marketing = AsyncMock(
+            side_effect=DomainError("LLM_UNAVAILABLE", "Unavailable")
+        )
+    elif response_type == "rejected":
+        worker.provider.infer_marketing = AsyncMock(
+            return_value=MarketingResult(
+                creative_context={"creative_angles": ["Unsupported angle"]}
+            )
+        )
+    brand_id = register(client)
+    job_id = await extract(client, worker, brand_id)
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    expected = "FAILED" if response_type == "failed" else "INSUFFICIENT_EVIDENCE"
+    assert draft["stages"] == {"facts": "SUCCEEDED", "marketing": expected}
+    assert draft["profile"]["brand_identity"]["name"] == "Acme"
+    assert len(draft["profile"]["offerings"]) == 2
+    report = draft["evidence_validation"]["marketing"]
+    if response_type == "failed":
+        assert not report["available"] and report["generated"] is None
+    else:
+        assert report["available"] and report["accepted"] == 0
+        assert report["generated"] == (1 if response_type == "rejected" else 0)
+    with factory() as session:
+        stored = session.get(Profile, uuid.UUID(brand_id))
+        assert stored.pipeline_metadata["evidence_validation"] == draft["evidence_validation"]
+    assert client.get(f"/v1/extractions/{job_id}").json()["status"] == "SUCCEEDED"
+    confirmed = client.post(
+        f"/v1/brands/{brand_id}/profile/confirm", json={"expected_revision": draft["revision"]}
+    ).json()
+    assert confirmed["status"] == "CONFIRMED" and confirmed["stages"] == draft["stages"]
+
+
+async def test_selected_offering_readiness_updates_after_edit_and_confirmation(
+    client, factory, settings, bundle, extraction_result
+):
+    from tests.test_evidence_outcomes import complete_profile
+
+    brand_id = register(client)
+    job = client.post(f"/v1/brands/{brand_id}/extractions", json={"offering_key": "flow"}).json()
+    await make_worker(factory, settings, bundle, extraction_result).process_once()
+    assert client.get(job["poll_url"]).json()["status"] == "SUCCEEDED"
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["creative_readiness"]["offering_assessment"]["benefits"] is False
+    edited = client.patch(
+        f"/v1/brands/{brand_id}/profile",
+        json={
+            "expected_revision": draft["revision"],
+            "changes": complete_profile().model_dump(mode="json"),
+        },
+    ).json()
+    assert (
+        edited["creative_readiness"]["offering_assessment"]["supported_marketing_claims"] is False
+    )
+    confirmed = client.post(
+        f"/v1/brands/{brand_id}/profile/confirm", json={"expected_revision": edited["revision"]}
+    ).json()
+    assert confirmed["creative_readiness"]["status"] == "READY_FOR_CREATIVE_BRIEF"
+    assert (
+        confirmed["stages"]["marketing"] == "INSUFFICIENT_EVIDENCE"
+    )  # Extraction history, not edits.
+    assert confirmed["evidence_validation"] == draft["evidence_validation"]
+
+
+async def test_legacy_quality_is_unknown_instead_of_inventing_audit_counts(
+    client, factory, settings, bundle, extraction_result
+):
+    from app.models import Profile
+
+    brand_id = register(client)
+    await extract(client, make_worker(factory, settings, bundle, extraction_result), brand_id)
+    for metadata, expected in [
+        ({}, {"facts": "UNKNOWN", "marketing": "UNKNOWN"}),
+        (
+            {"stages": {"facts": "SUCCEEDED", "marketing": "SUCCEEDED"}},
+            {"facts": "SUCCEEDED", "marketing": "UNKNOWN"},
+        ),
+    ]:
+        with factory.begin() as session:
+            session.get(Profile, uuid.UUID(brand_id)).pipeline_metadata = metadata
+        response = client.get(f"/v1/brands/{brand_id}/profile")
+        assert response.status_code == 200
+        assert response.json()["stages"] == expected
+        assert response.json()["evidence_validation"] == {}

@@ -405,3 +405,16 @@ See [the pipeline guide](docs/phase1b.md) and [measured comparison](evaluations/
 Frozen public-source snapshots, prior Phase 1 profiles and clearly labeled constructed
 regression fixtures allow repeatable checks. Evaluation now replays saved responses only;
 batch live calls are disabled to control costs.
+
+## Evidence quality and selected-offering readiness
+
+Profile responses now expose `stages` and `evidence_validation`. A valid marketing response
+with no accepted insights, or with more than half its generated fields rejected, reports
+`INSUFFICIENT_EVIDENCE`. Valid factual drafts survive optional marketing failures. Counts
+and safe rejection categories are grouped by BIP section; legacy audit gaps remain unknown.
+
+An explicitly selected offering must have benefits, meaningful audience details, motivations
+and appropriately scoped, supported claims for creative readiness. Brand-level targeting and
+facility/newsletter proof do not substitute for those checks. Readiness remains nonblocking.
+See [the evidence-quality guide](docs/evidence-quality.md) and
+[offline review results and known gaps](evaluations/PHASE1B_REVIEW.md).
