@@ -1,15 +1,18 @@
 from functools import lru_cache
 
-from pydantic import Field, SecretStr, field_validator, model_validator
+from pydantic import AnyHttpUrl, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import make_url
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=(".env", ".env.local"), extra="ignore")
 
     database_url: str = "postgresql+psycopg://brand:brand@localhost:5432/brand_intelligence"
-    llm_provider: str = "openai"
+    llm_provider: str = "deepseek"
+    deepseek_api_key: SecretStr | None = None
+    deepseek_model: str = "deepseek-flash"
+    deepseek_base_url: AnyHttpUrl = AnyHttpUrl("https://api.deepseek.com")
     openai_api_key: SecretStr | None = None
     openai_model: str = "gpt-4.1-mini"
     llm_timeout_seconds: float = Field(90, gt=0)

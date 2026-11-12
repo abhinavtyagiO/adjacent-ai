@@ -33,3 +33,18 @@ Not executed in this environment:
 
 No external company profile, invented company facts, API credential or production data is
 included in the deliverable. Test fixtures are explicitly synthetic.
+
+## DeepSeek strategy update — 12 November 2026
+
+* **75 tests passed** on Python 3.12 and PostgreSQL 15, including both configured providers
+  through async extraction, PostgreSQL draft/source/offerings storage, editing and confirmation.
+* The real SDK is exercised with a mocked HTTP transport for both providers: endpoint,
+  credential, model, strict JSON schema, refusal, truncation and schema validation.
+* Both strategies pass rate-limit retry, bounded timeout and safe authentication-error tests.
+* Environment precedence and the credential-free tracked `.env` are covered by tests.
+* Ruff lint and formatting checks passed. No database schema changes are required.
+* CI now validates Compose configuration as well as running PostgreSQL-backed tests.
+
+DeepSeek uses its documented Responses API schema mode and defaults to `deepseek-flash`.
+A live DeepSeek call was not made because no API key was supplied. Put `DEEPSEEK_API_KEY`
+in ignored `.env.local` to run a real extraction; keep the tracked `.env` credential-free.

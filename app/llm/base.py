@@ -1,3 +1,4 @@
+from collections.abc import Callable
 from typing import Protocol
 
 from app.config import Settings
@@ -7,6 +8,12 @@ from app.schemas import ExtractionResult
 
 
 class LLMProvider(Protocol):
+    """Strategy interface consumed by every LLM step in brand onboarding.
+
+    ExtractionWorker is the context: inject one selected strategy at startup, while
+    crawling, evidence validation, review and persistence remain provider-independent.
+    """
+
     name: str
     model: str
 
@@ -16,8 +23,15 @@ class LLMProvider(Protocol):
 
 
 def build_provider(settings: Settings) -> LLMProvider:
-    if settings.llm_provider == "openai":
-        from app.llm.openai_provider import OpenAIProvider
+    """Resolve configuration to a strategy; never fall back to a different paid service."""
+    from app.llm.deepseek_provider import DeepSeekProvider
+    from app.llm.openai_provider import OpenAIProvider
 
-        return OpenAIProvider(settings)
-    raise DomainError("LLM_CONFIG", "Unsupported LLM_PROVIDER configuration")
+    strategies: dict[str, Callable[[Settings], LLMProvider]] = {
+        DeepSeekProvider.name: DeepSeekProvider,
+        OpenAIProvider.name: OpenAIProvider,
+    }
+    strategy = strategies.get(settings.llm_provider)
+    if strategy is None:
+        raise DomainError("LLM_CONFIG", "Unsupported LLM_PROVIDER; choose deepseek or openai")
+    return strategy(settings)

@@ -6,17 +6,19 @@ PostgreSQL is the only supported database in development, tests and deployment.
 
 ## Quick start with Docker Compose
 
-Requires Docker with Compose v2.
+Requires Docker with Compose v2.24+ (for the optional private environment file).
 
 ```bash
-cp .env.example .env
-# Set OPENAI_API_KEY in .env. Optionally change OPENAI_MODEL.
+cp .env.example .env.local
+# Set DEEPSEEK_API_KEY in .env.local. Optionally change DEEPSEEK_MODEL.
 docker compose up --build -d
 docker compose logs -f api worker
 ```
 
-Compose starts PostgreSQL 16, runs Alembic migrations once, then starts the API and a
-separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
+The repository includes a credential-free `.env` with `LLM_PROVIDER=deepseek`. Private
+overrides belong in the ignored `.env.local`, which Compose loads after `.env` for the
+API, worker and migrations. Compose starts PostgreSQL 16, runs Alembic migrations once,
+then starts the API and a separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
 <http://localhost:8000/docs>. `GET /health/ready` checks the database and migration table.
 Ports bind to localhost. Database data persists in the `postgres_data` volume.
 
@@ -31,7 +33,8 @@ Use Python 3.12+ and a local PostgreSQL server, or let Compose run only the data
 No SQLite fallback exists.
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
+# Set DEEPSEEK_API_KEY in .env.local.
 docker compose up -d db
 python3.12 -m venv .venv
 source .venv/bin/activate
@@ -50,12 +53,14 @@ brand-worker
 
 The default `DATABASE_URL` targets the Compose database on `localhost:5432`. An existing
 PostgreSQL server can be used by changing that variable. The API never creates tables at
-startup: migrations are required. Run commands from this project directory so `.env` loads.
+startup: migrations are required. Run commands from this project directory so `.env` and
+`.env.local` load. For Python processes, precedence is environment variables, then
+`.env.local`, then `.env`, then application defaults. The committed defaults contain no keys.
 The lock files pin the versions tested here; `pyproject.toml` declares compatible ranges.
 
 ## API walkthrough
 
-Examples use curl and jq. Set `API_ACCESS_TOKEN` in `.env` if you want a shared access token,
+Examples use curl and jq. Set `API_ACCESS_TOKEN` in `.env.local` if you want a shared access token,
 and add `-H "Authorization: Bearer YOUR_TOKEN"` to `/v1` requests. No token is needed by
 default for local development. This is a single-workspace Phase 1 service; account ownership
 and tenant authorization are not implemented.
@@ -214,9 +219,13 @@ semantic correctness still requires the review/confirmation step.
 
 Text-only crawling cannot determine complete design systems: unsupported colors, fonts and
 guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
-The first provider uses [OpenAI Responses structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
-with a strict Pydantic-derived JSON schema, local validation, request timeouts and bounded
-retries. Model refusals, truncated output and invalid evidence are explicit failures.
+The default provider is DeepSeek, using its documented
+[Responses API JSON-schema output](https://api-docs.deepseek.com/api/create-response/).
+It uses `deepseek-flash` by default, with thinking disabled for bounded structured extraction.
+The existing [OpenAI Responses provider](https://developers.openai.com/api/docs/guides/structured-outputs)
+remains selectable. Both strategies share a Pydantic-derived JSON schema, the evidence prompt,
+local validation, request timeouts and bounded retries. Refusals, truncated output and invalid
+evidence are explicit failures. There is no automatic fallback between providers.
 
 ## Architecture and persistence
 
@@ -235,6 +244,9 @@ worker -> EnrichmentSource -> source_documents -> LLMProvider
 * `app/crawling/`: URL policy, pinned public DNS/IP requests, robots and page discovery.
 * `app/enrichment.py`: source-neutral document/bundle protocol for future source adapters.
 * `app/llm/`: provider protocol and configured adapter; no OpenAI dependency in business logic.
+  `LLMProvider` is the strategy interface, `build_provider` is the strategy registry/factory,
+  and `ExtractionWorker` is the context that receives the configured strategy. Concrete
+  `DeepSeekProvider` and `OpenAIProvider` strategies share Responses transport in `responses.py`.
 * `app/provenance.py`: grounded evidence checks and user-correction provenance.
 * `app/worker.py`: durable extraction orchestration and failure/recovery lifecycle.
 * `app/models.py`, `alembic/`: PostgreSQL schema and versioned migrations.
@@ -270,8 +282,11 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | Variable | Default | Meaning |
 |---|---|---|
 | `DATABASE_URL` | See `.env.example` | Must use `postgresql+psycopg://` |
-| `OPENAI_API_KEY` | Empty | Required for real model extraction |
-| `LLM_PROVIDER` | `openai` | Adapter selected by `build_provider` |
+| `LLM_PROVIDER` | `deepseek` | Strategy selected by `build_provider`: `deepseek` or `openai` |
+| `DEEPSEEK_API_KEY` | Empty | Required when using DeepSeek |
+| `DEEPSEEK_MODEL` | `deepseek-flash` | Configurable DeepSeek Responses model |
+| `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | DeepSeek API endpoint, with optional compatible gateway path |
+| `OPENAI_API_KEY` | Empty | Required only when using OpenAI |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
 | `LLM_MAX_ATTEMPTS` | `3` | Model retries for connection/timeout/429/5xx failures |
@@ -287,11 +302,37 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | `API_ACCESS_TOKEN` | Empty | Optional shared bearer token for `/v1` |
 | `TEST_DATABASE_URL` | Test DB on `5433` | Separate disposable PostgreSQL test database |
 
-Secrets are read from environment variables and never committed. Logs omit document content
-and raw provider response bodies. Both the API and worker need the same configuration.
+`.env` is committed as credential-free development configuration. Keep its key/token fields
+blank; put secrets in ignored `.env.local` or process environment variables. Do not add real
+credentials to the tracked `.env` or `.env.example`. Logs omit document content and raw
+provider response bodies. Both the API and worker need the same configuration.
 PostgreSQL connections use bounded connect, statement and lock timeouts.
 
-To change providers, implement `LLMProvider.extract()` and register it in `build_provider`.
+### Selecting a provider strategy
+
+The whole brand onboarding pipeline uses DeepSeek by default. Set the following in `.env.local`:
+
+```dotenv
+LLM_PROVIDER=deepseek
+DEEPSEEK_API_KEY=your-private-deepseek-key
+DEEPSEEK_MODEL=deepseek-flash
+```
+
+To select the retained OpenAI strategy instead:
+
+```dotenv
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your-private-openai-key
+OPENAI_MODEL=gpt-4.1-mini
+```
+
+Restart the Python API/worker after changes, or run `docker compose up -d --force-recreate api worker`
+to reload Compose environment files. Only the selected provider's key is required; missing
+credentials produce `LLM_CONFIG` on extraction, without calling the other provider. Completed
+profiles record the selected provider and model. Review, correction and confirmation use the
+same provider-independent business rules and do not make extra LLM requests.
+
+To add another provider, implement `LLMProvider.extract()` and register it in `build_provider`.
 Return `ExtractionResult` with the same evidence contract; the worker/service stays unchanged.
 Additional enrichment adapters implement `EnrichmentSource.collect()` and return timestamped
 `Document` objects. There is no simulated provider wired into the production factory.
@@ -328,7 +369,9 @@ Integration tests use the shipped Alembic migrations and truncate application ta
 tests. They refuse database names that do not end in `_test`; never point them at real data.
 If `TEST_DATABASE_URL` is absent, integration tests skip explicitly. No test uses SQLite or
 requires paid LLM calls. The provider boundary test uses the real OpenAI SDK with a mocked
-HTTP transport to verify strict schema serialization and response parsing.
+HTTP transport to verify strict schema serialization, provider routing and response parsing
+for both DeepSeek and OpenAI. Tests also run both configured strategies through PostgreSQL
+draft persistence, review, correction and confirmation with simulated provider HTTP responses.
 
 Tests cover URL-only onboarding, all twelve sections, source traceability, fact/inference
 separation, corrections/confirmation, offering rows/ID reuse, JSONB storage, revision conflicts,

@@ -14,7 +14,10 @@ services:
       retries: 30
   migrate:
     build: .
-    env_file: .env
+    env_file:
+      - path: .env
+      - path: .env.local
+        required: false
     environment:
       DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
     command: ["alembic", "upgrade", "head"]
@@ -22,7 +25,10 @@ services:
       db: {condition: service_healthy}
   api:
     build: .
-    env_file: .env
+    env_file:
+      - path: .env
+      - path: .env.local
+        required: false
     environment:
       DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
     ports: ["127.0.0.1:8000:8000"]
@@ -30,7 +36,10 @@ services:
       migrate: {condition: service_completed_successfully}
   worker:
     build: .
-    env_file: .env
+    env_file:
+      - path: .env
+      - path: .env.local
+        required: false
     environment:
       DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
     command: ["brand-worker"]

@@ -320,6 +320,98 @@ def test_validation_not_found_duplicate_and_access_token(client, monkeypatch):
     )
 
 
+@pytest.mark.parametrize("provider_name", ["deepseek", "openai"])
+async def test_configured_llm_strategy_runs_through_review_and_confirmation(
+    client, factory, settings, bundle, extraction_result, monkeypatch, provider_name
+):
+    """Configured real strategies drive the pipeline; only their HTTP boundary is simulated."""
+    import json
+
+    import httpx
+    import openai
+    from pydantic import SecretStr
+
+    from app.llm.base import build_provider
+
+    if provider_name == "openai":
+        settings.llm_provider = "openai"
+    # The DeepSeek case deliberately exercises the application default.
+    settings.deepseek_api_key = SecretStr("deepseek-test-only")
+    settings.openai_api_key = SecretStr("openai-test-only")
+    strategy = build_provider(settings)
+    assert strategy.name == provider_name
+    real_client = openai.AsyncOpenAI
+    requests = []
+
+    def handler(request):
+        requests.append(request)
+        payload = json.loads(request.content)
+        assert payload["model"] == strategy.model
+        assert request.headers["authorization"] == f"Bearer {provider_name}-test-only"
+        assert request.url.host == (
+            "api.deepseek.com" if provider_name == "deepseek" else "api.openai.com"
+        )
+        return httpx.Response(
+            200,
+            json={
+                "id": "resp_test",
+                "object": "response",
+                "created_at": 1,
+                "status": "completed",
+                "model": strategy.model,
+                "output": [
+                    {
+                        "id": "msg_test",
+                        "type": "message",
+                        "role": "assistant",
+                        "status": "completed",
+                        "content": [
+                            {
+                                "type": "output_text",
+                                "text": extraction_result.model_dump_json(),
+                                "annotations": [],
+                            }
+                        ],
+                    }
+                ],
+            },
+        )
+
+    monkeypatch.setattr(
+        "app.llm.responses.AsyncOpenAI",
+        lambda **kwargs: real_client(
+            **kwargs, http_client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        ),
+    )
+    worker = ExtractionWorker(factory, settings, FakeSource(bundle), strategy)
+    brand_id = register(client)
+    job = client.post(f"/v1/brands/{brand_id}/extractions").json()
+    assert requests == []  # HTTP registration and enqueueing do not block on an LLM call.
+    await worker.process_once()
+    assert client.get(job["poll_url"]).json()["status"] == "SUCCEEDED"
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["status"] == "DRAFT" and draft["provider"] == provider_name
+    assert draft["model"] == strategy.model and len(draft["profile"]) == 12
+    assert any(p["origin"] == "WEBSITE" for p in draft["provenance"])
+    assert len(client.get(f"/v1/brands/{brand_id}/offerings").json()["items"]) == 2
+    assert len(client.get(f"/v1/brands/{brand_id}/sources").json()["items"]) == 1
+    edited = client.patch(
+        f"/v1/brands/{brand_id}/profile",
+        json={
+            "expected_revision": draft["revision"],
+            "changes": {"brand_identity": {"name": "Reviewed Company"}},
+        },
+    ).json()
+    confirmed = client.post(
+        f"/v1/brands/{brand_id}/profile/confirm",
+        json={
+            "expected_revision": edited["revision"],
+        },
+    ).json()
+    assert confirmed["status"] == "CONFIRMED" and confirmed["provider"] == provider_name
+    assert len(requests) == 1  # Reviewing and confirming never invoke an unrelated provider.
+
+
 async def test_invalid_edits_leave_confirmed_profile_intact(
     client, factory, settings, bundle, extraction_result
 ):
