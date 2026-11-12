@@ -69,6 +69,103 @@ def test_evidence_uses_real_source_and_server_timestamps(extraction_result, bund
 
 
 @pytest.mark.parametrize(
+    "problem",
+    [
+        "mismatched_name",
+        "missing_evidence",
+        "missing_citations",
+        "unknown_source",
+        "invented_quote",
+        "inferred_name",
+        "duplicate_evidence",
+    ],
+)
+def test_unsupported_legal_name_is_cleared_without_rejecting_draft(
+    extraction_result, bundle, problem
+):
+    extraction_result.profile.brand_identity.legal_name = "Acme Incorporated"
+    entry = LLMEvidence(
+        path="/brand_identity/legal_name",
+        origin="WEBSITE",
+        citations=[
+            Citation(source_url=bundle.documents[0].url, quote="Acme makes collaboration software.")
+        ],
+    )
+    if problem == "missing_citations":
+        entry.citations = []
+    elif problem == "unknown_source":
+        entry.citations[0].source_url = "https://unread.example/"
+    elif problem == "invented_quote":
+        entry.citations[0].quote = "Registered company: Acme Incorporated"
+    elif problem == "inferred_name":
+        entry.origin, entry.reasoning = "INFERRED", "Guessed company suffix"
+    if problem != "missing_evidence":
+        extraction_result.evidence.append(entry)
+    if problem == "duplicate_evidence":
+        extraction_result.evidence.append(entry.model_copy(deep=True))
+    warnings = []
+    profile, provenance = validated_profile(
+        extraction_result, bundle, bundle.documents[0].url, None, warnings=warnings
+    )
+    assert profile.brand_identity.legal_name is None
+    assert profile.brand_identity.name == "Acme" and len(profile.offerings) == 2
+    assert not any(p["path"] == "/brand_identity/legal_name" for p in provenance)
+    assert len(warnings) == 1 and "Legal name" in warnings[0]
+    assert extraction_result.profile.brand_identity.legal_name == "Acme Incorporated"
+
+
+def test_supported_legal_name_is_preserved(extraction_result, bundle):
+    from app.enrichment import Document
+
+    document = Document(
+        "https://acme.example/terms",
+        "Legal entity: Acme Incorporated.",
+        bundle.documents[0].fetched_at,
+    )
+    bundle.documents.append(document)
+    extraction_result.profile.brand_identity.legal_name = "Acme Incorporated"
+    extraction_result.evidence.append(
+        LLMEvidence(
+            path="/brand_identity/legal_name",
+            origin="WEBSITE",
+            citations=[Citation(source_url=document.url, quote=document.text)],
+        )
+    )
+    warnings = []
+    profile, provenance = validated_profile(
+        extraction_result, bundle, bundle.documents[0].url, None, warnings=warnings
+    )
+    assert profile.brand_identity.legal_name == "Acme Incorporated" and warnings == []
+    assert (
+        next(p for p in provenance if p["path"] == "/brand_identity/legal_name")["origin"]
+        == "WEBSITE"
+    )
+
+
+def test_absent_legal_name_does_not_require_evidence_or_warn(extraction_result, bundle):
+    warnings = []
+    profile, _ = validated_profile(
+        extraction_result, bundle, bundle.documents[0].url, None, warnings=warnings
+    )
+    assert profile.brand_identity.legal_name is None and warnings == []
+
+
+def test_unused_legal_name_evidence_is_ignored(extraction_result, bundle):
+    extraction_result.evidence.append(
+        LLMEvidence(
+            path="/brand_identity/legal_name",
+            origin="WEBSITE",
+            citations=[],
+        )
+    )
+    profile, provenance = validated_profile(
+        extraction_result, bundle, bundle.documents[0].url, None
+    )
+    assert profile.brand_identity.legal_name is None
+    assert not any(p["path"] == "/brand_identity/legal_name" for p in provenance)
+
+
+@pytest.mark.parametrize(
     "mutation",
     [
         "no_evidence",

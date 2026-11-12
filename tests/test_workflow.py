@@ -224,6 +224,41 @@ async def test_invalid_llm_facts_fail_but_leave_source_trace(
         assert session.scalar(select(func.count()).select_from(Profile)) == 0
 
 
+async def test_invalid_optional_legal_name_still_saves_reviewable_confirmable_draft(
+    client, factory, settings, bundle, extraction_result
+):
+    from app.schemas import Citation, LLMEvidence
+
+    extraction_result.profile.brand_identity.legal_name = "Unsupported Legal Entity Ltd"
+    extraction_result.evidence.append(
+        LLMEvidence(
+            path="/brand_identity/legal_name",
+            origin="WEBSITE",
+            citations=[
+                Citation(
+                    source_url=bundle.documents[0].url, quote="Acme makes collaboration software."
+                )
+            ],
+        )
+    )
+    brand_id = register(client)
+    await extract(client, make_worker(factory, settings, bundle, extraction_result), brand_id)
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["status"] == "DRAFT"
+    assert draft["profile"]["brand_identity"]["legal_name"] is None
+    assert draft["profile"]["brand_identity"]["name"] == "Acme"
+    assert any("Legal name" in warning for warning in draft["warnings"])
+    assert not any(p["path"] == "/brand_identity/legal_name" for p in draft["provenance"])
+    assert len(draft["profile"]["offerings"]) == 2
+    confirmed = client.post(
+        f"/v1/brands/{brand_id}/profile/confirm",
+        json={
+            "expected_revision": draft["revision"],
+        },
+    )
+    assert confirmed.status_code == 200 and confirmed.json()["status"] == "CONFIRMED"
+
+
 async def test_transient_failure_retries_then_succeeds(
     client, factory, settings, bundle, extraction_result
 ):

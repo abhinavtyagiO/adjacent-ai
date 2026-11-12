@@ -33,6 +33,8 @@ creative_context, customer_personas_and_audience_segments and offering audiences
 customer_psychology. Do not invent customer identities, demographics or persona names.
 Leave those fields null unless stated on the site. Marketing defaults and guardrails
 must be explicit; do not recommend or create them. Do not guess colors or fonts.
+Legal name is optional: leave it null unless a source explicitly states the legal entity,
+and copy that name verbatim from its supporting quote. A trading name is not a legal name.
 Preserve the original wording where practical. No empty strings. No arbitrary defaults.
 """
 

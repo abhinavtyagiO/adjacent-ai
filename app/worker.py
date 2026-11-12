@@ -151,10 +151,20 @@ class ExtractionWorker:
                 bundle = await self.source.collect(claim.website_url)
                 self.save_sources(claim, bundle)
                 result = await self.provider.extract(claim.website_url, bundle)
+                validation_warnings = []
                 bip, provenance = validated_profile(
-                    result, bundle, claim.website_url, claim.user_name
+                    result,
+                    bundle,
+                    claim.website_url,
+                    claim.user_name,
+                    warnings=validation_warnings,
                 )
-                self.complete(claim, bip, provenance, bundle.warnings + result.warnings)
+                self.complete(
+                    claim,
+                    bip,
+                    provenance,
+                    bundle.warnings + result.warnings + validation_warnings,
+                )
             logger.info("extraction_succeeded job_id=%s", claim.job_id)
         except TimeoutError:
             error = DomainError(

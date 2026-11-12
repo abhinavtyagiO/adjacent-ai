@@ -211,7 +211,10 @@ Every populated scalar leaf has provenance at a JSON pointer such as `/offerings
 The service checks quoted text against the actual captured document, rejects unknown source
 URLs, missing evidence, duplicate/unknown pointers and unsupported inferences, and stamps
 citations with server-recorded fetch times. Names and pricing amounts must appear in cited
-quotes. Inferences are restricted to voice, psychology, creative context and audience
+quotes. An unsupported optional legal name is cleared to `null`, its provenance is omitted,
+and a review warning is saved with the draft. It does not block extraction or confirmation.
+Other evidence failures still reject the generated result.
+Inferences are restricted to voice, psychology, creative context and audience
 interpretation; company identity, pricing, proof, defaults and guardrails require direct
 evidence. Persona names/demographics cannot be inferred. Prompts treat website content as
 untrusted data and prohibit invented details. Citation checks establish traceability;
