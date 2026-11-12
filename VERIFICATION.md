@@ -51,9 +51,11 @@ in ignored `.env.local` to run a real extraction; keep the tracked `.env` creden
 
 ## Optional enrichment update — 12 November 2026
 
-103 tests passed against isolated PostgreSQL 16. Regression tests cover all enrichment
+107 tests passed against isolated PostgreSQL 16. Regression tests cover all enrichment
 sections, unsupported testimonial removal, preserving supported quotes, clearing inconsistent
 pricing, dropping unnamed offerings and rebuilding nested provenance indexes after filtering.
 Draft persistence and confirmation are verified with missing testimonials, pricing, personas
 and preferences. A missing company name permits a draft but still prevents confirmation.
 Ruff lint/format and diff checks passed. The BIP schema remains intact; no migration is needed.
+Provider tests also verify bounded malformed/truncated-response retries and that diagnostics
+log field locations/types without raw response values.

@@ -296,7 +296,7 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | `OPENAI_API_KEY` | Empty | Required only when using OpenAI |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
-| `LLM_MAX_ATTEMPTS` | `3` | Model retries for connection/timeout/429/5xx failures |
+| `LLM_MAX_ATTEMPTS` | `3` | Bounded retries for transient failures or invalid/truncated structured output |
 | `CRAWL_MAX_PAGES` | `10` | Maximum attempted page URLs per collection, including failures |
 | `CRAWL_TIMEOUT_SECONDS` | `15` | Per-fetch total timeout |
 | `CRAWL_MAX_BYTES` | `2000000` | Decompressed response body limit |

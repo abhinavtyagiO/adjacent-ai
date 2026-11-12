@@ -34,3 +34,7 @@ Users can review warnings, correct fields and confirm when name and website are 
 Unsupported content never becomes approved content automatically. Crawl failures, invalid
 provider JSON/schema, credentials failures, database failures and concurrency conflicts still
 produce explicit errors; optional enrichment does not bypass those checks.
+
+Structured generation asks for a concise initial draft (up to four offerings and five items
+per list) to stay within the response budget. Invalid/truncated structured responses receive
+bounded retries, with sanitized field-path diagnostics, before an extraction error is returned.

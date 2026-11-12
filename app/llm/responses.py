@@ -39,6 +39,9 @@ All enrichment is optional, including testimonials, proof, pricing, legal detail
 voice, visuals and marketing preferences. Return fewer supported facts instead of filling
 sections. Testimonials must be verbatim source quotes with evidence for the quote itself;
 do not create endorsements. Cite scalar leaf paths, not parent objects or whole sections.
+Keep the initial draft concise: select at most four offerings and up to five important
+items per list. Use short supporting quotes. Prefer a small complete JSON response with
+well-supported creative facts over a large response with exhaustive or speculative details.
 Preserve the original wording where practical. No empty strings. No arbitrary defaults.
 """
 
@@ -102,21 +105,40 @@ class StructuredResponsesProvider:
                             store=False,
                         )
                     if getattr(response, "status", None) == "incomplete":
-                        raise DomainError("LLM_INVALID_OUTPUT", "Model output was truncated")
+                        raise DomainError(
+                            "LLM_INVALID_OUTPUT", "Model output was truncated", retryable=True
+                        )
                     if response.output_parsed is None:
                         raise DomainError(
                             "LLM_REFUSED", "Model refused or returned no structured profile"
                         )
                     # SDK parsing plus independent validation at our provider boundary.
                     return ExtractionResult.model_validate(response.output_parsed.model_dump())
-                except (
-                    ValidationError,
-                    openai.LengthFinishReasonError,
-                    openai.APIResponseValidationError,
-                ) as exc:
-                    raise DomainError(
-                        "LLM_INVALID_OUTPUT", "Model returned an invalid or truncated profile"
-                    ) from exc
+                except ValidationError as exc:
+                    # Log field locations/types only, never input values or response bodies.
+                    logger.warning(
+                        "llm_invalid_output provider=%s fields=%s",
+                        self.name,
+                        [
+                            {"path": list(item["loc"]), "type": item["type"]}
+                            for item in exc.errors(include_input=False)[:10]
+                        ],
+                    )
+                    error = DomainError(
+                        "LLM_INVALID_OUTPUT",
+                        "Model returned an invalid or truncated profile",
+                        retryable=True,
+                    )
+                except (openai.LengthFinishReasonError, openai.APIResponseValidationError):
+                    error = DomainError(
+                        "LLM_INVALID_OUTPUT",
+                        "Model returned an invalid or truncated profile",
+                        retryable=True,
+                    )
+                except DomainError as exc:
+                    if not exc.retryable:
+                        raise
+                    error = exc
                 except (openai.APIConnectionError, TimeoutError) as exc:
                     error = DomainError(
                         "LLM_UNAVAILABLE", "Model request failed or timed out", retryable=True

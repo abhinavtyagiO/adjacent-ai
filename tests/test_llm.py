@@ -149,10 +149,36 @@ async def test_actual_sdk_sends_strict_json_schema_and_parses_response(
 
 async def test_truncated_response_is_clear(settings, bundle, monkeypatch):
     settings.openai_api_key = SecretStr("test-only")
-    mock_client(monkeypatch, [SimpleNamespace(output_parsed=None, status="incomplete")])
+    client = mock_client(
+        monkeypatch,
+        [SimpleNamespace(output_parsed=None, status="incomplete")] * settings.llm_max_attempts,
+    )
     with pytest.raises(DomainError) as error:
         await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_INVALID_OUTPUT"
+    assert client.responses.parse.await_count == settings.llm_max_attempts
+
+
+@pytest.mark.parametrize("problem", ["invalid", "truncated"])
+async def test_structured_output_retry_recovers_without_logging_payload(
+    settings, bundle, extraction_result, monkeypatch, caplog, problem
+):
+    from pydantic import ValidationError
+
+    from app.schemas import ExtractionResult
+
+    if problem == "invalid":
+        with pytest.raises(ValidationError) as validation:
+            ExtractionResult.model_validate({"profile": "private-payload-value"})
+        first = validation.value
+    else:
+        first = SimpleNamespace(output_parsed=None, status="incomplete")
+    client = mock_client(monkeypatch, [first, SimpleNamespace(output_parsed=extraction_result)])
+    assert (
+        await build_provider(settings).extract("https://acme.example/", bundle) == extraction_result
+    )
+    assert client.responses.parse.await_count == 2
+    assert "private-payload-value" not in caplog.text
 
 
 async def test_request_timeout_is_bounded_and_retried(settings, bundle, monkeypatch):
