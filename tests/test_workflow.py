@@ -421,6 +421,21 @@ async def test_configured_llm_strategy_runs_through_review_and_confirmation(
     real_client = openai.AsyncOpenAI
     requests = []
 
+    from app.schemas import FactualOffering, FactualProfile, FactualResult, MarketingResult
+
+    factual_data = {
+        k: v
+        for k, v in extraction_result.profile.model_dump().items()
+        if k in FactualProfile.model_fields
+    }
+    factual_data["offerings"] = [
+        {k: v for k, v in item.items() if k in FactualOffering.model_fields}
+        for item in factual_data["offerings"]
+    ]
+    factual_response = FactualResult(
+        profile=FactualProfile.model_validate(factual_data), evidence=extraction_result.evidence
+    ).model_dump_json()
+
     def handler(request):
         requests.append(request)
         payload = json.loads(request.content)
@@ -446,7 +461,9 @@ async def test_configured_llm_strategy_runs_through_review_and_confirmation(
                         "content": [
                             {
                                 "type": "output_text",
-                                "text": extraction_result.model_dump_json(),
+                                "text": MarketingResult().model_dump_json()
+                                if payload["text"]["format"]["name"] == "MarketingResult"
+                                else factual_response,
                                 "annotations": [],
                             }
                         ],
@@ -487,7 +504,7 @@ async def test_configured_llm_strategy_runs_through_review_and_confirmation(
         },
     ).json()
     assert confirmed["status"] == "CONFIRMED" and confirmed["provider"] == provider_name
-    assert len(requests) == 1  # Reviewing and confirming never invoke an unrelated provider.
+    assert len(requests) == 2  # Reviewing and confirming never invoke an unrelated provider.
 
 
 async def test_invalid_edits_leave_confirmed_profile_intact(
@@ -512,7 +529,7 @@ async def test_invalid_edits_leave_confirmed_profile_intact(
         assert response.status_code == 422, response.text
     assert client.get(f"/v1/brands/{brand_id}/profile").json()["status"] == "CONFIRMED"
     assert client.post(f"/v1/brands/{brand_id}/extractions").status_code == 409
-    assert client.get("/v1/profile-schema").json()["schema_version"] == 1
+    assert client.get("/v1/profile-schema").json()["schema_version"] == 2
 
 
 async def test_failed_reextraction_preserves_confirmed_profile(
@@ -547,3 +564,55 @@ async def test_hard_timeout_and_retry_exhaustion_are_persisted(
     await worker.process_once()
     result = client.get(job["poll_url"]).json()
     assert result["status"] == "FAILED" and result["error"]["code"] == "EXTRACTION_TIMEOUT"
+
+
+async def test_pipeline_metadata_pg_jsonb_and_confirmed_provenance(
+    client, factory, settings, bundle, extraction_result
+):
+    from app.schemas import MarketingResult
+
+    bundle.documents[0].metadata.update(category="homepage", products=[])
+    worker = make_worker(factory, settings, bundle, extraction_result)
+    worker.provider.infer_marketing = AsyncMock(
+        side_effect=DomainError("LLM_UNAVAILABLE", "Unavailable")
+    )
+    brand_id = register(client)
+    job_id = await extract(client, worker, brand_id)
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["source_coverage"]["pages"] == 1
+    assert draft["creative_readiness"]["status"] == "NEEDS_REVIEW"
+    assert draft["profile"]["brand_identity"]["name"] == "Acme"
+    with factory() as session:
+        from app.models import Profile
+
+        row = session.scalar(select(Profile))
+        assert row.pipeline_metadata["stages"] == {"facts": "SUCCEEDED", "marketing": "FAILED"}
+        assert (
+            session.scalar(text("SELECT pg_typeof(pipeline_metadata)::text FROM profiles"))
+            == "jsonb"
+        )
+        assert (
+            session.scalar(text("SELECT pg_typeof(metrics)::text FROM extraction_jobs")) == "jsonb"
+        )
+        assert session.scalar(select(SourceDocument)).source_metadata["category"] == "homepage"
+    confirmed = client.post(
+        f"/v1/brands/{brand_id}/profile/confirm", json={"expected_revision": draft["revision"]}
+    ).json()
+    assert confirmed["status"] == "CONFIRMED"  # Readiness never blocks confirmation.
+    assert all(p["confirmed_by_user"] for p in confirmed["provenance"])
+    assert any(p["origin"] == "WEBSITE" for p in confirmed["provenance"])
+    edited = client.patch(
+        f"/v1/brands/{brand_id}/profile",
+        json={
+            "expected_revision": confirmed["revision"],
+            "changes": {"brand_voice": {"tone": ["Warm"]}},
+        },
+    ).json()
+    tone = next(p for p in edited["provenance"] if p["path"] == "/brand_voice/tone/0")
+    assert tone["origin"] == "USER" and not tone["confirmed_by_user"]
+    assert edited["status"] == "DRAFT"
+    assert "brand_voice" not in {
+        m["field"] for m in edited["creative_readiness"]["missing_information"]
+    }
+    assert client.get(f"/v1/extractions/{job_id}").json()["metrics"] == draft["extraction_metrics"]
+    worker.provider.infer_marketing = AsyncMock(return_value=MarketingResult())

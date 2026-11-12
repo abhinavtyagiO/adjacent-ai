@@ -42,6 +42,8 @@ def job_view(job: ExtractionJob) -> dict:
         "created_at": job.created_at,
         "started_at": job.started_at,
         "finished_at": job.finished_at,
+        "metrics": job.metrics,
+        "selected_offering_key": job.selected_offering_key,
         "poll_url": f"/v1/extractions/{job.id}",
     }
 
@@ -93,7 +95,11 @@ def extract_brand(
     brand_id: uuid.UUID, session: DB, response: Response, request: ExtractionRequest | None = None
 ):
     """Enqueue durable work and return immediately. Repeated triggers reuse an active job."""
-    job = BrandService(session).enqueue(brand_id, request.replace_existing if request else False)
+    job = BrandService(session).enqueue(
+        brand_id,
+        request.replace_existing if request else False,
+        request.offering_key if request else None,
+    )
     response.headers["Location"] = f"/v1/extractions/{job.id}"
     response.headers["Retry-After"] = "2"
     return job_view(job)
@@ -109,8 +115,8 @@ def get_extraction(job_id: uuid.UUID, session: DB):
 
 @router.get("/profile-schema")
 def profile_schema():
-    """Complete version 1 JSON schema for clients building review/edit interfaces."""
-    return {"schema_version": 1, "schema": BIP.model_json_schema()}
+    """Complete version 2 JSON schema for clients building review/edit interfaces."""
+    return {"schema_version": 2, "schema": BIP.model_json_schema()}
 
 
 @router.get("/brands/{brand_id}/profile", response_model=ProfileResponse)
@@ -155,6 +161,7 @@ def list_sources(brand_id: uuid.UUID, session: DB):
                 "title": row.title,
                 "fetched_at": row.fetched_at,
                 "content_hash": row.content_hash,
+                "metadata": row.source_metadata,
             }
             for row in service.repo.source_documents(brand_id)
         ]

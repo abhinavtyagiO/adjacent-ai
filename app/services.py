@@ -56,7 +56,9 @@ class BrandService:
             raise DomainError("BRAND_EXISTS", "This website is already registered", 409) from exc
         return brand
 
-    def enqueue(self, brand_id: uuid.UUID, replace_existing: bool) -> ExtractionJob:
+    def enqueue(
+        self, brand_id: uuid.UUID, replace_existing: bool, offering_key: str | None = None
+    ) -> ExtractionJob:
         brand = self.require_brand(brand_id, lock=True)
         active = self.repo.active_job(brand_id)
         if active:
@@ -66,12 +68,16 @@ class BrandService:
             raise DomainError(
                 "PROFILE_EXISTS", "Use replace_existing=true to extract a new draft", 409
             )
-        job = ExtractionJob(brand_id=brand_id, base_revision=brand.revision)
+        job = ExtractionJob(
+            brand_id=brand_id, base_revision=brand.revision, selected_offering_key=offering_key
+        )
         self.session.add(job)
         self.session.commit()
         return job
 
     def read(self, brand_id: uuid.UUID) -> dict:
+        from app.intelligence import creative_readiness
+
         brand = self.require_brand(brand_id)
         profile = self.require_profile(brand_id)
         return {
@@ -87,6 +93,14 @@ class BrandService:
             "extracted_at": profile.extracted_at,
             "updated_at": profile.updated_at,
             "confirmed_at": profile.confirmed_at,
+            "source_coverage": profile.pipeline_metadata.get("source_coverage", {}),
+            "creative_readiness": creative_readiness(
+                self.repo.bip(profile),
+                profile.pipeline_metadata.get("creative_readiness", {}).get(
+                    "selected_offering_key"
+                ),
+            ),
+            "extraction_metrics": profile.pipeline_metadata.get("extraction_metrics", {}),
         }
 
     def update(self, brand_id: uuid.UUID, request: ProfilePatch) -> dict:
@@ -128,6 +142,10 @@ class BrandService:
             brand.revision += 1
             profile.status = "CONFIRMED"
             profile.confirmed_at = profile.updated_at = now()
+            profile.provenance = [
+                {**entry, "confirmed_by_user": True, "confirmation_revision": brand.revision}
+                for entry in profile.provenance
+            ]
         self.session.commit()
         return self.read(brand_id)
 

@@ -1,0 +1,1094 @@
+{
+  "website_url": "https://www.usefastlane.ai/",
+  "profile": {
+    "brand_identity": {
+      "name": "Fastlane",
+      "website_url": "https://www.usefastlane.ai/",
+      "legal_name": null,
+      "tagline": "Create, launch and scale winning ads with AI",
+      "description": "Fastlane is an AI marketing agent for brands. Its agent, Senna, learns a brand from a URL, studies competitors and customers, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and scales what works.",
+      "mission": null,
+      "vision": null,
+      "values": [],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "Marketing Technology",
+      "category": "AI marketing agent / AI UGC content engine",
+      "business_model": null,
+      "market_position": "Positions itself as an end-to-end autonomous marketing agent for solopreneurs and fast-growing teams, contrasted against AI ad generators, agencies, UGC marketplaces and general LLMs.",
+      "positioning_statement": "The AI marketing agent that turns a product link into high-volume, trend-native short-form content, publishes it natively across four platforms, and scales the winners.",
+      "differentiators": [],
+      "geographic_markets": []
+    },
+    "offerings": [
+      {
+        "name": "Fastlane",
+        "key": "fastlane",
+        "kind": null,
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "AI marketing agent platform (agent named Senna) that learns a brand from a URL, creates ads and organic content, publishes natively across social platforms, and optimizes based on performance.",
+        "url": "https://www.usefastlane.ai/",
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [
+            "Creative fatigue in ad account"
+          ],
+          "decision_criteria": [
+            "Native publishing to key platforms and attribution"
+          ],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Warmed accounts",
+        "key": "warmed-accounts",
+        "kind": "SERVICE",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Real US & EU TikTok and Instagram accounts created from scratch, warmed up in your niche and managed inside Fastlane, available as an add-on marketplace.",
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "New accounts get throttled before content reaches buyers."
+          ],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [
+            "Accounts created and warmed in-niche"
+          ],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [
+        {
+          "name": null,
+          "description": null,
+          "demographics": null,
+          "roles": [],
+          "goals": [],
+          "pain_points": [
+            "Shipped app, zero visitors"
+          ],
+          "buying_triggers": [
+            "Just deployed a new app or feature"
+          ],
+          "objections": [],
+          "preferred_channels": [],
+          "adjacent_interests": [],
+          "relatable_situations": []
+        },
+        {
+          "name": null,
+          "description": null,
+          "demographics": null,
+          "roles": [],
+          "goals": [],
+          "pain_points": [
+            "$500+ per creator video and slow delivery",
+            "Cold accounts get throttled"
+          ],
+          "buying_triggers": [],
+          "objections": [],
+          "preferred_channels": [],
+          "adjacent_interests": [],
+          "relatable_situations": [
+            "Sample arrives after the trend is over"
+          ]
+        }
+      ],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [
+        "Content volume is unmanageable by hand: building is fast but marketing by hand happens late and badly."
+      ],
+      "desired_outcomes": [
+        "Only spend ad budget on creative with organic proof."
+      ],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": [
+        "A single breakout video changing the trajectory of a launch."
+      ]
+    },
+    "value_propositions": {
+      "primary": null,
+      "functional_benefits": [],
+      "emotional_benefits": [],
+      "differentiators": [],
+      "reasons_to_believe": []
+    },
+    "trust_and_proof": {
+      "testimonials": [],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": []
+    },
+    "brand_voice": {
+      "tone": [
+        "Direct"
+      ],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [
+        "Ship 30 days of viral content in 30 seconds"
+      ],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [],
+      "colors": [],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [
+        "Volume-as-strategy: posting frequency and multi-format testing to beat creative fatigue."
+      ],
+      "creative_angles": [
+        "Show the same product through many different AI character faces to imply adoption rather than advertising."
+      ],
+      "cultural_contexts": [
+        "Tentative: AI-generated creator content is normalized in retail/social feeds but still openly debated for authenticity."
+      ],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": null,
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": null
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane - Create, launch and scale winning ads with AI",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": [],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Create, launch and scale winning ads with AI",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands. Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Company sells marketing/advertising software, so industry is Marketing Technology.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane launches AI marketing platform that runs campaigns end to end",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Site markets an AI marketing agent / AI UGC content engine, not a literal keyword.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane versus everything else. Capability | Fastlane | AI ad generators | Marketing agencies | UGC marketplaces | ChatGPT / Claude",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Site positions itself against point tools, agencies and general LLMs as an end-to-end agent.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/lovable-projects",
+          "quote": "paste your shipped URL into Fastlane and the engine generates, schedules and publishes short-form content around your app",
+          "fetched_at": "2026-11-12T16:58:53.437303+00:00"
+        }
+      ],
+      "reasoning": "Synthesized from recurring site messaging about URL-to-distribution.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/catalog_level",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Single umbrella platform product with pricing tiers, so FAMILY level.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/url",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane - Create, launch and scale winning ads with AI",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Warmed accounts | $100 / mo per account",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fresh TikTok and Instagram accounts, set up and warmed in your niche by our team, posting from day one.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "A human-managed account-warming service is a SERVICE.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/1/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Real US & EU TikTok and Instagram accounts, created from scratch, warmed up in your niche and managed inside Fastlane.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/1/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Warmed accounts | $100 / mo per account",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:05:25.115070+00:00"
+    },
+    {
+      "path": "/offerings/0/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tiktok-ads",
+          "quote": "TikTok creative fatigues in days",
+          "fetched_at": "2026-11-12T16:58:49.133935+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis: ad fatigue prompts seeking new creative engine.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/offerings/0/customer_psychology/decision_criteria/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Stated native multi-platform publishing.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/offerings/1/customer_psychology/pain_points/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tiktok-shop",
+          "quote": "Cold accounts get throttled",
+          "fetched_at": "2026-11-12T16:58:47.405723+00:00"
+        }
+      ],
+      "reasoning": "Stated account pain.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/offerings/1/customer_psychology/decision_criteria/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "warmed up in your niche and managed inside Fastlane",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Stated warmed-account mechanics.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/pain_points/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/lovable-projects",
+          "quote": "live URL, zero visitors",
+          "fetched_at": "2026-11-12T16:58:53.437303+00:00"
+        }
+      ],
+      "reasoning": "Stated stall pattern for new apps.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/buying_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/rork-projects",
+          "quote": "Paste your App Store or TestFlight link",
+          "fetched_at": "2026-11-12T16:58:51.528682+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis: launching an app prompts seeking distribution.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/pain_points/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/shopify-ecommerce",
+          "quote": "UGC creators typically charge $500+ per video.",
+          "fetched_at": "2026-11-12T16:58:49.665473+00:00"
+        }
+      ],
+      "reasoning": "Stated creator cost barrier.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/pain_points/1",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/dropshipping",
+          "quote": "new accounts with no history get throttled",
+          "fetched_at": "2026-11-12T16:58:54.070098+00:00"
+        }
+      ],
+      "reasoning": "Stated cold-start problem.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/dropshipping",
+          "quote": "By the time the sample arrives, the trend is someone else’s.",
+          "fetched_at": "2026-11-12T16:58:54.070098+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis: sample delays versus trend speed.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "builders can code with agents but still market by hand, badly, at 11pm",
+          "fetched_at": "2026-11-12T16:58:46.765319+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis: production gap between shipping and marketing.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/meta-ads",
+          "quote": "Your media budget only ever touches creative with organic receipts.",
+          "fetched_at": "2026-11-12T16:58:52.524868+00:00"
+        }
+      ],
+      "reasoning": "Stated outcome of organic-first validation.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/customer_psychology/emotional_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/mobile-apps",
+          "quote": "one breakout pays for everything",
+          "fetched_at": "2026-11-12T16:58:52.318869+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis: a single breakout feels decisive.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/brand_voice/tone/0",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Your next winning ad on autopilot",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Copy is direct and outcome-led.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/brand_voice/example_phrases/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "Ship 30 days of viral content in 30 seconds",
+          "fetched_at": "2026-11-12T16:58:46.765319+00:00"
+        }
+      ],
+      "reasoning": "Verbatim recurring CTA line.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/creative_context/content_pillars/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tiktok-ads",
+          "quote": "TikTok creative fatigues in days",
+          "fetched_at": "2026-11-12T16:58:49.133935+00:00"
+        }
+      ],
+      "reasoning": "Derived pillar: volume to counter fatigue.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/creative_context/creative_angles/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/shopify-ecommerce",
+          "quote": "Every video looks like a different customer found you.",
+          "fetched_at": "2026-11-12T16:58:49.665473+00:00"
+        }
+      ],
+      "reasoning": "Hypothesis angle from stated character variety.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    },
+    {
+      "path": "/creative_context/cultural_contexts/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/shopify-ecommerce",
+          "quote": "characters realistic enough that the feed cannot tell the difference",
+          "fetched_at": "2026-11-12T16:58:49.665473+00:00"
+        }
+      ],
+      "reasoning": "Tentative cultural read on AI-content authenticity debate.",
+      "recorded_at": "2026-11-12T17:05:43.829225+00:00"
+    }
+  ],
+  "warnings": [
+    "/business_positioning/business_model: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/1: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/2: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/3: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/4: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/5: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/kind: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/7: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/1/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/1/supported_platforms/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/supported_platforms/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/1/url: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/value_propositions/primary: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/3: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/4: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/3: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/2: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/0/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/1/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/1/company: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/2/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/awards/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/1: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/2: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/guarantees/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/subject: omitted because its source evidence could not be verified.",
+    "/visual_identity/colors/0/hex: omitted because its source evidence could not be verified.",
+    "/visual_identity/colors/0/usage: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators: ignored evidence for an empty or unknown field.",
+    "/offerings/0/features: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/0: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/1: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/2: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/3: ignored evidence for an empty or unknown field.",
+    "/offerings/0/supported_platforms: ignored evidence for an empty or unknown field.",
+    "/offerings/1/pricing: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/awards: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/metrics: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/scoped_claims/1: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/scoped_claims/2: ignored evidence for an empty or unknown field.",
+    "/value_propositions/reasons_to_believe: ignored evidence for an empty or unknown field.",
+    "/visual_identity/colors/0: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/0: pricing tier omitted because it has no verified name.",
+    "/offerings/0/pricing_tiers/1: pricing tier omitted because it has no verified name.",
+    "/offerings/0/pricing_tiers/2: pricing tier omitted because it has no verified name.",
+    "/offerings/0/pricing_tiers/3: pricing tier omitted because it has no verified name.",
+    "/offerings/0/claims/0: claim omitted because its text or scope is unsupported.",
+    "/offerings/1/claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/testimonials/0: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/1: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/2: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/scoped_claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/1: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/2: claim omitted because its text or scope is unsupported.",
+    "Legal name, founding year, headquarters and operating regions not stated in provided sources.",
+    "Pricing page contains extensive competitor pricing that is not Fastlane's own product data.",
+    "Wan 3.0 and record-product-demo pages are educational/resources, not Fastlane offerings, and were excluded from the catalog.",
+    "/offerings/0/audiences/segments/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/0/needs/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/0/needs/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/1/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/1/description: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/1/needs/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/segments/1/needs/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/pain_points/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/pain_points/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/desired_outcomes/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/desired_outcomes/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/motivations/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/fears/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/objections/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/objections/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/purchase_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/purchase_triggers/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/decision_criteria/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/decision_criteria/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_triggers/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/audiences/segments/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/1/audiences/segments/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/1/audiences/segments/0/needs/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/audiences/segments/0/needs/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/pain_points/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/desired_outcomes/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/desired_outcomes/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/motivations/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/objections/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/objections/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/purchase_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/decision_criteria/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/customer_psychology/emotional_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/desired_outcomes/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_triggers/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/language_style: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/4: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/5: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/0: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/1: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/0: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/1: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/0: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/1: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/2: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/3: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/0: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/1: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/2: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/0: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/1: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/2: omitted because its source evidence could not be verified.",
+    "/creative_context/content_pillars/1: omitted because its source evidence could not be verified.",
+    "/creative_context/creative_angles/0: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "selected_offering_key is null; offering insights cover the 'fastlane' family and 'warmed-accounts' add-on, not a single campaign offering.",
+    "No verified pricing, demographics, or geographies in profile beyond source docs; personas are role-based hypotheses, not customer facts.",
+    "Warmed-account country specifics (US/EU) and pricing appear in source pages but were not mirrored as profile facts; treat as website-stated, not verified profile claims."
+  ],
+  "pipeline_version": 2,
+  "source_coverage": {
+    "categories": {
+      "homepage": 1,
+      "use_case": 15,
+      "pricing": 1,
+      "other": 2
+    },
+    "missing_categories": [
+      "brand_story",
+      "category",
+      "product",
+      "customer_story",
+      "faq"
+    ],
+    "pages": 19,
+    "fetch_operations": 21,
+    "sitemaps_checked": 1,
+    "discovered_urls": 128,
+    "text_characters": 140000,
+    "estimated_input_tokens": 46667,
+    "budget_limited": true
+  },
+  "creative_readiness": {
+    "status": "NEEDS_REVIEW",
+    "scope": "BRAND",
+    "selected_offering_key": null,
+    "missing_information": [
+      {
+        "field": "selected_offering_key",
+        "reason": "Brand-level brief only; offering-specific targeting still needs a selected offering.",
+        "suggested_question": "Which offering should the next creative brief target?"
+      }
+    ],
+    "requires_human_review": true
+  },
+  "extraction_metrics": {
+    "calls": [
+      {
+        "stage": "facts",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 34357,
+        "output_tokens": 6381,
+        "cached_input_tokens": 0,
+        "status": "succeeded",
+        "budget_tokens": 40738,
+        "latency_seconds": 21.422
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 34171,
+        "output_tokens": 3996,
+        "cached_input_tokens": 0,
+        "status": "succeeded",
+        "budget_tokens": 38167,
+        "latency_seconds": 18.694
+      }
+    ],
+    "latency_seconds": 40.193,
+    "input_tokens": 68528,
+    "output_tokens": 10377,
+    "usage_complete": true,
+    "estimated_cost_usd": 0.0330108,
+    "cost_basis": "Configured token rates; not an invoice. Null if rates/attempt usage are unavailable.",
+    "rates": {
+      "input": 0.3,
+      "output": 1.2,
+      "cached_input": 0.006
+    }
+  },
+  "stages": {
+    "facts": "SUCCEEDED",
+    "marketing": "SUCCEEDED"
+  }
+}

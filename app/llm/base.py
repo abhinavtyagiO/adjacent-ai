@@ -4,7 +4,7 @@ from typing import Protocol
 from app.config import Settings
 from app.enrichment import SourceBundle
 from app.errors import DomainError
-from app.schemas import ExtractionResult
+from app.schemas import BIP, ExtractionResult, MarketingResult
 
 
 class LLMProvider(Protocol):
@@ -16,6 +16,12 @@ class LLMProvider(Protocol):
 
     name: str
     model: str
+
+    async def extract_facts(self, website_url: str, sources: SourceBundle) -> ExtractionResult: ...
+
+    async def infer_marketing(
+        self, profile: BIP, sources: SourceBundle, selected_offering_key: str | None = None
+    ) -> MarketingResult: ...
 
     async def extract(self, website_url: str, sources: SourceBundle) -> ExtractionResult:
         """Return schema-validated data. Evidence is independently checked by the service."""

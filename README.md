@@ -1,4 +1,4 @@
-# Brand Intelligence Backend — Phase 1
+# Brand Intelligence Backend — Phase 1B
 
 A FastAPI backend for registering a company URL, crawling public pages, extracting an
 evidence-aware Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
@@ -97,7 +97,9 @@ curl -sS "http://localhost:8000/v1/brands/$BRAND_ID/profile" | jq .
 ```
 
 The envelope includes `status`, `revision`, `profile`, field `provenance`, warnings,
-extraction/update timestamps, provider and model. Review inferred fields and source
+extraction/update timestamps, provider and model. Phase 1B also returns `source_coverage`,
+`creative_readiness` (recomputed after edits), and `extraction_metrics` with per-stage models,
+usage, latency and optional estimated cost. Review inferred fields and source
 evidence before approval. A profile can remain a draft without a company name if the site
 does not state one. The server never derives a company name from its domain.
 
@@ -135,7 +137,9 @@ curl -sS -X POST "http://localhost:8000/v1/brands/$BRAND_ID/profile/confirm" \
 Only company name and the registered website are required to confirm. Personas, pricing,
 brand guidelines and marketing preferences can remain unknown. Confirmation sets
 `CONFIRMED` and `confirmed_at`, and increments revision. Repeating confirmation with the
-current revision is a no-op. Future edits require review and confirmation again.
+current revision is a no-op. Confirmation marks provenance `confirmed_by_user` while retaining
+the original fact/classification/hypothesis origin. It does not turn a hypothesis into a sourced fact.
+Future edits require review and confirmation again.
 
 6. List brands, offerings and source metadata.
 
@@ -173,7 +177,7 @@ is outside Phase 1. Source snapshots and job history remain stored.
 | POST | `/v1/brands/{id}/profile/confirm` | Approve current revision |
 | GET | `/v1/brands/{id}/offerings` | Relational offerings, including row IDs |
 | GET | `/v1/brands/{id}/sources` | Source URLs, hashes and timestamps |
-| GET | `/v1/profile-schema` | Complete v1 BIP JSON Schema |
+| GET | `/v1/profile-schema` | Complete v2 BIP JSON Schema |
 | GET | `/health/live`, `/health/ready` | Process and database health |
 
 `/docs` and `/openapi.json` expose the typed BIP response contract. Field-level request
@@ -183,8 +187,8 @@ return `409`. Domain errors use `{"error":{"code":"...","message":"..."}}`.
 ## BIP schema and evidence
 
 The brief supplies the twelve section names, but no earlier field-level schema file.
-This implementation defines a documented **version 1** contract in `app/schemas.py` and
-`schemas/bip-v1.schema.json`. Extend those models and version the contract as requirements
+This implementation defines a documented **version 2** contract in `app/schemas.py` and
+`schemas/bip-v2.schema.json` (v1 is retained as a historical contract). Extend those models and version the contract as requirements
 evolve. Optional section members do not become onboarding prerequisites.
 
 | Section | Representative fields |
@@ -205,7 +209,8 @@ evolve. Optional section members do not become onboarding prerequisites.
 Every populated scalar leaf has provenance at a JSON pointer such as `/offerings/0/name`:
 
 * `WEBSITE`: direct extracted information, with a verbatim quote and collected source URL.
-* `INFERRED`: a tentative, grounded interpretation, with explicit reasoning and citations.
+* `CLASSIFIED`: an explainable label derived from source context, with rationale and citations.
+* `INFERRED`: a tentative audience or creative hypothesis, with concise rationale and citations.
 * `USER`: the submitted URL/name or a review correction; no website citation is asserted.
 
 The service checks quoted text against the actual captured document and verifies source
@@ -219,7 +224,7 @@ Only the registered website is required to start; a company name is required to 
 See [the onboarding field policy](docs/onboarding-field-policy.md) for the full classification.
 Inferences are restricted to voice, psychology, creative context and audience
 interpretation; company identity, pricing, proof, defaults and guardrails require direct
-evidence. Persona names/demographics cannot be inferred. Prompts treat website content as
+evidence. Persona labels can describe hypothetical segments; real identities and demographics cannot be invented. Prompts treat website content as
 untrusted data and prohibit invented details. Citation checks establish traceability;
 semantic correctness still requires the review/confirmation step.
 
@@ -227,7 +232,9 @@ Text-only crawling cannot determine complete design systems: unsupported colors,
 guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
 The default provider is DeepSeek, using its documented
 [Responses API JSON-schema output](https://api-docs.deepseek.com/api/create-response/).
-It uses `deepseek-flash` by default, with thinking disabled for bounded structured extraction.
+The factual stage defaults to `deepseek-flash` with thinking disabled. A second, separately
+configured stage generates grounded audience and creative hypotheses (DeepSeek effort `none`
+by default to control cost). See [Phase 1B pipeline and evaluation](docs/phase1b.md).
 The existing [OpenAI Responses provider](https://developers.openai.com/api/docs/guides/structured-outputs)
 remains selectable. Both strategies share a Pydantic-derived JSON schema, the evidence prompt,
 local validation, request timeouts and bounded retries. Refusals, truncated output and invalid
@@ -241,8 +248,10 @@ HTTP /v1 -> BrandService -> Repository -> PostgreSQL
                           |
                  durable extraction_jobs
                           |
-worker -> EnrichmentSource -> source_documents -> LLMProvider
-       -> schema/evidence validation -> transactional DRAFT + offerings
+worker -> EnrichmentSource -> source_documents
+       -> factual LLM -> citation + consistency checks -> verified catalog
+       -> marketing LLM -> grounded hypotheses + readiness
+       -> transactional DRAFT + offerings + pipeline diagnostics
 ```
 
 * `app/api/routes.py`: HTTP input/output, shared-token authorization, job polling.
@@ -254,6 +263,7 @@ worker -> EnrichmentSource -> source_documents -> LLMProvider
   `LLMProvider` is the strategy interface, `build_provider` is the strategy registry/factory,
   and `ExtractionWorker` is the context that receives the configured strategy. Concrete
   `DeepSeekProvider` and `OpenAIProvider` strategies share Responses transport in `responses.py`.
+* `app/intelligence.py`: two-stage orchestration, semantic checks, catalog labels and readiness.
 * `app/provenance.py`: grounded evidence checks and user-correction provenance.
 * `app/worker.py`: durable extraction orchestration and failure/recovery lifecycle.
 * `app/models.py`, `alembic/`: PostgreSQL schema and versioned migrations.
@@ -272,8 +282,9 @@ than its lease. On SIGTERM the worker finishes its current bounded job before ex
 Multiple workers may run against the same database; each worker processes one job at a time.
 Set a container shutdown grace period matching your timeout if graceful completion is needed.
 
-The crawler follows relevant homepage/about/product/service/pricing/solution links and tries
-common fallback paths. It enforces robots **before every redirect hop**, allows only the
+The crawler prioritizes homepage, story, category, product, use-case, customer-story, FAQ
+and pricing links, including bounded same-host sitemaps. It preserves headings, lists, tables
+and JSON-LD product/FAQ context. Common paths are a fallback when discovery finds little. It enforces robots **before every redirect hop**, allows only the
 registered host and its www variant, limits pages/body/text/time and does not execute JS.
 All DNS answers must be public; requests connect to a validated IP with the original Host
 and TLS server name, preventing a second DNS resolution from bypassing the check. HTTPX
@@ -297,12 +308,12 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
 | `LLM_MAX_ATTEMPTS` | `3` | Bounded retries for transient failures or invalid/truncated structured output |
-| `CRAWL_MAX_PAGES` | `10` | Maximum attempted page URLs per collection, including failures |
+| `CRAWL_MAX_PAGES` | `20` | Maximum collected content documents (requests have a separate limit) |
 | `CRAWL_TIMEOUT_SECONDS` | `15` | Per-fetch total timeout |
 | `CRAWL_MAX_BYTES` | `2000000` | Decompressed response body limit |
 | `CRAWL_MAX_TEXT_CHARS` | `12000` | Text per document supplied to LLM and stored |
-| `JOB_TIMEOUT_SECONDS` | `240` | Overall extraction attempt time limit |
-| `JOB_LEASE_SECONDS` | `300` | Must exceed job timeout by more than ten seconds |
+| `JOB_TIMEOUT_SECONDS` | `420` | Overall extraction attempt time limit |
+| `JOB_LEASE_SECONDS` | `480` | Must exceed job timeout by more than ten seconds |
 | `JOB_MAX_ATTEMPTS` | `3` | Maximum leased attempts including crash recovery |
 | `WORKER_POLL_SECONDS` | `2` | Idle polling interval |
 | `LOG_LEVEL` | `INFO` | Logs job IDs, stages and safe failure codes |
@@ -387,3 +398,10 @@ concurrent skip-locked claims, crawl restrictions and safe LLM errors.
 
 See `VERIFICATION.md` for checks run in the delivery environment and remaining live-service
 verification limits.
+
+## Phase 1B quality comparison
+
+See [the pipeline guide](docs/phase1b.md) and [measured comparison](evaluations/REPORT.md).
+Frozen public-source snapshots, prior Phase 1 profiles and clearly labeled constructed
+regression fixtures allow repeatable checks. Evaluation now replays saved responses only;
+batch live calls are disabled to control costs.

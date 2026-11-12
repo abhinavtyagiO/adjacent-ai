@@ -1,6 +1,7 @@
 """Check field-level evidence against the exact documents supplied to the model."""
 
 import logging
+import re
 from typing import Any
 
 from app.enrichment import Document, SourceBundle
@@ -33,7 +34,11 @@ def normalized(text: str) -> str:
 
 def inference_allowed(path: str) -> bool:
     # Identity, proof, pricing, marketing preferences and persona identities are facts only.
-    if path.endswith(("/name", "/demographics")):
+    if path.endswith("/demographics"):
+        return False
+    if path.endswith("/name") and not any(
+        marker in path for marker in ("/personas/", "/segments/")
+    ):
         return False
     roots = (
         "/brand_voice/",
@@ -59,6 +64,14 @@ def checked_evidence(
         raise DomainError("LLM_EVIDENCE_INVALID", f"Missing source evidence for {path}")
     if entry.origin == "INFERRED" and (not inference_allowed(path) or not entry.reasoning):
         raise DomainError("LLM_EVIDENCE_INVALID", f"Unsupported inference for {path}")
+    if entry.origin == "CLASSIFIED" and (
+        not entry.reasoning
+        or not (
+            path.endswith(("/kind", "/catalog_level", "/scope"))
+            or path.startswith(("/business_positioning/", "/brand_voice/"))
+        )
+    ):
+        raise DomainError("LLM_EVIDENCE_INVALID", f"Unsupported classification for {path}")
     citations = []
     for citation in entry.citations:
         document = documents.get(citation.source_url)
@@ -73,7 +86,8 @@ def checked_evidence(
             LEGAL_NAME_PATH,
             "/brand_identity/founded_year",
         }
-        or (path.startswith("/offerings/") and path.endswith(("/name", "/amount")))
+        or bool(re.fullmatch(r"/offerings/\d+/(?:name|pricing_tiers/\d+/name)", path))
+        or (path.startswith("/offerings/") and path.endswith("/amount"))
         or (path.startswith("/trust_and_proof/testimonials/") and path.endswith("/quote"))
     )
     if exact and not any(
@@ -150,6 +164,18 @@ def validated_profile(
     def clean(value, old_path="", new_path=""):
         if isinstance(value, dict):
             parts = old_path.split("/")
+            if (
+                re.fullmatch(r"/offerings/\d+/pricing_tiers/\d+", old_path)
+                and old_path + "/name" not in verified
+            ):
+                warn(old_path, "pricing tier omitted because it has no verified name.")
+                return missing, []
+            if re.fullmatch(
+                r"/(?:trust_and_proof/scoped_claims|offerings/\d+/claims)/\d+", old_path
+            ):
+                if any(old_path + suffix not in verified for suffix in ("/text", "/scope")):
+                    warn(old_path, "claim omitted because its text or scope is unsupported.")
+                    return missing, []
             if len(parts) == 3 and parts[1] == "offerings" and old_path + "/name" not in verified:
                 warn(old_path, "offering omitted because it has no verified name.")
                 return missing, []

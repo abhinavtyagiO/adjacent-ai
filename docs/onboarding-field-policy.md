@@ -35,6 +35,15 @@ Unsupported content never becomes approved content automatically. Crawl failures
 provider JSON/schema, credentials failures, database failures and concurrency conflicts still
 produce explicit errors; optional enrichment does not bypass those checks.
 
-Structured generation asks for a concise initial draft (up to four offerings and five items
-per list) to stay within the response budget. Invalid/truncated structured responses receive
+Structured generation captures the relevant catalog at family/product level without a fixed
+offering-count limit. Sizes/flavours belong in variants; SaaS plans belong in pricing tiers.
+The audience stage uses a focused set of hypotheses to fit its independent output budget. Invalid/truncated structured responses receive
 bounded retries, with sanitized field-path diagnostics, before an extraction error is returned.
+
+Phase 1B adds `CLASSIFIED` provenance for explainable labels (including PRODUCT/SERVICE)
+without requiring the classification word to occur literally in the quote. `INFERRED` persona
+labels describe possible buyer groups, never invented customer identities or demographics.
+Facility certifications, newsletter readership and customer anecdotes retain scoped claims;
+numeric contradictions are removed. Confirmation retains origin and adds user-review metadata.
+If the marketing stage fails, a verified factual DRAFT is retained with warnings and readiness
+questions. Readiness never blocks saving or confirming an otherwise valid profile.

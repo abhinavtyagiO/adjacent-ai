@@ -12,12 +12,14 @@ class Document:
     fetched_at: datetime
     title: str | None = None
     source_type: str = "website"
+    metadata: dict = field(default_factory=dict)
 
 
 @dataclass
 class SourceBundle:
     documents: list[Document]
     warnings: list[str] = field(default_factory=list)
+    coverage: dict = field(default_factory=dict)
 
 
 class EnrichmentSource(Protocol):

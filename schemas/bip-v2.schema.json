@@ -1,0 +1,1367 @@
+{
+  "$defs": {
+    "AudienceSegment": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "needs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Needs",
+          "type": "array"
+        },
+        "geography": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Geography",
+          "type": "array"
+        }
+      },
+      "title": "AudienceSegment",
+      "type": "object"
+    },
+    "Audiences": {
+      "additionalProperties": false,
+      "properties": {
+        "personas": {
+          "items": {
+            "$ref": "#/$defs/Persona"
+          },
+          "title": "Personas",
+          "type": "array"
+        },
+        "segments": {
+          "items": {
+            "$ref": "#/$defs/AudienceSegment"
+          },
+          "title": "Segments",
+          "type": "array"
+        }
+      },
+      "title": "Audiences",
+      "type": "object"
+    },
+    "BrandIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "maxLength": 300,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "website_url": {
+          "title": "Website Url",
+          "type": "string"
+        },
+        "legal_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legal Name"
+        },
+        "tagline": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tagline"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "mission": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mission"
+        },
+        "vision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Vision"
+        },
+        "values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Values",
+          "type": "array"
+        },
+        "founded_year": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Founded Year"
+        },
+        "headquarters": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Headquarters"
+        },
+        "operating_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operating Regions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "website_url"
+      ],
+      "title": "BrandIdentity",
+      "type": "object"
+    },
+    "BrandVoice": {
+      "additionalProperties": false,
+      "properties": {
+        "tone": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tone",
+          "type": "array"
+        },
+        "personality": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Personality",
+          "type": "array"
+        },
+        "language_style": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Language Style"
+        },
+        "preferred_terms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preferred Terms",
+          "type": "array"
+        },
+        "avoided_terms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Avoided Terms",
+          "type": "array"
+        },
+        "example_phrases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Example Phrases",
+          "type": "array"
+        },
+        "cultural_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cultural Contexts",
+          "type": "array"
+        }
+      },
+      "title": "BrandVoice",
+      "type": "object"
+    },
+    "BusinessPositioning": {
+      "additionalProperties": false,
+      "properties": {
+        "industry": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Industry"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category"
+        },
+        "business_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Business Model"
+        },
+        "market_position": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Market Position"
+        },
+        "positioning_statement": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Positioning Statement"
+        },
+        "differentiators": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Differentiators",
+          "type": "array"
+        },
+        "geographic_markets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Geographic Markets",
+          "type": "array"
+        }
+      },
+      "title": "BusinessPositioning",
+      "type": "object"
+    },
+    "Color": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "hex": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hex"
+        },
+        "usage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Usage"
+        }
+      },
+      "title": "Color",
+      "type": "object"
+    },
+    "CreativeContext": {
+      "additionalProperties": false,
+      "properties": {
+        "content_themes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Content Themes",
+          "type": "array"
+        },
+        "storytelling_angles": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Storytelling Angles",
+          "type": "array"
+        },
+        "existing_content_formats": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Existing Content Formats",
+          "type": "array"
+        },
+        "available_assets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Available Assets",
+          "type": "array"
+        },
+        "seasonal_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Seasonal Context",
+          "type": "array"
+        },
+        "calls_to_action": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Calls To Action",
+          "type": "array"
+        },
+        "content_pillars": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Content Pillars",
+          "type": "array"
+        },
+        "creative_angles": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Creative Angles",
+          "type": "array"
+        },
+        "cultural_contexts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cultural Contexts",
+          "type": "array"
+        },
+        "relatable_situations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Relatable Situations",
+          "type": "array"
+        }
+      },
+      "title": "CreativeContext",
+      "type": "object"
+    },
+    "MarketingDefaults": {
+      "additionalProperties": false,
+      "properties": {
+        "objectives": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Objectives",
+          "type": "array"
+        },
+        "target_channels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Channels",
+          "type": "array"
+        },
+        "content_language": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Content Language"
+        },
+        "target_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Regions",
+          "type": "array"
+        },
+        "preferred_cta": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preferred Cta"
+        },
+        "budget": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Budget"
+        },
+        "video_duration_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Video Duration Seconds"
+        },
+        "aspect_ratio": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aspect Ratio"
+        },
+        "default_landing_page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Default Landing Page"
+        }
+      },
+      "title": "MarketingDefaults",
+      "type": "object"
+    },
+    "MarketingGuardrails": {
+      "additionalProperties": false,
+      "properties": {
+        "prohibited_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Claims",
+          "type": "array"
+        },
+        "sensitive_topics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sensitive Topics",
+          "type": "array"
+        },
+        "legal_disclaimers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legal Disclaimers",
+          "type": "array"
+        },
+        "compliance_requirements": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compliance Requirements",
+          "type": "array"
+        },
+        "brand_safety_rules": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Brand Safety Rules",
+          "type": "array"
+        },
+        "approval_requirements": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approval Requirements"
+        }
+      },
+      "title": "MarketingGuardrails",
+      "type": "object"
+    },
+    "OfferingData": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Key"
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "PRODUCT",
+                "SERVICE",
+                "OTHER"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Kind"
+        },
+        "catalog_level": {
+          "anyOf": [
+            {
+              "enum": [
+                "FAMILY",
+                "PRODUCT",
+                "VARIANT"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Catalog Level"
+        },
+        "parent_offering_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Offering Key"
+        },
+        "variants": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "supported_platforms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supported Platforms",
+          "type": "array"
+        },
+        "pricing_tiers": {
+          "items": {
+            "$ref": "#/$defs/PricingTier"
+          },
+          "title": "Pricing Tiers",
+          "type": "array"
+        },
+        "claims": {
+          "items": {
+            "$ref": "#/$defs/ScopedClaim"
+          },
+          "title": "Claims",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Features",
+          "type": "array"
+        },
+        "benefits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Benefits",
+          "type": "array"
+        },
+        "use_cases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Use Cases",
+          "type": "array"
+        },
+        "pricing": {
+          "$ref": "#/$defs/Pricing"
+        },
+        "audiences": {
+          "$ref": "#/$defs/Audiences"
+        },
+        "customer_psychology": {
+          "$ref": "#/$defs/Psychology"
+        },
+        "value_propositions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Value Propositions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "OfferingData",
+      "type": "object"
+    },
+    "Persona": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "demographics": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Demographics"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Roles",
+          "type": "array"
+        },
+        "goals": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Goals",
+          "type": "array"
+        },
+        "pain_points": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pain Points",
+          "type": "array"
+        },
+        "buying_triggers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Buying Triggers",
+          "type": "array"
+        },
+        "objections": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Objections",
+          "type": "array"
+        },
+        "preferred_channels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preferred Channels",
+          "type": "array"
+        },
+        "adjacent_interests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Adjacent Interests",
+          "type": "array"
+        },
+        "relatable_situations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Relatable Situations",
+          "type": "array"
+        }
+      },
+      "title": "Persona",
+      "type": "object"
+    },
+    "Pricing": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Model"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "billing_period": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Billing Period"
+        },
+        "details": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Details"
+        },
+        "pricing_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pricing Url"
+        }
+      },
+      "title": "Pricing",
+      "type": "object"
+    },
+    "PricingTier": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "pricing": {
+          "$ref": "#/$defs/Pricing"
+        },
+        "features": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Features",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PricingTier",
+      "type": "object"
+    },
+    "Psychology": {
+      "additionalProperties": false,
+      "properties": {
+        "pain_points": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pain Points",
+          "type": "array"
+        },
+        "desired_outcomes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Desired Outcomes",
+          "type": "array"
+        },
+        "motivations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Motivations",
+          "type": "array"
+        },
+        "fears": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fears",
+          "type": "array"
+        },
+        "objections": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Objections",
+          "type": "array"
+        },
+        "purchase_triggers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Purchase Triggers",
+          "type": "array"
+        },
+        "decision_criteria": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Decision Criteria",
+          "type": "array"
+        },
+        "emotional_benefits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emotional Benefits",
+          "type": "array"
+        },
+        "adjacent_interests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Adjacent Interests",
+          "type": "array"
+        },
+        "relatable_situations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Relatable Situations",
+          "type": "array"
+        },
+        "emotional_triggers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emotional Triggers",
+          "type": "array"
+        }
+      },
+      "title": "Psychology",
+      "type": "object"
+    },
+    "ScopedClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "BRAND",
+            "OFFERING",
+            "FACILITY",
+            "NEWSLETTER",
+            "CUSTOMER_ANECDOTE"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
+        }
+      },
+      "required": [
+        "text",
+        "scope"
+      ],
+      "title": "ScopedClaim",
+      "type": "object"
+    },
+    "Testimonial": {
+      "additionalProperties": false,
+      "properties": {
+        "quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quote"
+        },
+        "attribution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Attribution"
+        },
+        "company": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Company"
+        }
+      },
+      "title": "Testimonial",
+      "type": "object"
+    },
+    "TrustAndProof": {
+      "additionalProperties": false,
+      "properties": {
+        "testimonials": {
+          "items": {
+            "$ref": "#/$defs/Testimonial"
+          },
+          "title": "Testimonials",
+          "type": "array"
+        },
+        "customer_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Customer Names",
+          "type": "array"
+        },
+        "case_studies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Case Studies",
+          "type": "array"
+        },
+        "certifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Certifications",
+          "type": "array"
+        },
+        "awards": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Awards",
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Metrics",
+          "type": "array"
+        },
+        "guarantees": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Guarantees",
+          "type": "array"
+        },
+        "scoped_claims": {
+          "items": {
+            "$ref": "#/$defs/ScopedClaim"
+          },
+          "title": "Scoped Claims",
+          "type": "array"
+        }
+      },
+      "title": "TrustAndProof",
+      "type": "object"
+    },
+    "ValuePropositions": {
+      "additionalProperties": false,
+      "properties": {
+        "primary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Primary"
+        },
+        "functional_benefits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Functional Benefits",
+          "type": "array"
+        },
+        "emotional_benefits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Emotional Benefits",
+          "type": "array"
+        },
+        "differentiators": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Differentiators",
+          "type": "array"
+        },
+        "reasons_to_believe": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons To Believe",
+          "type": "array"
+        }
+      },
+      "title": "ValuePropositions",
+      "type": "object"
+    },
+    "VisualIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "logo_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Logo Urls",
+          "type": "array"
+        },
+        "colors": {
+          "items": {
+            "$ref": "#/$defs/Color"
+          },
+          "title": "Colors",
+          "type": "array"
+        },
+        "fonts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fonts",
+          "type": "array"
+        },
+        "imagery_style": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Imagery Style"
+        },
+        "design_style": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Design Style"
+        },
+        "guidelines_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Guidelines Url"
+        }
+      },
+      "title": "VisualIdentity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "brand_identity": {
+      "$ref": "#/$defs/BrandIdentity"
+    },
+    "business_positioning": {
+      "$ref": "#/$defs/BusinessPositioning"
+    },
+    "offerings": {
+      "items": {
+        "$ref": "#/$defs/OfferingData"
+      },
+      "title": "Offerings",
+      "type": "array"
+    },
+    "customer_personas_and_audience_segments": {
+      "$ref": "#/$defs/Audiences"
+    },
+    "customer_psychology": {
+      "$ref": "#/$defs/Psychology"
+    },
+    "value_propositions": {
+      "$ref": "#/$defs/ValuePropositions"
+    },
+    "trust_and_proof": {
+      "$ref": "#/$defs/TrustAndProof"
+    },
+    "brand_voice": {
+      "$ref": "#/$defs/BrandVoice"
+    },
+    "visual_identity": {
+      "$ref": "#/$defs/VisualIdentity"
+    },
+    "creative_context": {
+      "$ref": "#/$defs/CreativeContext"
+    },
+    "marketing_guardrails": {
+      "$ref": "#/$defs/MarketingGuardrails"
+    },
+    "marketing_defaults": {
+      "$ref": "#/$defs/MarketingDefaults"
+    }
+  },
+  "required": [
+    "brand_identity"
+  ],
+  "title": "BIP",
+  "type": "object"
+}

@@ -18,7 +18,7 @@ def configured_strategy(settings, request):
 
 
 def mock_client(monkeypatch, side_effect):
-    client = SimpleNamespace(responses=SimpleNamespace(parse=AsyncMock(side_effect=side_effect)))
+    client = SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(side_effect=side_effect)))
     context = MagicMock()
     context.__aenter__ = AsyncMock(return_value=client)
     context.__aexit__ = AsyncMock(return_value=None)
@@ -46,13 +46,13 @@ async def test_retry_on_rate_limit_and_structured_schema_used(
         monkeypatch,
         [
             openai.RateLimitError("secret upstream body", response=response, body=None),
-            SimpleNamespace(output_parsed=extraction_result),
+            SimpleNamespace(output_text=extraction_result.model_dump_json()),
         ],
     )
     result = await build_provider(settings).extract("https://acme.example/", bundle)
-    assert result == extraction_result and client.responses.parse.await_count == 2
-    assert client.responses.parse.call_args.kwargs["text_format"].__name__ == "ExtractionResult"
-    assert client.responses.parse.call_args.kwargs["store"] is False
+    assert result == extraction_result and client.responses.create.await_count == 2
+    assert client.responses.create.call_args.kwargs["text"]["format"]["name"] == "ExtractionResult"
+    assert client.responses.create.call_args.kwargs["store"] is False
 
 
 async def test_authentication_error_not_retried_or_leaked(settings, bundle, monkeypatch):
@@ -72,13 +72,13 @@ async def test_authentication_error_not_retried_or_leaked(settings, bundle, monk
     )
     with pytest.raises(DomainError) as error:
         await build_provider(settings).extract("https://acme.example/", bundle)
-    assert client.responses.parse.await_count == 1
+    assert client.responses.create.await_count == 1
     assert "secret" not in error.value.message
 
 
 async def test_refusal_never_becomes_an_empty_success(settings, bundle, monkeypatch):
     settings.openai_api_key = SecretStr("test-only")
-    mock_client(monkeypatch, [SimpleNamespace(output_parsed=None)])
+    mock_client(monkeypatch, [SimpleNamespace(output_text="")])
     with pytest.raises(DomainError) as error:
         await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_REFUSED"
@@ -151,12 +151,12 @@ async def test_truncated_response_is_clear(settings, bundle, monkeypatch):
     settings.openai_api_key = SecretStr("test-only")
     client = mock_client(
         monkeypatch,
-        [SimpleNamespace(output_parsed=None, status="incomplete")] * settings.llm_max_attempts,
+        [SimpleNamespace(output_text="", status="incomplete")] * settings.llm_max_attempts,
     )
     with pytest.raises(DomainError) as error:
         await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_INVALID_OUTPUT"
-    assert client.responses.parse.await_count == settings.llm_max_attempts
+    assert client.responses.create.await_count == settings.llm_max_attempts
 
 
 @pytest.mark.parametrize("problem", ["invalid", "truncated"])
@@ -172,12 +172,14 @@ async def test_structured_output_retry_recovers_without_logging_payload(
             ExtractionResult.model_validate({"profile": "private-payload-value"})
         first = validation.value
     else:
-        first = SimpleNamespace(output_parsed=None, status="incomplete")
-    client = mock_client(monkeypatch, [first, SimpleNamespace(output_parsed=extraction_result)])
+        first = SimpleNamespace(output_text="", status="incomplete")
+    client = mock_client(
+        monkeypatch, [first, SimpleNamespace(output_text=extraction_result.model_dump_json())]
+    )
     assert (
         await build_provider(settings).extract("https://acme.example/", bundle) == extraction_result
     )
-    assert client.responses.parse.await_count == 2
+    assert client.responses.create.await_count == 2
     assert "private-payload-value" not in caplog.text
 
 
@@ -192,11 +194,11 @@ async def test_request_timeout_is_bounded_and_retried(settings, bundle, monkeypa
     async def never_finishes(**kwargs):
         await asyncio.Future()
 
-    client.responses.parse.side_effect = never_finishes
+    client.responses.create.side_effect = never_finishes
     with pytest.raises(DomainError) as error:
         await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_UNAVAILABLE" and error.value.retryable
-    assert client.responses.parse.await_count == 2
+    assert client.responses.create.await_count == 2
 
 
 async def test_invalid_schema_is_rejected_using_the_real_sdk(settings, bundle, monkeypatch):

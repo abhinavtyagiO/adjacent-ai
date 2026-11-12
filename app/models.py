@@ -39,6 +39,9 @@ class Profile(Base):
     extracted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    pipeline_metadata: Mapped[dict] = mapped_column(
+        JSONB, default=dict, server_default=text("'{}'::jsonb")
+    )
 
 
 class Offering(Base):
@@ -79,6 +82,8 @@ class ExtractionJob(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    selected_offering_key: Mapped[str | None] = mapped_column(String(300))
+    metrics: Mapped[dict] = mapped_column(JSONB, default=dict, server_default=text("'{}'::jsonb"))
 
 
 class SourceDocument(Base):
@@ -96,3 +101,6 @@ class SourceDocument(Base):
     content: Mapped[str] = mapped_column(Text)
     content_hash: Mapped[str] = mapped_column(String(64))
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    source_metadata: Mapped[dict] = mapped_column(
+        JSONB, default=dict, server_default=text("'{}'::jsonb")
+    )

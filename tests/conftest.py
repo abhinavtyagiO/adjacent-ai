@@ -14,7 +14,7 @@ from app.db import get_session, session_factory
 from app.enrichment import Document, SourceBundle
 from app.main import create_app
 from app.models import now
-from app.schemas import BIP, Citation, ExtractionResult, LLMEvidence
+from app.schemas import BIP, Citation, ExtractionResult, LLMEvidence, MarketingResult
 
 WEBSITE = "https://acme.example/"
 CONTENT = "Acme makes collaboration software. Flow is our product. Advisory is our service."
@@ -68,6 +68,12 @@ class FakeProvider:
 
     async def extract(self, website_url, sources):
         return self.result
+
+    async def extract_facts(self, website_url, sources):
+        return await self.extract(website_url, sources)
+
+    async def infer_marketing(self, profile, sources, selected_offering_key=None):
+        return MarketingResult()
 
 
 @pytest.fixture(scope="session")

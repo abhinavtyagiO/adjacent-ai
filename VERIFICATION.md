@@ -59,3 +59,29 @@ and preferences. A missing company name permits a draft but still prevents confi
 Ruff lint/format and diff checks passed. The BIP schema remains intact; no migration is needed.
 Provider tests also verify bounded malformed/truncated-response retries and that diagnostics
 log field locations/types without raw response values.
+
+## Phase 1B — 12 November 2026
+
+- **135 tests passed** against isolated PostgreSQL 16, including two-stage extraction,
+  optional marketing failure preserving factual drafts, both provider HTTP boundaries,
+  scoped/numeric claims, catalog classification, literal-only grouped citation recovery,
+  code-fenced JSON, model/effort overrides, malformed-output usage accounting, JSONB
+  metadata, review corrections, revision fencing and confirmation provenance.
+- Ruff lint/format and diff whitespace checks passed.
+- Alembic 0002 downgrade → upgrade → check passed on the disposable test database;
+  no schema drift was detected.
+- Docker API/worker images built and migration 0002 applied to the local Docker database.
+  Existing profile section checksums, statuses and confirmation timestamps were unchanged.
+- Local HTTP readiness, brand listing, schema v2 and legacy-profile reads returned 200.
+- Actual public-source snapshots and selected model responses are frozen for Fastlane,
+  Whole Truth and Newton; see `evaluations/REPORT.md` for bounded quality measurements,
+  estimated cost assumptions and remaining gaps.
+- Paid comparison calls were stopped at the user's cost constraint. Final fixes were
+  verified with frozen responses and mocked providers only. Batch live evaluation was
+  removed; ordinary tests and recorded replays make no paid model requests.
+
+The default remains DeepSeek Flash, now using effort none for both stages to control cost.
+Independent stage reasoning/model overrides and the retained OpenAI strategy are covered
+by free mocked transport tests. The low-effort comparison is incomplete and is not presented
+as evidence that reasoning improves quality. Newton marketing evidence remains a documented
+limitation of the recorded sample. No further paid call is needed to reproduce the checks.
