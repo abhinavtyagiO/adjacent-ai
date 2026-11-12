@@ -376,3 +376,28 @@ async def test_malformed_paid_response_usage_is_recorded_before_validation(
     assert provider.usage_records[0]["input_tokens"] == 100
     assert provider.usage_records[0]["output_tokens"] == 10
     assert provider.usage_records[0]["status"] == "failed"
+
+
+@pytest.mark.parametrize("brand,minimum", [("fastlane", 2), ("whole_truth", 9), ("newton", 7)])
+async def test_recorded_catalog_regressions_without_network_or_model(settings, brand, minimum):
+    from app.schemas import ExtractionResult
+    from evaluations.phase1b import ROOT, load_bundle
+
+    source = load_bundle(ROOT / "evaluations/snapshots" / (brand + ".json"))
+    facts = ExtractionResult.model_validate_json(
+        (ROOT / "evaluations/results" / (brand + "-none-facts.json")).read_text()
+    )
+    result = await run_pipeline(FakeProvider(facts), settings, source.documents[0].url, source)
+    assert len(result.profile.offerings) >= minimum
+    assert set(leaves(result.profile.model_dump())) == {p["path"] for p in result.provenance}
+    if brand == "fastlane":
+        assert not {"starter", "growth", "pro", "enterprise"} & {
+            o.name.lower() for o in result.profile.offerings
+        }
+        assert sum(len(o.pricing_tiers) for o in result.profile.offerings) >= 3
+        assert result.profile.marketing_defaults.target_channels == []
+    elif brand == "whole_truth":
+        assert all(o.kind for o in result.profile.offerings)
+        assert not {"Truth Be Told", "ChemX"} & {o.name for o in result.profile.offerings}
+    else:
+        assert sum(o.kind == "SERVICE" for o in result.profile.offerings) >= 6

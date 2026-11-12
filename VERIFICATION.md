@@ -62,7 +62,7 @@ log field locations/types without raw response values.
 
 ## Phase 1B — 12 November 2026
 
-- **135 tests passed** against isolated PostgreSQL 16, including two-stage extraction,
+- **138 tests passed** against isolated PostgreSQL 16, including two-stage extraction,
   optional marketing failure preserving factual drafts, both provider HTTP boundaries,
   scoped/numeric claims, catalog classification, literal-only grouped citation recovery,
   code-fenced JSON, model/effort overrides, malformed-output usage accounting, JSONB
