@@ -48,3 +48,12 @@ included in the deliverable. Test fixtures are explicitly synthetic.
 DeepSeek uses its documented Responses API schema mode and defaults to `deepseek-flash`.
 A live DeepSeek call was not made because no API key was supplied. Put `DEEPSEEK_API_KEY`
 in ignored `.env.local` to run a real extraction; keep the tracked `.env` credential-free.
+
+## Optional enrichment update — 12 November 2026
+
+103 tests passed against isolated PostgreSQL 16. Regression tests cover all enrichment
+sections, unsupported testimonial removal, preserving supported quotes, clearing inconsistent
+pricing, dropping unnamed offerings and rebuilding nested provenance indexes after filtering.
+Draft persistence and confirmation are verified with missing testimonials, pricing, personas
+and preferences. A missing company name permits a draft but still prevents confirmation.
+Ruff lint/format and diff checks passed. The BIP schema remains intact; no migration is needed.

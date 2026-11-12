@@ -208,12 +208,15 @@ Every populated scalar leaf has provenance at a JSON pointer such as `/offerings
 * `INFERRED`: a tentative, grounded interpretation, with explicit reasoning and citations.
 * `USER`: the submitted URL/name or a review correction; no website citation is asserted.
 
-The service checks quoted text against the actual captured document, rejects unknown source
-URLs, missing evidence, duplicate/unknown pointers and unsupported inferences, and stamps
-citations with server-recorded fetch times. Names and pricing amounts must appear in cited
-quotes. An unsupported optional legal name is cleared to `null`, its provenance is omitted,
-and a review warning is saved with the draft. It does not block extraction or confirmation.
-Other evidence failures still reject the generated result.
+The service checks quoted text against the actual captured document and verifies source
+URLs, evidence paths and permitted inferences before retaining facts. It stamps citations
+with server-recorded fetch times. Names, testimonial quotes and pricing amounts must appear in cited
+quotes. Unsupported enrichment is omitted with review warnings, while verified content is
+saved as a draft. Scalars become `null`, unsupported list entries are removed, testimonials
+without verified quotes and offerings without verified names are dropped, and inconsistent
+pricing objects are cleared. Provenance indexes follow the retained collection entries.
+Only the registered website is required to start; a company name is required to confirm.
+See [the onboarding field policy](docs/onboarding-field-policy.md) for the full classification.
 Inferences are restricted to voice, psychology, creative context and audience
 interpretation; company identity, pricing, proof, defaults and guardrails require direct
 evidence. Persona names/demographics cannot be inferred. Prompts treat website content as
@@ -228,7 +231,8 @@ It uses `deepseek-flash` by default, with thinking disabled for bounded structur
 The existing [OpenAI Responses provider](https://developers.openai.com/api/docs/guides/structured-outputs)
 remains selectable. Both strategies share a Pydantic-derived JSON schema, the evidence prompt,
 local validation, request timeouts and bounded retries. Refusals, truncated output and invalid
-evidence are explicit failures. There is no automatic fallback between providers.
+evidence are handled explicitly: malformed model output fails, while unsupported enrichment
+is omitted with review warnings. There is no automatic fallback between providers.
 
 ## Architecture and persistence
 

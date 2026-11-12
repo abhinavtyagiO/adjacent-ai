@@ -7,7 +7,7 @@ from sqlalchemy import func, select, text
 from sqlalchemy.exc import IntegrityError
 
 from app.errors import DomainError
-from app.models import ExtractionJob, Offering, Profile, SourceDocument, now
+from app.models import ExtractionJob, Offering, SourceDocument, now
 from app.repository import Repository
 from app.schemas import CreateBrand
 from app.services import BrandService
@@ -210,18 +210,28 @@ async def test_crawl_failure_is_clear_and_persists_no_profile(
     assert client.get(f"/v1/brands/{brand_id}/profile").status_code == 404
 
 
-async def test_invalid_llm_facts_fail_but_leave_source_trace(
+async def test_unverified_enrichment_leaves_reviewable_draft_and_source_trace(
     client, factory, settings, bundle, extraction_result
 ):
     extraction_result.evidence = []
     brand_id = register(client)
     job = client.post(f"/v1/brands/{brand_id}/extractions").json()
     await make_worker(factory, settings, bundle, extraction_result).process_once()
-    result = client.get(job["poll_url"]).json()
-    assert result["status"] == "FAILED" and result["error"]["code"] == "LLM_EVIDENCE_INVALID"
+    assert client.get(job["poll_url"]).json()["status"] == "SUCCEEDED"
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["status"] == "DRAFT" and draft["warnings"]
+    assert draft["profile"]["brand_identity"]["name"] is None
+    assert draft["profile"]["offerings"] == []
     assert len(client.get(f"/v1/brands/{brand_id}/sources").json()["items"]) == 1
-    with factory() as session:
-        assert session.scalar(select(func.count()).select_from(Profile)) == 0
+    assert (
+        client.post(
+            f"/v1/brands/{brand_id}/profile/confirm",
+            json={
+                "expected_revision": draft["revision"],
+            },
+        ).status_code
+        == 422
+    )
 
 
 async def test_invalid_optional_legal_name_still_saves_reviewable_confirmable_draft(
@@ -257,6 +267,39 @@ async def test_invalid_optional_legal_name_still_saves_reviewable_confirmable_dr
         },
     )
     assert confirmed.status_code == 200 and confirmed.json()["status"] == "CONFIRMED"
+
+
+async def test_optional_testimonials_pricing_and_personas_do_not_block_confirmation(
+    client, factory, settings, bundle, extraction_result
+):
+    from app.schemas import BIP
+
+    data = extraction_result.profile.model_dump()
+    data["trust_and_proof"]["testimonials"] = [
+        {"quote": "Unsupported praise", "attribution": "CEO"}
+    ]
+    data["offerings"][0]["pricing"] = {"amount": "99", "currency": "USD"}
+    data["customer_personas_and_audience_segments"]["personas"] = [{"name": "Invented buyer"}]
+    data["marketing_defaults"]["budget"] = "$1000"
+    extraction_result.profile = BIP.model_validate(data)
+    brand_id = register(client)
+    await extract(client, make_worker(factory, settings, bundle, extraction_result), brand_id)
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["status"] == "DRAFT" and draft["warnings"]
+    assert draft["profile"]["trust_and_proof"]["testimonials"] == []
+    assert draft["profile"]["offerings"][0]["pricing"]["amount"] is None
+    assert draft["profile"]["customer_personas_and_audience_segments"]["personas"] == []
+    assert draft["profile"]["marketing_defaults"]["budget"] is None
+    assert len(draft["profile"]["offerings"]) == 2
+    assert (
+        client.post(
+            f"/v1/brands/{brand_id}/profile/confirm",
+            json={
+                "expected_revision": draft["revision"],
+            },
+        ).json()["status"]
+        == "CONFIRMED"
+    )
 
 
 async def test_transient_failure_retries_then_succeeds(

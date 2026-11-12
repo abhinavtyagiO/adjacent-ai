@@ -3,7 +3,6 @@ from pydantic import ValidationError
 
 from app.config import Settings
 from app.db import session_factory
-from app.errors import DomainError
 from app.provenance import corrected_provenance, leaves, validated_profile
 from app.schemas import BIP, Citation, CreateBrand, LLMEvidence
 from app.services import merge_profile
@@ -177,7 +176,7 @@ def test_unused_legal_name_evidence_is_ignored(extraction_result, bundle):
         "inferred_name",
     ],
 )
-def test_untraceable_or_invented_details_rejected(extraction_result, bundle, mutation):
+def test_untraceable_or_invented_details_are_omitted(extraction_result, bundle, mutation):
     result = extraction_result.model_copy(deep=True)
     if mutation == "no_evidence":
         result.evidence = []
@@ -194,9 +193,23 @@ def test_untraceable_or_invented_details_rejected(extraction_result, bundle, mut
     else:
         result.evidence[0].origin = "INFERRED"
         result.evidence[0].reasoning = "Guessed from domain"
-    with pytest.raises(DomainError, match=".") as error:
-        validated_profile(result, bundle, bundle.documents[0].url, None)
-    assert error.value.code == "LLM_EVIDENCE_INVALID"
+    warnings = []
+    profile, provenance = validated_profile(
+        result, bundle, bundle.documents[0].url, None, warnings=warnings
+    )
+    assert warnings
+    assert {p["path"] for p in provenance} == set(leaves(profile.model_dump()))
+    if mutation in {
+        "no_evidence",
+        "fake_quote",
+        "fake_url",
+        "fake_name",
+        "duplicate",
+        "inferred_name",
+    }:
+        assert profile.brand_identity.name is None
+    if mutation == "no_evidence":
+        assert profile.offerings == []
 
 
 def test_grounded_inference_stays_separate(extraction_result, bundle):

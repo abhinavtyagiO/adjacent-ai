@@ -35,6 +35,10 @@ Leave those fields null unless stated on the site. Marketing defaults and guardr
 must be explicit; do not recommend or create them. Do not guess colors or fonts.
 Legal name is optional: leave it null unless a source explicitly states the legal entity,
 and copy that name verbatim from its supporting quote. A trading name is not a legal name.
+All enrichment is optional, including testimonials, proof, pricing, legal details, audiences,
+voice, visuals and marketing preferences. Return fewer supported facts instead of filling
+sections. Testimonials must be verbatim source quotes with evidence for the quote itself;
+do not create endorsements. Cite scalar leaf paths, not parent objects or whole sections.
 Preserve the original wording where practical. No empty strings. No arbitrary defaults.
 """
 
