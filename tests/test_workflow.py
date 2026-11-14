@@ -428,20 +428,10 @@ async def test_configured_llm_strategy_runs_through_review_and_confirmation(
     real_client = openai.AsyncOpenAI
     requests = []
 
-    from app.schemas import FactualOffering, FactualProfile, FactualResult, MarketingResult
+    from app.schemas import MarketingResult
+    from tests.conftest import compact_facts
 
-    factual_data = {
-        k: v
-        for k, v in extraction_result.profile.model_dump().items()
-        if k in FactualProfile.model_fields
-    }
-    factual_data["offerings"] = [
-        {k: v for k, v in item.items() if k in FactualOffering.model_fields}
-        for item in factual_data["offerings"]
-    ]
-    factual_response = FactualResult(
-        profile=FactualProfile.model_validate(factual_data), evidence=extraction_result.evidence
-    ).model_dump_json()
+    factual_response = compact_facts(extraction_result, bundle).model_dump_json()
 
     def handler(request):
         requests.append(request)
@@ -717,3 +707,26 @@ async def test_legacy_quality_is_unknown_instead_of_inventing_audit_counts(
         assert response.status_code == 200
         assert response.json()["stages"] == expected
         assert response.json()["evidence_validation"] == {}
+
+
+async def test_uncited_facts_persist_reviewable_draft_with_skipped_marketing(
+    client, factory, settings, bundle
+):
+    from app.schemas import BIP, ExtractionResult
+    from tests.test_factual_quality_gate import missing_facts
+
+    raw = missing_facts()
+    provider = FakeProvider(ExtractionResult(profile=BIP.model_validate(raw.profile.model_dump())))
+    provider.infer_marketing = AsyncMock(side_effect=AssertionError("Marketing must not execute"))
+    brand_id = register(client)
+    await extract(
+        client, ExtractionWorker(factory, settings, FakeSource(bundle), provider), brand_id
+    )
+    draft = client.get(f"/v1/brands/{brand_id}/profile").json()
+    assert draft["status"] == "DRAFT"
+    assert draft["stages"] == {"facts": "INSUFFICIENT_EVIDENCE", "marketing": "SKIPPED"}
+    assert draft["profile"]["offerings"] == []
+    assert draft["evidence_validation"]["facts"]["generated"] == 179
+    assert draft["evidence_validation"]["facts"]["parsed_output"]["evidence_entries"] == 0
+    assert draft["stage_errors"]["marketing"]["code"] == "FACTUAL_QUALITY_GATE"
+    provider.infer_marketing.assert_not_awaited()

@@ -273,7 +273,7 @@ def test_soft_404_and_xml_entities_are_rejected():
 async def test_stage_models_efforts_and_output_budgets_are_independent(
     settings, bundle, monkeypatch
 ):
-    from app.schemas import FactualResult
+    from app.schemas import CitedFactualResult
 
     settings.llm_provider = "openai"
     settings.openai_api_key_billing_enabled = True
@@ -286,7 +286,7 @@ async def test_stage_models_efforts_and_output_budgets_are_independent(
         monkeypatch,
         [
             SimpleNamespace(
-                output_text=FactualResult(
+                output_text=CitedFactualResult(
                     profile={"brand_identity": {"website_url": bundle.documents[0].url}}
                 ).model_dump_json()
             ),

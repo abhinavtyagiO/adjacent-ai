@@ -121,3 +121,32 @@ def client(factory):
     app.dependency_overrides[get_session] = database_session
     with TestClient(app) as client:
         yield client
+
+
+def compact_facts(result, sources):
+    """Encode historical fixtures in the new compact inference wire contract."""
+    from app.schemas import CitedFactualResult, FactualOffering, FactualProfile
+
+    data = {
+        k: v for k, v in result.profile.model_dump().items() if k in FactualProfile.model_fields
+    }
+    data["offerings"] = [
+        {k: v for k, v in item.items() if k in FactualOffering.model_fields}
+        for item in data["offerings"]
+    ]
+    ids = {doc.url: f"s{i}" for i, doc in enumerate(sources.documents)}
+    return CitedFactualResult(
+        profile=data,
+        citations=[
+            {
+                "source_id": ids[c.source_url],
+                "quote": c.quote,
+                "paths": [entry.path],
+                "origin": entry.origin,
+                "reasoning": entry.reasoning,
+            }
+            for entry in result.evidence
+            for c in entry.citations
+        ],
+        warnings=result.warnings,
+    )

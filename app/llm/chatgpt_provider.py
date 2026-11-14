@@ -114,14 +114,14 @@ class ChatGPTProvider(StructuredResponsesProvider):
         }
         started = time.monotonic()
         try:
-            async with asyncio.timeout(self.settings.llm_timeout_seconds):
+            async with asyncio.timeout(self.settings.stage_timeout(stage)):
                 if self.service.client:
                     result = await self._stream(
                         self.service.client, body, token, record, max_output_tokens
                     )
                 else:
                     async with httpx.AsyncClient(
-                        timeout=self.settings.llm_timeout_seconds,
+                        timeout=self.settings.stage_timeout(stage),
                         follow_redirects=False,
                         trust_env=False,
                     ) as client:
@@ -136,12 +136,24 @@ class ChatGPTProvider(StructuredResponsesProvider):
                 ) from error
             record["status"] = "succeeded"
             return parsed
-        except (httpx.HTTPError, TimeoutError) as error:
+        except (httpx.TimeoutException, TimeoutError) as error:
+            record["error_code"] = "CHATGPT_TIMEOUT"
             raise DomainError(
-                "CHATGPT_STREAM_INTERRUPTED",
-                "ChatGPT request timed out or disconnected; no automatic inference retry",
+                "CHATGPT_TIMEOUT",
+                "ChatGPT stage deadline or network timeout exceeded; no automatic inference retry",
+                504,
+                details={"stage": stage, "timeout_seconds": self.settings.stage_timeout(stage)},
+            ) from error
+        except httpx.HTTPError as error:
+            record["error_code"] = "CHATGPT_STREAM_DISCONNECTED"
+            raise DomainError(
+                "CHATGPT_STREAM_DISCONNECTED",
+                "ChatGPT connection failed or disconnected; no automatic inference retry",
                 503,
             ) from error
+        except DomainError as error:
+            record["error_code"] = error.code
+            raise
         finally:
             record["latency_seconds"] = round(time.monotonic() - started, 3)
             self.usage_records.append(record)
@@ -154,6 +166,7 @@ class ChatGPTProvider(StructuredResponsesProvider):
             headers={"Authorization": "Bearer " + token, "Accept": "text/event-stream"},
         ) as response:
             request_id = response.headers.get("x-request-id")
+            record["request_id"] = request_id
             if response.status_code != 200:
                 await response.aread()
                 try:
@@ -218,7 +231,11 @@ class ChatGPTProvider(StructuredResponsesProvider):
                     )
                 elif kind == "response.incomplete":
                     self._usage(event.get("response", {}), record)
-                    raise DomainError("LLM_INVALID_OUTPUT", "ChatGPT response was incomplete")
+                    raise DomainError(
+                        "CHATGPT_RESPONSE_INCOMPLETE",
+                        "ChatGPT reported an incomplete response; no automatic inference retry",
+                        502,
+                    )
                 elif kind == "response.completed":
                     result = event.get("response", {})
                     if not isinstance(result, dict):
@@ -232,7 +249,7 @@ class ChatGPTProvider(StructuredResponsesProvider):
                     break
             if not completed:
                 raise DomainError(
-                    "CHATGPT_STREAM_INTERRUPTED", "Stream ended without response.completed", 503
+                    "CHATGPT_STREAM_DISCONNECTED", "Stream ended without response.completed", 503
                 )
             if not parts:
                 raise DomainError("LLM_REFUSED", "ChatGPT returned no structured text")

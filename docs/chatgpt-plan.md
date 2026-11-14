@@ -126,3 +126,10 @@ optional-stage persistence and encrypted VM handoff. No live sign-in or inferenc
 You must connect your account to validate real preview admission and available models. The
 server remains stopped until you choose to start it. Do not treat this as deployed-commercial
 approval, unlimited usage, or multi-tenant account isolation.
+
+
+Factual extraction now uses compact shared source-ID citations and stops before marketing
+when no usable facts survive validation. See [evidence quality](evidence-quality.md) for
+`SKIPPED` stage semantics, pre-pruning counts, bounded context and stage-specific deadlines.
+Timeouts, stream disconnections and explicit incomplete responses have separate error codes;
+none triggers an automatic inference retry or a billing-provider fallback.

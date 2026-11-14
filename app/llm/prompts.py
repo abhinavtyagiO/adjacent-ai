@@ -14,8 +14,7 @@ customer names, prices, certifications or performance metrics. Copy testimonial 
 Use null or [] for missing information. Do not invent defaults or marketing preferences.
 No chain-of-thought: only short explanations suitable for user review. No empty strings.
 """
-FACTUAL_PROMPT = (
-    """
+FACTUAL_PROMPT = """
 You extract factual company and product intelligence for a marketing brief. Return structured
 JSON matching the supplied factual schema. The registered website URL is authoritative.
 Copy offering names verbatim from the cited text: never append invented descriptors such as
@@ -41,12 +40,19 @@ Do not promote statements about another brand on comparison pages into this bran
 Leave audience/persona reasoning for the next stage. Legal name requires explicit entity evidence.
 Keep quotes short and fields focused so the complete catalog fits the output budget.
 Prioritize names, kind, a short description and 1-3 differentiating features per offering.
-Omit redundant proof, lengthy quotes and repeated benefits; complete valid JSON is essential.
+Omit redundant facts and repeated benefits, NEVER their supporting citations.
 Example: 'Starter $29/month, Growth $79/month; publish to Instagram' yields one software
 product, two pricing tiers, supported_platforms ['Instagram'], and no marketing channel preference.
-"""
-    + EVIDENCE_RULES
-)
+""" + EVIDENCE_RULES.replace(
+    "For every populated scalar leaf provide one evidence entry at its exact JSON pointer path\n"
+    "relative to profile (facts) or relative to the marketing result (intelligence).",
+    "For EVERY populated scalar leaf except the registered website_url, include its exact "
+    "JSON pointer in citations[].paths. Each citation uses a supplied source_id and a short "
+    "verbatim quote. Reuse ONE citation with multiple paths when the same excerpt supports "
+    "those values. Never cite a whole object instead of its scalar paths. Omit unsupported "
+    "facts rather than citations. Evidence is mandatory even when keeping output concise. "
+    "Do not invent source IDs. Factual origins are WEBSITE or CLASSIFIED, never INFERRED.",
+).replace("provided source_url", "provided source_id")
 MARKETING_PROMPT = (
     """
 You produce audience and creative intelligence for a brand using ONLY the verified factual BIP

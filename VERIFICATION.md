@@ -1,5 +1,25 @@
 # Delivery verification
 
+Latest verification: 14 November 2026, Python 3.12 and local PostgreSQL 16.
+
+- Full offline suite: **227 passed**, including PostgreSQL/API persistence and mocked OAuth/SSE.
+- Existing Fastlane, Whole Truth and Newton saved-response replays completed without network
+  crawling or inference. Newton's saved marketing remains honestly insufficient.
+- Ruff lint/format and `git diff --check` passed; Alembic detected no schema changes.
+- The 179-uncited-fact regression rejects all 179, saves a sparse DRAFT, reports factual
+  `INSUFFICIENT_EVIDENCE`, skips marketing, and never retries inference. The raw scalar
+  count is 180 including the user-provided website URL anchor.
+- Compact citation expansion rejects unknown source IDs, invented excerpts and unsupported
+  exact names. Existing ingredient/product/price/certification/claim checks remain in place.
+- Separate mocked deadline, disconnection and incomplete-event paths passed.
+- No live LLM calls were made. One existing Starlette/httpx deprecation warning remains.
+
+A later, explicitly authorized single live Minimalist test would measure real model citation
+compliance and latency. Offline tests prove the control flow and validation behavior, not
+real-model quality or speed. See [evidence quality](docs/evidence-quality.md) for details.
+
+## Original delivery record
+
 Verified on 11 November 2026 using Python 3.12.14 and an isolated PostgreSQL 15 server.
 All test data and the temporary API used for smoke checks were local to this task.
 

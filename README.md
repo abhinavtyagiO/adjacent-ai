@@ -396,3 +396,10 @@ and appropriately scoped, supported claims for creative readiness. Brand-level t
 facility/newsletter proof do not substitute for those checks. Readiness remains nonblocking.
 See [the evidence-quality guide](docs/evidence-quality.md) and
 [offline review results and known gaps](evaluations/PHASE1B_REVIEW.md).
+
+
+Factual extraction quality: a parsed response with no usable verified business facts produces
+an `INSUFFICIENT_EVIDENCE` factual stage and `SKIPPED` marketing stage, while retaining a
+reviewable draft. Inspect `stages` and `evidence_validation` rather than treating job
+`SUCCEEDED` as evidence completeness. See [citation contracts and diagnostics](docs/evidence-quality.md)
+for compact citations, pre-pruning counts and stage timeout settings.

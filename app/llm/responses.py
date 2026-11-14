@@ -13,7 +13,8 @@ from app.config import Settings
 from app.enrichment import SourceBundle
 from app.errors import DomainError
 from app.llm.prompts import FACTUAL_PROMPT, MARKETING_PROMPT
-from app.schemas import BIP, ExtractionResult, FactualResult, MarketingResult
+from app.provenance import leaves
+from app.schemas import BIP, CitedFactualResult, ExtractionResult, LLMEvidence, MarketingResult
 
 logger = logging.getLogger(__name__)
 
@@ -135,11 +136,12 @@ class StructuredResponsesProvider:
         share = available // max(len(sources.documents), 1)
         payload["documents"] = [
             {
+                "source_id": f"s{index}",
                 "source_url": doc.url,
                 "category": doc.metadata.get("category"),
                 "content": doc.text[:share],
             }
-            for doc in sources.documents
+            for index, doc in enumerate(sources.documents)
         ]
         return payload
 
@@ -164,20 +166,43 @@ class StructuredResponsesProvider:
         if effort is None and self.name == "deepseek":
             effort = "none"
         payload = self._documents(
-            sources, {"website_url": website_url}, FactualResult, FACTUAL_PROMPT
+            sources, {"website_url": website_url}, CitedFactualResult, FACTUAL_PROMPT
         )
         result = await self._request(
             payload,
-            FactualResult,
+            CitedFactualResult,
             FACTUAL_PROMPT,
             "facts",
             model,
             effort,
             self.settings.factual_max_output_tokens,
         )
+        # Snapshot before expansion or pruning; no raw values/reasoning in diagnostics.
+        self.factual_parse_counts = {
+            "populated_fields": len(leaves(result.profile.model_dump())),
+            "evidence_entries": len(result.citations),
+            "evidence_paths": sum(len(c.paths) for c in result.citations),
+        }
+        logger.info("factual_output_parsed counts=%s", self.factual_parse_counts)
+        urls = {f"s{i}": doc.url for i, doc in enumerate(sources.documents)}
+        evidence = [
+            LLMEvidence(
+                path=path,
+                origin=c.origin,
+                reasoning=c.reasoning,
+                citations=[
+                    {
+                        "source_url": urls.get(c.source_id, "unknown-source-id:" + c.source_id),
+                        "quote": c.quote,
+                    }
+                ],
+            )
+            for c in result.citations
+            for path in c.paths
+        ]
         return ExtractionResult(
             profile=BIP.model_validate(result.profile.model_dump()),
-            evidence=result.evidence,
+            evidence=evidence,
             warnings=result.warnings,
         )
 
@@ -188,15 +213,19 @@ class StructuredResponsesProvider:
         effort = self.settings.marketing_reasoning_effort
         if effort is None and self.name == "deepseek":
             effort = "none"
-        payload = self._documents(
-            sources,
-            {
-                "verified_profile": profile.model_dump(mode="json"),
-                "selected_offering_key": selected_offering_key,
-            },
-            MarketingResult,
-            MARKETING_PROMPT,
-        )
+        payload = {
+            "verified_profile": profile.model_dump(mode="json", exclude_none=True),
+            "selected_offering_key": selected_offering_key,
+            "documents": [
+                {"source_url": doc.url, "content": doc.text} for doc in sources.documents
+            ],
+        }
+        if (
+            len(json.dumps(payload))
+            + len(MARKETING_PROMPT)
+            + len(json.dumps(MarketingResult.model_json_schema()))
+        ) > self.settings.llm_max_input_tokens * 3 - 2000:
+            raise DomainError("LLM_INPUT_BUDGET", "Verified marketing context exceeds input budget")
         return await self._request(
             payload,
             MarketingResult,
@@ -220,7 +249,7 @@ class StructuredResponsesProvider:
             api_key=key.get_secret_value(),
             base_url=self.base_url,
             max_retries=0,
-            timeout=self.settings.llm_timeout_seconds,
+            timeout=self.settings.stage_timeout(stage),
         ) as client:
             for attempt in range(self.settings.llm_max_attempts):
                 reservation = (
@@ -245,7 +274,7 @@ class StructuredResponsesProvider:
                     "budget_tokens": reservation,
                 }
                 try:
-                    async with asyncio.timeout(self.settings.llm_timeout_seconds):
+                    async with asyncio.timeout(self.settings.stage_timeout(stage)):
                         response = await client.responses.create(
                             model=model,
                             **({"reasoning": {"effort": effort}} if effort else {}),

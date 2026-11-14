@@ -20,7 +20,8 @@ from app.errors import DomainError
 from app.intelligence import metrics, run_pipeline
 from app.llm.base import build_provider
 from app.llm.chatgpt_provider import ChatGPTProvider
-from app.schemas import FactualOffering, FactualProfile, FactualResult, MarketingResult
+from app.schemas import MarketingResult
+from tests.conftest import compact_facts
 
 
 @pytest.fixture(scope="module")
@@ -29,7 +30,7 @@ def signing_key():
 
 
 @pytest.fixture
-async def chatgpt(settings, tmp_path, signing_key, extraction_result):
+async def chatgpt(settings, tmp_path, signing_key, extraction_result, bundle):
     settings.chatgpt_auth_dir = tmp_path / "credentials"
     settings.llm_provider = "openai_chatgpt"
     settings.api_access_token = SecretStr("local-access-test-only")
@@ -58,15 +59,7 @@ async def chatgpt(settings, tmp_path, signing_key, extraction_result):
         malformed=False,
         invalid_signature=False,
     )
-    data = {
-        k: v
-        for k, v in extraction_result.profile.model_dump().items()
-        if k in FactualProfile.model_fields
-    }
-    data["offerings"] = [
-        {k: v for k, v in o.items() if k in FactualOffering.model_fields} for o in data["offerings"]
-    ]
-    h.facts = FactualResult(profile=data, evidence=extraction_result.evidence)
+    h.facts = compact_facts(extraction_result, bundle)
     h.marketing = MarketingResult(
         creative_context={"creative_angles": ["Show a team handoff"]},
         evidence=[
@@ -165,7 +158,9 @@ async def chatgpt(settings, tmp_path, signing_key, extraction_result):
                     headers={"x-request-id": "req_mock"},
                 )
             body = json.loads(request.content)
-            value = h.facts if body["text"]["format"]["name"] == "FactualResult" else h.marketing
+            value = (
+                h.facts if body["text"]["format"]["name"] == "CitedFactualResult" else h.marketing
+            )
             text = "{broken" if h.malformed else value.model_dump_json()
             events = [
                 {"type": "response.reasoning_text.delta", "delta": "PRIVATE_REASONING"},
@@ -389,7 +384,7 @@ async def test_preview_stream_contract_and_private_reasoning_not_logged(chatgpt,
 
 @pytest.mark.parametrize(
     "end,expected",
-    [("", "CHATGPT_STREAM_INTERRUPTED"), ("response.incomplete", "LLM_INVALID_OUTPUT")],
+    [("", "CHATGPT_STREAM_DISCONNECTED"), ("response.incomplete", "CHATGPT_RESPONSE_INCOMPLETE")],
 )
 async def test_stream_requires_completion(chatgpt, bundle, end, expected):
     provider, _ = await chatgpt.provider()

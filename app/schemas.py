@@ -321,6 +321,24 @@ class FactualResult(Schema):
     warnings: list[str] = Field(default_factory=list)
 
 
+class FactualCitation(Schema):
+    """One verbatim excerpt can support multiple exact scalar pointers."""
+
+    source_id: str
+    quote: str = Field(min_length=1, max_length=1600)
+    paths: list[str] = Field(min_length=1, max_length=200)
+    origin: Literal["WEBSITE", "CLASSIFIED"] = "WEBSITE"
+    reasoning: str | None = None
+
+
+class CitedFactualResult(Schema):
+    """Compact inference wire format; expanded into the existing verification contract."""
+
+    profile: FactualProfile
+    citations: list[FactualCitation] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
 class OfferingInsight(Schema):
     offering_key: str
     audiences: Audiences = Field(default_factory=Audiences)
@@ -394,8 +412,8 @@ class ProfileResponse(Schema):
     source_coverage: dict[str, Any] = Field(default_factory=dict)
     creative_readiness: dict[str, Any] = Field(default_factory=dict)
     extraction_metrics: dict[str, Any] = Field(default_factory=dict)
-    stages: dict[str, Literal["SUCCEEDED", "FAILED", "INSUFFICIENT_EVIDENCE", "UNKNOWN"]] = Field(
-        default_factory=dict
-    )
+    stages: dict[
+        str, Literal["SUCCEEDED", "FAILED", "INSUFFICIENT_EVIDENCE", "SKIPPED", "UNKNOWN"]
+    ] = Field(default_factory=dict)
     evidence_validation: dict[str, Any] = Field(default_factory=dict)
     stage_errors: dict[str, Any] = Field(default_factory=dict)

@@ -12,7 +12,7 @@ from pydantic import ValidationError
 
 from app.crawling.website import CATEGORIES, page_category
 from app.diagnostics import EvidenceAudit, unavailable_evidence
-from app.enrichment import SourceBundle
+from app.enrichment import Document, SourceBundle
 from app.errors import DomainError
 from app.provenance import leaves, normalized, validated_profile
 from app.schemas import BIP, ExtractionResult, LLMEvidence
@@ -561,6 +561,59 @@ def metrics(records: list[dict], settings, elapsed: float) -> dict:
     }
 
 
+def marketing_sources(sources, provenance, selected_offering_key, profile, max_chars):
+    """Bound stage two to already verified excerpts, prioritizing the selected product.
+
+    Quotes retain original URLs/timestamps and are checked against the full saved source
+    during validation. Never substitute the entire crawl when evidence is sparse.
+    """
+    selected = next(
+        (i for i, o in enumerate(profile.offerings) if o.key == selected_offering_key), None
+    )
+    prefix = f"/offerings/{selected}/" if selected is not None else None
+    entries = sorted(provenance, key=lambda p: not (prefix and p["path"].startswith(prefix)))
+    documents = {doc.url: doc for doc in sources.documents}
+    passages, seen, used = {}, set(), 0
+    for entry in entries:
+        if entry["origin"] == "USER":
+            continue
+        for citation in entry.get("citations", []):
+            url, quote = citation["source_url"], citation["quote"]
+            if url not in documents or (url, quote) in seen:
+                continue
+            seen.add((url, quote))
+            if used + len(quote) + 2 > max_chars:
+                continue
+            passages.setdefault(url, []).append(quote)
+            used += len(quote) + 2
+    return SourceBundle(
+        [
+            Document(
+                url,
+                "\n\n".join(quotes),
+                documents[url].fetched_at,
+                title=documents[url].title,
+                metadata=documents[url].metadata,
+            )
+            for url, quotes in passages.items()
+        ]
+    )
+
+
+def factual_quality_sufficient(profile, audit):
+    """Identity, URLs, legal details and visual preferences alone cannot seed marketing."""
+    if not audit.accepted:
+        return False
+    if profile.offerings:
+        return True
+    return any(
+        p.startswith(
+            ("/business_positioning/", "/value_propositions/", "/brand_identity/description")
+        )
+        for p in audit.accepted
+    )
+
+
 @dataclass
 class PipelineResult:
     profile: BIP
@@ -579,8 +632,15 @@ async def run_pipeline(
 ) -> PipelineResult:
     started = time.monotonic()
     provider.usage_records = []
+    provider.factual_parse_counts = None
     warnings = list(sources.warnings)
     facts = await provider.extract_facts(website_url, sources)
+    parsed_counts = getattr(provider, "factual_parse_counts", None) or {
+        "populated_fields": len(leaves(facts.profile.model_dump())),
+        "evidence_entries": len(facts.evidence),
+        "evidence_paths": len(facts.evidence),
+    }
+    logger.info("factual_output_parsed counts=%s", parsed_counts)
     # Fact call never supplies audience hypotheses or creative reasoning.
     raw = facts.profile.model_dump()
     for root in MARKETING_ROOTS:
@@ -608,163 +668,183 @@ async def run_pipeline(
     )
     warnings.extend(facts.warnings)
     add_catalog_classifications(bip, provenance, sources, warnings, factual_audit)
-    marketing_status = "SUCCEEDED"
+    factual_status = (
+        "SUCCEEDED" if factual_quality_sufficient(bip, factual_audit) else "INSUFFICIENT_EVIDENCE"
+    )
+    marketing_status = "SUCCEEDED" if factual_status == "SUCCEEDED" else "SKIPPED"
     marketing_audit = None
     stage_errors = {}
-    try:
-        remaining = max(
-            1,
-            settings.job_timeout_seconds
-            - settings.crawl_max_elapsed_seconds
-            - (time.monotonic() - started)
-            - 10,
-        )
-        async with asyncio.timeout(remaining):
-            reasoning = await provider.infer_marketing(bip, sources, selected_offering_key)
-        marketing_audit = EvidenceAudit(
-            p
-            for p in leaves(reasoning.model_dump(exclude={"evidence", "warnings"}))
-            if not p.endswith("/offering_key")
-        )
-        data = bip.model_dump()
-        for root in MARKETING_ROOTS:
-            data[root] = getattr(reasoning, root).model_dump()
-        mapped = []
-        key_indexes = {o.key: i for i, o in enumerate(bip.offerings)}
-        insight_indexes, seen_keys = {}, set()
-        for i, insight in enumerate(reasoning.offering_insights):
-            prefix = f"/offering_insights/{i}"
-            if insight.offering_key not in key_indexes:
-                marketing_audit.reject(prefix, "UNKNOWN_OFFERING_REFERENCE")
-            elif insight.offering_key in seen_keys:
-                marketing_audit.reject(prefix, "DUPLICATE_OFFERING_REFERENCE")
-            else:
-                index = key_indexes[insight.offering_key]
-                insight_indexes[i] = index
-                seen_keys.add(insight.offering_key)
-                for path in marketing_audit.generated:
-                    if path.startswith(prefix + "/"):
-                        marketing_audit.alias(path, f"/offerings/{index}" + path[len(prefix) :])
-        for entry in reasoning.evidence:
-            parts = entry.path.split("/")
-            if len(parts) > 3 and parts[1] == "offering_insights":
-                try:
-                    if not parts[2].isdigit():
-                        raise ValueError("Invalid insight index")
-                    index = insight_indexes[int(parts[2])]
-                    if parts[3] not in {"audiences", "customer_psychology"}:
-                        continue
-                    mapped.append(
-                        entry.model_copy(
-                            update={"path": f"/offerings/{index}/" + "/".join(parts[3:])}
-                        )
-                    )
-                except (ValueError, IndexError, KeyError):
-                    warnings.append("Unknown offering insight reference omitted.")
-            elif len(parts) > 1 and parts[1] in MARKETING_ROOTS:
-                mapped.append(entry)
-            else:
-                marketing_audit.ignored_evidence_entries += 1
-        for i, insight in enumerate(reasoning.offering_insights):
-            if i in insight_indexes:
-                index = insight_indexes[i]
-                data["offerings"][index]["audiences"] = insight.audiences.model_dump()
-                data["offerings"][index]["customer_psychology"] = (
-                    insight.customer_psychology.model_dump()
-                )
-        # Keep only reasoning-stage fields for validation; do not allow stage 2 to replace facts.
-        skeleton = BIP(brand_identity={"website_url": website_url}).model_dump()
-        for root in MARKETING_ROOTS:
-            skeleton[root] = data[root]
-        skeleton["offerings"] = [
-            {
-                **BIP(
-                    brand_identity={"website_url": website_url}, offerings=[{"name": o.name}]
-                ).model_dump()["offerings"][0],
-                "audiences": data["offerings"][i]["audiences"],
-                "customer_psychology": data["offerings"][i]["customer_psychology"],
-            }
-            for i, o in enumerate(bip.offerings)
-        ]
-        # Offering names anchor indexes and come from already verified facts.
-        name_entries = [
-            LLMEvidence.model_validate(
-                {
-                    **{k: p[k] for k in ("path", "origin", "reasoning")},
-                    "citations": [
-                        {k: c[k] for k in ("source_url", "quote")} for c in p["citations"]
-                    ],
-                }
-            )
-            for p in provenance
-            if re.fullmatch(r"/offerings/\d+/name", p["path"]) and p["origin"] != "USER"
-        ]
-        insights, insight_proof = validated_profile(
-            ExtractionResult(profile=BIP.model_validate(skeleton), evidence=name_entries + mapped),
-            sources,
-            website_url,
-            None,
-            warnings=warnings,
-            audit=marketing_audit,
-        )
-        if len(insights.offerings) != len(bip.offerings):
-            raise DomainError(
-                "MARKETING_ANCHOR_INVALID", "Marketing offering anchors did not validate"
-            )
-        for root in MARKETING_ROOTS:
-            setattr(bip, root, getattr(insights, root))
-        # Verified anchors preserve order. Names can repeat; merging by name corrupts
-        # offering-specific targeting and disagrees with the remapped provenance.
-        for original, offering in zip(bip.offerings, insights.offerings, strict=True):
-            original.audiences, original.customer_psychology = (
-                offering.audiences,
-                offering.customer_psychology,
-            )
-        provenance.extend(
-            p
-            for p in insight_proof
-            if p["path"].split("/")[1] in MARKETING_ROOTS
-            or "/audiences/" in p["path"]
-            or "/customer_psychology/" in p["path"]
-        )
-        warnings.extend(reasoning.warnings)
-        evidence_result = marketing_audit.report()
-        if (
-            not evidence_result["accepted"]
-            or evidence_result["accepted"] * 2 < evidence_result["generated"]
-        ):
-            marketing_status = "INSUFFICIENT_EVIDENCE"
-            warnings.append(
-                "Audience/creative stage has insufficient retained evidence; "
-                "review the validation diagnostics. Verified factual draft retained."
-            )
-    except (DomainError, TimeoutError, ValidationError) as error:
-        marketing_status = "FAILED"
-        if marketing_audit:
-            marketing_audit.accepted.clear()
-            marketing_audit.reject("", "MARKETING_STAGE_FAILED")
-        code = (
-            error.code
-            if isinstance(error, DomainError)
-            else "MARKETING_TIMEOUT"
-            if isinstance(error, TimeoutError)
-            else "MARKETING_INVALID_OUTPUT"
-        )
-        stage_errors["marketing"] = {
-            "code": code,
-            **(
-                {"details": error.details}
-                if isinstance(error, DomainError) and error.details
-                else {}
-            ),
-        }
+    if factual_status == "INSUFFICIENT_EVIDENCE":
         warnings.append(
-            f"Audience/creative stage unavailable ({code}); verified factual draft retained."
+            "Factual evidence is insufficient for marketing; review the retained draft and "
+            "diagnostics. Marketing skipped; no automatic inference retry."
         )
+        stage_errors["facts"] = {"code": "INSUFFICIENT_EVIDENCE"}
+        stage_errors["marketing"] = {"code": "FACTUAL_QUALITY_GATE"}
+    else:
+        try:
+            remaining = max(
+                1,
+                settings.job_timeout_seconds
+                - settings.crawl_max_elapsed_seconds
+                - (time.monotonic() - started)
+                - 10,
+            )
+            async with asyncio.timeout(remaining):
+                context = marketing_sources(
+                    sources,
+                    provenance,
+                    selected_offering_key,
+                    bip,
+                    settings.marketing_context_max_chars,
+                )
+                reasoning = await provider.infer_marketing(bip, context, selected_offering_key)
+            marketing_audit = EvidenceAudit(
+                p
+                for p in leaves(reasoning.model_dump(exclude={"evidence", "warnings"}))
+                if not p.endswith("/offering_key")
+            )
+            data = bip.model_dump()
+            for root in MARKETING_ROOTS:
+                data[root] = getattr(reasoning, root).model_dump()
+            mapped = []
+            key_indexes = {o.key: i for i, o in enumerate(bip.offerings)}
+            insight_indexes, seen_keys = {}, set()
+            for i, insight in enumerate(reasoning.offering_insights):
+                prefix = f"/offering_insights/{i}"
+                if insight.offering_key not in key_indexes:
+                    marketing_audit.reject(prefix, "UNKNOWN_OFFERING_REFERENCE")
+                elif insight.offering_key in seen_keys:
+                    marketing_audit.reject(prefix, "DUPLICATE_OFFERING_REFERENCE")
+                else:
+                    index = key_indexes[insight.offering_key]
+                    insight_indexes[i] = index
+                    seen_keys.add(insight.offering_key)
+                    for path in marketing_audit.generated:
+                        if path.startswith(prefix + "/"):
+                            marketing_audit.alias(path, f"/offerings/{index}" + path[len(prefix) :])
+            for entry in reasoning.evidence:
+                parts = entry.path.split("/")
+                if len(parts) > 3 and parts[1] == "offering_insights":
+                    try:
+                        if not parts[2].isdigit():
+                            raise ValueError("Invalid insight index")
+                        index = insight_indexes[int(parts[2])]
+                        if parts[3] not in {"audiences", "customer_psychology"}:
+                            continue
+                        mapped.append(
+                            entry.model_copy(
+                                update={"path": f"/offerings/{index}/" + "/".join(parts[3:])}
+                            )
+                        )
+                    except (ValueError, IndexError, KeyError):
+                        warnings.append("Unknown offering insight reference omitted.")
+                elif len(parts) > 1 and parts[1] in MARKETING_ROOTS:
+                    mapped.append(entry)
+                else:
+                    marketing_audit.ignored_evidence_entries += 1
+            for i, insight in enumerate(reasoning.offering_insights):
+                if i in insight_indexes:
+                    index = insight_indexes[i]
+                    data["offerings"][index]["audiences"] = insight.audiences.model_dump()
+                    data["offerings"][index]["customer_psychology"] = (
+                        insight.customer_psychology.model_dump()
+                    )
+            # Validate reasoning fields separately; stage two cannot replace facts.
+            skeleton = BIP(brand_identity={"website_url": website_url}).model_dump()
+            for root in MARKETING_ROOTS:
+                skeleton[root] = data[root]
+            skeleton["offerings"] = [
+                {
+                    **BIP(
+                        brand_identity={"website_url": website_url}, offerings=[{"name": o.name}]
+                    ).model_dump()["offerings"][0],
+                    "audiences": data["offerings"][i]["audiences"],
+                    "customer_psychology": data["offerings"][i]["customer_psychology"],
+                }
+                for i, o in enumerate(bip.offerings)
+            ]
+            # Offering names anchor indexes and come from already verified facts.
+            name_entries = [
+                LLMEvidence.model_validate(
+                    {
+                        **{k: p[k] for k in ("path", "origin", "reasoning")},
+                        "citations": [
+                            {k: c[k] for k in ("source_url", "quote")} for c in p["citations"]
+                        ],
+                    }
+                )
+                for p in provenance
+                if re.fullmatch(r"/offerings/\d+/name", p["path"]) and p["origin"] != "USER"
+            ]
+            insights, insight_proof = validated_profile(
+                ExtractionResult(
+                    profile=BIP.model_validate(skeleton), evidence=name_entries + mapped
+                ),
+                sources,
+                website_url,
+                None,
+                warnings=warnings,
+                audit=marketing_audit,
+            )
+            if len(insights.offerings) != len(bip.offerings):
+                raise DomainError(
+                    "MARKETING_ANCHOR_INVALID", "Marketing offering anchors did not validate"
+                )
+            for root in MARKETING_ROOTS:
+                setattr(bip, root, getattr(insights, root))
+            # Verified anchors preserve order. Names can repeat; merging by name corrupts
+            # offering-specific targeting and disagrees with the remapped provenance.
+            for original, offering in zip(bip.offerings, insights.offerings, strict=True):
+                original.audiences, original.customer_psychology = (
+                    offering.audiences,
+                    offering.customer_psychology,
+                )
+            provenance.extend(
+                p
+                for p in insight_proof
+                if p["path"].split("/")[1] in MARKETING_ROOTS
+                or "/audiences/" in p["path"]
+                or "/customer_psychology/" in p["path"]
+            )
+            warnings.extend(reasoning.warnings)
+            evidence_result = marketing_audit.report()
+            if (
+                not evidence_result["accepted"]
+                or evidence_result["accepted"] * 2 < evidence_result["generated"]
+            ):
+                marketing_status = "INSUFFICIENT_EVIDENCE"
+                warnings.append(
+                    "Audience/creative stage has insufficient retained evidence; "
+                    "review the validation diagnostics. Verified factual draft retained."
+                )
+        except (DomainError, TimeoutError, ValidationError) as error:
+            marketing_status = "FAILED"
+            if marketing_audit:
+                marketing_audit.accepted.clear()
+                marketing_audit.reject("", "MARKETING_STAGE_FAILED")
+            code = (
+                error.code
+                if isinstance(error, DomainError)
+                else "MARKETING_TIMEOUT"
+                if isinstance(error, TimeoutError)
+                else "MARKETING_INVALID_OUTPUT"
+            )
+            stage_errors["marketing"] = {
+                "code": code,
+                **(
+                    {"details": error.details}
+                    if isinstance(error, DomainError) and error.details
+                    else {}
+                ),
+            }
+            warnings.append(
+                f"Audience/creative stage unavailable ({code}); verified factual draft retained."
+            )
     current = leaves(bip.model_dump())
     provenance = list({p["path"]: p for p in provenance if p["path"] in current}.values())
     validation = {
-        "facts": factual_audit.report(),
+        "facts": {**factual_audit.report(), "parsed_output": parsed_counts},
         "marketing": marketing_audit.report() if marketing_audit else unavailable_evidence(),
     }
     for stage, report in validation.items():
@@ -787,7 +867,7 @@ async def run_pipeline(
             "extraction_metrics": metrics(
                 getattr(provider, "usage_records", []), settings, time.monotonic() - started
             ),
-            "stages": {"facts": "SUCCEEDED", "marketing": marketing_status},
+            "stages": {"facts": factual_status, "marketing": marketing_status},
             "evidence_validation": validation,
             "stage_errors": stage_errors,
         },

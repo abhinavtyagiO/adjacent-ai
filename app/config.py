@@ -36,6 +36,9 @@ class Settings(BaseSettings):
     llm_output_usd_per_million: float | None = Field(None, ge=0)
     llm_cached_input_usd_per_million: float | None = Field(None, ge=0)
     llm_timeout_seconds: float = Field(90, gt=0)
+    factual_timeout_seconds: float | None = Field(None, gt=0)
+    marketing_timeout_seconds: float | None = Field(None, gt=0)
+    marketing_context_max_chars: int = Field(18000, ge=1000, le=60000)
     llm_max_attempts: int = Field(1, ge=1, le=5)
     crawl_max_pages: int = Field(20, ge=1, le=60)
     crawl_max_requests: int = Field(40, ge=1, le=120)
@@ -52,6 +55,13 @@ class Settings(BaseSettings):
     worker_poll_seconds: float = Field(2, gt=0)
     log_level: str = "INFO"
     api_access_token: SecretStr | None = None
+
+    def stage_timeout(self, stage: str) -> float:
+        """Stage overrides retain LLM_TIMEOUT_SECONDS as the backwards-compatible default."""
+        return (
+            getattr(self, f"{stage if stage != 'facts' else 'factual'}_timeout_seconds", None)
+            or self.llm_timeout_seconds
+        )
 
     @field_validator(
         "factual_model",
