@@ -275,7 +275,9 @@ async def test_stage_models_efforts_and_output_budgets_are_independent(
 ):
     from app.schemas import FactualResult
 
-    settings.deepseek_api_key = SecretStr("test-only")
+    settings.llm_provider = "openai"
+    settings.openai_api_key_billing_enabled = True
+    settings.openai_api_key = SecretStr("test-only")
     settings.factual_model = "factual-test-model"
     settings.marketing_model = "marketing-test-model"
     settings.factual_reasoning_effort = "none"
@@ -356,7 +358,9 @@ def test_grouped_catalog_evidence_recovers_only_literal_leaves():
 async def test_malformed_paid_response_usage_is_recorded_before_validation(
     settings, bundle, monkeypatch
 ):
-    settings.deepseek_api_key = SecretStr("test-only")
+    settings.llm_provider = "openai"
+    settings.openai_api_key_billing_enabled = True
+    settings.openai_api_key = SecretStr("test-only")
     settings.llm_max_attempts = 1
     mock_client(
         monkeypatch,

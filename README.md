@@ -9,18 +9,21 @@ PostgreSQL is the only supported database in development, tests and deployment.
 Requires Docker with Compose v2.24+ (for the optional private environment file).
 
 ```bash
-cp .env.example .env.local
-# Set DEEPSEEK_API_KEY in .env.local. Optionally change DEEPSEEK_MODEL.
+cp -n .env.example .env.local
+# Set a strong API_ACCESS_TOKEN in .env.local; OAuth does not need an OpenAI API key.
 docker compose up --build -d
 docker compose logs -f api worker
 ```
 
-The repository includes a credential-free `.env` with `LLM_PROVIDER=deepseek`. Private
+The repository includes a credential-free `.env` with `LLM_PROVIDER=openai_chatgpt`. Private
 overrides belong in the ignored `.env.local`, which Compose loads after `.env` for the
 API, worker and migrations. Compose starts PostgreSQL 16, runs Alembic migrations once,
 then starts the API and a separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
 <http://localhost:8000/docs>. `GET /health/ready` checks the database and migration table.
 Ports bind to localhost. Database data persists in the `postgres_data` volume.
+Open <http://127.0.0.1:8000/v1/chatgpt/connect>, enter the local access token, explicitly
+consent to plan use, choose an account and select an available model before extraction.
+See [Sign in with ChatGPT setup and limits](docs/chatgpt-plan.md).
 
 ```bash
 docker compose down                  # Stop services, retain database volume
@@ -33,15 +36,15 @@ Use Python 3.12+ and a local PostgreSQL server, or let Compose run only the data
 No SQLite fallback exists.
 
 ```bash
-cp .env.example .env.local
-# Set DEEPSEEK_API_KEY in .env.local.
+cp -n .env.example .env.local
+# Set a strong API_ACCESS_TOKEN in .env.local.
 docker compose up -d db
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements-dev.lock
 pip install --no-deps -e .
 alembic upgrade head
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --no-access-log
 ```
 
 In another terminal, activate the same environment and start the worker:
@@ -60,9 +63,8 @@ The lock files pin the versions tested here; `pyproject.toml` declares compatibl
 
 ## API walkthrough
 
-Examples use curl and jq. Set `API_ACCESS_TOKEN` in `.env.local` if you want a shared access token,
-and add `-H "Authorization: Bearer YOUR_TOKEN"` to `/v1` requests. No token is needed by
-default for local development. This is a single-workspace Phase 1 service; account ownership
+Examples use curl and jq. `API_ACCESS_TOKEN` is required for ChatGPT mode: set it in `.env.local`,
+and add `-H "Authorization: Bearer YOUR_TOKEN"` to `/v1` requests. Use the same local token in the connection page and Swagger Authorize dialog. This is a single-workspace Phase 1 service; account ownership
 and tenant authorization are not implemented.
 
 1. Register a website. A name is optional; a URL is sufficient to start.
@@ -230,16 +232,11 @@ semantic correctness still requires the review/confirmation step.
 
 Text-only crawling cannot determine complete design systems: unsupported colors, fonts and
 guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
-The default provider is DeepSeek, using its documented
-[Responses API JSON-schema output](https://api-docs.deepseek.com/api/create-response/).
-The factual stage defaults to `deepseek-flash` with thinking disabled. A second, separately
-configured stage generates grounded audience and creative hypotheses (DeepSeek effort `none`
-by default to control cost). See [Phase 1B pipeline and evaluation](docs/phase1b.md).
-The existing [OpenAI Responses provider](https://developers.openai.com/api/docs/guides/structured-outputs)
-remains selectable. Both strategies share a Pydantic-derived JSON schema, the evidence prompt,
-local validation, request timeouts and bounded retries. Refusals, truncated output and invalid
-evidence are handled explicitly: malformed model output fails, while unsupported enrichment
-is omitted with review warnings. There is no automatic fallback between providers.
+The default strategy is `openai_chatgpt`: official OAuth credentials authorized to use an
+eligible user's ChatGPT plan, account-specific model discovery and streamed Responses API
+requests. It never reads an API key or Codex's existing login cache. DeepSeek is disabled in
+the runtime factory. The legacy OpenAI API-key strategy is retained only behind an explicit
+billing opt-in; it is never a fallback. See [ChatGPT setup](docs/chatgpt-plan.md).
 
 ## Architecture and persistence
 
@@ -262,7 +259,8 @@ worker -> EnrichmentSource -> source_documents
 * `app/llm/`: provider protocol and configured adapter; no OpenAI dependency in business logic.
   `LLMProvider` is the strategy interface, `build_provider` is the strategy registry/factory,
   and `ExtractionWorker` is the context that receives the configured strategy. Concrete
-  `DeepSeekProvider` and `OpenAIProvider` strategies share Responses transport in `responses.py`.
+  `ChatGPTProvider` uses OAuth/streaming; explicit API-key OpenAI uses the retained transport.
+* `app/chatgpt/`: PKCE/OIDC, encrypted runtime credentials, account/model settings and VM handoff.
 * `app/intelligence.py`: two-stage orchestration, semantic checks, catalog labels and readiness.
 * `app/provenance.py`: grounded evidence checks and user-correction provenance.
 * `app/worker.py`: durable extraction orchestration and failure/recovery lifecycle.
@@ -300,24 +298,21 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | Variable | Default | Meaning |
 |---|---|---|
 | `DATABASE_URL` | See `.env.example` | Must use `postgresql+psycopg://` |
-| `LLM_PROVIDER` | `deepseek` | Strategy selected by `build_provider`: `deepseek` or `openai` |
-| `DEEPSEEK_API_KEY` | Empty | Required when using DeepSeek |
-| `DEEPSEEK_MODEL` | `deepseek-flash` | Configurable DeepSeek Responses model |
-| `DEEPSEEK_BASE_URL` | `https://api.deepseek.com` | DeepSeek API endpoint, with optional compatible gateway path |
+| `LLM_PROVIDER` | `openai_chatgpt` | Official plan usage; DeepSeek selection is rejected |
 | `OPENAI_API_KEY` | Empty | Required only when using OpenAI |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
-| `LLM_MAX_ATTEMPTS` | `3` | Bounded retries for transient failures or invalid/truncated structured output |
+| `LLM_MAX_ATTEMPTS` | `1` | Bounded retries for transient failures or invalid/truncated structured output |
 | `CRAWL_MAX_PAGES` | `20` | Maximum collected content documents (requests have a separate limit) |
 | `CRAWL_TIMEOUT_SECONDS` | `15` | Per-fetch total timeout |
 | `CRAWL_MAX_BYTES` | `2000000` | Decompressed response body limit |
 | `CRAWL_MAX_TEXT_CHARS` | `12000` | Text per document supplied to LLM and stored |
 | `JOB_TIMEOUT_SECONDS` | `420` | Overall extraction attempt time limit |
 | `JOB_LEASE_SECONDS` | `480` | Must exceed job timeout by more than ten seconds |
-| `JOB_MAX_ATTEMPTS` | `3` | Maximum leased attempts including crash recovery |
+| `JOB_MAX_ATTEMPTS` | `1` | Maximum leased attempts including crash recovery |
 | `WORKER_POLL_SECONDS` | `2` | Idle polling interval |
 | `LOG_LEVEL` | `INFO` | Logs job IDs, stages and safe failure codes |
-| `API_ACCESS_TOKEN` | Empty | Optional shared bearer token for `/v1` |
+| `API_ACCESS_TOKEN` | Empty | Required local access token in ChatGPT mode |
 | `TEST_DATABASE_URL` | Test DB on `5433` | Separate disposable PostgreSQL test database |
 
 `.env` is committed as credential-free development configuration. Keep its key/token fields
@@ -326,34 +321,17 @@ credentials to the tracked `.env` or `.env.example`. Logs omit document content 
 provider response bodies. Both the API and worker need the same configuration.
 PostgreSQL connections use bounded connect, statement and lock timeouts.
 
-### Selecting a provider strategy
+### Runtime provider and billing policy
 
-The whole brand onboarding pipeline uses DeepSeek by default. Set the following in `.env.local`:
+`openai_chatgpt` is the local/self-hosted default. Keep `OPENAI_API_KEY_BILLING_ENABLED=false`.
+Blank `FACTUAL_MODEL`/`MARKETING_MODEL` use the model chosen for the signed-in account; any
+override is checked against that account's catalog. Both stages remain modular and use the
+same BIP evidence pipeline. New jobs snapshot the account/model selection when enqueued.
 
-```dotenv
-LLM_PROVIDER=deepseek
-DEEPSEEK_API_KEY=your-private-deepseek-key
-DEEPSEEK_MODEL=deepseek-flash
-```
-
-To select the retained OpenAI strategy instead:
-
-```dotenv
-LLM_PROVIDER=openai
-OPENAI_API_KEY=your-private-openai-key
-OPENAI_MODEL=gpt-4.1-mini
-```
-
-Restart the Python API/worker after changes, or run `docker compose up -d --force-recreate api worker`
-to reload Compose environment files. Only the selected provider's key is required; missing
-credentials produce `LLM_CONFIG` on extraction, without calling the other provider. Completed
-profiles record the selected provider and model. Review, correction and confirmation use the
-same provider-independent business rules and do not make extra LLM requests.
-
-To add another provider, implement `LLMProvider.extract()` and register it in `build_provider`.
-Return `ExtractionResult` with the same evidence contract; the worker/service stays unchanged.
-Additional enrichment adapters implement `EnrichmentSource.collect()` and return timestamped
-`Document` objects. There is no simulated provider wired into the production factory.
+Setting `LLM_PROVIDER=deepseek` now fails with `LLM_PROVIDER_DISABLED`, even with a key.
+Selecting `openai` also fails unless API-key billing is explicitly opted into. No errors,
+usage limits or missing consent switch providers or billing. Hosted commercial ChatGPT-plan
+access remains blocked; it needs separate OpenAI preview approval and client registration.
 
 ## Migrations
 
@@ -388,7 +366,7 @@ tests. They refuse database names that do not end in `_test`; never point them a
 If `TEST_DATABASE_URL` is absent, integration tests skip explicitly. No test uses SQLite or
 requires paid LLM calls. The provider boundary test uses the real OpenAI SDK with a mocked
 HTTP transport to verify strict schema serialization, provider routing and response parsing
-for both DeepSeek and OpenAI. Tests also run both configured strategies through PostgreSQL
+for the retained API transport and ChatGPT OAuth/streaming. Tests also run the strategies through PostgreSQL
 draft persistence, review, correction and confirmation with simulated provider HTTP responses.
 
 Tests cover URL-only onboarding, all twelve sections, source traceability, fact/inference

@@ -305,6 +305,7 @@ async def test_optional_testimonials_pricing_and_personas_do_not_block_confirmat
 async def test_transient_failure_retries_then_succeeds(
     client, factory, settings, bundle, extraction_result
 ):
+    settings.job_max_attempts = 3
     worker = make_worker(factory, settings, bundle, extraction_result)
     worker.provider.extract = AsyncMock(
         side_effect=[
@@ -324,6 +325,7 @@ async def test_transient_failure_retries_then_succeeds(
 
 
 def test_lease_recovery_fences_late_workers(client, factory, settings, bundle, extraction_result):
+    settings.job_max_attempts = 3
     worker = make_worker(factory, settings, bundle, extraction_result)
     brand_id = register(client)
     client.post(f"/v1/brands/{brand_id}/extractions")
@@ -416,7 +418,12 @@ async def test_configured_llm_strategy_runs_through_review_and_confirmation(
     # The DeepSeek case deliberately exercises the application default.
     settings.deepseek_api_key = SecretStr("deepseek-test-only")
     settings.openai_api_key = SecretStr("openai-test-only")
-    strategy = build_provider(settings)
+    settings.openai_api_key_billing_enabled = True
+    from app.llm.deepseek_provider import DeepSeekProvider
+
+    strategy = (
+        DeepSeekProvider(settings) if provider_name == "deepseek" else build_provider(settings)
+    )
     assert strategy.name == provider_name
     real_client = openai.AsyncOpenAI
     requests = []

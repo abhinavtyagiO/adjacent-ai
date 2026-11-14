@@ -30,14 +30,21 @@ class LLMProvider(Protocol):
 
 def build_provider(settings: Settings) -> LLMProvider:
     """Resolve configuration to a strategy; never fall back to a different paid service."""
-    from app.llm.deepseek_provider import DeepSeekProvider
+    from app.llm.chatgpt_provider import ChatGPTProvider
     from app.llm.openai_provider import OpenAIProvider
 
     strategies: dict[str, Callable[[Settings], LLMProvider]] = {
-        DeepSeekProvider.name: DeepSeekProvider,
+        ChatGPTProvider.name: ChatGPTProvider,
         OpenAIProvider.name: OpenAIProvider,
     }
+    if settings.llm_provider == "deepseek":
+        raise DomainError("LLM_PROVIDER_DISABLED", "DeepSeek is disabled for application requests")
+    if settings.llm_provider == "openai" and not settings.openai_api_key_billing_enabled:
+        raise DomainError(
+            "API_KEY_BILLING_DISABLED",
+            "API-key billing needs an explicit opt-in; use ChatGPT sign-in instead",
+        )
     strategy = strategies.get(settings.llm_provider)
     if strategy is None:
-        raise DomainError("LLM_CONFIG", "Unsupported LLM_PROVIDER; choose deepseek or openai")
+        raise DomainError("LLM_CONFIG", "Unsupported LLM_PROVIDER; choose openai_chatgpt")
     return strategy(settings)

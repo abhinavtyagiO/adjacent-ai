@@ -104,3 +104,31 @@ limitation of the recorded sample. No further paid call is needed to reproduce t
 No paid inference calls were made during this review. Original raw marketing responses were
 not archived, so original rejected counts cannot be reconstructed from retained-only replays.
 See `evaluations/PHASE1B_REVIEW.md` for detailed counts and remaining limitations.
+
+## Sign in with ChatGPT — 14 November 2026
+
+- **216 offline tests passed** with PostgreSQL 16; OAuth/JWKS/model/SSE calls use
+  MockTransport and generated RSA test keys, never a real login or inference request.
+- Coverage includes PKCE/state/nonce/signature/issuer/audience/expiry, account/workspace
+  binding, missing consent, encrypted owner-only storage, concurrent rotating refresh,
+  revoked/expired sessions, account-specific models, late stream failures/usage limits,
+  no automatic retries/billing fallback, browser-origin protection, PostgreSQL job binding,
+  optional marketing failures preserving factual drafts and encrypted VM session handoff.
+- DeepSeek is blocked in the application factory even if explicitly configured. ChatGPT
+  OAuth never reads an API key; the retained API-key strategy requires explicit billing
+  opt-in and fixes the endpoint to OpenAI. Public/local defaults use plan mode.
+- Alembic 0003 downgrade → upgrade → check passed against the disposable PostgreSQL DB;
+  no schema drift. The BIP v2 contract remains unchanged.
+- Ruff lint/format, dependency consistency, Compose validation, connection-page JavaScript
+  syntax and Docker image builds passed. The API/worker remain stopped.
+
+Actual account eligibility, real OAuth admission and model availability await the user's
+sign-in; they have not been claimed verified. Hosted commercial usage is deliberately blocked
+pending OpenAI preview approval. This is a protected single-workspace local/self-hosted
+installation, not multi-tenant SaaS. Existing test-client deprecation warning remains.
+See `docs/chatgpt-plan.md` for setup, official documentation and preview limitations.
+The local Docker database was upgraded to 0003 with API/worker stopped; existing profile
+section checksums, statuses and confirmation timestamps were unchanged. Stopped service
+containers were recreated with the new configuration to prevent a later start from reusing
+old DeepSeek settings. No sign-in, model listing or inference was performed against a live
+account. Model/eligibility checks remain a user-driven setup step.

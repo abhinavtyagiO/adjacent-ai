@@ -515,9 +515,11 @@ def creative_readiness(
 
 def metrics(records: list[dict], settings, elapsed: float) -> dict:
     known = [r for r in records if r.get("input_tokens") is not None]
+    uses_plan = any(r.get("billing_source") == "chatgpt_plan" for r in records)
     estimated = None
     if (
         records
+        and not uses_plan
         and len(known) == len(records)
         and settings.llm_input_usd_per_million is not None
         and settings.llm_output_usd_per_million is not None
@@ -544,8 +546,12 @@ def metrics(records: list[dict], settings, elapsed: float) -> dict:
         "output_tokens": sum(r["output_tokens"] for r in known),
         "usage_complete": len(known) == len(records),
         "estimated_cost_usd": estimated,
+        "billing_source": "chatgpt_plan" if uses_plan else "api_key",
         "cost_basis": (
-            "Configured token rates; not an invoice. Null if rates/attempt usage are unavailable."
+            "ChatGPT plan/credits; no API-key USD charge is calculated."
+            if uses_plan
+            else "Configured token rates; not an invoice. "
+            "Null if rates/attempt usage are unavailable."
         ),
         "rates": {
             "input": settings.llm_input_usd_per_million,
@@ -604,6 +610,7 @@ async def run_pipeline(
     add_catalog_classifications(bip, provenance, sources, warnings, factual_audit)
     marketing_status = "SUCCEEDED"
     marketing_audit = None
+    stage_errors = {}
     try:
         remaining = max(
             1,
@@ -743,6 +750,14 @@ async def run_pipeline(
             if isinstance(error, TimeoutError)
             else "MARKETING_INVALID_OUTPUT"
         )
+        stage_errors["marketing"] = {
+            "code": code,
+            **(
+                {"details": error.details}
+                if isinstance(error, DomainError) and error.details
+                else {}
+            ),
+        }
         warnings.append(
             f"Audience/creative stage unavailable ({code}); verified factual draft retained."
         )
@@ -774,5 +789,6 @@ async def run_pipeline(
             ),
             "stages": {"facts": "SUCCEEDED", "marketing": marketing_status},
             "evidence_validation": validation,
+            "stage_errors": stage_errors,
         },
     )

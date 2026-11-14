@@ -83,6 +83,9 @@ class ExtractionJob(Base):
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     selected_offering_key: Mapped[str | None] = mapped_column(String(300))
+    chatgpt_account_id: Mapped[uuid.UUID | None] = mapped_column(UUID)
+    factual_model: Mapped[str | None] = mapped_column(String(200))
+    marketing_model: Mapped[str | None] = mapped_column(String(200))
     metrics: Mapped[dict] = mapped_column(JSONB, default=dict, server_default=text("'{}'::jsonb"))
 
 

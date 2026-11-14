@@ -7,12 +7,22 @@ import pytest
 from pydantic import SecretStr
 
 from app.errors import DomainError
-from app.llm.base import build_provider
+from app.llm.base import build_provider as runtime_provider
+from app.llm.deepseek_provider import DeepSeekProvider
+
+
+def build_provider(settings):
+    """Legacy wire-format tests instantiate the disabled adapter directly, never runtime routing."""
+    if settings.llm_provider == "deepseek":
+        return DeepSeekProvider(settings)
+    settings.openai_api_key_billing_enabled = True
+    return runtime_provider(settings)
 
 
 @pytest.fixture(autouse=True, params=["deepseek", "openai"])
 def configured_strategy(settings, request):
     settings.llm_provider = request.param
+    settings.llm_max_attempts = 3
     settings.deepseek_api_key = SecretStr("deepseek-test-only")
     settings.openai_api_key = SecretStr("openai-test-only")
 

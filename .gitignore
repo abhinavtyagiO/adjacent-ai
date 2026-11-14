@@ -7,3 +7,5 @@ __pycache__/
 .ruff_cache/
 *.egg-info/
 .coverage
+
+.local/

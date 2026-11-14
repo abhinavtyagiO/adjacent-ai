@@ -96,7 +96,9 @@ def database_url():
 @pytest.fixture
 def factory(database_url, monkeypatch):
     monkeypatch.setenv("DATABASE_URL", database_url)
-    monkeypatch.delenv("API_ACCESS_TOKEN", raising=False)
+    monkeypatch.setenv("API_ACCESS_TOKEN", "")
+    monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.setenv("OPENAI_API_KEY_BILLING_ENABLED", "true")
     get_settings.cache_clear()
     factory = session_factory(database_url)
     with factory.begin() as session:

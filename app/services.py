@@ -57,7 +57,13 @@ class BrandService:
         return brand
 
     def enqueue(
-        self, brand_id: uuid.UUID, replace_existing: bool, offering_key: str | None = None
+        self,
+        brand_id: uuid.UUID,
+        replace_existing: bool,
+        offering_key: str | None = None,
+        chatgpt_account_id=None,
+        factual_model=None,
+        marketing_model=None,
     ) -> ExtractionJob:
         brand = self.require_brand(brand_id, lock=True)
         active = self.repo.active_job(brand_id)
@@ -69,7 +75,12 @@ class BrandService:
                 "PROFILE_EXISTS", "Use replace_existing=true to extract a new draft", 409
             )
         job = ExtractionJob(
-            brand_id=brand_id, base_revision=brand.revision, selected_offering_key=offering_key
+            brand_id=brand_id,
+            base_revision=brand.revision,
+            selected_offering_key=offering_key,
+            chatgpt_account_id=chatgpt_account_id,
+            factual_model=factual_model,
+            marketing_model=marketing_model,
         )
         self.session.add(job)
         self.session.commit()
@@ -114,6 +125,7 @@ class BrandService:
             "extraction_metrics": profile.pipeline_metadata.get("extraction_metrics", {}),
             "stages": stages,
             "evidence_validation": validation,
+            "stage_errors": profile.pipeline_metadata.get("stage_errors", {}),
         }
 
     def update(self, brand_id: uuid.UUID, request: ProfilePatch) -> dict:

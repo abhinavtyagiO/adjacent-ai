@@ -350,6 +350,9 @@ class CreateBrand(Schema):
 class ExtractionRequest(Schema):
     replace_existing: bool = False
     offering_key: str | None = None
+    chatgpt_account_id: UUID | None = None
+    factual_model: str | None = Field(None, min_length=1, max_length=200)
+    marketing_model: str | None = Field(None, min_length=1, max_length=200)
 
 
 class ProfilePatch(Schema):
@@ -395,3 +398,4 @@ class ProfileResponse(Schema):
         default_factory=dict
     )
     evidence_validation: dict[str, Any] = Field(default_factory=dict)
+    stage_errors: dict[str, Any] = Field(default_factory=dict)

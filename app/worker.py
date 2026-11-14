@@ -35,6 +35,9 @@ class Claim:
     website_url: str
     user_name: str | None
     selected_offering_key: str | None = None
+    chatgpt_account_id: uuid.UUID | None = None
+    factual_model: str | None = None
+    marketing_model: str | None = None
 
 
 class ExtractionWorker:
@@ -66,6 +69,9 @@ class ExtractionWorker:
                 brand.website_url,
                 brand.name if name_is_user else None,
                 job.selected_offering_key,
+                job.chatgpt_account_id,
+                job.factual_model,
+                job.marketing_model,
             )
 
     @staticmethod
@@ -144,7 +150,11 @@ class ExtractionWorker:
                 return
             retry = error.retryable and job.attempts < self.settings.job_max_attempts
             job.status = "PENDING" if retry else "FAILED"
-            job.error = {"code": error.code, "message": error.message}
+            job.error = {
+                "code": error.code,
+                "message": error.message,
+                **({"details": error.details} if error.details else {}),
+            }
             job.metrics = metrics(
                 getattr(self.provider, "usage_records", []),
                 self.settings,
@@ -162,6 +172,11 @@ class ExtractionWorker:
         self.provider.usage_records = []
         try:
             async with asyncio.timeout(self.settings.job_timeout_seconds):
+                bind = getattr(self.provider, "for_job", None)
+                if bind:
+                    self.provider = bind(
+                        claim.chatgpt_account_id, claim.factual_model, claim.marketing_model
+                    )
                 bundle = await self.source.collect(claim.website_url)
                 self.save_sources(claim, bundle)
                 result = await run_pipeline(
@@ -172,6 +187,9 @@ class ExtractionWorker:
                     claim.user_name,
                     claim.selected_offering_key,
                 )
+                if claim.chatgpt_account_id:
+                    result.metadata["chatgpt_account_id"] = str(claim.chatgpt_account_id)
+                    result.metadata["billing_source"] = "chatgpt_plan"
                 self.complete(
                     claim,
                     result.profile,

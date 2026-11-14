@@ -14,4 +14,5 @@ class OpenAIProvider(StructuredResponsesProvider):
             model=settings.openai_model,
             api_key=settings.openai_api_key,
             api_key_variable="OPENAI_API_KEY",
+            base_url="https://api.openai.com/v1",
         )
