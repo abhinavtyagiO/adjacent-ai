@@ -1,0 +1,759 @@
+{
+  "website_url": "https://www.newtonschool.co/",
+  "profile": {
+    "brand_identity": {
+      "name": "Newton School",
+      "website_url": "https://www.newtonschool.co/",
+      "legal_name": "Incanus Technologies Pvt. Ltd.",
+      "tagline": "Outcome Oriented Education",
+      "description": "Newton School is a neo-university offering AI-driven, industry-focused courses in software development and data science, with placement support to help learners secure tech jobs.",
+      "mission": "Make India the developer powerhouse of the world.",
+      "vision": "A world where talent finds opportunity through tech-driven learning.",
+      "values": [],
+      "founded_year": 2019,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "EdTech / Tech Education",
+      "category": "Tech career education and placement programs",
+      "business_model": "Paid online courses and programs with placement assistance; also offers degree-style NSAT-admission programs",
+      "market_position": "Outcome-oriented neo-university focused on tech job placement",
+      "positioning_statement": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job.",
+      "differentiators": [],
+      "geographic_markets": []
+    },
+    "offerings": [],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [],
+      "desired_outcomes": [],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": []
+    },
+    "value_propositions": {
+      "primary": "AI-driven, industry-focused courses to secure your dream tech job.",
+      "functional_benefits": [],
+      "emotional_benefits": [],
+      "differentiators": [],
+      "reasons_to_believe": []
+    },
+    "trust_and_proof": {
+      "testimonials": [],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": []
+    },
+    "brand_voice": {
+      "tone": [],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [],
+      "colors": [],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [],
+      "creative_angles": [],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": "en",
+      "target_regions": [],
+      "preferred_cta": "Book a Live Class, For Free!",
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": "https://www.newtonschool.co/"
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Newton School – Outcome Oriented Education",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": [],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/legal_name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development",
+          "quote": "Copyright © 2026 Incanus Technologies Pvt. Ltd. All rights reserved.",
+          "fetched_at": "2026-11-12T16:57:04.791714+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Newton School – Outcome Oriented Education",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job.",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "We are a neo-university with an aim to make India the developer powerhouse of the world.",
+          "fetched_at": "2026-11-12T16:57:04.731523+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/vision",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "A world where talent finds opportunity through tech-driven learning.",
+          "fetched_at": "2026-11-12T16:57:04.731523+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/brand_identity/founded_year",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "co-founded Newton School, an online learning platform launched in 2019",
+          "fetched_at": "2026-11-12T16:57:04.731523+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+          "quote": "Designed to get you Placed",
+          "fetched_at": "2026-11-12T16:57:05.180874+00:00"
+        }
+      ],
+      "reasoning": "Company runs tech education and placement programs.",
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "We are a neo-university",
+          "fetched_at": "2026-11-12T16:57:04.731523+00:00"
+        }
+      ],
+      "reasoning": "Positions as a neo-university for tech education.",
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+          "quote": "₹7,000 /month\nTotal: ₹2,45,000*",
+          "fetched_at": "2026-11-12T16:57:05.180874+00:00"
+        }
+      ],
+      "reasoning": "Paid courses with installment and EMI payment options.",
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Unlock your dream tech job",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": "Outcome-oriented placement-focused positioning.",
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job.",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job.",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/marketing_defaults/content_language",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Unlock your dream tech job",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": "Site content is English.",
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/marketing_defaults/preferred_cta",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Book a Live Class, For Free!",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    },
+    {
+      "path": "/marketing_defaults/default_landing_page",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Your first step to find your dream tech job.",
+          "fetched_at": "2026-11-12T16:57:03.896521+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:07:04.407981+00:00"
+    }
+  ],
+  "warnings": [
+    "Sitemap https://www.newtonschool.co/sitemap.xml: UNSUPPORTED_CONTENT",
+    "/brand_identity/operating_regions/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/1: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/2: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/3: omitted because its source evidence could not be verified.",
+    "/business_positioning/geographic_markets/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/kind: omitted because its source evidence could not be verified.",
+    "/offerings/0/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/0/url: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/1/name: omitted because its source evidence could not be verified.",
+    "/offerings/1/kind: omitted because its source evidence could not be verified.",
+    "/offerings/1/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/1/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/1/description: omitted because its source evidence could not be verified.",
+    "/offerings/1/url: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/2/name: omitted because its source evidence could not be verified.",
+    "/offerings/2/kind: omitted because its source evidence could not be verified.",
+    "/offerings/2/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/2/description: omitted because its source evidence could not be verified.",
+    "/offerings/2/url: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/2/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/3/name: omitted because its source evidence could not be verified.",
+    "/offerings/3/kind: omitted because its source evidence could not be verified.",
+    "/offerings/3/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/3/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/3/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/3/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/3/description: omitted because its source evidence could not be verified.",
+    "/offerings/3/url: omitted because its source evidence could not be verified.",
+    "/offerings/3/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/3/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/3/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/3/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/3/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/4/name: omitted because its source evidence could not be verified.",
+    "/offerings/4/kind: omitted because its source evidence could not be verified.",
+    "/offerings/4/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/4/description: omitted because its source evidence could not be verified.",
+    "/offerings/4/url: omitted because its source evidence could not be verified.",
+    "/offerings/4/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/4/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/4/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/4/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/4/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/5/name: omitted because its source evidence could not be verified.",
+    "/offerings/5/kind: omitted because its source evidence could not be verified.",
+    "/offerings/5/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/5/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/5/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/5/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/5/description: omitted because its source evidence could not be verified.",
+    "/offerings/5/url: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/5/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/5/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/6/name: omitted because its source evidence could not be verified.",
+    "/offerings/6/kind: omitted because its source evidence could not be verified.",
+    "/offerings/6/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/6/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/6/claims/0/text: omitted because its source evidence could not be verified.",
+    "/offerings/6/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/6/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/6/description: omitted because its source evidence could not be verified.",
+    "/offerings/6/url: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/6/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/2: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/0/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/0/attribution: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/1/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/1/attribution: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/1: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/2: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/3: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/subject: omitted because its source evidence could not be verified.",
+    "/visual_identity/logo_urls/0: omitted because its source evidence could not be verified.",
+    "/visual_identity/logo_urls/1: omitted because its source evidence could not be verified.",
+    "/marketing_guardrails/legal_disclaimers/0: omitted because its source evidence could not be verified.",
+    "/marketing_guardrails/legal_disclaimers/1: omitted because its source evidence could not be verified.",
+    "/marketing_defaults/target_regions/0: omitted because its source evidence could not be verified.",
+    "/brand_identity/operating_regions: ignored evidence for an empty or unknown field.",
+    "/business_positioning/differentiators: ignored evidence for an empty or unknown field.",
+    "/business_positioning/geographic_markets: ignored evidence for an empty or unknown field.",
+    "/marketing_defaults/target_regions: ignored evidence for an empty or unknown field.",
+    "/marketing_guardrails/legal_disclaimers: ignored evidence for an empty or unknown field.",
+    "/offerings/0: ignored evidence for an empty or unknown field.",
+    "/offerings/1: ignored evidence for an empty or unknown field.",
+    "/offerings/2: ignored evidence for an empty or unknown field.",
+    "/offerings/3: ignored evidence for an empty or unknown field.",
+    "/offerings/4: ignored evidence for an empty or unknown field.",
+    "/offerings/5: ignored evidence for an empty or unknown field.",
+    "/offerings/6: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/metrics: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/scoped_claims: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/testimonials: ignored evidence for an empty or unknown field.",
+    "/value_propositions/differentiators: ignored evidence for an empty or unknown field.",
+    "/value_propositions/emotional_benefits: ignored evidence for an empty or unknown field.",
+    "/value_propositions/functional_benefits: ignored evidence for an empty or unknown field.",
+    "/value_propositions/reasons_to_believe: ignored evidence for an empty or unknown field.",
+    "/visual_identity/logo_urls: ignored evidence for an empty or unknown field.",
+    "/offerings/0: offering omitted because it has no verified name.",
+    "/offerings/1: offering omitted because it has no verified name.",
+    "/offerings/2: offering omitted because it has no verified name.",
+    "/offerings/3: offering omitted because it has no verified name.",
+    "/offerings/4: offering omitted because it has no verified name.",
+    "/offerings/5: offering omitted because it has no verified name.",
+    "/offerings/6: offering omitted because it has no verified name.",
+    "/trust_and_proof/testimonials/0: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/1: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/scoped_claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/1: claim omitted because its text or scope is unsupported.",
+    "Headquarters, values, visual colors/fonts, and target marketing channels were not explicitly stated on provided pages and are left null/empty.",
+    "Placement metrics appear in differing figures across pages (e.g. 800+ vs 2,000+ hiring partners); values captured as stated per page.",
+    "/customer_personas_and_audience_segments/personas/0/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/1/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/1/description: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/1/needs/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/1/needs/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/1/needs/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/pain_points/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/desired_outcomes/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/desired_outcomes/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/3: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_triggers/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/language_style: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/4: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/5: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/0: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/2: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/0: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/1: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/2: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/0: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/1: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/2: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/3: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/0: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/1: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/2: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/3: omitted because its source evidence could not be verified.",
+    "/creative_context/seasonal_context/0: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/0: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/1: omitted because its source evidence could not be verified.",
+    "/creative_context/calls_to_action/2: omitted because its source evidence could not be verified.",
+    "/creative_context/content_pillars/0: omitted because its source evidence could not be verified.",
+    "/creative_context/content_pillars/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_pillars/2: omitted because its source evidence could not be verified.",
+    "/creative_context/creative_angles/0: omitted because its source evidence could not be verified.",
+    "/creative_context/creative_angles/1: omitted because its source evidence could not be verified.",
+    "/creative_context/creative_angles/2: omitted because its source evidence could not be verified.",
+    "/creative_context/cultural_contexts/0: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/2: omitted because its source evidence could not be verified.",
+    "No offering was selected (selected_offering_key=null). Offering insights are provided for two representative offerings: 'professional-certificate-course-in-data-science-v2' and 'newton-school-xcelerate', using exact keys from the verified catalog.",
+    "The verified profile's offerings list is empty, so offering keys are drawn from the provided source documents.",
+    "Personas, psychology and creative angles are INFERRED hypotheses, not confirmed customer facts; no demographics, incomes or identities are asserted.",
+    "The cultural context item is a tentative hypothesis, not a stereotype."
+  ],
+  "pipeline_version": 2,
+  "source_coverage": {
+    "categories": {
+      "homepage": 1,
+      "brand_story": 1,
+      "product": 7
+    },
+    "missing_categories": [
+      "category",
+      "use_case",
+      "customer_story",
+      "faq",
+      "pricing"
+    ],
+    "pages": 9,
+    "fetch_operations": 11,
+    "sitemaps_checked": 1,
+    "discovered_urls": 9,
+    "text_characters": 75999,
+    "estimated_input_tokens": 25333,
+    "budget_limited": false
+  },
+  "creative_readiness": {
+    "status": "NEEDS_REVIEW",
+    "scope": "BRAND",
+    "selected_offering_key": null,
+    "missing_information": [
+      {
+        "field": "offerings",
+        "reason": "No supported information available.",
+        "suggested_question": "Which products or services should we feature?"
+      },
+      {
+        "field": "audience",
+        "reason": "No supported information available.",
+        "suggested_question": "Who is the intended buyer and what are they trying to achieve?"
+      },
+      {
+        "field": "brand_voice",
+        "reason": "No supported information available.",
+        "suggested_question": "What tone should the brand use?"
+      },
+      {
+        "field": "creative_context",
+        "reason": "No supported information available.",
+        "suggested_question": "Which stories or everyday situations resonate with your customers?"
+      },
+      {
+        "field": "selected_offering_key",
+        "reason": "Brand-level brief only; offering-specific targeting still needs a selected offering.",
+        "suggested_question": "Which offering should the next creative brief target?"
+      }
+    ],
+    "requires_human_review": true
+  },
+  "extraction_metrics": {
+    "calls": [
+      {
+        "stage": "facts",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 30307,
+        "output_tokens": 6337,
+        "cached_input_tokens": 4352,
+        "status": "succeeded",
+        "budget_tokens": 36644,
+        "latency_seconds": 21.589
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 29426,
+        "output_tokens": 3126,
+        "cached_input_tokens": 2688,
+        "status": "failed",
+        "budget_tokens": 32552,
+        "latency_seconds": 18.12
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 2,
+        "input_tokens": 29426,
+        "output_tokens": 3492,
+        "cached_input_tokens": 29184,
+        "status": "succeeded",
+        "budget_tokens": 32918,
+        "latency_seconds": 17.892
+      }
+    ],
+    "latency_seconds": 59.657,
+    "input_tokens": 89159,
+    "output_tokens": 12955,
+    "usage_complete": true,
+    "estimated_cost_usd": 0.031643844,
+    "cost_basis": "Configured token rates; not an invoice. Null if rates/attempt usage are unavailable.",
+    "rates": {
+      "input": 0.3,
+      "output": 1.2,
+      "cached_input": 0.006
+    }
+  },
+  "stages": {
+    "facts": "SUCCEEDED",
+    "marketing": "SUCCEEDED"
+  }
+}

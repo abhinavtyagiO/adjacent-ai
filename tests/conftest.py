@@ -14,7 +14,7 @@ from app.db import get_session, session_factory
 from app.enrichment import Document, SourceBundle
 from app.main import create_app
 from app.models import now
-from app.schemas import BIP, Citation, ExtractionResult, LLMEvidence
+from app.schemas import BIP, Citation, ExtractionResult, LLMEvidence, MarketingResult
 
 WEBSITE = "https://acme.example/"
 CONTENT = "Acme makes collaboration software. Flow is our product. Advisory is our service."
@@ -69,6 +69,12 @@ class FakeProvider:
     async def extract(self, website_url, sources):
         return self.result
 
+    async def extract_facts(self, website_url, sources):
+        return await self.extract(website_url, sources)
+
+    async def infer_marketing(self, profile, sources, selected_offering_key=None):
+        return MarketingResult()
+
 
 @pytest.fixture(scope="session")
 def database_url():
@@ -90,7 +96,9 @@ def database_url():
 @pytest.fixture
 def factory(database_url, monkeypatch):
     monkeypatch.setenv("DATABASE_URL", database_url)
-    monkeypatch.delenv("API_ACCESS_TOKEN", raising=False)
+    monkeypatch.setenv("API_ACCESS_TOKEN", "")
+    monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.setenv("OPENAI_API_KEY_BILLING_ENABLED", "true")
     get_settings.cache_clear()
     factory = session_factory(database_url)
     with factory.begin() as session:
@@ -113,3 +121,32 @@ def client(factory):
     app.dependency_overrides[get_session] = database_session
     with TestClient(app) as client:
         yield client
+
+
+def compact_facts(result, sources):
+    """Encode historical fixtures in the new compact inference wire contract."""
+    from app.schemas import CitedFactualResult, FactualOffering, FactualProfile
+
+    data = {
+        k: v for k, v in result.profile.model_dump().items() if k in FactualProfile.model_fields
+    }
+    data["offerings"] = [
+        {k: v for k, v in item.items() if k in FactualOffering.model_fields}
+        for item in data["offerings"]
+    ]
+    ids = {doc.url: f"s{i}" for i, doc in enumerate(sources.documents)}
+    return CitedFactualResult(
+        profile=data,
+        citations=[
+            {
+                "source_id": ids[c.source_url],
+                "quote": c.quote,
+                "paths": [entry.path],
+                "origin": entry.origin,
+                "reasoning": entry.reasoning,
+            }
+            for entry in result.evidence
+            for c in entry.citations
+        ],
+        warnings=result.warnings,
+    )

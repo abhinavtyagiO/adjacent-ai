@@ -20,8 +20,57 @@ from app.schemas import (
 from app.services import BrandService
 
 
+def extraction_binding(request):
+    """Snapshot the chosen account/models before queueing; no inference on HTTP path."""
+    from app.chatgpt.routes import get_chatgpt_service
+    from app.llm.base import build_provider
+
+    settings = get_settings()
+    if settings.llm_provider != "openai_chatgpt":
+        build_provider(settings)  # Reject DeepSeek/implicit paid billing before enqueue.
+        return {}
+    service = get_chatgpt_service()
+    account_id = (
+        str(request.chatgpt_account_id)
+        if request and request.chatgpt_account_id
+        else service.store.selected_id()
+    )
+    if not account_id:
+        raise DomainError(
+            "CHATGPT_SIGN_IN_REQUIRED", "Connect a ChatGPT account before extraction", 401
+        )
+    account = service.require_account(account_id)
+    fact = (
+        (request.factual_model if request else None)
+        or settings.factual_model
+        or account.get("selected_model")
+    )
+    marketing = (
+        (request.marketing_model if request else None)
+        or settings.marketing_model
+        or account.get("selected_model")
+    )
+    if not fact or not marketing:
+        raise DomainError(
+            "CHATGPT_MODEL_REQUIRED", "Choose an account-specific model before extraction", 422
+        )
+    return {
+        "chatgpt_account_id": uuid.UUID(account_id),
+        "factual_model": fact,
+        "marketing_model": marketing,
+    }
+
+
 def authorize(authorization: Annotated[str | None, Header()] = None):
     token = get_settings().api_access_token
+    if get_settings().llm_provider == "openai_chatgpt" and (
+        not token or not token.get_secret_value()
+    ):
+        raise DomainError(
+            "LOCAL_ACCESS_TOKEN_REQUIRED",
+            "Set API_ACCESS_TOKEN to protect local ChatGPT account and brand access",
+            503,
+        )
     if token and token.get_secret_value():
         expected = "Bearer " + token.get_secret_value()
         if not authorization or not secrets.compare_digest(authorization, expected):
@@ -42,6 +91,11 @@ def job_view(job: ExtractionJob) -> dict:
         "created_at": job.created_at,
         "started_at": job.started_at,
         "finished_at": job.finished_at,
+        "metrics": job.metrics,
+        "selected_offering_key": job.selected_offering_key,
+        "chatgpt_account_id": job.chatgpt_account_id,
+        "factual_model": job.factual_model,
+        "marketing_model": job.marketing_model,
         "poll_url": f"/v1/extractions/{job.id}",
     }
 
@@ -93,7 +147,12 @@ def extract_brand(
     brand_id: uuid.UUID, session: DB, response: Response, request: ExtractionRequest | None = None
 ):
     """Enqueue durable work and return immediately. Repeated triggers reuse an active job."""
-    job = BrandService(session).enqueue(brand_id, request.replace_existing if request else False)
+    job = BrandService(session).enqueue(
+        brand_id,
+        request.replace_existing if request else False,
+        request.offering_key if request else None,
+        **extraction_binding(request),
+    )
     response.headers["Location"] = f"/v1/extractions/{job.id}"
     response.headers["Retry-After"] = "2"
     return job_view(job)
@@ -109,8 +168,8 @@ def get_extraction(job_id: uuid.UUID, session: DB):
 
 @router.get("/profile-schema")
 def profile_schema():
-    """Complete version 1 JSON schema for clients building review/edit interfaces."""
-    return {"schema_version": 1, "schema": BIP.model_json_schema()}
+    """Complete version 2 JSON schema for clients building review/edit interfaces."""
+    return {"schema_version": 2, "schema": BIP.model_json_schema()}
 
 
 @router.get("/brands/{brand_id}/profile", response_model=ProfileResponse)
@@ -155,6 +214,7 @@ def list_sources(brand_id: uuid.UUID, session: DB):
                 "title": row.title,
                 "fetched_at": row.fetched_at,
                 "content_hash": row.content_hash,
+                "metadata": row.source_metadata,
             }
             for row in service.repo.source_documents(brand_id)
         ]

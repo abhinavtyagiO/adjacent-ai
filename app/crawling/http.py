@@ -102,8 +102,16 @@ class PublicFetcher:
                         retryable=response.status_code >= 500 or response.status_code == 429,
                     )
                 media_type = response.headers.get("content-type", "").split(";")[0].lower()
-                if media_type not in {"text/html", "application/xhtml+xml", "text/plain"}:
-                    raise DomainError("UNSUPPORTED_CONTENT", "Website response is not HTML or text")
+                if media_type not in {
+                    "text/html",
+                    "application/xhtml+xml",
+                    "text/plain",
+                    "application/xml",
+                    "text/xml",
+                }:
+                    raise DomainError(
+                        "UNSUPPORTED_CONTENT", "Website response is not HTML, XML or text"
+                    )
                 chunks = bytearray()
                 async for chunk in response.aiter_bytes(chunk_size=65_536):
                     chunks.extend(chunk)

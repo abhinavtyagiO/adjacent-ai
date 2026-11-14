@@ -7,24 +7,42 @@ import pytest
 from pydantic import SecretStr
 
 from app.errors import DomainError
-from app.llm.openai_provider import OpenAIProvider
+from app.llm.base import build_provider as runtime_provider
+from app.llm.deepseek_provider import DeepSeekProvider
+
+
+def build_provider(settings):
+    """Legacy wire-format tests instantiate the disabled adapter directly, never runtime routing."""
+    if settings.llm_provider == "deepseek":
+        return DeepSeekProvider(settings)
+    settings.openai_api_key_billing_enabled = True
+    return runtime_provider(settings)
+
+
+@pytest.fixture(autouse=True, params=["deepseek", "openai"])
+def configured_strategy(settings, request):
+    settings.llm_provider = request.param
+    settings.llm_max_attempts = 3
+    settings.deepseek_api_key = SecretStr("deepseek-test-only")
+    settings.openai_api_key = SecretStr("openai-test-only")
 
 
 def mock_client(monkeypatch, side_effect):
-    client = SimpleNamespace(responses=SimpleNamespace(parse=AsyncMock(side_effect=side_effect)))
+    client = SimpleNamespace(responses=SimpleNamespace(create=AsyncMock(side_effect=side_effect)))
     context = MagicMock()
     context.__aenter__ = AsyncMock(return_value=client)
     context.__aexit__ = AsyncMock(return_value=None)
-    monkeypatch.setattr("app.llm.openai_provider.AsyncOpenAI", MagicMock(return_value=context))
-    monkeypatch.setattr("app.llm.openai_provider.asyncio.sleep", AsyncMock())
+    monkeypatch.setattr("app.llm.responses.AsyncOpenAI", MagicMock(return_value=context))
+    monkeypatch.setattr("app.llm.responses.asyncio.sleep", AsyncMock())
     return client
 
 
 async def test_missing_key_has_actionable_safe_error(settings, bundle):
-    settings.openai_api_key = None
+    setattr(settings, f"{settings.llm_provider}_api_key", None)
     with pytest.raises(DomainError) as error:
-        await OpenAIProvider(settings).extract("https://acme.example/", bundle)
+        await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_CONFIG"
+    assert settings.llm_provider.upper() + "_API_KEY" in error.value.message
 
 
 async def test_retry_on_rate_limit_and_structured_schema_used(
@@ -38,13 +56,13 @@ async def test_retry_on_rate_limit_and_structured_schema_used(
         monkeypatch,
         [
             openai.RateLimitError("secret upstream body", response=response, body=None),
-            SimpleNamespace(output_parsed=extraction_result),
+            SimpleNamespace(output_text=extraction_result.model_dump_json()),
         ],
     )
-    result = await OpenAIProvider(settings).extract("https://acme.example/", bundle)
-    assert result == extraction_result and client.responses.parse.await_count == 2
-    assert client.responses.parse.call_args.kwargs["text_format"].__name__ == "ExtractionResult"
-    assert client.responses.parse.call_args.kwargs["store"] is False
+    result = await build_provider(settings).extract("https://acme.example/", bundle)
+    assert result == extraction_result and client.responses.create.await_count == 2
+    assert client.responses.create.call_args.kwargs["text"]["format"]["name"] == "ExtractionResult"
+    assert client.responses.create.call_args.kwargs["store"] is False
 
 
 async def test_authentication_error_not_retried_or_leaked(settings, bundle, monkeypatch):
@@ -63,16 +81,16 @@ async def test_authentication_error_not_retried_or_leaked(settings, bundle, monk
         ],
     )
     with pytest.raises(DomainError) as error:
-        await OpenAIProvider(settings).extract("https://acme.example/", bundle)
-    assert client.responses.parse.await_count == 1
+        await build_provider(settings).extract("https://acme.example/", bundle)
+    assert client.responses.create.await_count == 1
     assert "secret" not in error.value.message
 
 
 async def test_refusal_never_becomes_an_empty_success(settings, bundle, monkeypatch):
     settings.openai_api_key = SecretStr("test-only")
-    mock_client(monkeypatch, [SimpleNamespace(output_parsed=None)])
+    mock_client(monkeypatch, [SimpleNamespace(output_text="")])
     with pytest.raises(DomainError) as error:
-        await OpenAIProvider(settings).extract("https://acme.example/", bundle)
+        await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_REFUSED"
 
 
@@ -87,7 +105,16 @@ async def test_actual_sdk_sends_strict_json_schema_and_parses_response(
 
     def handler(request):
         body = json.loads(request.content)
-        assert request.url.path == "/v1/responses"
+        if settings.llm_provider == "deepseek":
+            assert request.url.host == "api.deepseek.com" and request.url.path == "/responses"
+            assert request.headers["authorization"] == "Bearer deepseek-test-only"
+            assert body["reasoning"] == {"effort": "none"}
+            assert body["model"] == settings.deepseek_model
+        else:
+            assert request.url.host == "api.openai.com" and request.url.path == "/v1/responses"
+            assert request.headers["authorization"] == "Bearer test-only"
+            assert "reasoning" not in body
+            assert body["model"] == settings.openai_model
         output_format = body["text"]["format"]
         assert output_format["type"] == "json_schema" and output_format["strict"] is True
         schema = output_format["schema"]
@@ -101,7 +128,7 @@ async def test_actual_sdk_sends_strict_json_schema_and_parses_response(
                 "object": "response",
                 "created_at": 1,
                 "status": "completed",
-                "model": settings.openai_model,
+                "model": build_provider(settings).model,
                 "output": [
                     {
                         "id": "msg_test",
@@ -121,18 +148,105 @@ async def test_actual_sdk_sends_strict_json_schema_and_parses_response(
         )
 
     monkeypatch.setattr(
-        "app.llm.openai_provider.AsyncOpenAI",
+        "app.llm.responses.AsyncOpenAI",
         lambda **kwargs: real_client(
             **kwargs, http_client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
         ),
     )
-    result = await OpenAIProvider(settings).extract("https://acme.example/", bundle)
+    result = await build_provider(settings).extract("https://acme.example/", bundle)
     assert result == extraction_result
 
 
 async def test_truncated_response_is_clear(settings, bundle, monkeypatch):
     settings.openai_api_key = SecretStr("test-only")
-    mock_client(monkeypatch, [SimpleNamespace(output_parsed=None, status="incomplete")])
+    client = mock_client(
+        monkeypatch,
+        [SimpleNamespace(output_text="", status="incomplete")] * settings.llm_max_attempts,
+    )
     with pytest.raises(DomainError) as error:
-        await OpenAIProvider(settings).extract("https://acme.example/", bundle)
+        await build_provider(settings).extract("https://acme.example/", bundle)
+    assert error.value.code == "LLM_INVALID_OUTPUT"
+    assert client.responses.create.await_count == settings.llm_max_attempts
+
+
+@pytest.mark.parametrize("problem", ["invalid", "truncated"])
+async def test_structured_output_retry_recovers_without_logging_payload(
+    settings, bundle, extraction_result, monkeypatch, caplog, problem
+):
+    from pydantic import ValidationError
+
+    from app.schemas import ExtractionResult
+
+    if problem == "invalid":
+        with pytest.raises(ValidationError) as validation:
+            ExtractionResult.model_validate({"profile": "private-payload-value"})
+        first = validation.value
+    else:
+        first = SimpleNamespace(output_text="", status="incomplete")
+    client = mock_client(
+        monkeypatch, [first, SimpleNamespace(output_text=extraction_result.model_dump_json())]
+    )
+    assert (
+        await build_provider(settings).extract("https://acme.example/", bundle) == extraction_result
+    )
+    assert client.responses.create.await_count == 2
+    assert "private-payload-value" not in caplog.text
+
+
+async def test_request_timeout_is_bounded_and_retried(settings, bundle, monkeypatch):
+    import asyncio
+
+    settings.llm_max_attempts = 2
+    settings.llm_timeout_seconds = 0.01
+    client = mock_client(monkeypatch, None)
+
+    # An unresolved future exercises cancellation without depending on patched sleep.
+    async def never_finishes(**kwargs):
+        await asyncio.Future()
+
+    client.responses.create.side_effect = never_finishes
+    with pytest.raises(DomainError) as error:
+        await build_provider(settings).extract("https://acme.example/", bundle)
+    assert error.value.code == "LLM_UNAVAILABLE" and error.value.retryable
+    assert client.responses.create.await_count == 2
+
+
+async def test_invalid_schema_is_rejected_using_the_real_sdk(settings, bundle, monkeypatch):
+    real_client = openai.AsyncOpenAI
+
+    def handler(request):
+        return httpx.Response(
+            200,
+            json={
+                "id": "resp_test",
+                "object": "response",
+                "created_at": 1,
+                "status": "completed",
+                "model": build_provider(settings).model,
+                "output": [
+                    {
+                        "id": "msg_test",
+                        "type": "message",
+                        "role": "assistant",
+                        "status": "completed",
+                        "content": [
+                            {
+                                "type": "output_text",
+                                "text": '{"invented_section":true}',
+                                "annotations": [],
+                            }
+                        ],
+                    }
+                ],
+            },
+        )
+
+    monkeypatch.setattr(
+        "app.llm.responses.AsyncOpenAI",
+        lambda **kwargs: real_client(
+            **kwargs, http_client=httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        ),
+    )
+    with pytest.raises(DomainError) as error:
+        await build_provider(settings).extract("https://acme.example/", bundle)
     assert error.value.code == "LLM_INVALID_OUTPUT"

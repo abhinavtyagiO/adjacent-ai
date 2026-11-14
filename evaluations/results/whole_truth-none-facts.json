@@ -1,0 +1,1440 @@
+{
+  "profile": {
+    "brand_identity": {
+      "name": "The Whole Truth Foods",
+      "website_url": "https://thewholetruthfoods.com/",
+      "legal_name": null,
+      "tagline": "We're re-building the world's trust in food.",
+      "description": "A clean-label food brand making real food — protein powders, protein bars, nut spreads, muesli and kids' nutrition — with every ingredient declared upfront.",
+      "mission": "We're re-building the world's trust in food.",
+      "vision": null,
+      "values": [
+        "Transparency (#nothingtohide)",
+        "Clean-label real food",
+        "Good food is made of good ingredients"
+      ],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": [
+        "India"
+      ]
+    },
+    "business_positioning": {
+      "industry": "Packaged food & nutrition",
+      "category": "Clean-label health food",
+      "business_model": "D2C e-commerce",
+      "market_position": "Clean-label challenger brand positioning against conventional packaged food",
+      "positioning_statement": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront.",
+      "differentiators": [
+        "Short, fully declared ingredient lists (5-9 real ingredients)",
+        "No artificial sweeteners, flavours or preservatives",
+        "In-house manufacturing control",
+        "Sweetened with dates/Kakvi instead of refined sugar"
+      ],
+      "geographic_markets": [
+        "India"
+      ]
+    },
+    "offerings": [
+      {
+        "name": "Protein Powder",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Cold Coffee 24 g Protein Powder",
+          "Light Cocoa 24 g Protein Powder",
+          "Pista Badaam 24 g Protein Powder",
+          "Mango Milkshake 24 g Protein Powder",
+          "Strawberry Shake 24 g Protein Powder",
+          "Unflavoured 30 g Pure Whey Protein Isolate",
+          "Unflavoured Raw Whey Protein Concentrate 26 g",
+          "Ragi Cocoa 15 g Protein Powder",
+          "Cold Coffee 15 g Protein Powder"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Whey protein powders across a 15g and 24-30g protein range, made with no artificial sweeteners, flavours, gums or fillers.",
+        "url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+        "features": [
+          "24-30g protein range plus a 15g beginner range",
+          "No artificial sweeteners or flavours",
+          "Just 5-7 ingredients, listed upfront",
+          "Every batch tested"
+        ],
+        "benefits": [
+          "Protein as light as water, easy on digestion"
+        ],
+        "use_cases": [
+          "Post-workout protein",
+          "Replacing 4pm junk cravings"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Sold by pack size (e.g. 1 KG, sachets)",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Plant Protein",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Unflavoured 30g Plant Protein",
+          "Double Cocoa 25g Plant Protein",
+          "Pista Badaam 24g Plant Protein"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Plant protein powders made with a 70:30 blend of pea and brown rice protein isolate, with no artificial sweeteners or flavours.",
+        "url": "https://thewholetruthfoods.com/categories/plant-protein-powders",
+        "features": [
+          "Complete protein from a 70:30 pea and brown rice blend",
+          "Unflavoured variant is heat-resistant and built for cooking",
+          "Made with just 9 real ingredients"
+        ],
+        "benefits": [
+          "Plant-based protein option for lactose-intolerant users"
+        ],
+        "use_cases": [
+          "Cooking and baking protein boost",
+          "Plant-based protein shake"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Unflavoured 30g Plant Protein: 500 G ₹989, 1 KG ₹1749, 2 KG ₹3469",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Protein Bars",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Walnut Fudge Protein Bars",
+          "Double Cocoa Protein Bars",
+          "Hazelnut Cocoa Protein Bars",
+          "Coffee Cocoa Protein Bars",
+          "Peanut Cocoa Protein Bars",
+          "Coconut Cocoa Protein Bars",
+          "Orange Cocoa Protein Bars",
+          "Cranberry Raisin Protein Bars",
+          "Lemon Cranberry Protein Bars",
+          "Hazelnut Millet Protein Bars",
+          "Mocha Millet Protein Bars",
+          "Almond Millet Cocoa Protein Bars",
+          "Peanut Millet Cocoa",
+          "Peanut Butter Protein Bars",
+          "Almond Choco Fudge",
+          "Peanut Choco Fudge",
+          "Cocoa Cranberry Fudge",
+          "Subko Tiramisu Protein Bars",
+          "All in One - Box of 8 Protein Bars",
+          "Personalised Box"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "13g protein per bar, about 20% of recommended daily intake",
+            "scope": "OFFERING",
+            "subject": "Protein Bars"
+          }
+        ],
+        "description": "Protein bars made with 5-8 clean ingredients, sweetened with whole dates, no artificial sweeteners or added refined sugar.",
+        "url": "https://thewholetruthfoods.com/categories/protein-bars",
+        "features": [
+          "~13g protein per bar, about half from nuts",
+          "Sweetened only with whole dates",
+          "No artificial sweeteners or added refined sugar",
+          "Personalised boxes to build-your-own"
+        ],
+        "benefits": [
+          "Fills you up and keeps fried snacks at bay"
+        ],
+        "use_cases": [
+          "Post-workout snack",
+          "Clean snacking"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Walnut Fudge Protein Bars: Box of 5 ₹876, Box of 10 ₹1652",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Protein Bars Pro",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Double Cocoa Pro",
+          "Hazelnut Cocoa Pro",
+          "Coffee Cocoa Pro",
+          "Peanut Cocoa Pro",
+          "All in One - Protein Bars Pro"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Higher-protein bars with 20g protein per bar, made with just 5 ingredients.",
+        "url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+        "features": [
+          "20g protein per bar",
+          "Made with just 5 ingredients",
+          "Whey blend of concentrate and isolate"
+        ],
+        "benefits": [],
+        "use_cases": [
+          "Post-workout snack",
+          "Late-night dessert"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Sold as Box of 5",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Mini Protein Bars",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Double Cocoa Mini Protein Bars",
+          "Coffee Cocoa Mini Protein Bars",
+          "Cranberry Raisin Mini Protein Bars",
+          "Peanut Cocoa Mini Protein Bars"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Miniature versions of the protein bars, sold in packs of 12 or larger personalised boxes.",
+        "url": "https://thewholetruthfoods.com/categories/protein-bars",
+        "features": [
+          "Compact mini format",
+          "Sold in packs of 12 and personalised boxes"
+        ],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Nut Spreads",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "CREAMY Unsweetened Peanut Butter",
+          "CRUNCHY Unsweetened Peanut Butter",
+          "CRUNCHY Peanut Spread With Dates",
+          "CRUNCHY Dark Chocolate Peanut Spread",
+          "CREAMY Dark Chocolate Peanut Spread",
+          "CREAMY Hazelnut Spread"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Peanut butters and nut spreads, including unsweetened peanut butter and date- or chocolate-sweetened spreads.",
+        "url": "https://thewholetruthfoods.com/categories/peanut-butter",
+        "features": [
+          "Unsweetened version made only of slow-roasted peanuts",
+          "Chocolate made in-house",
+          "Sweetened with whole dates"
+        ],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Muesli",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Choco Fruit Crunch Muesli",
+          "Nuts, Fruit & Seeds Muesli",
+          "No Added Sugar 5 Grain Muesli"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Breakfast muesli in three variants, gluten-free and vegan, sweetened with Kakvi or no added sugar.",
+        "url": "https://thewholetruthfoods.com/categories/muesli",
+        "features": [
+          "Gluten-free, no wheat",
+          "Sweetened with Kakvi (unrefined liquid jaggery)",
+          "A 'No added sugar' option"
+        ],
+        "benefits": [
+          "Sustained energy and balanced breakfast nutrition"
+        ],
+        "use_cases": [
+          "Breakfast with milk or curd"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Sold in 750 g and 1.5 kg packs",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "The Next Gen Range",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Food Drink Jr | Milk-mix for 2-6 yr olds",
+          "Food Drink Pre-Teen | Milk-mix for 7-12 yr olds",
+          "Hazelnut Cocoa for 5+ yr old",
+          "Double Cocoa for 5+ yr old",
+          "Peanut Cocoa for 5+ yr old",
+          "Almond Cocoa Snackbar",
+          "Mango Snackbar",
+          "Mixed Fruit Snackbar",
+          "Hazelnut Fudge Snackbar",
+          "Protein Blocks",
+          "Whoosh | Frother",
+          "Snap | Air-tight tin"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Clean milk-mixes and snacking bars for kids, with no chemicals, refined sugar, or synthetic vitamins and minerals.",
+        "url": "https://thewholetruthfoods.com/categories/next-gen",
+        "features": [
+          "Milk-mix for 2-6 and 7-12 yr olds",
+          "No refined sugar or synthetic vitamins/minerals",
+          "Avoids 'taller, smarter, stronger' claims and mascots"
+        ],
+        "benefits": [],
+        "use_cases": [
+          "Kids' nutrition",
+          "Kids' snacking"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": null,
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Whoosh frother ₹900",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Truth Be Told",
+        "key": null,
+        "kind": "OTHER",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "India's top health newsletter, read by 50,000+",
+            "scope": "NEWSLETTER",
+            "subject": "Truth Be Told"
+          }
+        ],
+        "description": "A health newsletter billed as India's top health newsletter.",
+        "url": "https://thewholetruthfoods.com/",
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "The Whole Truth Academy",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "A food and nutrition course covering what should have been taught in school.",
+        "url": "https://thewholetruthfoods.com/",
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "ChemX",
+        "key": null,
+        "kind": "OTHER",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "A tool to look up food ingredients you can't pronounce.",
+        "url": "https://thewholetruthfoods.com/",
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [],
+      "desired_outcomes": [],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": []
+    },
+    "value_propositions": {
+      "primary": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront.",
+      "functional_benefits": [
+        "Short, fully declared ingredient lists",
+        "No artificial sweeteners, flavours or preservatives",
+        "In-house production control"
+      ],
+      "emotional_benefits": [
+        "Trust in food again",
+        "No fear-and-guilt marketing"
+      ],
+      "differentiators": [
+        "Clean-label #nothingtohide approach",
+        "Sweetened with dates/Kakvi, no refined sugar",
+        "Real food acknowledged as imperfectly shaped"
+      ],
+      "reasons_to_believe": [
+        "Every batch tested",
+        "In-house manufacturing"
+      ]
+    },
+    "trust_and_proof": {
+      "testimonials": [],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": [
+        {
+          "text": "Our Bada Barkhana is an FSSC certified facility",
+          "scope": "FACILITY",
+          "subject": "Bada Barkhana production facility"
+        },
+        {
+          "text": "Every batch is tested for purity at NABL certified labs",
+          "scope": "OFFERING",
+          "subject": "Unflavoured 30g Pure Whey Protein Isolate"
+        },
+        {
+          "text": "We blend our protein powders in-house at an ISO, HACCP, GMP, and US FDA-certified facility",
+          "scope": "FACILITY",
+          "subject": "in-house protein powder blending facility"
+        }
+      ]
+    },
+    "brand_voice": {
+      "tone": [],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [
+        "https://thewholetruthfoods.com/images/logo.svg?w=256&q=60&f=webp",
+        "https://media.thewholetruthfoods.com/public/cms/TBT_1_c9dfadd608.gif"
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": "#000000",
+          "usage": "Theme color"
+        }
+      ],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [],
+      "creative_angles": [],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": null,
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": null
+    }
+  },
+  "evidence": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The Whole Truth Foods - Online Store"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're re-building the world's trust in food."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're re-building the world's trust in food."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/values",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "we literally have #nothingtohide"
+        },
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "good food is made of good ingredients"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/operating_regions",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars",
+          "quote": "India is a protein deficient country"
+        },
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "India's top health newsletter"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand"
+        }
+      ],
+      "reasoning": "Brand markets packaged food and nutrition products."
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand"
+        }
+      ],
+      "reasoning": "Self-positions as clean-label food."
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Order online from The Whole Truth Foods with secure payment options"
+        }
+      ],
+      "reasoning": "Direct online store selling own products."
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/differentiators",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Just 5 ingredients"
+        },
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "No added refined sugar. No fancy sugar substitute. No artificial sweeteners."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/geographic_markets",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "India's top health newsletter"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Powder"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "24g-30g Protein Range"
+        }
+      ],
+      "reasoning": "Physical packaged protein powder."
+    },
+    {
+      "path": "/offerings/0/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "Cold Coffee 24 g Protein Powder - Pack of 1 KG"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "Just 5-7 ingredients"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Plant Protein"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/plant-protein-powders",
+          "quote": "Double Cocoa 25g Plant Protein"
+        }
+      ],
+      "reasoning": "Physical plant protein powder."
+    },
+    {
+      "path": "/offerings/1/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/plant-protein-powders",
+          "quote": "Unflavoured 30g Plant Protein"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30g-plant-protein",
+          "quote": "a 70:30 blend of pea and brown rice protein isolate"
+        },
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30g-plant-protein",
+          "quote": "This plant protien powder is heat resistant and ideal for cooking"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/pricing/details",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30g-plant-protein",
+          "quote": "Pack of 1 KG"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "Walnut Fudge Protein Bars"
+        }
+      ],
+      "reasoning": "Physical packaged bars."
+    },
+    {
+      "path": "/offerings/2/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars",
+          "quote": "Double Cocoa Protein Bars - Box of 10"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "Made with just 6 clean ingredients. No artificial sweeteners, No added flavours."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/claims/0/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "13g. That’s about 20% of your recommended daily intake."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/pricing/details",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "Box of 5"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/3/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars Pro"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/3/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Hazelnut Cocoa Pro - Box of 5"
+        }
+      ],
+      "reasoning": "Physical packaged bars."
+    },
+    {
+      "path": "/offerings/3/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "20g Protein. No chemicals."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/3/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Double Cocoa Pro - Box of 5"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/3/use_cases",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Your new favourite post-workout snack or late-night dessert."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/4/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Mini Protein Bars"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/4/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars",
+          "quote": "Double Cocoa Mini Protein Bars - Box of 12"
+        }
+      ],
+      "reasoning": "Physical packaged bars."
+    },
+    {
+      "path": "/offerings/4/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars",
+          "quote": "Cranberry Raisin Mini Protein Bars - Box of 12"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/5/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Nut Spreads"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/5/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/peanut-butter",
+          "quote": "Unsweetened Peanut Butter"
+        }
+      ],
+      "reasoning": "Physical packaged spreads."
+    },
+    {
+      "path": "/offerings/5/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/peanut-butter",
+          "quote": "CREAMY- Hazelnut Spread 200 G - Pack of 1"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/5/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/peanut-butter",
+          "quote": "We make our own chocolate, in-house!"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/6/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Muesli"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/6/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/muesli",
+          "quote": "No Added Sugar 5 Grain Muesli"
+        }
+      ],
+      "reasoning": "Physical packaged cereal."
+    },
+    {
+      "path": "/offerings/6/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/muesli",
+          "quote": "Choco Fruit Crunch Muesli"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/6/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/the-essentials-combo-pack-of-2",
+          "quote": "The regular (non-whey) Mueslis are 100% vegan."
+        },
+        {
+          "source_url": "https://thewholetruthfoods.com/products/the-essentials-combo-pack-of-2",
+          "quote": "To sweeten these Mueslis we add Kakvi"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/7/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "The Next Gen Range"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/7/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "Food Drink Jr | Milk-mix for 2-6 yr olds"
+        }
+      ],
+      "reasoning": "Physical kids' nutrition products and accessories."
+    },
+    {
+      "path": "/offerings/7/variants",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "Mango Snackbar | Pack of 15"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/7/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "No chemicals, no refined sugar, no synthetic vitamins or minerals."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/8/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Truth Be Told"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/8/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "India's top health newsletter."
+        }
+      ],
+      "reasoning": "Newsletter media property, not a physical product or taught service."
+    },
+    {
+      "path": "/offerings/8/claims/0/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "India's top health newsletter. Read by 50,000+."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/9/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The Whole Truth Academy"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/9/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The food & nutrition course we should've been taught in school."
+        }
+      ],
+      "reasoning": "A taught course is a service."
+    },
+    {
+      "path": "/offerings/10/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "ChemX"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/10/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Found an ingredient you can't pronounce? Allow us to help."
+        }
+      ],
+      "reasoning": "Ingredient-lookup tool, classified OTHER."
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Our Bada Barkhana is an FSSC certified facility"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30-g-pure-whey-protein-isolate",
+          "quote": "Every batch is tested for purity at NABL certified labs."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/2/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30-g-pure-whey-protein-isolate",
+          "quote": "We then blend our protein powders in-house at an ISO, HACCP, GMP, and US FDA-certified facility."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/visual_identity/logo_urls",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "https://thewholetruthfoods.com/images/logo.svg"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/visual_identity/colors/0/hex",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Theme color: #000000"
+        }
+      ],
+      "reasoning": null
+    }
+  ],
+  "warnings": [
+    "Legal name, founding year and headquarters not stated in provided sources.",
+    "Marketing channels, objectives, budget and language preferences are not explicitly stated by the company; left empty.",
+    "Whoosh frother and Snap tin are accessories within The Next Gen Range, not independent product families."
+  ]
+}

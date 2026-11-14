@@ -19,9 +19,9 @@ from app.crawling.website import WebsiteSource
 from app.db import session_factory
 from app.enrichment import EnrichmentSource, SourceBundle
 from app.errors import DomainError
+from app.intelligence import metrics, run_pipeline
 from app.llm.base import LLMProvider, build_provider
 from app.models import ExtractionJob, Profile, SourceDocument, now
-from app.provenance import validated_profile
 from app.repository import Repository
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,10 @@ class Claim:
     token: uuid.UUID
     website_url: str
     user_name: str | None
+    selected_offering_key: str | None = None
+    chatgpt_account_id: uuid.UUID | None = None
+    factual_model: str | None = None
+    marketing_model: str | None = None
 
 
 class ExtractionWorker:
@@ -64,6 +68,10 @@ class ExtractionWorker:
                 job.lease_token,
                 brand.website_url,
                 brand.name if name_is_user else None,
+                job.selected_offering_key,
+                job.chatgpt_account_id,
+                job.factual_model,
+                job.marketing_model,
             )
 
     @staticmethod
@@ -94,10 +102,13 @@ class ExtractionWorker:
                         content=document.text,
                         content_hash=hashlib.sha256(document.text.encode()).hexdigest(),
                         fetched_at=document.fetched_at,
+                        source_metadata=document.metadata,
                     )
                 )
 
-    def complete(self, claim: Claim, bip, provenance: list[dict], warnings: list[str]):
+    def complete(
+        self, claim: Claim, bip, provenance: list[dict], warnings: list[str], metadata=None
+    ):
         with self.factory.begin() as session:
             repo = Repository(session)
             brand = repo.brand(claim.brand_id, lock=True)
@@ -121,6 +132,9 @@ class ExtractionWorker:
             profile.warnings = warnings
             profile.provider = self.provider.name
             profile.model = self.provider.model
+            profile.schema_version = 2
+            profile.pipeline_metadata = metadata or {}
+            job.metrics = (metadata or {}).get("extraction_metrics", {})
             profile.extracted_at = profile.updated_at = now()
             brand.name = bip.brand_identity.name
             brand.revision += 1
@@ -136,7 +150,16 @@ class ExtractionWorker:
                 return
             retry = error.retryable and job.attempts < self.settings.job_max_attempts
             job.status = "PENDING" if retry else "FAILED"
-            job.error = {"code": error.code, "message": error.message}
+            job.error = {
+                "code": error.code,
+                "message": error.message,
+                **({"details": error.details} if error.details else {}),
+            }
+            job.metrics = metrics(
+                getattr(self.provider, "usage_records", []),
+                self.settings,
+                (now() - job.started_at).total_seconds() if job.started_at else 0,
+            )
             job.available_at = now() + timedelta(seconds=min(2**job.attempts, 60))
             job.finished_at = None if retry else now()
             job.lease_token = job.lease_until = None
@@ -146,15 +169,34 @@ class ExtractionWorker:
         if not claim:
             return False
         logger.info("extraction_started job_id=%s brand_id=%s", claim.job_id, claim.brand_id)
+        self.provider.usage_records = []
         try:
             async with asyncio.timeout(self.settings.job_timeout_seconds):
+                bind = getattr(self.provider, "for_job", None)
+                if bind:
+                    self.provider = bind(
+                        claim.chatgpt_account_id, claim.factual_model, claim.marketing_model
+                    )
                 bundle = await self.source.collect(claim.website_url)
                 self.save_sources(claim, bundle)
-                result = await self.provider.extract(claim.website_url, bundle)
-                bip, provenance = validated_profile(
-                    result, bundle, claim.website_url, claim.user_name
+                result = await run_pipeline(
+                    self.provider,
+                    self.settings,
+                    claim.website_url,
+                    bundle,
+                    claim.user_name,
+                    claim.selected_offering_key,
                 )
-                self.complete(claim, bip, provenance, bundle.warnings + result.warnings)
+                if claim.chatgpt_account_id:
+                    result.metadata["chatgpt_account_id"] = str(claim.chatgpt_account_id)
+                    result.metadata["billing_source"] = "chatgpt_plan"
+                self.complete(
+                    claim,
+                    result.profile,
+                    result.provenance,
+                    result.warnings,
+                    result.metadata,
+                )
             logger.info("extraction_succeeded job_id=%s", claim.job_id)
         except TimeoutError:
             error = DomainError(

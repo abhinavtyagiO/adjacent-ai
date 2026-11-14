@@ -1,0 +1,2131 @@
+{
+  "website_url": "https://thewholetruthfoods.com/",
+  "profile": {
+    "brand_identity": {
+      "name": "The Whole Truth Foods",
+      "website_url": "https://thewholetruthfoods.com/",
+      "legal_name": null,
+      "tagline": "We're re-building the world's trust in food.",
+      "description": "A clean-label food brand making real food — protein powders, protein bars, nut spreads, muesli and kids' nutrition — with every ingredient declared upfront.",
+      "mission": "We're re-building the world's trust in food.",
+      "vision": null,
+      "values": [],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "Packaged food & nutrition",
+      "category": "Clean-label health food",
+      "business_model": "D2C e-commerce",
+      "market_position": null,
+      "positioning_statement": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront.",
+      "differentiators": [],
+      "geographic_markets": []
+    },
+    "offerings": [
+      {
+        "name": "Protein Powder",
+        "key": "protein-powder",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Plant Protein",
+        "key": "plant-protein",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Protein Bars",
+        "key": "protein-bars",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "Protein bars that hide sugar substitutes and artificial sweeteners behind 'healthy' positioning"
+          ],
+          "desired_outcomes": [
+            "A snack that fills you up and keeps the fried snack at bay"
+          ],
+          "motivations": [],
+          "fears": [],
+          "objections": [
+            "Whey use (WPC 80) may not suit lactose-intolerant buyers"
+          ],
+          "purchase_triggers": [
+            "Seeing that the only sugar comes from raw whole dates, de-pitted in-house"
+          ],
+          "decision_criteria": [
+            "Ingredient count and recognisability (e.g. 6 clean ingredients, 5-ingredient Pro bars)"
+          ],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Protein Bars Pro",
+        "key": "protein-bars-pro",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Mini Protein Bars",
+        "key": "mini-protein-bars",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Nut Spreads",
+        "key": "nut-spreads",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Muesli",
+        "key": "muesli",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "The Next Gen Range",
+        "key": "the-next-gen-range",
+        "kind": "PRODUCT",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Truth Be Told",
+        "key": "truth-be-told",
+        "kind": "OTHER",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "The Whole Truth Academy",
+        "key": "the-whole-truth-academy",
+        "kind": "SERVICE",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "ChemX",
+        "key": "chemx",
+        "kind": "OTHER",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [
+        {
+          "name": null,
+          "description": "Health-motivated shopper who has been burned by 'healthy' packaged food and now reads ingredient lists before buying.",
+          "demographics": null,
+          "roles": [],
+          "goals": [
+            "Find foods whose ingredient lists match the marketing claims"
+          ],
+          "pain_points": [],
+          "buying_triggers": [
+            "Seeing a short, fully-declared ingredient list with percentages that add to 100%"
+          ],
+          "objections": [],
+          "preferred_channels": [],
+          "adjacent_interests": [],
+          "relatable_situations": [
+            "Standing in a store aisle squinting at the crimp of a pack to read ingredients"
+          ]
+        },
+        {
+          "name": null,
+          "description": "Person who wants more protein but does not identify as a gym-goer, and is unsure whether protein products are 'for them'.",
+          "demographics": null,
+          "roles": [],
+          "goals": [],
+          "pain_points": [
+            "Concerned about bloating, gas or acne from protein powders"
+          ],
+          "buying_triggers": [],
+          "objections": [],
+          "preferred_channels": [],
+          "adjacent_interests": [],
+          "relatable_situations": [
+            "The 4pm slump and reaching for a fried snack"
+          ]
+        }
+      ],
+      "segments": [
+        {
+          "name": null,
+          "description": "Households replacing conventional packaged snacks, spreads and breakfast cereals with short-ingredient alternatives.",
+          "needs": [],
+          "geography": []
+        }
+      ]
+    },
+    "customer_psychology": {
+      "pain_points": [
+        "Distrust of brands that hide ingredient lists in microscopic font at the back"
+      ],
+      "desired_outcomes": [
+        "A food where every ingredient is declared upfront and adds up to 100%"
+      ],
+      "motivations": [
+        "Rebuilding personal trust in packaged food after feeling lied to by 'healthy' claims"
+      ],
+      "fears": [
+        "Being sold lies in the name of 'healthy'"
+      ],
+      "objections": [
+        "Skepticism that any brand can be fully transparent"
+      ],
+      "purchase_triggers": [
+        "First purchase via small sampler packs or sachets"
+      ],
+      "decision_criteria": [
+        "Number and recognisability of ingredients (e.g. 'Just 5-7 ingredients')"
+      ],
+      "emotional_benefits": [
+        "Feeling respected as a reader rather than fooled"
+      ],
+      "adjacent_interests": [
+        "Ingredient literacy and label reading"
+      ],
+      "relatable_situations": [
+        "The late-night dessert craving and reaching for a clean protein bar"
+      ],
+      "emotional_triggers": [
+        "Frustration at being fooled by 'healthy' marketing"
+      ]
+    },
+    "value_propositions": {
+      "primary": null,
+      "functional_benefits": [],
+      "emotional_benefits": [],
+      "differentiators": [],
+      "reasons_to_believe": []
+    },
+    "trust_and_proof": {
+      "testimonials": [],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": []
+    },
+    "brand_voice": {
+      "tone": [
+        "Plain-spoken",
+        "Wry and playful"
+      ],
+      "personality": [],
+      "language_style": "Direct, conversational copy that names the problem and shows the ingredients.",
+      "preferred_terms": [
+        "real food"
+      ],
+      "avoided_terms": [],
+      "example_phrases": [
+        "Real food is flawed. And those flaws are perfect!"
+      ],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [],
+      "colors": [
+        {
+          "name": null,
+          "hex": "#000000",
+          "usage": null
+        }
+      ],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [
+        "Declare it upfront: making the full ingredient list impossible to miss",
+        "Nothing to hide: inside the Bada Barkhana and the people who make the food"
+      ],
+      "creative_angles": [
+        "Contrast a squint-at-the-crimp label moment with a short ingredient list that adds to 100%",
+        "Show real food's 'flaws' (imperfect look) as proof of no tampering, side by side with the ingredient list"
+      ],
+      "cultural_contexts": [],
+      "relatable_situations": [
+        "Trying a sampler sachet before committing to a 1kg pack"
+      ]
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": null,
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": null
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The Whole Truth Foods - Online Store",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": [],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're re-building the world's trust in food.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're re-building the world's trust in food.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Brand markets packaged food and nutrition products.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We're a clean-label food brand",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Self-positions as clean-label food.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Order online from The Whole Truth Foods with secure payment options",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Direct online store selling own products.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Powder",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/0/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "24g-30g Protein Range",
+          "fetched_at": "2026-11-12T16:56:54.073829+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged protein powder.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Plant Protein",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/plant-protein-powders",
+          "quote": "Double Cocoa 25g Plant Protein",
+          "fetched_at": "2026-11-12T16:56:56.116860+00:00"
+        }
+      ],
+      "reasoning": "Physical plant protein powder.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/2/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/2/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "Walnut Fudge Protein Bars",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged bars.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/3/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars Pro",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/3/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Hazelnut Cocoa Pro - Box of 5",
+          "fetched_at": "2026-11-12T16:56:54.873180+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged bars.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/4/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Mini Protein Bars",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/4/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars",
+          "quote": "Double Cocoa Mini Protein Bars - Box of 12",
+          "fetched_at": "2026-11-12T16:56:55.561312+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged bars.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/5/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Nut Spreads",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/5/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/peanut-butter",
+          "quote": "Unsweetened Peanut Butter",
+          "fetched_at": "2026-11-12T16:56:56.705788+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged spreads.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/6/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Muesli",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/6/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/muesli",
+          "quote": "No Added Sugar 5 Grain Muesli",
+          "fetched_at": "2026-11-12T16:56:57.917631+00:00"
+        }
+      ],
+      "reasoning": "Physical packaged cereal.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/7/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "The Next Gen Range",
+          "fetched_at": "2026-11-12T16:56:57.384287+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/7/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "Food Drink Jr | Milk-mix for 2-6 yr olds",
+          "fetched_at": "2026-11-12T16:56:57.384287+00:00"
+        }
+      ],
+      "reasoning": "Physical kids' nutrition products and accessories.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/8/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Truth Be Told",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/8/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "India's top health newsletter.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Newsletter media property, not a physical product or taught service.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/9/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The Whole Truth Academy",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/9/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The food & nutrition course we should've been taught in school.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "A taught course is a service.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/10/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "ChemX",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/10/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Found an ingredient you can't pronounce? Allow us to help.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Ingredient-lookup tool, classified OTHER.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/visual_identity/colors/0/hex",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Theme color: #000000",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/0/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Powder",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/1/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Plant Protein",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/2/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/3/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Protein Bars Pro",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/4/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Mini Protein Bars",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/5/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Nut Spreads",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/6/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Muesli",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/7/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/next-gen",
+          "quote": "The Next Gen Range",
+          "fetched_at": "2026-11-12T16:56:57.384287+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/8/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Truth Be Told",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/9/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "The Whole Truth Academy",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/10/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "ChemX",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:06:12.171702+00:00"
+    },
+    {
+      "path": "/offerings/2/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "No artificial sweeteners.",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Pain point around hidden sweeteners inferred from the no-artificial-sweeteners positioning.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/offerings/2/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "in just those many calories, it’ll fill you up and keep that fried snack at bay.",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Satiety outcome inferred from product FAQ.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/offerings/2/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "We use WPC 80.",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Whey-related lactose objection inferred from FAQ answer.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/offerings/2/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "only from raw, whole dates that we de-pit ourselves",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Date-only sugar hypothesized as a trigger.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/offerings/2/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "Made with just 6 clean ingredients.",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Ingredient count as criterion inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/description",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "Why you’re made to stare, squint eyed, at the crimp, just to figure out what your food is made of?",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Source frames label-reading frustration; persona is a tentative hypothesis of that shopper.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/goals/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "We make food so clean, we can proudly declare every single ingredient that goes into it, upfront.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Goal inferred from the brand's upfront-declaration promise.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/buying_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "Just 5-7 ingredients",
+          "fetched_at": "2026-11-12T16:56:54.073829+00:00"
+        }
+      ],
+      "reasoning": "Short, fully-declared list hypothesized as a trigger.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/0/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "stare, squint eyed, at the crimp",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Everyday label-squinting moment inferred from source.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/description",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/walnut-fudge-protein-bars",
+          "quote": "I don’t go to the gym. Are protein bars for me?",
+          "fetched_at": "2026-11-12T16:56:53.741289+00:00"
+        }
+      ],
+      "reasoning": "Persona hypothesis built around the brand's own FAQ question.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/pain_points/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30-g-pure-whey-protein-isolate-sachets",
+          "quote": "Will this protein powder cause bloating/ gas or acne?",
+          "fetched_at": "2026-11-12T16:56:54.638631+00:00"
+        }
+      ],
+      "reasoning": "Digestive worry inferred from FAQ.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/personas/1/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/products/unflavoured-30-g-pure-whey-protein-isolate-sachets",
+          "quote": "replace your 4pm junk cravings with this",
+          "fetched_at": "2026-11-12T16:56:54.638631+00:00"
+        }
+      ],
+      "reasoning": "4pm craving situation inferred from usage guidance.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/description",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/peanut-butter",
+          "quote": "Just high-quality, slow-roasted peanuts. That's all!",
+          "fetched_at": "2026-11-12T16:56:56.705788+00:00"
+        }
+      ],
+      "reasoning": "Segment hypothesis around swapping spreads/cereals for short-ingredient options.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "most brands hide their ingredient list, in microscopic font, at the back",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Distrust of hidden labels hypothesized from source.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "= 100%",
+          "fetched_at": "2026-11-12T16:56:54.073829+00:00"
+        }
+      ],
+      "reasoning": "Desire for a fully-accounted ingredient list inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "In the name of ‘healthy’, we’re being sold a bunch of lies.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Motivation to restore trust in food inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/fears/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "In the name of ‘healthy’, we’re being sold a bunch of lies.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Fear of misleading 'healthy' claims inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "Brands hide what goes into their food, because they have something to hide.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Skepticism that full transparency is possible inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-beginners",
+          "quote": "Sampler Pack of 7",
+          "fetched_at": "2026-11-12T16:56:54.368705+00:00"
+        }
+      ],
+      "reasoning": "Small-format trial hypothesized as a trigger.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Just 5 ingredients",
+          "fetched_at": "2026-11-12T16:56:54.873180+00:00"
+        }
+      ],
+      "reasoning": "Ingredient count hypothesized as a selection criterion.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/emotional_benefits/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "speak the whole truth, because we have #nothingtohide",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Emotional benefit of feeling respected inferred.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Found an ingredient you can't pronounce? Allow us to help.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Ingredient literacy as adjacent interest inferred from ChemX.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-bars-pro",
+          "quote": "Your new favourite post-workout snack or late-night dessert.",
+          "fetched_at": "2026-11-12T16:56:54.873180+00:00"
+        }
+      ],
+      "reasoning": "Late-night dessert situation inferred from copy.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/customer_psychology/emotional_triggers/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "I was done being lied to.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Frustration trigger inferred from founder narrative.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/brand_voice/tone/0",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "Brands hide what goes into their food, because they have something to hide.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Plain-spoken directness evident in the cited copy.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/brand_voice/tone/1",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/muesli",
+          "quote": "#cerealkilla",
+          "fetched_at": "2026-11-12T16:56:57.917631+00:00"
+        }
+      ],
+      "reasoning": "Playful wordplay supports a wry tone label.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/brand_voice/language_style",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/pages/our-story",
+          "quote": "Our purpose is simple.",
+          "fetched_at": "2026-11-12T16:56:53.377600+00:00"
+        }
+      ],
+      "reasoning": "Direct, conversational style labelled from copy.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/brand_voice/preferred_terms/0",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "We make real food.",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Brand repeatedly uses 'real food'.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/brand_voice/example_phrases/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Real food is flawed. And those flaws are perfect!",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Verbatim homepage phrase.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/creative_context/content_pillars/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "Just 5-7 ingredients",
+          "fetched_at": "2026-11-12T16:56:54.073829+00:00"
+        }
+      ],
+      "reasoning": "Pillar built on the short declared ingredient list.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/creative_context/content_pillars/1",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "See where our protein powders are made",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Behind-the-scenes pillar inferred from Bada Barkhana walkthrough.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/creative_context/creative_angles/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-pro",
+          "quote": "= 100%",
+          "fetched_at": "2026-11-12T16:56:54.073829+00:00"
+        }
+      ],
+      "reasoning": "Contrast angle built on the summed ingredient list.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/creative_context/creative_angles/1",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/",
+          "quote": "Our food doesn't always look perfect. (But it tastes great!)",
+          "fetched_at": "2026-11-12T16:56:52.544407+00:00"
+        }
+      ],
+      "reasoning": "Imperfect-look-as-proof angle inferred from copy.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    },
+    {
+      "path": "/creative_context/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": [
+        {
+          "source_url": "https://thewholetruthfoods.com/categories/protein-powder-beginners",
+          "quote": "Sampler Pack of 7",
+          "fetched_at": "2026-11-12T16:56:54.368705+00:00"
+        }
+      ],
+      "reasoning": "Try-small situation inferred from sampler offering.",
+      "recorded_at": "2026-11-12T17:06:42.771770+00:00"
+    }
+  ],
+  "warnings": [
+    "/brand_identity/values/0: omitted because its source evidence could not be verified.",
+    "/brand_identity/values/1: omitted because its source evidence could not be verified.",
+    "/brand_identity/values/2: omitted because its source evidence could not be verified.",
+    "/brand_identity/operating_regions/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/market_position: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/1: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/2: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/3: omitted because its source evidence could not be verified.",
+    "/business_positioning/geographic_markets/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/7: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/8: omitted because its source evidence could not be verified.",
+    "/offerings/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/0/url: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/1/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/1/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/1/description: omitted because its source evidence could not be verified.",
+    "/offerings/1/url: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/2/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/4: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/5: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/6: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/7: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/8: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/9: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/10: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/11: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/12: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/13: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/14: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/15: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/16: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/17: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/18: omitted because its source evidence could not be verified.",
+    "/offerings/2/variants/19: omitted because its source evidence could not be verified.",
+    "/offerings/2/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/2/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/2/description: omitted because its source evidence could not be verified.",
+    "/offerings/2/url: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/2/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/3/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/3/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/3/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/3/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/3/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/3/variants/4: omitted because its source evidence could not be verified.",
+    "/offerings/3/description: omitted because its source evidence could not be verified.",
+    "/offerings/3/url: omitted because its source evidence could not be verified.",
+    "/offerings/3/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/3/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/3/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/3/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/3/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/3/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/3/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/3/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/4/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/4/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/4/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/4/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/4/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/4/description: omitted because its source evidence could not be verified.",
+    "/offerings/4/url: omitted because its source evidence could not be verified.",
+    "/offerings/4/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/4/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/4/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/5/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/4: omitted because its source evidence could not be verified.",
+    "/offerings/5/variants/5: omitted because its source evidence could not be verified.",
+    "/offerings/5/description: omitted because its source evidence could not be verified.",
+    "/offerings/5/url: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/5/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/5/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/6/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/6/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/6/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/6/description: omitted because its source evidence could not be verified.",
+    "/offerings/6/url: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/6/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/6/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/6/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/7/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/4: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/5: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/6: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/7: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/8: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/9: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/10: omitted because its source evidence could not be verified.",
+    "/offerings/7/variants/11: omitted because its source evidence could not be verified.",
+    "/offerings/7/description: omitted because its source evidence could not be verified.",
+    "/offerings/7/url: omitted because its source evidence could not be verified.",
+    "/offerings/7/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/7/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/7/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/7/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/7/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/7/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/7/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/7/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/8/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/8/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/8/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/8/description: omitted because its source evidence could not be verified.",
+    "/offerings/8/url: omitted because its source evidence could not be verified.",
+    "/offerings/9/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/9/description: omitted because its source evidence could not be verified.",
+    "/offerings/9/url: omitted because its source evidence could not be verified.",
+    "/offerings/10/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/10/description: omitted because its source evidence could not be verified.",
+    "/offerings/10/url: omitted because its source evidence could not be verified.",
+    "/value_propositions/primary: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/1: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/subject: omitted because its source evidence could not be verified.",
+    "/visual_identity/logo_urls/0: omitted because its source evidence could not be verified.",
+    "/visual_identity/logo_urls/1: omitted because its source evidence could not be verified.",
+    "/visual_identity/colors/0/name: omitted because its source evidence could not be verified.",
+    "/visual_identity/colors/0/usage: omitted because its source evidence could not be verified.",
+    "/brand_identity/operating_regions: ignored evidence for an empty or unknown field.",
+    "/brand_identity/values: ignored evidence for an empty or unknown field.",
+    "/business_positioning/differentiators: ignored evidence for an empty or unknown field.",
+    "/business_positioning/geographic_markets: ignored evidence for an empty or unknown field.",
+    "/offerings/0/features: ignored evidence for an empty or unknown field.",
+    "/offerings/0/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/1/features: ignored evidence for an empty or unknown field.",
+    "/offerings/1/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/2/features: ignored evidence for an empty or unknown field.",
+    "/offerings/2/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/3/features: ignored evidence for an empty or unknown field.",
+    "/offerings/3/use_cases: ignored evidence for an empty or unknown field.",
+    "/offerings/3/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/4/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/5/features: ignored evidence for an empty or unknown field.",
+    "/offerings/5/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/6/features: ignored evidence for an empty or unknown field.",
+    "/offerings/6/variants: ignored evidence for an empty or unknown field.",
+    "/offerings/7/features: ignored evidence for an empty or unknown field.",
+    "/offerings/7/variants: ignored evidence for an empty or unknown field.",
+    "/visual_identity/logo_urls: ignored evidence for an empty or unknown field.",
+    "/offerings/2/claims/0: claim omitted because its text or scope is unsupported.",
+    "/offerings/8/claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/1: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/2: claim omitted because its text or scope is unsupported.",
+    "Legal name, founding year and headquarters not stated in provided sources.",
+    "Marketing channels, objectives, budget and language preferences are not explicitly stated by the company; left empty.",
+    "Whoosh frother and Snap tin are accessories within The Next Gen Range, not independent product families.",
+    "/offerings/0/audiences/personas/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/roles/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/roles/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/goals/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/goals/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/pain_points/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/pain_points/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/objections/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/objections/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/preferred_channels/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/audiences/personas/0/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/pain_points/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/desired_outcomes/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/objections/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/purchase_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/decision_criteria/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/customer_psychology/emotional_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/description: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/roles/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/roles/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/goals/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/goals/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/pain_points/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/pain_points/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/objections/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/objections/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/audiences/personas/0/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/motivations/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/fears/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/customer_psychology/emotional_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/buying_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/preferred_channels/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/adjacent_interests/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/0/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/roles/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/goals/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/buying_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/objections/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/preferred_channels/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/preferred_channels/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/preferred_channels/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/adjacent_interests/2: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/personas/1/relatable_situations/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/name: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/0: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/1: omitted because its source evidence could not be verified.",
+    "/customer_personas_and_audience_segments/segments/0/needs/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/pain_points/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/pain_points/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/desired_outcomes/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/desired_outcomes/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/motivations/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/fears/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/objections/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/purchase_triggers/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/decision_criteria/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_benefits/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/adjacent_interests/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/customer_psychology/relatable_situations/2: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_triggers/1: omitted because its source evidence could not be verified.",
+    "/customer_psychology/emotional_triggers/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/tone/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/personality/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/2: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/4: omitted because its source evidence could not be verified.",
+    "/brand_voice/preferred_terms/5: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/1: omitted because its source evidence could not be verified.",
+    "/brand_voice/example_phrases/3: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/0: omitted because its source evidence could not be verified.",
+    "/brand_voice/cultural_contexts/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/0: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/1: omitted because its source evidence could not be verified.",
+    "/creative_context/content_themes/2: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/0: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/1: omitted because its source evidence could not be verified.",
+    "/creative_context/storytelling_angles/2: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/0: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/1: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/2: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/3: omitted because its source evidence could not be verified.",
+    "/creative_context/existing_content_formats/4: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/0: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/1: omitted because its source evidence could not be verified.",
+    "/creative_context/available_assets/2: omitted because its source evidence could not be verified.",
+    "/creative_context/content_pillars/1: omitted because its source evidence could not be verified.",
+    "/creative_context/creative_angles/2: omitted because its source evidence could not be verified.",
+    "/creative_context/cultural_contexts/0: omitted because its source evidence could not be verified.",
+    "/creative_context/cultural_contexts/1: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/0: omitted because its source evidence could not be verified.",
+    "/creative_context/relatable_situations/2: omitted because its source evidence could not be verified.",
+    "selected_offering_key was null; offering insights are provided for two representative offerings (protein-bars, protein-powder) rather than a single selected campaign product.",
+    "All audience and psychology material is INFERRED hypothesis, not verified customer behaviour; no demographics or identity facts were invented.",
+    "Some documents appear truncated (FAQ answers cut off); only quoted text was used."
+  ],
+  "pipeline_version": 2,
+  "source_coverage": {
+    "categories": {
+      "homepage": 1,
+      "category": 9,
+      "brand_story": 1,
+      "product": 8,
+      "other": 1
+    },
+    "missing_categories": [
+      "use_case",
+      "customer_story",
+      "faq",
+      "pricing"
+    ],
+    "pages": 20,
+    "fetch_operations": 22,
+    "sitemaps_checked": 1,
+    "discovered_urls": 345,
+    "text_characters": 54868,
+    "estimated_input_tokens": 18290,
+    "budget_limited": true
+  },
+  "creative_readiness": {
+    "status": "NEEDS_REVIEW",
+    "scope": "BRAND",
+    "selected_offering_key": null,
+    "missing_information": [
+      {
+        "field": "selected_offering_key",
+        "reason": "Brand-level brief only; offering-specific targeting still needs a selected offering.",
+        "suggested_question": "Which offering should the next creative brief target?"
+      }
+    ],
+    "requires_human_review": true
+  },
+  "extraction_metrics": {
+    "calls": [
+      {
+        "stage": "facts",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 22047,
+        "output_tokens": 9584,
+        "cached_input_tokens": 4352,
+        "status": "succeeded",
+        "budget_tokens": 31631,
+        "latency_seconds": 28.283
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 23612,
+        "output_tokens": 7674,
+        "cached_input_tokens": 2688,
+        "status": "succeeded",
+        "budget_tokens": 31286,
+        "latency_seconds": 30.558
+      }
+    ],
+    "latency_seconds": 58.93,
+    "input_tokens": 45659,
+    "output_tokens": 17258,
+    "usage_complete": true,
+    "estimated_cost_usd": 0.03233754,
+    "cost_basis": "Configured token rates; not an invoice. Null if rates/attempt usage are unavailable.",
+    "rates": {
+      "input": 0.3,
+      "output": 1.2,
+      "cached_input": 0.006
+    }
+  },
+  "stages": {
+    "facts": "SUCCEEDED",
+    "marketing": "SUCCEEDED"
+  }
+}
