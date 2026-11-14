@@ -165,7 +165,8 @@ and `evidence_paths` immediately after structured parsing, before expansion/prun
 `populated_fields` includes the authoritative website URL (and supplied name when present),
 whereas `generated` excludes user anchors. Therefore the 179-fact regression records 180
 raw populated leaves including the URL, 179 generated/rejected facts, and zero evidence
-entries. For historical fixture providers, entries mean original legacy evidence objects;
+entries. A separate regression covers exactly 179 raw leaves including the URL anchor.
+For historical fixture providers, entries mean original legacy evidence objects;
 for the new compact wire format they mean shared citation objects. Logs contain only counts,
 fixed rejection codes and stage labels, never model reasoning/content.
 

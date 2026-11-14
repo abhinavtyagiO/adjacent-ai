@@ -15,14 +15,14 @@ from evaluations.phase1b import ROOT, load_bundle
 from tests.conftest import FakeProvider
 
 
-def missing_facts():
+def missing_facts(count=179):
     # Exactly 179 generated factual leaves, plus the authoritative URL anchor.
     # Names/feature strings are deliberately unsupported: no citation may be invented.
     return FactualResult(
         profile={
             "brand_identity": {"website_url": "https://beminimalist.co/"},
             "offerings": [
-                {"name": "Unverified product", "features": [f"Fact {i}" for i in range(178)]}
+                {"name": "Unverified product", "features": [f"Fact {i}" for i in range(count - 1)]}
             ],
         },
         evidence=[],
@@ -30,10 +30,13 @@ def missing_facts():
     )
 
 
-async def test_179_uncited_facts_keep_empty_draft_and_never_call_marketing(settings):
+@pytest.mark.parametrize("count", [178, 179])
+async def test_uncited_facts_keep_empty_draft_and_never_call_marketing(settings, count):
     sources = load_bundle(ROOT / "evaluations/snapshots/whole_truth.json")
-    parsed = parse_output(missing_facts().model_dump_json(), FactualResult)
-    assert len(leaves(parsed.profile.model_dump())) == 180  # URL plus 179 facts
+    parsed = parse_output(missing_facts(count).model_dump_json(), FactualResult)
+    assert (
+        len(leaves(parsed.profile.model_dump())) == count + 1
+    )  # Also covers exactly 179 raw leaves.
     provider = FakeProvider(
         ExtractionResult(
             profile=BIP.model_validate(parsed.profile.model_dump()),
@@ -49,10 +52,10 @@ async def test_179_uncited_facts_keep_empty_draft_and_never_call_marketing(setti
     }
     assert result.metadata["stages"] == {"facts": "INSUFFICIENT_EVIDENCE", "marketing": "SKIPPED"}
     audit = result.metadata["evidence_validation"]["facts"]
-    assert (audit["generated"], audit["accepted"], audit["rejected"]) == (179, 0, 179)
-    assert audit["rejection_reasons"] == {"MISSING_EVIDENCE": 179}
+    assert (audit["generated"], audit["accepted"], audit["rejected"]) == (count, 0, count)
+    assert audit["rejection_reasons"] == {"MISSING_EVIDENCE": count}
     assert audit["parsed_output"] == {
-        "populated_fields": 180,
+        "populated_fields": count + 1,
         "evidence_entries": 0,
         "evidence_paths": 0,
     }

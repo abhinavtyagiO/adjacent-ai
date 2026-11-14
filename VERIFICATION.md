@@ -2,7 +2,7 @@
 
 Latest verification: 14 November 2026, Python 3.12 and local PostgreSQL 16.
 
-- Full offline suite: **227 passed**, including PostgreSQL/API persistence and mocked OAuth/SSE.
+- Full offline suite: **228 passed**, including PostgreSQL/API persistence and mocked OAuth/SSE.
 - Existing Fastlane, Whole Truth and Newton saved-response replays completed without network
   crawling or inference. Newton's saved marketing remains honestly insufficient.
 - Ruff lint/format and `git diff --check` passed; Alembic detected no schema changes.
