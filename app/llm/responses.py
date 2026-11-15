@@ -148,7 +148,8 @@ class StructuredResponsesProvider:
             )
         if self.settings.extraction_mode == "draft_first":
             available = min(available, self.settings.factual_context_max_chars)
-        share = available // max(len(sources.documents), 1)
+        documents = [d for d in sources.documents if d.source_type != "catalog"]
+        share = available // max(len(documents), 1)
         payload["documents"] = [
             {
                 "source_id": f"s{index}",
@@ -156,7 +157,7 @@ class StructuredResponsesProvider:
                 "category": doc.metadata.get("category"),
                 "content": doc.text[:share],
             }
-            for index, doc in enumerate(sources.documents)
+            for index, doc in enumerate(documents)
         ]
         return payload
 
@@ -182,7 +183,18 @@ class StructuredResponsesProvider:
             effort = "none"
         if self.settings.extraction_mode == "draft_first":
             payload = self._documents(
-                sources, {"website_url": website_url}, DraftFactualResult, DRAFT_FACTUAL_PROMPT
+                sources,
+                {
+                    "website_url": website_url,
+                    "catalog_overview": {
+                        "product_count": sources.discovery.get("coverage", {}).get("product_count"),
+                        "categories": sources.discovery.get("coverage", {}).get("categories", [])[
+                            :50
+                        ],
+                    },
+                },
+                DraftFactualResult,
+                DRAFT_FACTUAL_PROMPT,
             )
             result = await self._request(
                 payload,
@@ -220,7 +232,10 @@ class StructuredResponsesProvider:
             "evidence_paths": sum(len(c.paths) for c in result.citations),
         }
         logger.info("factual_output_parsed counts=%s", self.factual_parse_counts)
-        urls = {f"s{i}": doc.url for i, doc in enumerate(sources.documents)}
+        urls = {
+            f"s{i}": doc.url
+            for i, doc in enumerate(d for d in sources.documents if d.source_type != "catalog")
+        }
         evidence = [
             LLMEvidence(
                 path=path,
@@ -252,10 +267,46 @@ class StructuredResponsesProvider:
         draft = self.settings.extraction_mode == "draft_first"
         response_type = DraftMarketingResult if draft else MarketingResult
         prompt = DRAFT_MARKETING_PROMPT if draft else MARKETING_PROMPT
+        brief = profile.model_dump(mode="json", exclude_none=True)
+        if draft:
+            brief = {
+                "brand_identity": brief["brand_identity"],
+                "business_positioning": brief["business_positioning"],
+                "brand_voice": brief["brand_voice"],
+                "value_propositions": brief["value_propositions"],
+                "offerings": [
+                    {
+                        k: v
+                        for k, v in o.items()
+                        if k
+                        in {
+                            "key",
+                            "name",
+                            "kind",
+                            "catalog_level",
+                            "parent_offering_key",
+                            "description",
+                            "features",
+                            "benefits",
+                            "ingredients",
+                            "use_cases",
+                        }
+                    }
+                    for o in brief["offerings"]
+                ],
+            }
         payload = {
-            ("extracted_profile" if draft else "verified_profile"): profile.model_dump(
-                mode="json", exclude_none=True
-            ),
+            ("extracted_profile" if draft else "verified_profile"): brief,
+            "website_concerns": [
+                {
+                    "name": c["name"],
+                    "description": c.get("description"),
+                    "source_urls": c.get("source_urls", [])[:3],
+                    "offering_keys": c.get("offering_keys", []),
+                    "interpretation": c.get("interpretation"),
+                }
+                for c in sources.discovery.get("concerns", [])[:20]
+            ],
             "selected_offering_key": selected_offering_key,
             "documents": [
                 {"source_url": doc.url, "content": doc.text} for doc in sources.documents

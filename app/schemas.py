@@ -9,7 +9,7 @@ from datetime import datetime
 from typing import Annotated, Any, Literal, get_args
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 
 from app.crawling.urls import normalize_url
 
@@ -409,6 +409,14 @@ class ExtractionRequest(Schema):
     marketing_model: str | None = Field(None, min_length=1, max_length=200)
 
 
+class MarketingEnrichmentRequest(Schema):
+    expected_revision: int | None = Field(None, ge=0)
+    offering_key: str | None = None
+    replace_reviewed: StrictBool = False
+    chatgpt_account_id: UUID | None = None
+    marketing_model: str | None = Field(None, min_length=1, max_length=200)
+
+
 class ProfilePatch(Schema):
     expected_revision: int = Field(ge=0)
     changes: dict[str, Any]
@@ -452,6 +460,7 @@ class ProfileResponse(Schema):
         str,
         Literal[
             "SUCCEEDED",
+            "RUNNING",
             "FAILED",
             "INSUFFICIENT_EVIDENCE",
             "INSUFFICIENT_DATA",
@@ -465,3 +474,7 @@ class ProfileResponse(Schema):
     extraction_mode: Literal["draft_first", "strict", "legacy"] = "legacy"
     completeness: dict[str, Any] = Field(default_factory=dict)
     claim_review: list[dict[str, Any]] = Field(default_factory=list)
+    catalog: dict[str, Any] = Field(default_factory=dict)
+    customer_concerns: list[dict[str, Any]] = Field(default_factory=list)
+    marketing_enrichment: dict[str, Any] = Field(default_factory=dict)
+    source_job_id: UUID | None = None

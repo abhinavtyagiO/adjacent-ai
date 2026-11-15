@@ -42,6 +42,8 @@ class Settings(BaseSettings):
     factual_context_max_chars: int = Field(60000, ge=1000, le=140000)
     marketing_context_max_chars: int = Field(18000, ge=1000, le=60000)
     llm_max_attempts: int = Field(1, ge=1, le=5)
+    catalog_max_pages: int = Field(3, ge=0, le=10)
+    catalog_max_products: int = Field(1000, ge=1, le=5000)
     crawl_max_pages: int = Field(20, ge=1, le=60)
     crawl_max_requests: int = Field(40, ge=1, le=120)
     crawl_max_total_chars: int = Field(140000, ge=1000, le=500000)

@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.config import get_settings
 from app.db import get_session
+from app.discovery_api import summary as discovery_summary
 from app.errors import DomainError
 from app.models import ExtractionJob
 from app.schemas import (
@@ -14,13 +15,14 @@ from app.schemas import (
     ConfirmProfile,
     CreateBrand,
     ExtractionRequest,
+    MarketingEnrichmentRequest,
     ProfilePatch,
     ProfileResponse,
 )
 from app.services import BrandService
 
 
-def extraction_binding(request):
+def extraction_binding(request, marketing_only=False):
     """Snapshot the chosen account/models before queueing; no inference on HTTP path."""
     from app.chatgpt.routes import get_chatgpt_service
     from app.llm.base import build_provider
@@ -41,7 +43,7 @@ def extraction_binding(request):
         )
     account = service.require_account(account_id)
     fact = (
-        (request.factual_model if request else None)
+        (getattr(request, "factual_model", None) if request else None)
         or settings.factual_model
         or account.get("selected_model")
     )
@@ -50,7 +52,7 @@ def extraction_binding(request):
         or settings.marketing_model
         or account.get("selected_model")
     )
-    if not fact or not marketing:
+    if not marketing or (not marketing_only and not fact):
         raise DomainError(
             "CHATGPT_MODEL_REQUIRED", "Choose an account-specific model before extraction", 422
         )
@@ -92,11 +94,18 @@ def job_view(job: ExtractionJob) -> dict:
         "started_at": job.started_at,
         "finished_at": job.finished_at,
         "metrics": job.metrics,
+        "kind": job.kind,
+        "source_job_id": job.source_job_id,
+        "diagnostics": job.diagnostics,
+        "replace_reviewed": job.replace_reviewed,
         "selected_offering_key": job.selected_offering_key,
         "chatgpt_account_id": job.chatgpt_account_id,
         "factual_model": job.factual_model,
         "marketing_model": job.marketing_model,
-        "poll_url": f"/v1/extractions/{job.id}",
+        "poll_url": (
+            "/v1/marketing-enrichments/" if job.kind == "MARKETING" else "/v1/extractions/"
+        )
+        + str(job.id),
     }
 
 
@@ -138,6 +147,7 @@ def get_brand(brand_id: uuid.UUID, session: DB):
         "name": brand.name,
         "revision": brand.revision,
         "profile_status": profile.status if profile else None,
+        **discovery_summary(session, brand_id),
         "created_at": brand.created_at,
     }
 
@@ -218,4 +228,69 @@ def list_sources(brand_id: uuid.UUID, session: DB):
             }
             for row in service.repo.source_documents(brand_id)
         ]
+    }
+
+
+@router.post("/brands/{brand_id}/marketing-enrichments", status_code=202)
+def enrich_marketing(
+    brand_id: uuid.UUID,
+    session: DB,
+    response: Response,
+    request: MarketingEnrichmentRequest | None = None,
+):
+    request = request or MarketingEnrichmentRequest()
+    job = BrandService(session).enqueue_marketing(
+        brand_id, request, **extraction_binding(request, marketing_only=True)
+    )
+    response.headers["Location"] = f"/v1/marketing-enrichments/{job.id}"
+    response.headers["Retry-After"] = "2"
+    return job_view(job)
+
+
+@router.get("/marketing-enrichments/{job_id}")
+def get_marketing_enrichment(job_id: uuid.UUID, session: DB):
+    job = session.get(ExtractionJob, job_id)
+    if not job or job.kind != "MARKETING":
+        raise DomainError("JOB_NOT_FOUND", "Marketing enrichment job was not found", 404)
+    return job_view(job)
+
+
+@router.get("/brands/{brand_id}/catalog")
+def get_catalog(
+    brand_id: uuid.UUID,
+    session: DB,
+    limit: Annotated[int, Query(ge=1, le=100)] = 20,
+    offset: Annotated[int, Query(ge=0)] = 0,
+    category: str | None = None,
+    linked_only: bool = False,
+):
+    from app.discovery_api import catalog
+
+    BrandService(session).require_brand(brand_id)
+    return catalog(session, brand_id, limit, offset, category, linked_only)
+
+
+@router.get("/brands/{brand_id}/customer-concerns")
+def get_concerns(brand_id: uuid.UUID, session: DB):
+    from app.discovery_api import summary
+
+    BrandService(session).require_brand(brand_id)
+    return {"items": summary(session, brand_id)["customer_concerns"]}
+
+
+@router.get("/brands/{brand_id}/catalog/{product_id}")
+def get_catalog_product(brand_id: uuid.UUID, product_id: uuid.UUID, session: DB):
+    from app.models import CatalogProduct, Offering
+
+    BrandService(session).require_brand(brand_id)
+    product = session.get(CatalogProduct, product_id)
+    if not product or product.brand_id != brand_id:
+        raise DomainError("CATALOG_PRODUCT_NOT_FOUND", "Catalog product was not found", 404)
+    offering = session.get(Offering, product.offering_id) if product.offering_id else None
+    return {
+        "id": product.id,
+        "source_job_id": product.source_job_id,
+        "linked_offering_id": product.offering_id,
+        "linked_offering_key": offering.details.get("key") if offering else None,
+        **product.details,
     }

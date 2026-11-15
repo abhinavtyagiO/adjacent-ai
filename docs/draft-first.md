@@ -144,3 +144,11 @@ one separately authorized Minimalist live test after restarting/rebuilding the l
 There is no known code/configuration blocker; a still-authorized ChatGPT session/model must
 be available then. Real model compliance, catalog quality, latency and semantic factual
 correctness remain unmeasured, and a 60-second marketing timeout remains possible.
+
+
+## Phase 1C additions
+
+See [Phase 1C](phase1c.md) for deterministic discovery, progressive factual checkpoints and
+marketing-only jobs. Independent marketing uses the same citation-free merge, protects
+reviewed fields by default and never recrawls or repeats factual inference. Each published
+profile update advances the revision, so an initial extraction can now publish two revisions.

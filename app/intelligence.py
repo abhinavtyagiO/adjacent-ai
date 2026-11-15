@@ -643,12 +643,19 @@ async def run_pipeline(
     sources: SourceBundle,
     registered_name=None,
     selected_offering_key=None,
+    factual_checkpoint=None,
 ) -> PipelineResult:
     if settings.extraction_mode == "draft_first":
         from app.draft import run_draft_pipeline
 
         return await run_draft_pipeline(
-            provider, settings, website_url, sources, registered_name, selected_offering_key
+            provider,
+            settings,
+            website_url,
+            sources,
+            registered_name,
+            selected_offering_key,
+            factual_checkpoint,
         )
     started = time.monotonic()
     provider.usage_records = []

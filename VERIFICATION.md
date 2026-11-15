@@ -1,5 +1,28 @@
 # Delivery verification
 
+Latest Phase 1C P0 verification: **16 November 2026**, Python 3.12 / PostgreSQL 16.
+
+- **296 offline tests passed**, including independent marketing-only execution on a seven-product
+  Minimalist profile, saved-source binding, one mocked request, edit/confirmation protection,
+  stale revisions, expired leases, discovery/variant deduplication and safe stream timing.
+- Migration **0004** upgrade, downgrade and re-upgrade verified on the disposable test DB;
+  legacy profile sections/audits survive rollback. Alembic check reports no model/schema drift.
+- Ruff lint/format, Compose configuration and diff checks passed. One pre-existing
+  Starlette/httpx deprecation warning remains.
+- Saved Minimalist data yields seven structured products and source-derived concern signals.
+  A synthetic public product response yields all twelve supplied records without an LLM.
+  Neither is a live full-catalog count, and no count of 83 is assumed.
+- No live inference, live website crawl or production extraction/enrichment job was triggered.
+  The running deployment/database was not migrated or restarted.
+- Standard onboarding adds no primary model call; independent enrichment skips recrawling
+  and factual inference. Expected latency/usage savings are unmeasured live. Real catalog
+  coverage, provider event latency and marketing usefulness require separate authorization.
+
+Apply migration 0004 and rebuild services before a live check. See
+[Phase 1C APIs and architecture](docs/phase1c.md) for rollout and limitations.
+
+## Previous MVP verification
+
 Latest MVP draft-first verification: **15 November 2026**, Python 3.12 / PostgreSQL 16.
 
 - **260 passed**, including citation-free factual/marketing contracts, four-brand fixtures,

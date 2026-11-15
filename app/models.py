@@ -3,7 +3,17 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, Integer, String, Text, text
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    text,
+)
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -39,6 +49,9 @@ class Profile(Base):
     extracted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now)
     confirmed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    source_job_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID, ForeignKey("extraction_jobs.id", ondelete="SET NULL")
+    )
     pipeline_metadata: Mapped[dict] = mapped_column(
         JSONB, default=dict, server_default=text("'{}'::jsonb")
     )
@@ -59,7 +72,11 @@ class Offering(Base):
 class ExtractionJob(Base):
     __tablename__ = "extraction_jobs"
     __table_args__ = (
-        CheckConstraint("status IN ('PENDING','RUNNING','SUCCEEDED','FAILED')", name="job_status"),
+        CheckConstraint(
+            "status IN ('PENDING','RUNNING','SUCCEEDED','FAILED','INSUFFICIENT_DATA')",
+            name="job_status",
+        ),
+        CheckConstraint("kind IN ('EXTRACTION','MARKETING')", name="job_kind"),
         Index("ix_jobs_claim", "status", "available_at"),
         Index(
             "uq_active_job",
@@ -73,6 +90,16 @@ class ExtractionJob(Base):
         UUID, ForeignKey("brands.id", ondelete="CASCADE"), index=True
     )
     status: Mapped[str] = mapped_column(String(20), default="PENDING")
+    kind: Mapped[str] = mapped_column(String(20), default="EXTRACTION", server_default="EXTRACTION")
+    source_job_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID, ForeignKey("extraction_jobs.id", ondelete="SET NULL")
+    )
+    replace_reviewed: Mapped[bool] = mapped_column(
+        Boolean, default=False, server_default=text("false")
+    )
+    diagnostics: Mapped[dict] = mapped_column(
+        JSONB, default=dict, server_default=text("'{}'::jsonb")
+    )
     base_revision: Mapped[int] = mapped_column(Integer)
     attempts: Mapped[int] = mapped_column(Integer, default=0)
     lease_token: Mapped[uuid.UUID | None] = mapped_column(UUID)
@@ -107,3 +134,38 @@ class SourceDocument(Base):
     source_metadata: Mapped[dict] = mapped_column(
         JSONB, default=dict, server_default=text("'{}'::jsonb")
     )
+
+
+class CatalogProduct(Base):
+    """Observed lightweight catalog, independent from the editable deep BIP offering."""
+
+    __tablename__ = "catalog_products"
+    __table_args__ = (Index("uq_catalog_product", "brand_id", "product_key", unique=True),)
+    id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
+    brand_id: Mapped[uuid.UUID] = mapped_column(
+        UUID, ForeignKey("brands.id", ondelete="CASCADE"), index=True
+    )
+    product_key: Mapped[str] = mapped_column(String(2048))
+    source_job_id: Mapped[uuid.UUID] = mapped_column(
+        UUID, ForeignKey("extraction_jobs.id", ondelete="CASCADE")
+    )
+    offering_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID, ForeignKey("offerings.id", ondelete="SET NULL")
+    )
+    details: Mapped[dict] = mapped_column(JSONB)
+
+
+class CustomerConcern(Base):
+    """Website problem/need signal, never a measured audience or buyer persona."""
+
+    __tablename__ = "customer_concerns"
+    __table_args__ = (Index("uq_customer_concern", "brand_id", "concern_key", unique=True),)
+    id: Mapped[uuid.UUID] = mapped_column(UUID, primary_key=True, default=uuid.uuid4)
+    brand_id: Mapped[uuid.UUID] = mapped_column(
+        UUID, ForeignKey("brands.id", ondelete="CASCADE"), index=True
+    )
+    concern_key: Mapped[str] = mapped_column(String(300))
+    source_job_id: Mapped[uuid.UUID] = mapped_column(
+        UUID, ForeignKey("extraction_jobs.id", ondelete="CASCADE")
+    )
+    details: Mapped[dict] = mapped_column(JSONB)

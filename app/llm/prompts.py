@@ -126,3 +126,16 @@ lists short and non-redundant while covering distinct target audiences. Short op
 explanations describe the product-to-hypothesis connection, not private chain-of-thought.
 Use null/[] if context is inadequate. Do not present hypotheses as proven consumer behaviour.
 """
+
+
+DRAFT_FACTUAL_PROMPT += (
+    "\nThe catalog_overview is a bounded source-derived category/count summary, not a list "
+    "to rewrite. Represent major families and deeply describe representative products; "
+    "do not write every SKU.\n"
+)
+DRAFT_MARKETING_PROMPT += (
+    "\nUse website_concerns as website-derived need signals, never measured demographics "
+    "or audience percentages. Keep the response compact: 1-2 buyer segments, at most one "
+    "concise persona, 1-2 motivations/objections per analyzed offering, and 2-3 creative "
+    "angles. Leave unused fields empty.\n"
+)

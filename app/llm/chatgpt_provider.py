@@ -111,6 +111,9 @@ class ChatGPTProvider(StructuredResponsesProvider):
             "budget_tokens": reservation,
             "status": "failed",
             "billing_source": "chatgpt_plan",
+            "time_to_first_event_seconds": None,
+            "time_to_first_output_text_seconds": None,
+            "stream_outcome": "FAILED",
         }
         started = time.monotonic()
         try:
@@ -138,6 +141,7 @@ class ChatGPTProvider(StructuredResponsesProvider):
             return parsed
         except (httpx.TimeoutException, TimeoutError) as error:
             record["error_code"] = "CHATGPT_TIMEOUT"
+            record["stream_outcome"] = "TIMEOUT"
             raise DomainError(
                 "CHATGPT_TIMEOUT",
                 "ChatGPT stage deadline or network timeout exceeded; no automatic inference retry",
@@ -146,6 +150,7 @@ class ChatGPTProvider(StructuredResponsesProvider):
             ) from error
         except httpx.HTTPError as error:
             record["error_code"] = "CHATGPT_STREAM_DISCONNECTED"
+            record["stream_outcome"] = "DISCONNECTED"
             raise DomainError(
                 "CHATGPT_STREAM_DISCONNECTED",
                 "ChatGPT connection failed or disconnected; no automatic inference retry",
@@ -153,12 +158,18 @@ class ChatGPTProvider(StructuredResponsesProvider):
             ) from error
         except DomainError as error:
             record["error_code"] = error.code
+            if error.code == "CHATGPT_RESPONSE_INCOMPLETE":
+                record["stream_outcome"] = "INCOMPLETE"
+            elif error.code == "CHATGPT_STREAM_DISCONNECTED":
+                record["stream_outcome"] = "DISCONNECTED"
             raise
         finally:
             record["latency_seconds"] = round(time.monotonic() - started, 3)
+            record["total_stage_seconds"] = record["latency_seconds"]
             self.usage_records.append(record)
 
     async def _stream(self, client, body, token, record, output_budget):
+        stream_started = time.monotonic()
         async with client.stream(
             "POST",
             RESOURCE + "/responses",
@@ -197,6 +208,10 @@ class ChatGPTProvider(StructuredResponsesProvider):
                 event_lines = []
                 if raw == "[DONE]":
                     break
+                if record["time_to_first_event_seconds"] is None:
+                    record["time_to_first_event_seconds"] = round(
+                        time.monotonic() - stream_started, 3
+                    )
                 try:
                     event = json.loads(raw)
                 except ValueError as error:
@@ -211,6 +226,10 @@ class ChatGPTProvider(StructuredResponsesProvider):
                     if not isinstance(delta, str):
                         raise DomainError(
                             "CHATGPT_STREAM_INVALID", "ChatGPT returned an invalid text event", 502
+                        )
+                    if delta and record["time_to_first_output_text_seconds"] is None:
+                        record["time_to_first_output_text_seconds"] = round(
+                            time.monotonic() - stream_started, 3
                         )
                     parts.append(delta)
                     size += len(delta)
@@ -245,6 +264,7 @@ class ChatGPTProvider(StructuredResponsesProvider):
                         raise DomainError(
                             "CHATGPT_STREAM_INVALID", "ChatGPT did not complete the response", 502
                         )
+                    record["stream_outcome"] = "COMPLETED"
                     completed = True
                     break
             if not completed:

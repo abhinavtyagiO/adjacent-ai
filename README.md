@@ -1,4 +1,4 @@
-# Brand Intelligence Backend — Phase 1B
+# Brand Intelligence Backend — Phase 1C P0
 
 A FastAPI backend for registering a company URL, crawling public pages, extracting an
 draft-first Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
@@ -9,6 +9,11 @@ outputs. Facts are provisional `AI_EXTRACTED` data and marketing hypotheses are 
 Review flags never approve sensitive advertising claims. The original citation-verification
 path remains available with `EXTRACTION_MODE=strict`.
 See [MVP contracts, review semantics and limitations](docs/draft-first.md).
+
+Phase 1C adds deterministic product-catalog and website-concern discovery plus separately
+runnable marketing enrichment. Discovery is separate from deep BIP offerings. Factual drafts
+can be reviewed while marketing is running. [New APIs, migration and architecture](docs/phase1c.md)
+describe source-snapshot binding, edit protection, stream timing and offline verification.
 
 ## Quick start with Docker Compose
 

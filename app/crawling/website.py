@@ -93,18 +93,28 @@ def structured_data(soup: BeautifulSoup) -> dict:
     """Extract whitelisted JSON-LD context without following any embedded URLs."""
     products, faqs = [], []
 
-    def walk(value, depth=0):
+    def walk(value, depth=0, parent=None):
         if depth > 12:
             return
         if isinstance(value, list):
             for child in value[:100]:
-                walk(child, depth + 1)
+                walk(child, depth + 1, parent)
         elif isinstance(value, dict):
             types = value.get("@type", [])
-            types = [types] if isinstance(types, str) else types
-            if "Product" in types and len(products) < 100:
+            types = [types] if isinstance(types, str) else types if isinstance(types, list) else []
+            if (
+                any(t in types for t in ("Product", "ProductGroup", "Course", "Service"))
+                and len(products) < 100
+            ):
                 keys = (
                     "@type",
+                    "@id",
+                    "url",
+                    "image",
+                    "sku",
+                    "productID",
+                    "gtin",
+                    "mpn",
                     "name",
                     "description",
                     "category",
@@ -114,14 +124,22 @@ def structured_data(soup: BeautifulSoup) -> dict:
                     "isVariantOf",
                     "additionalProperty",
                 )
-                products.append({key: value[key] for key in keys if key in value})
+                record = {key: value[key] for key in keys if key in value}
+                if parent and not record.get("isVariantOf"):
+                    record["isVariantOf"] = parent
+                products.append(record)
             if "Question" in types and len(faqs) < 50:
                 answer = value.get("acceptedAnswer", {})
                 if isinstance(answer, dict):
                     faqs.append({"question": value.get("name"), "answer": answer.get("text")})
             for key in ("@graph", "mainEntity", "itemListElement", "item", "hasVariant"):
                 if key in value:
-                    walk(value[key], depth + 1)
+                    parent_info = (
+                        {k: value[k] for k in ("name", "url", "@id") if k in value}
+                        if key == "hasVariant"
+                        else None
+                    )
+                    walk(value[key], depth + 1, parent_info)
 
     for tag in soup.select('script[type="application/ld+json"]')[:20]:
         try:
@@ -142,7 +160,7 @@ def parse_page(html: str, url: str, limit: int):
         re.I,
     ):
         raise DomainError("PAGE_NOT_FOUND", "Website returned a soft-404 error page")
-    links = []
+    links, navigation, catalog_links = [], [], []
     for anchor in soup.select("a[href]")[:4000]:
         href = str(anchor.get("href", ""))
         if href.startswith(("mailto:", "tel:", "javascript:", "#")):
@@ -150,11 +168,58 @@ def parse_page(html: str, url: str, limit: int):
         try:
             candidate = normalize_url(urljoin(url, href))
             label = anchor.get_text(" ", strip=True)
+            if len(navigation) < 300 and label:
+                navigation.append({"label": label[:300], "url": candidate})
+            if (
+                re.search(
+                    r"/(?:products|product|courses|programs|p)/[^/]+", urlsplit(candidate).path
+                )
+                and len(catalog_links) < 1000
+            ):
+                image = anchor.find("img")
+                name = (str(image.get("alt", "")) if image else "") or label
+                if name:
+                    catalog_links.append(
+                        {
+                            "name": name[:300],
+                            "url": candidate,
+                            "image": urljoin(
+                                url, str(image.get("src") or image.get("data-src") or "")
+                            )
+                            if image
+                            else None,
+                        }
+                    )
             if page_category(candidate, label) not in {"other", "comparison"}:
                 links.append(candidate)
         except ValueError:
             continue
     structured = structured_data(soup)
+
+    def meta_value(*names):
+        for name in names:
+            tag = soup.find("meta", attrs={"property": name}) or soup.find(
+                "meta", attrs={"name": name}
+            )
+            if tag and tag.get("content"):
+                return str(tag["content"])
+        return None
+
+    html_product = None
+    if page_category(url) == "product":
+        html_product = {
+            "name": heading.get_text(" ", strip=True) if heading else meta_value("og:title"),
+            "url": url,
+            "image": meta_value("og:image"),
+            "offers": {
+                "price": meta_value("product:price:amount", "og:price:amount"),
+                "priceCurrency": meta_value("product:price:currency", "og:price:currency"),
+            },
+        }
+    shopify = bool(
+        soup.find("script", src=re.compile("cdn.shopify.com"))
+        or re.search(r"Shopify\.(?:shop|theme)|cdn\.shopify\.com", html)
+    )
     metadata = []
     for name, field in [("description", "Meta description"), ("theme-color", "Theme color")]:
         tag = soup.find("meta", attrs={"name": name})
@@ -204,6 +269,11 @@ def parse_page(html: str, url: str, limit: int):
         links,
         {
             **structured,
+            "navigation": navigation,
+            "catalog_links": catalog_links,
+            "html_product": html_product,
+            "heading": heading.get_text(" ", strip=True) if heading else None,
+            "shopify": shopify,
             "category": page_category(url),
             "truncated": len(prefix + body + extra) > limit,
         },
@@ -260,7 +330,14 @@ class WebsiteSource:
                 if operations >= self.settings.crawl_max_requests:
                     raise DomainError("CRAWL_BUDGET", "Website fetch-operation budget exhausted")
                 operations += 1
-                return await fetcher.fetch(url, hosts, authorize=authorize)
+                remaining = self.settings.crawl_max_elapsed_seconds - (time.monotonic() - started)
+                try:
+                    async with asyncio.timeout(max(0.001, remaining)):
+                        return await fetcher.fetch(url, hosts, authorize=authorize)
+                except TimeoutError as exc:
+                    raise DomainError(
+                        "CRAWL_BUDGET", "Website discovery elapsed-time budget exhausted"
+                    ) from exc
 
             async def robots_for(url):
                 parsed = urlsplit(url)
@@ -375,6 +452,52 @@ class WebsiteSource:
                     for link in links:
                         discover(link)
                     if len(bundle.documents) == 1:
+                        if metadata.get("shopify"):
+                            for number in range(1, self.settings.catalog_max_pages + 1):
+                                if (
+                                    operations >= self.settings.crawl_max_requests
+                                    or len(bundle.documents) >= self.settings.crawl_max_pages
+                                    or time.monotonic() - started
+                                    >= self.settings.crawl_max_elapsed_seconds
+                                ):
+                                    break
+                                try:
+                                    endpoint = (
+                                        urljoin(page.url, "/products.json")
+                                        + f"?limit=250&page={number}"
+                                    )
+                                    product_page = await fetch(endpoint, authorize)
+                                    payload = json.loads(product_page.body)
+                                    products = (
+                                        payload.get("products")
+                                        if isinstance(payload, dict)
+                                        else None
+                                    )
+                                    if not isinstance(products, list):
+                                        raise ValueError("Invalid public product data")
+                                    bundle.documents.append(
+                                        Document(
+                                            product_page.url,
+                                            "Public product catalog: "
+                                            + str(len(products))
+                                            + " records.",
+                                            now(),
+                                            source_type="catalog",
+                                            metadata={
+                                                "public_products": products[:250],
+                                                "category": "catalog",
+                                            },
+                                        )
+                                    )
+                                    counts["catalog"] += 1
+                                    if len(products) < 250:
+                                        break
+                                except (DomainError, ValueError) as exc:
+                                    bundle.warnings.append(
+                                        "Public catalog discovery: "
+                                        + getattr(exc, "code", "INVALID_PRODUCT_DATA")
+                                    )
+                                    break
                         await discover_sitemaps()
                         # Fall back to common paths only when discovery yielded almost nothing.
                         for path in (
@@ -401,6 +524,8 @@ class WebsiteSource:
             "categories": dict(counts),
             "missing_categories": [c for c in CATEGORIES if not counts[c]],
             "pages": len(bundle.documents),
+            "catalog_pages": sum(d.source_type == "catalog" for d in bundle.documents),
+            "html_pages": sum(d.source_type != "catalog" for d in bundle.documents),
             "fetch_operations": operations,
             "sitemaps_checked": sitemap_count,
             "discovered_urls": len(candidates),

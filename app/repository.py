@@ -81,7 +81,10 @@ class Repository:
         stale = and_(ExtractionJob.status == "RUNNING", ExtractionJob.lease_until < current)
         exhausted = (
             select(ExtractionJob)
-            .where(stale, ExtractionJob.attempts >= max_attempts)
+            .where(
+                stale,
+                or_(ExtractionJob.attempts >= max_attempts, ExtractionJob.kind == "MARKETING"),
+            )
             .with_for_update(skip_locked=True)
         )
         for job in self.session.scalars(exhausted):
@@ -101,6 +104,7 @@ class Repository:
                     stale,
                 ),
                 ExtractionJob.attempts < max_attempts,
+                or_(ExtractionJob.kind != "MARKETING", ExtractionJob.attempts == 0),
             )
             .order_by(ExtractionJob.created_at)
             .with_for_update(skip_locked=True)

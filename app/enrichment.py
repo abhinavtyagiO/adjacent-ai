@@ -20,6 +20,7 @@ class SourceBundle:
     documents: list[Document]
     warnings: list[str] = field(default_factory=list)
     coverage: dict = field(default_factory=dict)
+    discovery: dict = field(default_factory=dict)
 
 
 class EnrichmentSource(Protocol):

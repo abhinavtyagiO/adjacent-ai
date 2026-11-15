@@ -18,7 +18,7 @@ from app.diagnostics import unavailable_evidence
 from app.enrichment import Document, SourceBundle
 from app.errors import DomainError
 from app.provenance import leaves
-from app.schemas import BIP, DraftMarketingResult, PricingTier
+from app.schemas import BIP, PricingTier
 
 logger = logging.getLogger(__name__)
 
@@ -302,12 +302,19 @@ def relevant_context(sources, profile, selected_key, max_chars):
         [
             Document(url, "\n".join(texts), doc.fetched_at, title=doc.title, metadata=doc.metadata)
             for url, (doc, texts) in passages.items()
-        ]
+        ],
+        discovery=sources.discovery,
     )
 
 
 async def run_draft_pipeline(
-    provider, settings, website_url, sources, registered_name=None, selected_offering_key=None
+    provider,
+    settings,
+    website_url,
+    sources,
+    registered_name=None,
+    selected_offering_key=None,
+    factual_checkpoint=None,
 ):
     """Two calls at most: basic factual draft, optional offering-focused hypotheses."""
     from app.intelligence import PipelineResult, creative_readiness, metrics, source_coverage
@@ -321,6 +328,27 @@ async def run_draft_pipeline(
     provenance = draft_provenance(profile, website_url, registered_name)
     fact_status = "SUCCEEDED" if usable_offerings(profile) else "INSUFFICIENT_DATA"
     marketing_status, stage_errors = "SKIPPED", {}
+    if fact_status == "SUCCEEDED" and factual_checkpoint:
+        factual_checkpoint(
+            PipelineResult(
+                profile,
+                provenance,
+                list(warnings),
+                {
+                    "pipeline_version": 2,
+                    "extraction_mode": "draft_first",
+                    "stages": {"facts": "SUCCEEDED", "marketing": "RUNNING"},
+                    "source_coverage": source_coverage(sources),
+                    "extraction_metrics": metrics(
+                        provider.usage_records, settings, time.monotonic() - started
+                    ),
+                    "evidence_validation": {
+                        stage: {**unavailable_evidence(), "status": "NOT_APPLICABLE"}
+                        for stage in ("facts", "marketing")
+                    },
+                },
+            )
+        )
     if fact_status == "SUCCEEDED":
         factual_profile = profile.model_copy(deep=True)
         factual_provenance = list(provenance)
@@ -333,77 +361,18 @@ async def run_draft_pipeline(
                 - 10,
             )
             async with asyncio.timeout(remaining):
-                raw = await provider.infer_marketing(
+                from app.marketing import enrich
+
+                profile, provenance, extra_warnings, stage_diagnostics = await enrich(
+                    provider,
+                    settings,
                     profile,
-                    relevant_context(
-                        sources,
-                        profile,
-                        selected_offering_key,
-                        settings.marketing_context_max_chars,
-                    ),
+                    provenance,
+                    sources,
                     selected_offering_key,
                 )
-            # Legacy mocked adapters may still return their evidence envelope; never use it here.
-            payload = clean_values(raw.model_dump(exclude={"evidence", "explanation"}), warnings)
-            if "explanation" in type(raw).model_fields:
-                payload["explanation"] = raw.explanation
-            result = DraftMarketingResult.model_validate(payload)
-            stamp = datetime.now(UTC).isoformat()
-            generated = {}
-            for root in (
-                "customer_personas_and_audience_segments",
-                "customer_psychology",
-                "brand_voice",
-                "creative_context",
-            ):
-                data = getattr(profile, root).model_dump()
-                for key, value in getattr(result, root).model_dump().items():
-                    if not value:
-                        continue
-                    if root == "creative_context" and key in {
-                        "available_assets",
-                        "existing_content_formats",
-                        "calls_to_action",
-                    }:
-                        continue  # Existing assets are factual observations, not new inventions.
-                    data[key] = value
-                    generated.update(leaves({key: value}, f"/{root}"))
-                setattr(profile, root, type(getattr(profile, root)).model_validate(data))
-            indexes = {o.key: i for i, o in enumerate(profile.offerings)}
-            seen = set()
-            explanations = {}
-            for insight in result.offering_insights:
-                key = insight.offering_key
-                if key not in indexes or key in seen:
-                    warnings.append(
-                        "Unknown or duplicate offering insight ignored; factual catalog retained."
-                    )
-                    continue
-                seen.add(key)
-                index = indexes[key]
-                offering = profile.offerings[index]
-                offering.audiences = insight.audiences
-                offering.customer_psychology = insight.customer_psychology
-                for field in ("audiences", "customer_psychology"):
-                    paths = leaves(
-                        getattr(offering, field).model_dump(), f"/offerings/{index}/{field}"
-                    )
-                    generated.update(paths)
-                    explanations.update({path: insight.explanation for path in paths})
-            provenance = [e for e in provenance if e["path"] not in generated]
-            provenance.extend(
-                {
-                    "path": path,
-                    "origin": "INFERRED",
-                    "citations": [],
-                    "reasoning": explanations.get(path) or result.explanation,
-                    "recorded_at": stamp,
-                }
-                for path in generated
-                if path in leaves(profile.model_dump())
-            )
-            warnings.extend(result.warnings)
-            marketing_status = "SUCCEEDED" if generated else "INSUFFICIENT_DATA"
+            warnings.extend(extra_warnings)
+            marketing_status = stage_diagnostics["status"]
         except (DomainError, TimeoutError, ValidationError) as error:
             profile, provenance = factual_profile, factual_provenance
             marketing_status = "FAILED"

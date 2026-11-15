@@ -104,7 +104,10 @@ def factory(database_url, monkeypatch):
     factory = session_factory(database_url)
     with factory.begin() as session:
         session.execute(
-            text("TRUNCATE source_documents, offerings, profiles, extraction_jobs, brands")
+            text(
+                "TRUNCATE customer_concerns, catalog_products, source_documents, "
+                "offerings, profiles, extraction_jobs, brands"
+            )
         )
     yield factory
     factory.kw["bind"].dispose()
