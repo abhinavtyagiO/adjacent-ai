@@ -39,7 +39,8 @@ Migration **0004** adds:
 
 Catalog records are not inserted into `BIP.offerings`. Product URL/name matches establish
 links to existing offerings; categories remain lightweight source attributes. Existing
-BIP family/product/variant keys and relational offering IDs are preserved. Stable catalog
+BIP family/product/variant keys and relational offering IDs are preserved. Catalog and
+concern links are refreshed after customer edits, including corrected names or keys. Stable catalog
 UUIDs and the detail endpoint let future flows select a product without another full-brand
 extraction. No later detailed-analysis flow is implemented here.
 

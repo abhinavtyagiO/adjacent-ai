@@ -291,6 +291,10 @@ class BrandService:
             ),
         }
         self.repo.write_bip(brand_id, profile, bip)
+        from app.discovery import link_offerings
+
+        self.session.flush()
+        link_offerings(self.session, brand_id)
         brand.name = bip.brand_identity.name
         brand.revision += 1
         profile.status = "DRAFT"

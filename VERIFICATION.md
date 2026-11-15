@@ -2,7 +2,7 @@
 
 Latest Phase 1C P0 verification: **16 November 2026**, Python 3.12 / PostgreSQL 16.
 
-- **296 offline tests passed**, including independent marketing-only execution on a seven-product
+- **297 offline tests passed**, including independent marketing-only execution on a seven-product
   Minimalist profile, saved-source binding, one mocked request, edit/confirmation protection,
   stale revisions, expired leases, discovery/variant deduplication and safe stream timing.
 - Migration **0004** upgrade, downgrade and re-upgrade verified on the disposable test DB;

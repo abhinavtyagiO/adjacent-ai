@@ -558,3 +558,26 @@ async def test_stable_external_identity_survives_product_url_change(client, fact
             session.get(CatalogProduct, original_id).details["url"]
             == "https://beminimalist.co/products/new-handle"
         )
+
+
+@pytest.mark.integration
+async def test_profile_edit_refreshes_catalog_and_concern_relationships(client, factory, settings):
+    brand, old, _, _, _ = await seed(client, factory, settings)
+    original_key = old["profile"]["offerings"][0]["key"]
+    products = client.get(f"/v1/brands/{brand}/catalog").json()["items"]
+    product = next(p for p in products if p["url"] == old["profile"]["offerings"][0]["url"])
+    offerings = old["profile"]["offerings"]
+    offerings[0] = {
+        **offerings[0],
+        "name": "Customer-corrected product",
+        "key": "customer-corrected",
+    }
+    edited = client.patch(
+        f"/v1/brands/{brand}/profile",
+        json={"expected_revision": old["revision"], "changes": {"offerings": offerings}},
+    )
+    assert edited.status_code == 200
+    product_after = client.get(f"/v1/brands/{brand}/catalog/{product['id']}").json()
+    assert product_after["linked_offering_key"] == "customer-corrected"
+    assert product_after["linked_offering_id"] != product["linked_offering_id"]
+    assert all(original_key not in c["offering_keys"] for c in edited.json()["customer_concerns"])
