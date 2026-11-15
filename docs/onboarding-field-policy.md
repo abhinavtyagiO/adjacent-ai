@@ -1,5 +1,10 @@
 # Onboarding field policy
 
+> **Mode note:** This document describes the optional strict/historical evidence policy.
+> Default onboarding is now [MVP draft-first](draft-first.md), which requests no citations,
+> retains provisional fields and uses offering-based `INSUFFICIENT_DATA` outcomes.
+
+
 An incomplete brand profile is a valid draft. Preserve all twelve section objects, using
 null for unknown scalars and empty arrays for unknown collections. Enrichment should never
 become an onboarding questionnaire or a reason to invent company information.

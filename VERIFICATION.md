@@ -1,5 +1,23 @@
 # Delivery verification
 
+Latest MVP draft-first verification: **15 November 2026**, Python 3.12 / PostgreSQL 16.
+
+- **260 passed**, including citation-free factual/marketing contracts, four-brand fixtures,
+  PostgreSQL draft/edit/confirm/history, strict compatibility and mocked ChatGPT OAuth/SSE.
+- Ruff lint/format, `git diff --check`, Compose configuration and Alembic check passed.
+- No migration required; new metadata uses existing JSONB. BIP-v2 gains optional ingredients.
+- Strict audit/provenance history survives replacement; profile confirmation never approves
+  sensitive claims for advertising. One pre-existing Starlette/httpx warning remains.
+- No live inference, website crawl, account/model discovery or real extraction was triggered.
+  Local API and worker remain stopped. No model/reasoning/deadline/retry/provider changes.
+- Ready for one separately authorized live test after rebuilding/restarting. Real output
+  quality, token usage and latency are unmeasured; reduced citation overhead is an estimate,
+  not an observed speedup. Claim-risk detection is a conservative review aid, not compliance.
+
+See [MVP behavior, contracts and limits](docs/draft-first.md).
+
+## Previous strict-mode verification
+
 Latest verification: 14 November 2026, Python 3.12 and local PostgreSQL 16.
 
 - Full offline suite: **228 passed**, including PostgreSQL/API persistence and mocked OAuth/SSE.

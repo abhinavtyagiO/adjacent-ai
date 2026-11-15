@@ -1,5 +1,10 @@
 # Evidence quality outcomes and offering readiness
 
+> **Mode note:** This document describes the optional strict/historical evidence policy.
+> Default onboarding is now [MVP draft-first](draft-first.md), which requests no citations,
+> retains provisional fields and uses offering-based `INSUFFICIENT_DATA` outcomes.
+
+
 The Phase 1B review identified three correctness gaps: a parsed marketing response was
 always marked successful even if every insight was pruned; the profile API hid stored stage
 outcomes; and selecting any offering could bypass product-specific creative checks. These

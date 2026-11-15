@@ -71,6 +71,7 @@ def describe(profile, provenance=None):
 
 async def main(args):
     settings = Settings(
+        extraction_mode="strict",  # Preserve historical evidence-audit semantics.
         marketing_reasoning_effort=args.effort,
         factual_reasoning_effort="none",
         llm_input_usd_per_million=args.input_rate,

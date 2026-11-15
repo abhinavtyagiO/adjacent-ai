@@ -742,6 +742,13 @@
           "title": "Benefits",
           "type": "array"
         },
+        "ingredients": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ingredients",
+          "type": "array"
+        },
         "use_cases": {
           "items": {
             "type": "string"

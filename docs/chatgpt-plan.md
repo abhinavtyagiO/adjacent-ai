@@ -64,7 +64,7 @@ optional `chatgpt_account_id`, `factual_model`, and `marketing_model`; omitted v
 the active authorized account and selected model. Jobs never switch account if settings later
 change. Old unbound queued jobs fail sign-in-required rather than guessing an owner. The
 worker validates models with the same account before inference; stage errors are exposed in
-`stage_errors`. Optional marketing failures still preserve the verified factual draft.
+`stage_errors`. Optional marketing failures still preserve the factual draft.
 
 ## Streaming and limits
 
@@ -72,7 +72,7 @@ The [models/inference contract](https://developers.openai.com/siwc/token-sharing
 uses OAuth bearer access with public `/v1/models` and `/v1/responses`. It does not use ChatGPT
 backend endpoints. Success requires `response.completed`; partial JSON, disconnects, incomplete
 responses and late failure events are not successes. Text is schema-validated before the
-existing evidence pipeline. Private reasoning events are ignored, not logged or stored.
+configured draft-first or optional strict pipeline. Private reasoning events are ignored, not logged or stored.
 
 The [preview restrictions](https://developers.openai.com/siwc/token-sharing-open-source/preview-limitations)
 require streaming and `store:false`. The transport sends `instructions` instead of system
@@ -128,8 +128,8 @@ server remains stopped until you choose to start it. Do not treat this as deploy
 approval, unlimited usage, or multi-tenant account isolation.
 
 
-Factual extraction now uses compact shared source-ID citations and stops before marketing
-when no usable facts survive validation. See [evidence quality](evidence-quality.md) for
+Default extraction now uses citation-free draft-first contracts and stops before marketing
+when no usable offering remains. Optional strict mode retains compact source-ID citations. See [evidence quality](evidence-quality.md) for
 `SKIPPED` stage semantics, pre-pruning counts, bounded context and stage-specific deadlines.
 Timeouts, stream disconnections and explicit incomplete responses have separate error codes;
 none triggers an automatic inference retry or a billing-provider fallback.

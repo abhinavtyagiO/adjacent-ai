@@ -12,9 +12,22 @@ from pydantic import SecretStr, ValidationError
 from app.config import Settings
 from app.enrichment import SourceBundle
 from app.errors import DomainError
-from app.llm.prompts import FACTUAL_PROMPT, MARKETING_PROMPT
+from app.llm.prompts import (
+    DRAFT_FACTUAL_PROMPT,
+    DRAFT_MARKETING_PROMPT,
+    FACTUAL_PROMPT,
+    MARKETING_PROMPT,
+)
 from app.provenance import leaves
-from app.schemas import BIP, CitedFactualResult, ExtractionResult, LLMEvidence, MarketingResult
+from app.schemas import (
+    BIP,
+    CitedFactualResult,
+    DraftFactualResult,
+    DraftMarketingResult,
+    ExtractionResult,
+    LLMEvidence,
+    MarketingResult,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -131,8 +144,10 @@ class StructuredResponsesProvider:
         available = self.settings.llm_max_input_tokens * 3 - overhead - 2000
         if available < 500:
             raise DomainError(
-                "LLM_INPUT_BUDGET", "Verified context exceeds the configured input budget"
+                "LLM_INPUT_BUDGET", "Profile context exceeds the configured input budget"
             )
+        if self.settings.extraction_mode == "draft_first":
+            available = min(available, self.settings.factual_context_max_chars)
         share = available // max(len(sources.documents), 1)
         payload["documents"] = [
             {
@@ -165,6 +180,27 @@ class StructuredResponsesProvider:
         effort = self.settings.factual_reasoning_effort
         if effort is None and self.name == "deepseek":
             effort = "none"
+        if self.settings.extraction_mode == "draft_first":
+            payload = self._documents(
+                sources, {"website_url": website_url}, DraftFactualResult, DRAFT_FACTUAL_PROMPT
+            )
+            result = await self._request(
+                payload,
+                DraftFactualResult,
+                DRAFT_FACTUAL_PROMPT,
+                "facts",
+                model,
+                effort,
+                self.settings.factual_max_output_tokens,
+            )
+            self.factual_parse_counts = {
+                "populated_fields": len(leaves(result.profile.model_dump())),
+                "evidence_entries": 0,
+                "evidence_paths": 0,
+            }
+            return ExtractionResult(
+                profile=BIP.model_validate(result.profile.model_dump()), warnings=result.warnings
+            )
         payload = self._documents(
             sources, {"website_url": website_url}, CitedFactualResult, FACTUAL_PROMPT
         )
@@ -213,8 +249,13 @@ class StructuredResponsesProvider:
         effort = self.settings.marketing_reasoning_effort
         if effort is None and self.name == "deepseek":
             effort = "none"
+        draft = self.settings.extraction_mode == "draft_first"
+        response_type = DraftMarketingResult if draft else MarketingResult
+        prompt = DRAFT_MARKETING_PROMPT if draft else MARKETING_PROMPT
         payload = {
-            "verified_profile": profile.model_dump(mode="json", exclude_none=True),
+            ("extracted_profile" if draft else "verified_profile"): profile.model_dump(
+                mode="json", exclude_none=True
+            ),
             "selected_offering_key": selected_offering_key,
             "documents": [
                 {"source_url": doc.url, "content": doc.text} for doc in sources.documents
@@ -222,14 +263,14 @@ class StructuredResponsesProvider:
         }
         if (
             len(json.dumps(payload))
-            + len(MARKETING_PROMPT)
-            + len(json.dumps(MarketingResult.model_json_schema()))
+            + len(prompt)
+            + len(json.dumps(response_type.model_json_schema()))
         ) > self.settings.llm_max_input_tokens * 3 - 2000:
-            raise DomainError("LLM_INPUT_BUDGET", "Verified marketing context exceeds input budget")
+            raise DomainError("LLM_INPUT_BUDGET", "Marketing context exceeds input budget")
         return await self._request(
             payload,
-            MarketingResult,
-            MARKETING_PROMPT,
+            response_type,
+            prompt,
             "marketing",
             model,
             effort,

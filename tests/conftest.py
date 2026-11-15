@@ -22,7 +22,7 @@ CONTENT = "Acme makes collaboration software. Flow is our product. Advisory is o
 
 @pytest.fixture
 def settings():
-    return Settings(_env_file=None)
+    return Settings(_env_file=None, extraction_mode="strict")
 
 
 @pytest.fixture
@@ -98,6 +98,7 @@ def factory(database_url, monkeypatch):
     monkeypatch.setenv("DATABASE_URL", database_url)
     monkeypatch.setenv("API_ACCESS_TOKEN", "")
     monkeypatch.setenv("LLM_PROVIDER", "openai")
+    monkeypatch.setenv("EXTRACTION_MODE", "strict")
     monkeypatch.setenv("OPENAI_API_KEY_BILLING_ENABLED", "true")
     get_settings.cache_clear()
     factory = session_factory(database_url)

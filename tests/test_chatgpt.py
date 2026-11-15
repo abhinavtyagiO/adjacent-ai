@@ -159,7 +159,9 @@ async def chatgpt(settings, tmp_path, signing_key, extraction_result, bundle):
                 )
             body = json.loads(request.content)
             value = (
-                h.facts if body["text"]["format"]["name"] == "CitedFactualResult" else h.marketing
+                h.facts
+                if body["text"]["format"]["name"] in {"CitedFactualResult", "DraftFactualResult"}
+                else h.marketing
             )
             text = "{broken" if h.malformed else value.model_dump_json()
             events = [

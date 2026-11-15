@@ -363,7 +363,10 @@ def source_coverage(sources: SourceBundle) -> dict:
 
 
 def creative_readiness(
-    profile: BIP, selected_offering_key: str | None = None, provenance: list[dict] | None = None
+    profile: BIP,
+    selected_offering_key: str | None = None,
+    provenance: list[dict] | None = None,
+    mode: str = "strict",
 ) -> dict:
     """Assess retained content, with product-specific checks only for explicit selection.
 
@@ -412,7 +415,7 @@ def creative_readiness(
             missing.append(
                 {
                     "field": field,
-                    "reason": "No supported information available.",
+                    "reason": "No useful information available.",
                     "suggested_question": question,
                 }
             )
@@ -478,6 +481,8 @@ def creative_readiness(
             ),
         }
         for check, present in assessment.items():
+            if mode == "draft_first" and check == "supported_marketing_claims":
+                continue  # Ordinary creative briefs do not require advertising proof.
             if not present:
                 field, question = questions[check]
                 missing.append(
@@ -502,7 +507,16 @@ def creative_readiness(
                 "suggested_question": "Which offering should the next creative brief target?",
             }
         )
+    if mode == "draft_first":
+        from app.draft import claim_review
+
+        risks = claim_review(profile, provenance or [])
+        pending = [r for r in risks if r["status"] == "REQUIRES_REVIEW"]
+    else:
+        pending = []
     return {
+        "ready_for_campaign": False,
+        "claim_review_required": bool(pending),
         "status": "NEEDS_REVIEW" if missing else "READY_FOR_CREATIVE_BRIEF",
         "scope": "OFFERING" if selected else "BRAND",
         "selected_offering_key": selected.key if selected else None,
@@ -630,6 +644,12 @@ async def run_pipeline(
     registered_name=None,
     selected_offering_key=None,
 ) -> PipelineResult:
+    if settings.extraction_mode == "draft_first":
+        from app.draft import run_draft_pipeline
+
+        return await run_draft_pipeline(
+            provider, settings, website_url, sources, registered_name, selected_offering_key
+        )
     started = time.monotonic()
     provider.usage_records = []
     provider.factual_parse_counts = None
@@ -862,6 +882,7 @@ async def run_pipeline(
         warnings,
         {
             "pipeline_version": 2,
+            "extraction_mode": "strict",
             "source_coverage": source_coverage(sources),
             "creative_readiness": creative_readiness(bip, selected_offering_key, provenance),
             "extraction_metrics": metrics(

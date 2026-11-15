@@ -1,8 +1,14 @@
 # Brand Intelligence Backend — Phase 1B
 
 A FastAPI backend for registering a company URL, crawling public pages, extracting an
-evidence-aware Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
+draft-first Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
 PostgreSQL is the only supported database in development, tests and deployment.
+
+Default mode is `EXTRACTION_MODE=draft_first`: both LLM calls use citation-free structured
+outputs. Facts are provisional `AI_EXTRACTED` data and marketing hypotheses are `INFERRED`.
+Review flags never approve sensitive advertising claims. The original citation-verification
+path remains available with `EXTRACTION_MODE=strict`.
+See [MVP contracts, review semantics and limitations](docs/draft-first.md).
 
 ## Quick start with Docker Compose
 
@@ -208,27 +214,20 @@ evolve. Optional section members do not become onboarding prerequisites.
 | `marketing_guardrails` | Prohibited claims, legal disclaimers and approval requirements |
 | `marketing_defaults` | Objectives, channels, language, regions, budget and video preferences |
 
-Every populated scalar leaf has provenance at a JSON pointer such as `/offerings/0/name`:
+Every populated scalar leaf has provenance at a pointer such as `/offerings/0/name`.
+Default `draft_first` mode uses `AI_EXTRACTED` for provisional website-based information,
+`INFERRED` for audience/creative hypotheses, and `USER` for submitted values or corrections.
+Citations can be empty. Confirmation records user review; it neither relabels AI content as
+independently verified nor approves it for advertising. `claim_review` identifies sensitive
+prices, concentrations, efficacy statements, certifications and guarantees for later approval.
 
-* `WEBSITE`: direct extracted information, with a verbatim quote and collected source URL.
-* `CLASSIFIED`: an explainable label derived from source context, with rationale and citations.
-* `INFERRED`: a tentative audience or creative hypothesis, with concise rationale and citations.
-* `USER`: the submitted URL/name or a review correction; no website citation is asserted.
-
-The service checks quoted text against the actual captured document and verifies source
-URLs, evidence paths and permitted inferences before retaining facts. It stamps citations
-with server-recorded fetch times. Names, testimonial quotes and pricing amounts must appear in cited
-quotes. Unsupported enrichment is omitted with review warnings, while verified content is
-saved as a draft. Scalars become `null`, unsupported list entries are removed, testimonials
-without verified quotes and offerings without verified names are dropped, and inconsistent
-pricing objects are cleared. Provenance indexes follow the retained collection entries.
-Only the registered website is required to start; a company name is required to confirm.
-See [the onboarding field policy](docs/onboarding-field-policy.md) for the full classification.
-Inferences are restricted to voice, psychology, creative context and audience
-interpretation; company identity, pricing, proof, defaults and guardrails require direct
-evidence. Persona labels can describe hypothetical segments; real identities and demographics cannot be invented. Prompts treat website content as
-untrusted data and prohibit invented details. Citation checks establish traceability;
-semantic correctness still requires the review/confirmation step.
+Optional `strict` mode retains the historical `WEBSITE` (direct sourced fact), `CLASSIFIED`
+(source-grounded classification) and `INFERRED` evidence contract, including quote matching,
+scalar pointers, scope checks and pruning. Existing profiles and audits retain their meanings.
+See [strict evidence verification](docs/evidence-quality.md). Only the website is required
+to start; a company name is required to confirm. Both prompts prohibit invented names,
+prices, ingredients, performance claims, certifications and customer identities. User review
+is required in either mode; draft-first content is not independently verified.
 
 Text-only crawling cannot determine complete design systems: unsupported colors, fonts and
 guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
@@ -301,6 +300,8 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | `LLM_PROVIDER` | `openai_chatgpt` | Official plan usage; DeepSeek selection is rejected |
 | `OPENAI_API_KEY` | Empty | Required only when using OpenAI |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
+| `EXTRACTION_MODE` | `draft_first` | `strict` opts into historical citation verification |
+| `FACTUAL_CONTEXT_MAX_CHARS` | `60000` | Factual document-content budget in draft-first mode |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
 | `LLM_MAX_ATTEMPTS` | `1` | Bounded retries for transient failures or invalid/truncated structured output |
 | `CRAWL_MAX_PAGES` | `20` | Maximum collected content documents (requests have a separate limit) |
@@ -386,20 +387,14 @@ batch live calls are disabled to control costs.
 
 ## Evidence quality and selected-offering readiness
 
-Profile responses now expose `stages` and `evidence_validation`. A valid marketing response
-with no accepted insights, or with more than half its generated fields rejected, reports
-`INSUFFICIENT_EVIDENCE`. Valid factual drafts survive optional marketing failures. Counts
-and safe rejection categories are grouped by BIP section; legacy audit gaps remain unknown.
+Profile responses expose `extraction_mode`, `stages`, `evidence_validation`, `completeness`
+and `claim_review`. Default factual success requires a usable marketable offering with a
+name and description/features/benefits/ingredients/use cases. Without one, a partial draft
+is saved with factual `INSUFFICIENT_DATA` and marketing `SKIPPED`, with no automatic retry.
+Marketing failures preserve the full factual draft. Job `SUCCEEDED` means a draft was saved.
+Evidence validation is `NOT_APPLICABLE` with null acceptance counts in draft-first mode.
 
-An explicitly selected offering must have benefits, meaningful audience details, motivations
-and appropriately scoped, supported claims for creative readiness. Brand-level targeting and
-facility/newsletter proof do not substitute for those checks. Readiness remains nonblocking.
-See [the evidence-quality guide](docs/evidence-quality.md) and
-[offline review results and known gaps](evaluations/PHASE1B_REVIEW.md).
-
-
-Factual extraction quality: a parsed response with no usable verified business facts produces
-an `INSUFFICIENT_EVIDENCE` factual stage and `SKIPPED` marketing stage, while retaining a
-reviewable draft. Inspect `stages` and `evidence_validation` rather than treating job
-`SUCCEEDED` as evidence completeness. See [citation contracts and diagnostics](docs/evidence-quality.md)
-for compact citations, pre-pruning counts and stage timeout settings.
+Readiness is nonblocking and checks useful product, audience, motivation and creative content;
+valid JSON alone is insufficient. Campaign generation is out of scope and is not declared
+ready automatically. [MVP documentation](docs/draft-first.md) explains the output contracts,
+source limits, historical compatibility and estimated efficiency changes.

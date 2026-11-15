@@ -1,5 +1,10 @@
 # Phase 1B: extraction and marketing intelligence
 
+> **Mode note:** This document describes the optional strict/historical evidence policy.
+> Default onboarding is now [MVP draft-first](draft-first.md), which requests no citations,
+> retains provisional fields and uses offering-based `INSUFFICIENT_DATA` outcomes.
+
+
 The durable PostgreSQL worker now runs two primary LLM operations using the selected
 provider strategy. API requests still enqueue work immediately. OpenAI and DeepSeek share
 schema validation and transport behavior; business rules contain no provider-specific calls.

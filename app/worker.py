@@ -125,6 +125,25 @@ class ExtractionWorker:
                 session.add(profile)
                 # Populate required sections before write_bip performs a flush.
                 profile.sections = bip.model_dump(mode="json", exclude={"offerings"})
+            # Retain historical strict audits/proof when a replacement switches modes.
+            # Do not nest previous history or reinterpret old origins as draft content.
+            history = list((profile.pipeline_metadata or {}).get("evidence_validation_history", []))
+            previous_audit = (profile.pipeline_metadata or {}).get("evidence_validation", {})
+            if any(report.get("available") for report in previous_audit.values()):
+                history.append(
+                    {
+                        "revision": brand.revision,
+                        "extracted_at": profile.extracted_at.isoformat()
+                        if profile.extracted_at
+                        else None,
+                        "extraction_mode": profile.pipeline_metadata.get(
+                            "extraction_mode", "legacy"
+                        ),
+                        "evidence_validation": previous_audit,
+                        "provenance": profile.provenance,
+                    }
+                )
+            metadata = {**(metadata or {}), "evidence_validation_history": history}
             repo.write_bip(brand.id, profile, bip)
             profile.status = "DRAFT"
             profile.confirmed_at = None

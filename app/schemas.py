@@ -150,6 +150,7 @@ class OfferingData(Schema):
     url: str | None = None
     features: list[str] = Field(default_factory=list)
     benefits: list[str] = Field(default_factory=list)
+    ingredients: list[str] = Field(default_factory=list)
     use_cases: list[str] = Field(default_factory=list)
     pricing: Pricing = Field(default_factory=Pricing)
     audiences: Audiences = Field(default_factory=Audiences)
@@ -297,6 +298,7 @@ class FactualOffering(Schema):
     url: str | None = None
     features: list[str] = Field(default_factory=list)
     benefits: list[str] = Field(default_factory=list)
+    ingredients: list[str] = Field(default_factory=list)
     use_cases: list[str] = Field(default_factory=list)
     supported_platforms: list[str] = Field(default_factory=list)
     pricing: Pricing = Field(default_factory=Pricing)
@@ -355,6 +357,40 @@ class MarketingResult(Schema):
     warnings: list[str] = Field(default_factory=list)
 
 
+class ObservedContent(Schema):
+    existing_content_formats: list[str] = Field(default_factory=list)
+    available_assets: list[str] = Field(default_factory=list)
+    calls_to_action: list[str] = Field(default_factory=list)
+
+
+class DraftFactualProfile(FactualProfile):
+    brand_voice: BrandVoice = Field(default_factory=BrandVoice)
+    creative_context: ObservedContent = Field(default_factory=ObservedContent)
+
+
+class DraftFactualResult(Schema):
+    """Default factual wire contract: no evidence, quotes or pointer generation."""
+
+    profile: DraftFactualProfile
+    warnings: list[str] = Field(default_factory=list)
+
+
+class DraftOfferingInsight(OfferingInsight):
+    explanation: str | None = None
+
+
+class DraftMarketingResult(Schema):
+    """Audience/creative hypotheses; explanations are optional short review notes."""
+
+    customer_personas_and_audience_segments: Audiences = Field(default_factory=Audiences)
+    customer_psychology: Psychology = Field(default_factory=Psychology)
+    brand_voice: BrandVoice = Field(default_factory=BrandVoice)
+    creative_context: CreativeContext = Field(default_factory=CreativeContext)
+    offering_insights: list[DraftOfferingInsight] = Field(default_factory=list)
+    explanation: str | None = None
+    warnings: list[str] = Field(default_factory=list)
+
+
 class CreateBrand(Schema):
     website_url: str
     name: Name | None = None
@@ -388,7 +424,7 @@ class ProvenanceCitation(Citation):
 
 class FieldProvenance(Schema):
     path: str
-    origin: Literal["WEBSITE", "CLASSIFIED", "INFERRED", "USER"]
+    origin: Literal["WEBSITE", "CLASSIFIED", "AI_EXTRACTED", "INFERRED", "USER"]
     citations: list[ProvenanceCitation]
     reasoning: str | None
     recorded_at: datetime
@@ -413,7 +449,19 @@ class ProfileResponse(Schema):
     creative_readiness: dict[str, Any] = Field(default_factory=dict)
     extraction_metrics: dict[str, Any] = Field(default_factory=dict)
     stages: dict[
-        str, Literal["SUCCEEDED", "FAILED", "INSUFFICIENT_EVIDENCE", "SKIPPED", "UNKNOWN"]
+        str,
+        Literal[
+            "SUCCEEDED",
+            "FAILED",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_DATA",
+            "SKIPPED",
+            "UNKNOWN",
+        ],
     ] = Field(default_factory=dict)
     evidence_validation: dict[str, Any] = Field(default_factory=dict)
+    evidence_validation_history: list[dict[str, Any]] = Field(default_factory=list)
     stage_errors: dict[str, Any] = Field(default_factory=dict)
+    extraction_mode: Literal["draft_first", "strict", "legacy"] = "legacy"
+    completeness: dict[str, Any] = Field(default_factory=dict)
+    claim_review: list[dict[str, Any]] = Field(default_factory=list)

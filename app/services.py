@@ -87,6 +87,7 @@ class BrandService:
         return job
 
     def read(self, brand_id: uuid.UUID) -> dict:
+        from app.draft import claim_review, completeness
         from app.intelligence import creative_readiness
 
         brand = self.require_brand(brand_id)
@@ -121,11 +122,18 @@ class BrandService:
                     "selected_offering_key"
                 ),
                 profile.provenance,
+                mode=profile.pipeline_metadata.get("extraction_mode", "strict"),
             ),
             "extraction_metrics": profile.pipeline_metadata.get("extraction_metrics", {}),
             "stages": stages,
             "evidence_validation": validation,
+            "evidence_validation_history": profile.pipeline_metadata.get(
+                "evidence_validation_history", []
+            ),
             "stage_errors": profile.pipeline_metadata.get("stage_errors", {}),
+            "extraction_mode": profile.pipeline_metadata.get("extraction_mode", "legacy"),
+            "completeness": completeness(self.repo.bip(profile)),
+            "claim_review": claim_review(self.repo.bip(profile), profile.provenance),
         }
 
     def update(self, brand_id: uuid.UUID, request: ProfilePatch) -> dict:

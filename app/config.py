@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=(".env", ".env.local"), extra="ignore")
 
     database_url: str = "postgresql+psycopg://brand:brand@localhost:5432/brand_intelligence"
+    extraction_mode: Literal["draft_first", "strict"] = "draft_first"
     llm_provider: str = "openai_chatgpt"
     deepseek_api_key: SecretStr | None = None
     deepseek_model: str = "deepseek-flash"
@@ -38,6 +39,7 @@ class Settings(BaseSettings):
     llm_timeout_seconds: float = Field(90, gt=0)
     factual_timeout_seconds: float | None = Field(None, gt=0)
     marketing_timeout_seconds: float | None = Field(None, gt=0)
+    factual_context_max_chars: int = Field(60000, ge=1000, le=140000)
     marketing_context_max_chars: int = Field(18000, ge=1000, le=60000)
     llm_max_attempts: int = Field(1, ge=1, le=5)
     crawl_max_pages: int = Field(20, ge=1, le=60)
