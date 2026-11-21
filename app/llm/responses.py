@@ -10,6 +10,7 @@ from openai.lib._pydantic import to_strict_json_schema
 from pydantic import SecretStr, ValidationError
 
 from app.config import Settings
+from app.crawling.policy import CONTEXT_WEIGHTS
 from app.enrichment import SourceBundle
 from app.errors import DomainError
 from app.llm.prompts import (
@@ -149,13 +150,35 @@ class StructuredResponsesProvider:
         if self.settings.extraction_mode == "draft_first":
             available = min(available, self.settings.factual_context_max_chars)
         documents = [d for d in sources.documents if d.source_type != "catalog"]
-        share = available // max(len(documents), 1)
+        allocations = [available // max(len(documents), 1)] * len(documents)
+        if self.settings.extraction_mode == "draft_first":
+            # Weighted water-filling: broad proof/audience context gets more space,
+            # while short pages return their unused allocation to the remaining pages.
+            allocations = [0] * len(documents)
+            pending = set(range(len(documents)))
+            remaining = available
+            while pending and remaining:
+                weights = {
+                    i: CONTEXT_WEIGHTS.get(documents[i].metadata.get("category"), 1)
+                    for i in pending
+                }
+                total_weight = sum(weights.values())
+                spent = 0
+                for i in sorted(pending):
+                    share = max(1, int(remaining * weights[i] / total_weight))
+                    take = min(share, len(documents[i].text) - allocations[i], remaining - spent)
+                    allocations[i] += take
+                    spent += take
+                pending = {i for i in pending if allocations[i] < len(documents[i].text)}
+                if not spent:
+                    break
+                remaining -= spent
         payload["documents"] = [
             {
                 "source_id": f"s{index}",
                 "source_url": doc.url,
                 "category": doc.metadata.get("category"),
-                "content": doc.text[:share],
+                "content": doc.text[: allocations[index]],
             }
             for index, doc in enumerate(documents)
         ]
@@ -274,6 +297,7 @@ class StructuredResponsesProvider:
                 "business_positioning": brief["business_positioning"],
                 "brand_voice": brief["brand_voice"],
                 "value_propositions": brief["value_propositions"],
+                "marketing_guardrails": brief["marketing_guardrails"],
                 "offerings": [
                     {
                         k: v

@@ -123,12 +123,13 @@ class PublicFetcher:
                     "text/html",
                     "application/xhtml+xml",
                     "text/plain",
+                    "text/css",
                     "application/xml",
                     "text/xml",
                     "application/json",
                 }:
                     raise DomainError(
-                        "UNSUPPORTED_CONTENT", "Website response is not HTML, XML or text"
+                        "UNSUPPORTED_CONTENT", "Website response is not supported public text"
                     )
                 chunks = bytearray()
                 async for chunk in response.aiter_bytes(chunk_size=65_536):

@@ -15,6 +15,8 @@ from bs4 import BeautifulSoup
 
 from app.config import Settings
 from app.crawling.http import PublicFetcher
+from app.crawling.policy import CATEGORIES, SCORES, asset_label, page_category
+from app.crawling.signals import css_colors, extract_signals, signal_text
 from app.crawling.urls import normalize_url
 from app.enrichment import Document, SourceBundle
 from app.errors import DomainError
@@ -22,76 +24,11 @@ from app.models import now
 
 logger = logging.getLogger(__name__)
 BOT = "BrandIntelligenceBot"
-CATEGORIES = (
-    "homepage",
-    "brand_story",
-    "category",
-    "product",
-    "use_case",
-    "customer_story",
-    "faq",
-    "pricing",
-)
-SCORES = {
-    "homepage": 1000,
-    "brand_story": 90,
-    "category": 100,
-    "product": 85,
-    "use_case": 85,
-    "customer_story": 80,
-    "faq": 80,
-    "pricing": 85,
-    "other": 10,
-    "comparison": -1,
-}
-
-
-def page_category(url: str, label: str = "") -> str:
-    path = urlsplit(url).path.lower().rstrip("/")
-    context = path + " " + label.lower()
-    if re.search(r"^/(?:review|reviews|compare|comparison|alternatives)(?:/|$)", path):
-        return "comparison"
-    if re.search(r"^/(?:terms|privacy|search|cart|checkout|login|sign-in)(?:/|$)", path):
-        return "comparison"
-    if re.search(r"compare|comparison|alternatives|\bvs\b", context):
-        return "comparison"
-    if path.startswith("/pricing/") and path.rsplit("/", 1)[-1] not in {
-        "starter",
-        "growth",
-        "pro",
-        "enterprise",
-        "plans",
-    }:
-        return "comparison"
-    if not path:
-        return "homepage"
-    if re.search(r"/(?:faq[s]?|frequently-asked[^/]*|questions)(?:/|$)", path):
-        return "faq"
-    if re.search(r"customer-stor|case-stud|testimonials|placement-stor|success-stor", context):
-        return "customer_story"
-    if path.startswith(("/blog/", "/learn/", "/articles/")):
-        return "other"
-    if re.search(r"/(?:our-story|brand-story|about[^/]*|our-mission|our-values)(?:/|$)", path):
-        return "brand_story"
-    if re.search(r"/(?:pricing|plans)(?:/|$)", path):
-        return "pricing"
-    if re.search(r"/(?:use-cases?|solutions|who-we-help|for|tools)(?:/|$)", path):
-        return "use_case"
-    if re.search(r"/products?/[^/]+|/courses?/[^/]+|/programs?/[^/]+|/p/[^/]+", path):
-        return "product"
-    if path.endswith(("-program", "-course")):
-        return "product"
-    if re.search(
-        r"/(?:collections?|categories|category|shop|products?|services?|courses?|programs?|platform)(?:/|$)",
-        path,
-    ):
-        return "category"
-    return "other"
 
 
 def structured_data(soup: BeautifulSoup) -> dict:
     """Extract whitelisted JSON-LD context without following any embedded URLs."""
-    products, faqs = [], []
+    products, faqs, reviews = [], [], []
 
     def walk(value, depth=0, parent=None):
         if depth > 12:
@@ -132,7 +69,17 @@ def structured_data(soup: BeautifulSoup) -> dict:
                 answer = value.get("acceptedAnswer", {})
                 if isinstance(answer, dict):
                     faqs.append({"question": value.get("name"), "answer": answer.get("text")})
-            for key in ("@graph", "mainEntity", "itemListElement", "item", "hasVariant"):
+            if "Review" in types and isinstance(value.get("reviewBody"), str) and len(reviews) < 20:
+                author = value.get("author")
+                author = (
+                    author.get("name")
+                    if isinstance(author, dict)
+                    else author
+                    if isinstance(author, str)
+                    else None
+                )
+                reviews.append({"quote": value["reviewBody"], "attribution": author})
+            for key in ("@graph", "mainEntity", "itemListElement", "item", "hasVariant", "review"):
                 if key in value:
                     parent_info = (
                         {k: value[k] for k in ("name", "url", "@id") if k in value}
@@ -146,7 +93,7 @@ def structured_data(soup: BeautifulSoup) -> dict:
             walk(json.loads(tag.string or tag.get_text()))
         except (ValueError, TypeError, RecursionError):
             continue
-    return {"products": products, "faqs": faqs}
+    return {"products": products, "faqs": faqs, "reviews": reviews}
 
 
 def parse_page(html: str, url: str, limit: int):
@@ -195,6 +142,7 @@ def parse_page(html: str, url: str, limit: int):
         except ValueError:
             continue
     structured = structured_data(soup)
+    signals = extract_signals(soup, url, structured["reviews"])
 
     def meta_value(*names):
         for name in names:
@@ -247,7 +195,7 @@ def parse_page(html: str, url: str, limit: int):
         lines.append(content)
     if not lines:
         lines = [main.get_text(" ", strip=True)]
-    prefix = "\n".join(filter(None, [title, *metadata]))
+    prefix = "\n".join(filter(None, [title, *metadata, signal_text(signals)]))
     body = "\n".join(dict.fromkeys(lines))
     extra = ""
     if structured["products"]:
@@ -269,6 +217,7 @@ def parse_page(html: str, url: str, limit: int):
         links,
         {
             **structured,
+            **signals,
             "navigation": navigation,
             "catalog_links": catalog_links,
             "html_product": html_product,
@@ -307,21 +256,73 @@ class WebsiteSource:
         candidates, visited = {website_url: "homepage"}, set()
         counts, operations, sitemap_count = Counter(), 0, 0
         total_chars = 0
+        attempts, skipped = Counter(), Counter()
+        alternate_prefixes, alternate_urls = set(), set()
+        approved_assets = set(self.settings.crawl_brand_asset_hosts.get(bare, []))
+        linked_assets, stylesheet_seen = set(), set()
+        stylesheet_count, shopify = 0, False
+        sitemaps_done = False
+        excluded_asset_urls, product_aliases = set(), set()
+
+        def is_alternate(url):
+            return self.settings.crawl_skip_alternate_locales and (
+                url in alternate_urls
+                or any(url.startswith(prefix) for prefix in alternate_prefixes)
+            )
+
+        def canonical(url):
+            if shopify and urlsplit(url).hostname in hosts:
+                parsed = urlsplit(url)
+                path = re.sub(r"^/collections/[^/]+(/products/[^/]+)$", r"\1", parsed.path)
+                return urlunsplit(parsed._replace(path=path))
+            return url
+
         started = time.monotonic()
         async with httpx.AsyncClient(trust_env=False) as client:
             fetcher = PublicFetcher(self.settings, client)
 
-            def discover(url):
+            def discover(url, label="", origin=None):
                 try:
-                    url = normalize_url(url)
-                    if (
-                        urlsplit(url).hostname not in hosts
-                        or len(candidates) >= self.settings.crawl_max_links
-                    ):
+                    original = normalize_url(url)
+                    url = canonical(original)
+                    if url != original:
+                        product_aliases.add(original)
+                    target_host = urlsplit(url).hostname
+                    category = page_category(url, label)
+                    if target_host not in hosts:
+                        # Only explicit site-linked kits on a per-company allowlist.
+                        if (
+                            target_host in approved_assets
+                            and category == "brand_assets"
+                            and origin
+                            and urlsplit(origin).hostname in hosts | linked_assets
+                            and (asset_label(label) or target_host in linked_assets)
+                        ):
+                            linked_assets.add(target_host)
+                        else:
+                            if asset_label(label):
+                                excluded_asset_urls.add(url)
+                            return
+                    if is_alternate(url):
+                        skipped["alternate_locale"] += int(url not in candidates)
                         return
-                    category = page_category(url)
-                    if category != "comparison":
-                        candidates.setdefault(url, category)
+                    if len(candidates) >= self.settings.crawl_max_links and url not in candidates:
+                        # A long product menu must not crowd a late footer proof/kit link
+                        # out of the bounded candidate set. Evict only unvisited lower priorities.
+                        replaceable = [u for u in candidates if u not in visited]
+                        weakest = min(
+                            replaceable, key=lambda u: SCORES[candidates[u]], default=None
+                        )
+                        if weakest and SCORES[category] > SCORES[candidates[weakest]]:
+                            del candidates[weakest]
+                            skipped["candidate_evicted"] += 1
+                        else:
+                            skipped["candidate_limit"] += 1
+                            return
+                    if category not in {"comparison", "other"}:
+                        previous = candidates.get(url)
+                        if previous is None or SCORES[category] > SCORES[previous]:
+                            candidates[url] = category
                 except ValueError:
                     pass
 
@@ -333,7 +334,12 @@ class WebsiteSource:
                 remaining = self.settings.crawl_max_elapsed_seconds - (time.monotonic() - started)
                 try:
                     async with asyncio.timeout(max(0.001, remaining)):
-                        return await fetcher.fetch(url, hosts, authorize=authorize)
+                        allowed = (
+                            hosts if urlsplit(url).hostname in hosts else {urlsplit(url).hostname}
+                        )
+                        if not allowed <= hosts | linked_assets:
+                            raise DomainError("OFFSITE_REDIRECT", "Unapproved resource host")
+                        return await fetcher.fetch(url, allowed, authorize=authorize)
                 except TimeoutError as exc:
                     raise DomainError(
                         "CRAWL_BUDGET", "Website discovery elapsed-time budget exhausted"
@@ -399,8 +405,36 @@ class WebsiteSource:
                             f"Sitemap {raw}: {getattr(exc, 'code', 'INVALID_SITEMAP')}"
                         )
 
+            async def styles(metadata, page_url):
+                nonlocal stylesheet_count
+                # Leave a slot for a later brand kit rather than spending both on home CSS.
+                limit = self.settings.crawl_max_stylesheets
+                if metadata["category"] != "brand_assets":
+                    limit = min(limit, 1)
+                for target in metadata.get("stylesheets", []):
+                    if stylesheet_count >= limit:
+                        break
+                    if target in stylesheet_seen:
+                        continue
+                    stylesheet_seen.add(target)
+                    if urlsplit(target).hostname != urlsplit(page_url).hostname:
+                        skipped["external_stylesheet"] += 1
+                        continue
+                    if operations >= self.settings.crawl_max_requests:
+                        break
+                    stylesheet_count += 1
+                    try:
+                        resource = await fetch(target, authorize)
+                        if resource.content_type not in {"text/css", "text/plain"}:
+                            raise DomainError("UNSUPPORTED_CONTENT", "Expected a public stylesheet")
+                        for color in css_colors(resource.body, resource.url):
+                            metadata["visual_signals"].append(color)
+                        metadata["visual_signals"] = metadata["visual_signals"][:24]
+                    except DomainError as exc:
+                        bundle.warnings.append(f"Stylesheet {target}: {exc.code}")
+
             root = urljoin(website_url, "/")
-            while candidates and len(bundle.documents) < self.settings.crawl_max_pages:
+            while len(bundle.documents) < self.settings.crawl_max_pages:
                 if time.monotonic() - started >= self.settings.crawl_max_elapsed_seconds:
                     break
                 if (
@@ -408,7 +442,19 @@ class WebsiteSource:
                     or total_chars >= self.settings.crawl_max_total_chars
                 ):
                     break
-                available = [(url, cat) for url, cat in candidates.items() if url not in visited]
+                available = [
+                    (url, cat)
+                    for url, cat in candidates.items()
+                    if url not in visited
+                    and not is_alternate(url)
+                    and attempts[cat] < self.settings.crawl_category_limits[cat]
+                ]
+                # Spend the first slots on site-linked audience/proof/assets; then use
+                # sitemaps to fill gaps. They share the same operation/time ceilings.
+                if not sitemaps_done and (len(bundle.documents) >= 5 or not available):
+                    sitemaps_done = True
+                    await discover_sitemaps()
+                    continue
                 if not available:
                     break
                 url, category = max(
@@ -423,6 +469,7 @@ class WebsiteSource:
                     ),
                 )
                 visited.add(url)
+                attempts[category] += 1
                 try:
                     page = await fetch(url, authorize)
                     if page.content_type not in {
@@ -438,6 +485,38 @@ class WebsiteSource:
                         self.settings.crawl_max_total_chars - total_chars,
                     )
                     content, title, links, metadata = parse_page(page.body, page.url, limit)
+                    metadata["category"] = category
+                    shopify = shopify or metadata.get("shopify", False)
+                    if self.settings.crawl_skip_alternate_locales:
+                        current_lang = str(metadata.get("language") or "").lower().split("-")[0]
+                        for alternate in metadata.get("alternate_locales", []):
+                            if (
+                                not current_lang
+                                or alternate["language"].split("-")[0] == current_lang
+                            ):
+                                continue
+                            target = alternate["url"]
+                            if urlsplit(target).hostname not in hosts:
+                                continue
+                            alternate_urls.add(target)
+                            prefix = urlsplit(target).path.strip("/").split("/")[0]
+                            if prefix.lower() == alternate["language"]:
+                                parsed = urlsplit(target)
+                                alternate_prefixes.add(
+                                    urlunsplit(
+                                        (parsed.scheme, parsed.netloc, "/" + prefix + "/", "", "")
+                                    )
+                                )
+                    await styles(metadata, page.url)
+                    observations = signal_text(
+                        {
+                            "visual_signals": [
+                                v for v in metadata["visual_signals"] if v["source_url"] != page.url
+                            ]
+                        }
+                    )
+                    if observations:
+                        content = (observations + "\n" + content)[:limit]
                     if len(content.strip()) < 30:
                         raise DomainError(
                             "EMPTY_PAGE", "Website page has insufficient readable text"
@@ -449,8 +528,15 @@ class WebsiteSource:
                         counts[metadata["category"]] += 1
                         total_chars += len(content)
                     visited.add(page.url)
+                    for candidate, kind in list(candidates.items()):
+                        normalized = canonical(candidate)
+                        if normalized != candidate:
+                            del candidates[candidate]
+                            candidates.setdefault(normalized, kind)
+                            product_aliases.add(candidate)
+                    labels = {link["url"]: link["label"] for link in metadata["navigation"]}
                     for link in links:
-                        discover(link)
+                        discover(link, labels.get(link, ""), page.url)
                     if len(bundle.documents) == 1:
                         if metadata.get("shopify"):
                             for number in range(1, self.settings.catalog_max_pages + 1):
@@ -498,7 +584,6 @@ class WebsiteSource:
                                         + getattr(exc, "code", "INVALID_PRODUCT_DATA")
                                     )
                                     break
-                        await discover_sitemaps()
                         # Fall back to common paths only when discovery yielded almost nothing.
                         for path in (
                             ()
@@ -521,6 +606,28 @@ class WebsiteSource:
                         raise
                     bundle.warnings.append(f"{url}: {exc.code} — {exc.message}")
         bundle.coverage = {
+            "policy": "content_first_v1",
+            "category_limits": self.settings.crawl_category_limits,
+            "category_attempts": dict(attempts),
+            "category_capped_urls": dict(
+                Counter(
+                    cat
+                    for url, cat in candidates.items()
+                    if url not in visited
+                    and not is_alternate(url)
+                    and attempts[cat] >= self.settings.crawl_category_limits[cat]
+                )
+            ),
+            "skipped": {**dict(skipped), "duplicate_product_path": len(product_aliases)},
+            "alternate_locale_urls_skipped": sum(is_alternate(url) for url in candidates),
+            "unfetched_external_brand_assets": sorted(excluded_asset_urls)[:20],
+            "stylesheets_checked": stylesheet_count,
+            "pending_eligible_urls": sum(
+                url not in visited
+                and not is_alternate(url)
+                and attempts[cat] < self.settings.crawl_category_limits[cat]
+                for url, cat in candidates.items()
+            ),
             "categories": dict(counts),
             "missing_categories": [c for c in CATEGORIES if not counts[c]],
             "pages": len(bundle.documents),
@@ -536,4 +643,15 @@ class WebsiteSource:
             or len(bundle.documents) >= self.settings.crawl_max_pages
             or time.monotonic() - started >= self.settings.crawl_max_elapsed_seconds,
         }
+        bundle.coverage["stop_reason"] = (
+            "GLOBAL_BUDGET"
+            if bundle.coverage["budget_limited"]
+            else "CATEGORY_LIMITS"
+            if bundle.coverage["category_capped_urls"]
+            else "NO_ELIGIBLE_URLS"
+        )
+        logger.info(
+            "Content-first crawl completed",
+            extra={"crawl_coverage": bundle.coverage},
+        )
         return bundle

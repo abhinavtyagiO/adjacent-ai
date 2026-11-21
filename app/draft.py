@@ -13,6 +13,7 @@ from datetime import UTC, datetime
 
 from pydantic import ValidationError
 
+from app.crawling.policy import MARKETING_SCORES
 from app.crawling.urls import normalize_url
 from app.diagnostics import unavailable_evidence
 from app.enrichment import Document, SourceBundle
@@ -280,14 +281,19 @@ def draft_provenance(profile, website_url, registered_name):
 
 
 def relevant_context(sources, profile, selected_key, max_chars):
-    """Bound website passages with deterministic offering-name/URL relevance, no new crawl."""
+    """Bound audience/proof passages and offering relevance without another crawl."""
     offerings = sorted(profile.offerings, key=lambda o: o.key != selected_key)
     terms = [o.name.casefold() for o in offerings]
     ranked = []
     for doc in sources.documents:
+        if doc.source_type == "catalog":
+            continue
         for i in range(0, len(doc.text), 700):
             passage = doc.text[i : i + 700]
-            score = sum(2 for t in terms if t in passage.casefold())
+            score = MARKETING_SCORES.get(doc.metadata.get("category"), 0)
+            score += sum(2 for t in terms if t in passage.casefold())
+            if selected_key and offerings and offerings[0].key == selected_key:
+                score += 6 if offerings[0].name.casefold() in passage.casefold() else 0
             score += 4 if any(o.url == doc.url for o in offerings) else 0
             ranked.append((score, i == 0, doc, passage))
     ranked.sort(key=lambda row: (row[0], row[1]), reverse=True)

@@ -7,6 +7,8 @@ from pydantic import AnyHttpUrl, Field, SecretStr, field_validator, model_valida
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import make_url
 
+from app.crawling.policy import DEFAULT_LIMITS
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=(".env", ".env.local"), extra="ignore")
@@ -44,6 +46,10 @@ class Settings(BaseSettings):
     llm_max_attempts: int = Field(1, ge=1, le=5)
     catalog_max_pages: int = Field(3, ge=0, le=10)
     catalog_max_products: int = Field(1000, ge=1, le=5000)
+    crawl_category_limits: dict[str, int] = Field(default_factory=lambda: dict(DEFAULT_LIMITS))
+    crawl_skip_alternate_locales: bool = True
+    crawl_max_stylesheets: int = Field(2, ge=0, le=4)
+    crawl_brand_asset_hosts: dict[str, list[str]] = Field(default_factory=dict)
     crawl_max_pages: int = Field(20, ge=1, le=60)
     crawl_max_requests: int = Field(40, ge=1, le=120)
     crawl_max_total_chars: int = Field(140000, ge=1000, le=500000)
@@ -59,6 +65,28 @@ class Settings(BaseSettings):
     worker_poll_seconds: float = Field(2, gt=0)
     log_level: str = "INFO"
     api_access_token: SecretStr | None = None
+
+    @field_validator("crawl_category_limits")
+    @classmethod
+    def category_limits(cls, value):
+        if set(value) - set(DEFAULT_LIMITS) or any(not 0 <= v <= 60 for v in value.values()):
+            raise ValueError("Unknown crawl category or invalid limit")
+        return {**DEFAULT_LIMITS, **value}
+
+    @field_validator("crawl_brand_asset_hosts")
+    @classmethod
+    def asset_hosts(cls, value):
+        from app.crawling.urls import normalize_url
+
+        result = {}
+        for company, hosts in value.items():
+            normalized = []
+            for host in (company, *hosts):
+                if any(c in host for c in ("/", ":", "*", "@", "?", "#")):
+                    raise ValueError("Brand asset allowlist requires exact public hostnames")
+                normalized.append(urlsplit(normalize_url("https://" + host)).hostname)
+            result[normalized[0].removeprefix("www.")] = normalized[1:]
+        return result
 
     def stage_timeout(self, stage: str) -> float:
         """Stage overrides retain LLM_TIMEOUT_SECONDS as the backwards-compatible default."""

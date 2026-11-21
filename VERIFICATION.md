@@ -193,3 +193,30 @@ section checksums, statuses and confirmation timestamps were unchanged. Stopped 
 containers were recreated with the new configuration to prevent a later start from reusing
 old DeepSeek settings. No sign-in, model listing or inference was performed against a live
 account. Model/eligibility checks remain a user-driven setup step.
+
+## Content-first crawler — 21 November 2026
+
+- **318 offline tests passed** against isolated PostgreSQL 16, with the existing single
+  Starlette/httpx test-client deprecation warning. No tests were skipped in the full run.
+- Saved Opal/Minimalist homepage navigation is replayed with synthetic content responses:
+  Opal's external brand kit and Minimalist's own reviews are visited. Tests do not claim
+  that actual kit contents or colors have been fetched or verified.
+- New checks cover category attempt caps, late proof links in a full candidate set,
+  navigation-label classification, sitemap deferral, declared locales, Shopify aliases,
+  broad public catalog records, literal quotations, scoped CSS/explicit palette signals,
+  asset-host restrictions, CSS robots/shared budgets and factual/marketing context priority.
+- Existing strict evidence, provider, OAuth/SSE, draft checkpoint, marketing-only,
+  PostgreSQL/API and migration-preservation regressions remain green.
+- Ruff lint/format, diff checks, Compose validation and Alembic check passed. No new
+  migration. Docker API/worker/migrate images built successfully (one dependency download
+  timeout was resolved by retrying the build).
+- Local API/worker updated with zero active jobs; readiness returns 200. Checksums of all
+  existing profile rows are unchanged after restart. Runtime uses openai_chatgpt with
+  API-key billing disabled, one LLM/job attempt, unchanged model/effort defaults and
+  120/60-second factual/marketing deadlines. Global crawl ceilings remain 20/40/90.
+
+No live crawl, paid inference or extraction/enrichment enqueue was performed for this
+change. CSS colors remain observed styling, testimonials remain unverified quotations,
+and claim review remains an advertising review aid. Live kit accessibility, palette
+fidelity and marketing usefulness still require a separately authorized check. See
+`docs/content-crawling.md` for exact policy, configuration, coverage diagnostics and limits.

@@ -234,8 +234,10 @@ to start; a company name is required to confirm. Both prompts prohibit invented 
 prices, ingredients, performance claims, certifications and customer identities. User review
 is required in either mode; draft-first content is not independently verified.
 
-Text-only crawling cannot determine complete design systems: unsupported colors, fonts and
-guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
+Static crawling preserves published quotations, logo URLs, explicit palette declarations
+and named brand/primary/accent CSS colors. CSS colors are observed styling; theme-color
+is a browser UI hint, neither automatically establishes official brand guidelines. Unsupported
+colors, fonts and rules stay empty. See [content-first crawl policy](docs/content-crawling.md).
 The default strategy is `openai_chatgpt`: official OAuth credentials authorized to use an
 eligible user's ChatGPT plan, account-specific model discovery and streamed Responses API
 requests. It never reads an API key or Codex's existing login cache. DeepSeek is disabled in
@@ -284,10 +286,17 @@ than its lease. On SIGTERM the worker finishes its current bounded job before ex
 Multiple workers may run against the same database; each worker processes one job at a time.
 Set a container shutdown grace period matching your timeout if graceful completion is needed.
 
-The crawler prioritizes homepage, story, category, product, use-case, customer-story, FAQ
-and pricing links, including bounded same-host sitemaps. It preserves headings, lists, tables
-and JSON-LD product/FAQ context. Common paths are a fallback when discovery finds little. It enforces robots **before every redirect hop**, allows only the
-registered host and its www variant, limits pages/body/text/time and does not execute JS.
+The crawler prioritizes customer stories/reviews, brand assets, use cases, positioning,
+FAQs and selective audience/ingredient education before repeated product details and pricing.
+Category attempt limits allocate the existing global budget; product catalogs still supply
+broad inventory without deep-crawling every SKU. Sitemaps fill gaps after initial navigation;
+observed language alternatives and Shopify product aliases avoid duplicate visits. It preserves
+headings, lists, tables, JSON-LD products/FAQs/reviews and explicit testimonial markup.
+Common paths are a fallback when discovery finds little. Robots apply **before every redirect
+hop**. Registered bare/www hosts are allowed; external brand kits require both an exact
+per-company host allowlist and an explicit site-linked brand/press resource. The committed
+configuration maps Opal to `brandkit.opal.so`. Unrelated external sites remain blocked.
+Limits apply to pages/body/text/time and the crawler does not execute JS.
 All DNS answers must be public; requests connect to a validated IP with the original Host
 and TLS server name, preventing a second DNS resolution from bypassing the check. HTTPX
 proxy environment variables are disabled for crawling. HTTP(S) standard ports only.
@@ -310,6 +319,13 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
 | `LLM_MAX_ATTEMPTS` | `1` | Bounded retries for transient failures or invalid/truncated structured output |
 | `CRAWL_MAX_PAGES` | `20` | Maximum collected content documents (requests have a separate limit) |
+| `CRAWL_CATEGORY_LIMITS` | JSON overrides | Content URL attempt caps; merge with built-in defaults |
+| `CRAWL_SKIP_ALTERNATE_LOCALES` | `true` | Skip alternatives declared with language metadata |
+| `CRAWL_MAX_STYLESHEETS` | `2` | Same-origin CSS checks within the shared fetch budget |
+| `CRAWL_BRAND_ASSET_HOSTS` | Opal mapping in `.env`; otherwise `{}` | Exact company → external brand-kit hosts; linked resources only |
+| `CRAWL_MAX_REQUESTS` | `40` | Top-level fetch operations, including robots, sitemaps, catalogs and CSS |
+| `CRAWL_MAX_ELAPSED_SECONDS` | `90` | Shared wall-clock crawl deadline |
+| `CRAWL_MAX_TOTAL_CHARS` | `140000` | Total stored HTML text; draft factual context capped separately |
 | `CRAWL_TIMEOUT_SECONDS` | `15` | Per-fetch total timeout |
 | `CRAWL_MAX_BYTES` | `2000000` | Decompressed response body limit |
 | `CRAWL_MAX_TEXT_CHARS` | `12000` | Text per document supplied to LLM and stored |
