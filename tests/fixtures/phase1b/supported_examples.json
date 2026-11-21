@@ -1,0 +1,15 @@
+{
+  "label": "Constructed regression fixtures from the user-supported examples; not verbatim website snapshots or certified company claims. Actual public snapshots live in evaluations/snapshots.",
+  "fastlane": {
+    "url": "https://www.usefastlane.ai/",
+    "text": "Fastlane is software for creating short videos. Starter is a subscription plan at $29 per month. Growth is a subscription plan. Publish videos to Instagram and TikTok."
+  },
+  "whole_truth": {
+    "url": "https://thewholetruthfoods.com/",
+    "text": "The Whole Truth offers Protein Bars, Protein Powder, Peanut Butter, Muesli, Dark Chocolate and Energy Bars. We show every ingredient. Our manufacturing facility is ISO certified. Our newsletter has 100,000 readers."
+  },
+  "newton": {
+    "url": "https://www.newtonschool.co/",
+    "text": "Newton School offers a Full Stack Development Course and a Data Science Program. Learn software development through hands-on projects."
+  }
+}

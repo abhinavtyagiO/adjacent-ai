@@ -7,6 +7,7 @@ from sqlalchemy import text
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.api.routes import router
+from app.chatgpt.routes import router as chatgpt_router
 from app.config import get_settings
 from app.db import get_factory
 from app.errors import DomainError
@@ -24,12 +25,21 @@ def create_app() -> FastAPI:
         description="Phase 1: website onboarding, evidence-backed drafts and approval.",
     )
     app.include_router(router)
+    app.include_router(chatgpt_router)
+    # OAuth codes/state in callback query strings must not reach access logs.
+    logging.getLogger("uvicorn.access").disabled = True
 
     @app.exception_handler(DomainError)
     async def domain_error(_, error: DomainError):
         return JSONResponse(
             status_code=error.status,
-            content={"error": {"code": error.code, "message": error.message}},
+            content={
+                "error": {
+                    "code": error.code,
+                    "message": error.message,
+                    **({"details": error.details} if error.details else {}),
+                }
+            },
         )
 
     @app.exception_handler(RequestValidationError)

@@ -1,0 +1,829 @@
+{
+  "website_url": "https://www.usefastlane.ai/",
+  "profile": {
+    "brand_identity": {
+      "name": "Fastlane",
+      "website_url": "https://www.usefastlane.ai/",
+      "legal_name": null,
+      "tagline": "Create, launch and scale winning ads with AI",
+      "description": "Fastlane is an AI marketing agent for brands. Its agent Senna learns a brand from a link, studies competitors and customers, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+      "mission": null,
+      "vision": null,
+      "values": [],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "Marketing technology",
+      "category": "AI marketing / social content automation platform",
+      "business_model": "SaaS subscription with credit-based usage, plus paid warmed social accounts",
+      "market_position": "Positions itself as an end-to-end AI marketing agent built by marketers who have run $1B+ in ad spend",
+      "positioning_statement": "Fastlane is the AI marketing agent for brands: give Senna a URL and it learns the brand, creates ads and organic content in volume, publishes across Meta, Instagram, TikTok, YouTube and LinkedIn, and scales the winners.",
+      "differentiators": [],
+      "geographic_markets": []
+    },
+    "offerings": [
+      {
+        "name": "Fastlane",
+        "key": "fastlane",
+        "kind": null,
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [
+          "Meta",
+          "Instagram",
+          "TikTok",
+          "YouTube"
+        ],
+        "pricing_tiers": [
+          {
+            "name": "Growth",
+            "pricing": {
+              "model": null,
+              "amount": null,
+              "currency": null,
+              "billing_period": null,
+              "details": null,
+              "pricing_url": null
+            },
+            "features": []
+          }
+        ],
+        "claims": [],
+        "description": "AI marketing agent platform that turns a brand URL into campaigns, AI UGC ads and organic short-form content, publishes them natively, and attributes results back to posts.",
+        "url": "https://www.usefastlane.ai/",
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Warmed accounts",
+        "key": "warmed-accounts",
+        "kind": "SERVICE",
+        "catalog_level": null,
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": null,
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [],
+      "desired_outcomes": [],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": []
+    },
+    "value_propositions": {
+      "primary": "Turn a single URL into high-volume, trend-native short-form marketing that publishes and self-optimizes end to end.",
+      "functional_benefits": [],
+      "emotional_benefits": [],
+      "differentiators": [],
+      "reasons_to_believe": []
+    },
+    "trust_and_proof": {
+      "testimonials": [],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": []
+    },
+    "brand_voice": {
+      "tone": [],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [],
+      "colors": [
+        {
+          "name": null,
+          "hex": "#ffffff",
+          "usage": null
+        }
+      ],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [],
+      "creative_angles": [],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": "Free trial, no credit card",
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": "https://www.usefastlane.ai/"
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane - Create, launch and scale winning ads with AI",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": [],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Create, launch and scale winning ads with AI",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands. Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Product is marketing software.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane launches AI marketing platform that runs campaigns end to end",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Self-described as AI marketing platform.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Starter | $29 / month | 500 credits a month",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": "Tiered credit subscription plus optional per-account warming fees.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Created by marketers that have run $1B+ in ad spend",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Give Senna a URL. It pulls your product, palette and tone of voice, then scans every ad you have ever run and tells you what is actually working.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/supported_platforms/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/supported_platforms/1",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/supported_platforms/2",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/supported_platforms/3",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Growth | $79 / month | 2,000 credits a month (up to 400 statics or 25 videos)",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/url",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Your next winning ad on autopilot",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Warmed accounts | $100 / mo per account",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Real TikTok or Instagram accounts created and warmed by humans in your niche",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": "Account warming is a managed service, not software.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "the same way AI agents turned a prompt into your product, Fastlane turns your product link into distribution",
+          "fetched_at": "2026-11-12T16:58:46.765319+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/visual_identity/colors/0/hex",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Theme color: #ffffff",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/marketing_defaults/preferred_cta",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "Free trial, no credit card",
+          "fetched_at": "2026-11-12T16:58:46.765319+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/marketing_defaults/default_landing_page",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Your next winning ad on autopilot",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": null,
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/0/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands.",
+          "fetched_at": "2026-11-12T16:58:46.100123+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    },
+    {
+      "path": "/offerings/1/key",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Warmed accounts | $100 / mo per account",
+          "fetched_at": "2026-11-12T16:58:46.888093+00:00"
+        }
+      ],
+      "reasoning": "Stable identifier derived from the verified offering name.",
+      "recorded_at": "2026-11-12T17:17:07.993686+00:00"
+    }
+  ],
+  "warnings": [
+    "/business_positioning/differentiators/0: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/1: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/2: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/3: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/kind: omitted because its source evidence could not be verified.",
+    "/offerings/0/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/variants/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/supported_platforms/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/0/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/1/features/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/2/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/name: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing_tiers/3/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/scope: omitted because its source evidence could not be verified.",
+    "/offerings/0/claims/0/subject: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/3: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/4: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/5: omitted because its source evidence could not be verified.",
+    "/offerings/0/features/6: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/benefits/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/0/use_cases/2: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/0/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/1/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/1/supported_platforms/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/supported_platforms/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/description: omitted because its source evidence could not be verified.",
+    "/offerings/1/url: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/1/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/model: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/amount: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/currency: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/billing_period: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/details: omitted because its source evidence could not be verified.",
+    "/offerings/1/pricing/pricing_url: omitted because its source evidence could not be verified.",
+    "/offerings/2/name: omitted because its source evidence could not be verified.",
+    "/offerings/2/catalog_level: omitted because its source evidence could not be verified.",
+    "/offerings/2/supported_platforms/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/supported_platforms/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/url: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/features/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/benefits/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/use_cases/0: omitted because its source evidence could not be verified.",
+    "/offerings/2/use_cases/1: omitted because its source evidence could not be verified.",
+    "/offerings/2/pricing/details: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/functional_benefits/3: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/emotional_benefits/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/differentiators/2: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/0: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/1: omitted because its source evidence could not be verified.",
+    "/value_propositions/reasons_to_believe/2: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/0/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/1/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/2/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/3/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/testimonials/4/quote: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/awards/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/metrics/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/guarantees/0: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/0/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/1/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/2/subject: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/3/text: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/3/scope: omitted because its source evidence could not be verified.",
+    "/trust_and_proof/scoped_claims/3/subject: omitted because its source evidence could not be verified.",
+    "/visual_identity/colors/0/usage: omitted because its source evidence could not be verified.",
+    "/marketing_guardrails/legal_disclaimers/0: omitted because its source evidence could not be verified.",
+    "/marketing_defaults/content_language: omitted because its source evidence could not be verified.",
+    "/business_positioning/differentiators: ignored evidence for an empty or unknown field.",
+    "/marketing_guardrails/legal_disclaimers: ignored evidence for an empty or unknown field.",
+    "/offerings/0/features: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers: ignored evidence for an empty or unknown field.",
+    "/offerings/0/supported_platforms: ignored evidence for an empty or unknown field.",
+    "/offerings/1/pricing: ignored evidence for an empty or unknown field.",
+    "/offerings/1/supported_platforms: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/awards: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/guarantees: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/metrics: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/scoped_claims: ignored evidence for an empty or unknown field.",
+    "/trust_and_proof/testimonials: ignored evidence for an empty or unknown field.",
+    "/value_propositions/emotional_benefits: ignored evidence for an empty or unknown field.",
+    "/value_propositions/reasons_to_believe: ignored evidence for an empty or unknown field.",
+    "/offerings/0/pricing_tiers/0: pricing tier omitted because it has no verified name.",
+    "/offerings/0/pricing_tiers/2: pricing tier omitted because it has no verified name.",
+    "/offerings/0/pricing_tiers/3: pricing tier omitted because it has no verified name.",
+    "/offerings/0/claims/0: claim omitted because its text or scope is unsupported.",
+    "/offerings/2: offering omitted because it has no verified name.",
+    "/trust_and_proof/testimonials/0: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/1: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/2: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/3: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/testimonials/4: testimonial omitted because it has no verified quote.",
+    "/trust_and_proof/scoped_claims/0: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/1: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/2: claim omitted because its text or scope is unsupported.",
+    "/trust_and_proof/scoped_claims/3: claim omitted because its text or scope is unsupported.",
+    "Legal name, founded year, headquarters and operating regions were not explicitly stated; left null/empty.",
+    "Testimonials are anonymous posts from the site's X wall; no names or companies were provided.",
+    "Pricing tiers are treated as variants of the Fastlane product, not independent offerings.",
+    "Supported publishing platforms are product capabilities, not stated marketing channel preferences.",
+    "Audience/creative stage unavailable (RECORDED_FAILURE); verified factual draft retained."
+  ],
+  "pipeline_version": 2,
+  "source_coverage": {
+    "categories": {
+      "homepage": 1,
+      "use_case": 15,
+      "pricing": 1,
+      "other": 2
+    },
+    "missing_categories": [
+      "brand_story",
+      "category",
+      "product",
+      "customer_story",
+      "faq"
+    ],
+    "pages": 19,
+    "fetch_operations": 21,
+    "sitemaps_checked": 1,
+    "discovered_urls": 128,
+    "text_characters": 140000,
+    "estimated_input_tokens": 46667,
+    "budget_limited": true
+  },
+  "creative_readiness": {
+    "status": "NEEDS_REVIEW",
+    "scope": "BRAND",
+    "selected_offering_key": null,
+    "missing_information": [
+      {
+        "field": "audience",
+        "reason": "No supported information available.",
+        "suggested_question": "Who is the intended buyer and what are they trying to achieve?"
+      },
+      {
+        "field": "brand_voice",
+        "reason": "No supported information available.",
+        "suggested_question": "What tone should the brand use?"
+      },
+      {
+        "field": "creative_context",
+        "reason": "No supported information available.",
+        "suggested_question": "Which stories or everyday situations resonate with your customers?"
+      },
+      {
+        "field": "selected_offering_key",
+        "reason": "Brand-level brief only; offering-specific targeting still needs a selected offering.",
+        "suggested_question": "Which offering should the next creative brief target?"
+      }
+    ],
+    "requires_human_review": true
+  },
+  "extraction_metrics": {
+    "calls": [
+      {
+        "stage": "facts",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "none",
+        "attempt": 1,
+        "input_tokens": 34357,
+        "output_tokens": 6025,
+        "cached_input_tokens": 34176,
+        "status": "succeeded",
+        "budget_tokens": 40382,
+        "latency_seconds": 20.93
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "low",
+        "attempt": 1,
+        "input_tokens": 34209,
+        "output_tokens": 12000,
+        "cached_input_tokens": 128,
+        "status": "failed",
+        "budget_tokens": 46209,
+        "latency_seconds": 59.204
+      },
+      {
+        "stage": "marketing",
+        "provider": "deepseek",
+        "model": "deepseek-flash",
+        "reasoning_effort": "low",
+        "attempt": 2,
+        "input_tokens": 34209,
+        "output_tokens": 12000,
+        "cached_input_tokens": 34048,
+        "status": "failed",
+        "budget_tokens": 46209,
+        "latency_seconds": 56.503
+      }
+    ],
+    "latency_seconds": 140.278,
+    "input_tokens": 102775,
+    "output_tokens": 30025,
+    "usage_complete": true,
+    "estimated_cost_usd": 0.046767012,
+    "cost_basis": "Configured token rates; not an invoice. Null if rates/attempt usage are unavailable.",
+    "rates": {
+      "input": 0.3,
+      "output": 1.2,
+      "cached_input": 0.006
+    }
+  },
+  "stages": {
+    "facts": "SUCCEEDED",
+    "marketing": "FAILED"
+  },
+  "recorded_stages": {
+    "facts": "SUCCEEDED",
+    "marketing": "FAILED"
+  },
+  "replay_note": "No new model calls. Audience replay uses only previously retained brand-level insights, not raw stage-2 output."
+}

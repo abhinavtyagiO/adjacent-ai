@@ -1,0 +1,898 @@
+{
+  "profile": {
+    "brand_identity": {
+      "name": "Fastlane",
+      "website_url": "https://www.usefastlane.ai/",
+      "legal_name": null,
+      "tagline": "Create, launch and scale winning ads with AI",
+      "description": "Fastlane is an AI marketing agent for brands. Its agent Senna learns a brand from a link, studies competitors and customers, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works.",
+      "mission": null,
+      "vision": null,
+      "values": [],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "Marketing technology",
+      "category": "AI marketing / social content automation platform",
+      "business_model": "SaaS subscription with credit-based usage, plus paid warmed social accounts",
+      "market_position": "Positions itself as an end-to-end AI marketing agent built by marketers who have run $1B+ in ad spend",
+      "positioning_statement": "Fastlane is the AI marketing agent for brands: give Senna a URL and it learns the brand, creates ads and organic content in volume, publishes across Meta, Instagram, TikTok, YouTube and LinkedIn, and scales the winners.",
+      "differentiators": [
+        "Learns a brand from a single URL and scans past ads to identify what works",
+        "Combines creation, native publishing, attribution and iteration in one loop",
+        "Developer API and MCP server let agents run marketing autonomously",
+        "Sells warmed US/EU TikTok and Instagram accounts as distribution surface",
+        "1,000+ AI UGC characters plus 2,000+ licensed human UGC videos"
+      ],
+      "geographic_markets": []
+    },
+    "offerings": [
+      {
+        "name": "Fastlane",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Starter",
+          "Growth",
+          "Pro",
+          "Enterprise"
+        ],
+        "supported_platforms": [
+          "Meta",
+          "Instagram",
+          "TikTok",
+          "YouTube",
+          "LinkedIn"
+        ],
+        "pricing_tiers": [
+          {
+            "name": "Starter",
+            "pricing": {
+              "model": "subscription",
+              "amount": "29",
+              "currency": "USD",
+              "billing_period": "month",
+              "details": "500 credits a month (up to 100 statics or 6 videos)",
+              "pricing_url": "https://www.usefastlane.ai/pricing"
+            },
+            "features": [
+              "Light planning from Senna",
+              "1 campaign at a time",
+              "1 social account, 1 seat",
+              "25 AI characters",
+              "Trending content library",
+              "TikTok direct posting, unlimited scheduling"
+            ]
+          },
+          {
+            "name": "Growth",
+            "pricing": {
+              "model": "subscription",
+              "amount": "79",
+              "currency": "USD",
+              "billing_period": "month",
+              "details": "2,000 credits a month (up to 400 statics or 25 videos)",
+              "pricing_url": "https://www.usefastlane.ai/pricing"
+            },
+            "features": [
+              "4x the Senna fuel",
+              "5 campaigns at a time",
+              "10 social accounts per workspace, 3 workspaces",
+              "3 seats included, $10 a month per extra",
+              "Analytics, remix and auto captions",
+              "Unlimited AI characters, 100 real-person characters",
+              "Priority support"
+            ]
+          },
+          {
+            "name": "Pro",
+            "pricing": {
+              "model": "subscription",
+              "amount": "199",
+              "currency": "USD",
+              "billing_period": "month",
+              "details": "7,500 credits a month (up to 1,500 statics or 93 videos)",
+              "pricing_url": "https://www.usefastlane.ai/pricing"
+            },
+            "features": [
+              "5x the Senna fuel",
+              "20 campaigns at a time",
+              "500 social accounts per workspace, 10 workspaces",
+              "10 seats included, $10 a month per extra",
+              "Unlimited AI and real-person characters",
+              "Analytics, remix, auto captions, priority support"
+            ]
+          },
+          {
+            "name": "Enterprise",
+            "pricing": {
+              "model": "subscription",
+              "amount": "999-2,999",
+              "currency": "USD",
+              "billing_period": "month",
+              "details": "40,000 credits a month (up to 8,000 statics or 500 videos); scales to $2,999 in $50 steps, each adding 2,000 credits",
+              "pricing_url": "https://www.usefastlane.ai/pricing"
+            },
+            "features": [
+              "Every Pro feature",
+              "14x the Senna fuel",
+              "25 seats included",
+              "20 campaigns at a time",
+              "500 social accounts per workspace, 10 workspaces"
+            ]
+          }
+        ],
+        "claims": [
+          {
+            "text": "Created by marketers that have run $1B+ in ad spend",
+            "scope": "OFFERING",
+            "subject": "Fastlane"
+          }
+        ],
+        "description": "AI marketing agent platform that turns a brand URL into campaigns, AI UGC ads and organic short-form content, publishes them natively, and attributes results back to posts.",
+        "url": "https://www.usefastlane.ai/",
+        "features": [
+          "Senna agent learns brand, palette and tone from a URL and scans past ads",
+          "Competitor and customer research across ads, organic posts and reviews",
+          "Dozens of net-new ad concepts per campaign: competitor remixes, statics, memes, AI creators",
+          "Native publishing to Meta Ads Manager, Instagram, TikTok and YouTube",
+          "Per-creative analytics: thumbstop, hold rate, CPA and ROAS",
+          "Remix any image or video; Radar library of brand content; bulk Meta ad launch",
+          "Developer API and MCP server for agent-driven marketing"
+        ],
+        "benefits": [
+          "Create infinite content based on winning formats",
+          "Every loop feeds learnings into the next batch",
+          "Run paid and organic from one calendar"
+        ],
+        "use_cases": [
+          "Solopreneurs and fast-growing teams running social marketing",
+          "Tech startups replacing an early growth hire",
+          "SaaS, mobile apps, e-commerce, TikTok Shop, fashion, agencies and coaches"
+        ],
+        "pricing": {
+          "model": "Subscription with credit-based usage",
+          "amount": "29-999 per month",
+          "currency": "USD",
+          "billing_period": "monthly or yearly",
+          "details": "Free 7-day trial, no credit card. Yearly plans billed annually.",
+          "pricing_url": "https://www.usefastlane.ai/pricing"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Warmed accounts",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [
+          "TikTok",
+          "Instagram"
+        ],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Real US & EU TikTok and Instagram accounts created from scratch, warmed up in the buyer's niche and managed inside Fastlane.",
+        "url": "https://www.usefastlane.ai/pricing",
+        "features": [
+          "Created and warmed by humans in your niche on real phones",
+          "Managed inside Fastlane with scheduling and tracking"
+        ],
+        "benefits": [
+          "Skip the cold start and the throttling that kills new accounts"
+        ],
+        "use_cases": [
+          "Scale posting surface across multiple accounts"
+        ],
+        "pricing": {
+          "model": "Per-account subscription plus per-post fee",
+          "amount": "$100 / mo per account, plus $1.50 per post upload",
+          "currency": "USD",
+          "billing_period": "month",
+          "details": "Active Fastlane subscription required; no minimum.",
+          "pricing_url": "https://www.usefastlane.ai/pricing"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Developer API and MCP server",
+        "key": null,
+        "kind": "PRODUCT",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [
+          "Claude",
+          "Cursor"
+        ],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "API and MCP server letting agents in Claude, Cursor or any MCP-compatible stack generate content, schedule posts and read performance autonomously; also offered as a partner/white-label API for agencies.",
+        "url": "https://www.usefastlane.ai/for/vibe-coding",
+        "features": [
+          "Agents create content, schedule posts and pull analytics",
+          "Partner / white-label API for agencies"
+        ],
+        "benefits": [
+          "Marketing runs inside the same agent workflow used to build the product"
+        ],
+        "use_cases": [
+          "Agent-driven marketing automation",
+          "Agency white-label integration"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": "Partner access via hello@usefastlane.ai",
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [],
+      "desired_outcomes": [],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": []
+    },
+    "value_propositions": {
+      "primary": "Turn a single URL into high-volume, trend-native short-form marketing that publishes and self-optimizes end to end.",
+      "functional_benefits": [
+        "Generate dozens of ad and content concepts per campaign",
+        "Publish natively to four platforms on a schedule",
+        "Attribute signups, installs and sales to individual posts",
+        "Run marketing through an API and MCP server"
+      ],
+      "emotional_benefits": [
+        "Distribution becomes a subscription instead of a search",
+        "Ship 30 days of viral content in 30 seconds"
+      ],
+      "differentiators": [
+        "End-to-end loop: learn, create, launch, measure, iterate",
+        "Built by marketers with $1B+ in managed ad spend",
+        "Warmed accounts sold in-app as distribution surface"
+      ],
+      "reasons_to_believe": [
+        "50,000+ users",
+        "Customer videos reaching up to 31 million views on a single post",
+        "Free 7-day trial with no credit card"
+      ]
+    },
+    "trust_and_proof": {
+      "testimonials": [
+        {
+          "quote": "One user hit 36.2M views from a single video made in 60 seconds. I personally use it. Great product. Great proof.",
+          "attribution": null,
+          "company": null
+        },
+        {
+          "quote": "Fastlane basically turned distribution into a one-click deployment.",
+          "attribution": null,
+          "company": null
+        },
+        {
+          "quote": "For performance marketing this is unbeatable. The cost reduction vs traditional UGC is insane, like 5x cheaper and way faster.",
+          "attribution": null,
+          "company": null
+        },
+        {
+          "quote": "The distribution machine we've been asking for. Been using Fastlane for a few weeks now and it's awesome!",
+          "attribution": null,
+          "company": null
+        },
+        {
+          "quote": "We got 100 users on Bright Start in our first week just by making and posting content inside their platform. It honestly became a volume game — spot trends, remix fast, post consistently.",
+          "attribution": null,
+          "company": null
+        }
+      ],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [
+        "#3 Product of the Day, #1 of the Week in Marketing"
+      ],
+      "metrics": [
+        "50,000+ users"
+      ],
+      "guarantees": [
+        "7-day free trial, no credit card"
+      ],
+      "scoped_claims": [
+        {
+          "text": "One customer video reached 31 million views on a single post",
+          "scope": "CUSTOMER_ANECDOTE",
+          "subject": "Fastlane customer video"
+        },
+        {
+          "text": "36.2 million views from one video made and posted entirely from Fastlane",
+          "scope": "CUSTOMER_ANECDOTE",
+          "subject": "Frank"
+        },
+        {
+          "text": "A customer got 100 users in their first week posting inside the platform",
+          "scope": "CUSTOMER_ANECDOTE",
+          "subject": "Bright Start"
+        },
+        {
+          "text": "Exposes a developer API and an MCP server for agent-driven marketing",
+          "scope": "OFFERING",
+          "subject": "Fastlane Developer API and MCP server"
+        }
+      ]
+    },
+    "brand_voice": {
+      "tone": [],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [],
+      "colors": [
+        {
+          "name": null,
+          "hex": "#ffffff",
+          "usage": "Theme color"
+        }
+      ],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [],
+      "creative_angles": [],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [
+        "Example output. Fastlane is not affiliated with AG1 or the other brands shown."
+      ],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": "English",
+      "target_regions": [],
+      "preferred_cta": "Free trial, no credit card",
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": "https://www.usefastlane.ai/"
+    }
+  },
+  "evidence": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane - Create, launch and scale winning ads with AI"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Create, launch and scale winning ads with AI"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands. Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands."
+        }
+      ],
+      "reasoning": "Product is marketing software."
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane launches AI marketing platform that runs campaigns end to end"
+        }
+      ],
+      "reasoning": "Self-described as AI marketing platform."
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Starter | $29 / month | 500 credits a month"
+        }
+      ],
+      "reasoning": "Tiered credit subscription plus optional per-account warming fees."
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Created by marketers that have run $1B+ in ad spend"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Give Senna a URL. It pulls your product, palette and tone of voice, then scans every ad you have ever run and tells you what is actually working."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/differentiators",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "Fastlane ships a developer API and an MCP server"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Fastlane is the AI marketing agent for brands."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Fastlane pricing | Plan | Price | Includes"
+        }
+      ],
+      "reasoning": "Software platform sold on subscription tiers."
+    },
+    {
+      "path": "/offerings/0/catalog_level",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Starter | $29 / month ... Growth | $79 / month ... Pro | $199 / month ... Enterprise | $999 / month"
+        }
+      ],
+      "reasoning": "Base product with pricing tiers as variants, not separate offerings."
+    },
+    {
+      "path": "/offerings/0/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Senna learns your brand, studies your competitors, builds campaigns, creates ads and organic content, launches across Meta, Instagram, TikTok and YouTube, and doubles down on what works."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/url",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Your next winning ad on autopilot"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/features",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Dozens of net-new concepts per campaign: competitor remixes, trending formats, AI creators, statics and memes."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/supported_platforms",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "launches across Meta, Instagram, TikTok and YouTube"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/pricing",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Starter | $29 / month ... Enterprise | $999 / month"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/pricing_tiers",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Growth | $79 / month | 2,000 credits a month (up to 400 statics or 25 videos)"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0/claims/0/text",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Created by marketers that have run $1B+ in ad spend"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Warmed accounts | $100 / mo per account"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Real TikTok or Instagram accounts created and warmed by humans in your niche"
+        }
+      ],
+      "reasoning": "Account warming is a managed service, not software."
+    },
+    {
+      "path": "/offerings/1/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Real US & EU TikTok and Instagram accounts, created from scratch, warmed up in your niche and managed inside Fastlane."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/pricing",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "+ $1.50 per post upload · Active Fastlane subscription required"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1/supported_platforms",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/pricing",
+          "quote": "Real US & EU TikTok and Instagram accounts"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "Fastlane ships a developer API and an MCP server"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2/kind",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "agents in Claude, Cursor, or any MCP-compatible stack can generate content, schedule posts and pull analytics autonomously"
+        }
+      ],
+      "reasoning": "Developer interface as a distinct product capability."
+    },
+    {
+      "path": "/offerings/2/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/marketing-agencies",
+          "quote": "a partner API lets you integrate content generation, trend remixing, publishing and analytics inside your own agency offering"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "the same way AI agents turned a prompt into your product, Fastlane turns your product link into distribution"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/emotional_benefits",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tech-startups",
+          "quote": "Distribution is the default cause of startup death. Fastlane makes it a subscription instead of a search."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/mobile-apps",
+          "quote": "It is trusted by 50,000+ users, and a single customer video has reached 31 million views."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/metrics",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tech-startups",
+          "quote": "With 50,000+ users"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/awards",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "#3 Product of the Day, #1 of the Week in Marketing"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/guarantees",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/tiktok-ads",
+          "quote": "free trial to build your first organic test batch"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/testimonials",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "For performance marketing this is unbeatable. The cost reduction vs traditional UGC is insane, like 5x cheaper and way faster."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/mobile-apps",
+          "quote": "One app founder hit 31 million views with a single Fastlane video"
+        }
+      ],
+      "reasoning": "Customer anecdote kept scoped."
+    },
+    {
+      "path": "/visual_identity/colors/0/hex",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Theme color: #ffffff"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_guardrails/legal_disclaimers",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Example output. Fastlane is not affiliated with AG1 or the other brands shown."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_defaults/content_language",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Create, launch and scale winning ads with AI"
+        }
+      ],
+      "reasoning": "Site and product copy are English."
+    },
+    {
+      "path": "/marketing_defaults/preferred_cta",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/for/vibe-coding",
+          "quote": "Free trial, no credit card"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_defaults/default_landing_page",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.usefastlane.ai/",
+          "quote": "Your next winning ad on autopilot"
+        }
+      ],
+      "reasoning": null
+    }
+  ],
+  "warnings": [
+    "Legal name, founded year, headquarters and operating regions were not explicitly stated; left null/empty.",
+    "Testimonials are anonymous posts from the site's X wall; no names or companies were provided.",
+    "Pricing tiers are treated as variants of the Fastlane product, not independent offerings.",
+    "Supported publishing platforms are product capabilities, not stated marketing channel preferences."
+  ]
+}

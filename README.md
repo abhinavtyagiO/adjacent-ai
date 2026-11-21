@@ -1,24 +1,40 @@
-# Brand Intelligence Backend — Phase 1
+# Brand Intelligence Backend — Phase 1C P0
 
 A FastAPI backend for registering a company URL, crawling public pages, extracting an
-evidence-aware Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
+draft-first Brand Intelligence Profile (BIP), reviewing/correcting it and confirming it.
 PostgreSQL is the only supported database in development, tests and deployment.
+
+Default mode is `EXTRACTION_MODE=draft_first`: both LLM calls use citation-free structured
+outputs. Facts are provisional `AI_EXTRACTED` data and marketing hypotheses are `INFERRED`.
+Review flags never approve sensitive advertising claims. The original citation-verification
+path remains available with `EXTRACTION_MODE=strict`.
+See [MVP contracts, review semantics and limitations](docs/draft-first.md).
+
+Phase 1C adds deterministic product-catalog and website-concern discovery plus separately
+runnable marketing enrichment. Discovery is separate from deep BIP offerings. Factual drafts
+can be reviewed while marketing is running. [New APIs, migration and architecture](docs/phase1c.md)
+describe source-snapshot binding, edit protection, stream timing and offline verification.
 
 ## Quick start with Docker Compose
 
-Requires Docker with Compose v2.
+Requires Docker with Compose v2.24+ (for the optional private environment file).
 
 ```bash
-cp .env.example .env
-# Set OPENAI_API_KEY in .env. Optionally change OPENAI_MODEL.
+cp -n .env.example .env.local
+# Set a strong API_ACCESS_TOKEN in .env.local; OAuth does not need an OpenAI API key.
 docker compose up --build -d
 docker compose logs -f api worker
 ```
 
-Compose starts PostgreSQL 16, runs Alembic migrations once, then starts the API and a
-separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
+The repository includes a credential-free `.env` with `LLM_PROVIDER=openai_chatgpt`. Private
+overrides belong in the ignored `.env.local`, which Compose loads after `.env` for the
+API, worker and migrations. Compose starts PostgreSQL 16, runs Alembic migrations once,
+then starts the API and a separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
 <http://localhost:8000/docs>. `GET /health/ready` checks the database and migration table.
 Ports bind to localhost. Database data persists in the `postgres_data` volume.
+Open <http://127.0.0.1:8000/v1/chatgpt/connect>, enter the local access token, explicitly
+consent to plan use, choose an account and select an available model before extraction.
+See [Sign in with ChatGPT setup and limits](docs/chatgpt-plan.md).
 
 ```bash
 docker compose down                  # Stop services, retain database volume
@@ -31,14 +47,15 @@ Use Python 3.12+ and a local PostgreSQL server, or let Compose run only the data
 No SQLite fallback exists.
 
 ```bash
-cp .env.example .env
+cp -n .env.example .env.local
+# Set a strong API_ACCESS_TOKEN in .env.local.
 docker compose up -d db
 python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements-dev.lock
 pip install --no-deps -e .
 alembic upgrade head
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --no-access-log
 ```
 
 In another terminal, activate the same environment and start the worker:
@@ -50,14 +67,15 @@ brand-worker
 
 The default `DATABASE_URL` targets the Compose database on `localhost:5432`. An existing
 PostgreSQL server can be used by changing that variable. The API never creates tables at
-startup: migrations are required. Run commands from this project directory so `.env` loads.
+startup: migrations are required. Run commands from this project directory so `.env` and
+`.env.local` load. For Python processes, precedence is environment variables, then
+`.env.local`, then `.env`, then application defaults. The committed defaults contain no keys.
 The lock files pin the versions tested here; `pyproject.toml` declares compatible ranges.
 
 ## API walkthrough
 
-Examples use curl and jq. Set `API_ACCESS_TOKEN` in `.env` if you want a shared access token,
-and add `-H "Authorization: Bearer YOUR_TOKEN"` to `/v1` requests. No token is needed by
-default for local development. This is a single-workspace Phase 1 service; account ownership
+Examples use curl and jq. `API_ACCESS_TOKEN` is required for ChatGPT mode: set it in `.env.local`,
+and add `-H "Authorization: Bearer YOUR_TOKEN"` to `/v1` requests. Use the same local token in the connection page and Swagger Authorize dialog. This is a single-workspace Phase 1 service; account ownership
 and tenant authorization are not implemented.
 
 1. Register a website. A name is optional; a URL is sufficient to start.
@@ -92,7 +110,9 @@ curl -sS "http://localhost:8000/v1/brands/$BRAND_ID/profile" | jq .
 ```
 
 The envelope includes `status`, `revision`, `profile`, field `provenance`, warnings,
-extraction/update timestamps, provider and model. Review inferred fields and source
+extraction/update timestamps, provider and model. Phase 1B also returns `source_coverage`,
+`creative_readiness` (recomputed after edits), and `extraction_metrics` with per-stage models,
+usage, latency and optional estimated cost. Review inferred fields and source
 evidence before approval. A profile can remain a draft without a company name if the site
 does not state one. The server never derives a company name from its domain.
 
@@ -130,7 +150,9 @@ curl -sS -X POST "http://localhost:8000/v1/brands/$BRAND_ID/profile/confirm" \
 Only company name and the registered website are required to confirm. Personas, pricing,
 brand guidelines and marketing preferences can remain unknown. Confirmation sets
 `CONFIRMED` and `confirmed_at`, and increments revision. Repeating confirmation with the
-current revision is a no-op. Future edits require review and confirmation again.
+current revision is a no-op. Confirmation marks provenance `confirmed_by_user` while retaining
+the original fact/classification/hypothesis origin. It does not turn a hypothesis into a sourced fact.
+Future edits require review and confirmation again.
 
 6. List brands, offerings and source metadata.
 
@@ -168,7 +190,7 @@ is outside Phase 1. Source snapshots and job history remain stored.
 | POST | `/v1/brands/{id}/profile/confirm` | Approve current revision |
 | GET | `/v1/brands/{id}/offerings` | Relational offerings, including row IDs |
 | GET | `/v1/brands/{id}/sources` | Source URLs, hashes and timestamps |
-| GET | `/v1/profile-schema` | Complete v1 BIP JSON Schema |
+| GET | `/v1/profile-schema` | Complete v2 BIP JSON Schema |
 | GET | `/health/live`, `/health/ready` | Process and database health |
 
 `/docs` and `/openapi.json` expose the typed BIP response contract. Field-level request
@@ -178,8 +200,8 @@ return `409`. Domain errors use `{"error":{"code":"...","message":"..."}}`.
 ## BIP schema and evidence
 
 The brief supplies the twelve section names, but no earlier field-level schema file.
-This implementation defines a documented **version 1** contract in `app/schemas.py` and
-`schemas/bip-v1.schema.json`. Extend those models and version the contract as requirements
+This implementation defines a documented **version 2** contract in `app/schemas.py` and
+`schemas/bip-v2.schema.json` (v1 is retained as a historical contract). Extend those models and version the contract as requirements
 evolve. Optional section members do not become onboarding prerequisites.
 
 | Section | Representative fields |
@@ -197,26 +219,30 @@ evolve. Optional section members do not become onboarding prerequisites.
 | `marketing_guardrails` | Prohibited claims, legal disclaimers and approval requirements |
 | `marketing_defaults` | Objectives, channels, language, regions, budget and video preferences |
 
-Every populated scalar leaf has provenance at a JSON pointer such as `/offerings/0/name`:
+Every populated scalar leaf has provenance at a pointer such as `/offerings/0/name`.
+Default `draft_first` mode uses `AI_EXTRACTED` for provisional website-based information,
+`INFERRED` for audience/creative hypotheses, and `USER` for submitted values or corrections.
+Citations can be empty. Confirmation records user review; it neither relabels AI content as
+independently verified nor approves it for advertising. `claim_review` identifies sensitive
+prices, concentrations, efficacy statements, certifications and guarantees for later approval.
 
-* `WEBSITE`: direct extracted information, with a verbatim quote and collected source URL.
-* `INFERRED`: a tentative, grounded interpretation, with explicit reasoning and citations.
-* `USER`: the submitted URL/name or a review correction; no website citation is asserted.
+Optional `strict` mode retains the historical `WEBSITE` (direct sourced fact), `CLASSIFIED`
+(source-grounded classification) and `INFERRED` evidence contract, including quote matching,
+scalar pointers, scope checks and pruning. Existing profiles and audits retain their meanings.
+See [strict evidence verification](docs/evidence-quality.md). Only the website is required
+to start; a company name is required to confirm. Both prompts prohibit invented names,
+prices, ingredients, performance claims, certifications and customer identities. User review
+is required in either mode; draft-first content is not independently verified.
 
-The service checks quoted text against the actual captured document, rejects unknown source
-URLs, missing evidence, duplicate/unknown pointers and unsupported inferences, and stamps
-citations with server-recorded fetch times. Names and pricing amounts must appear in cited
-quotes. Inferences are restricted to voice, psychology, creative context and audience
-interpretation; company identity, pricing, proof, defaults and guardrails require direct
-evidence. Persona names/demographics cannot be inferred. Prompts treat website content as
-untrusted data and prohibit invented details. Citation checks establish traceability;
-semantic correctness still requires the review/confirmation step.
-
-Text-only crawling cannot determine complete design systems: unsupported colors, fonts and
-guidelines stay empty. Logo URLs and theme-color metadata are extracted when present.
-The first provider uses [OpenAI Responses structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
-with a strict Pydantic-derived JSON schema, local validation, request timeouts and bounded
-retries. Model refusals, truncated output and invalid evidence are explicit failures.
+Static crawling preserves published quotations, logo URLs, explicit palette declarations
+and named brand/primary/accent CSS colors. CSS colors are observed styling; theme-color
+is a browser UI hint, neither automatically establishes official brand guidelines. Unsupported
+colors, fonts and rules stay empty. See [content-first crawl policy](docs/content-crawling.md).
+The default strategy is `openai_chatgpt`: official OAuth credentials authorized to use an
+eligible user's ChatGPT plan, account-specific model discovery and streamed Responses API
+requests. It never reads an API key or Codex's existing login cache. DeepSeek is disabled in
+the runtime factory. The legacy OpenAI API-key strategy is retained only behind an explicit
+billing opt-in; it is never a fallback. See [ChatGPT setup](docs/chatgpt-plan.md).
 
 ## Architecture and persistence
 
@@ -225,8 +251,10 @@ HTTP /v1 -> BrandService -> Repository -> PostgreSQL
                           |
                  durable extraction_jobs
                           |
-worker -> EnrichmentSource -> source_documents -> LLMProvider
-       -> schema/evidence validation -> transactional DRAFT + offerings
+worker -> EnrichmentSource -> source_documents
+       -> factual LLM -> citation + consistency checks -> verified catalog
+       -> marketing LLM -> grounded hypotheses + readiness
+       -> transactional DRAFT + offerings + pipeline diagnostics
 ```
 
 * `app/api/routes.py`: HTTP input/output, shared-token authorization, job polling.
@@ -235,6 +263,11 @@ worker -> EnrichmentSource -> source_documents -> LLMProvider
 * `app/crawling/`: URL policy, pinned public DNS/IP requests, robots and page discovery.
 * `app/enrichment.py`: source-neutral document/bundle protocol for future source adapters.
 * `app/llm/`: provider protocol and configured adapter; no OpenAI dependency in business logic.
+  `LLMProvider` is the strategy interface, `build_provider` is the strategy registry/factory,
+  and `ExtractionWorker` is the context that receives the configured strategy. Concrete
+  `ChatGPTProvider` uses OAuth/streaming; explicit API-key OpenAI uses the retained transport.
+* `app/chatgpt/`: PKCE/OIDC, encrypted runtime credentials, account/model settings and VM handoff.
+* `app/intelligence.py`: two-stage orchestration, semantic checks, catalog labels and readiness.
 * `app/provenance.py`: grounded evidence checks and user-correction provenance.
 * `app/worker.py`: durable extraction orchestration and failure/recovery lifecycle.
 * `app/models.py`, `alembic/`: PostgreSQL schema and versioned migrations.
@@ -253,9 +286,17 @@ than its lease. On SIGTERM the worker finishes its current bounded job before ex
 Multiple workers may run against the same database; each worker processes one job at a time.
 Set a container shutdown grace period matching your timeout if graceful completion is needed.
 
-The crawler follows relevant homepage/about/product/service/pricing/solution links and tries
-common fallback paths. It enforces robots **before every redirect hop**, allows only the
-registered host and its www variant, limits pages/body/text/time and does not execute JS.
+The crawler prioritizes customer stories/reviews, brand assets, use cases, positioning,
+FAQs and selective audience/ingredient education before repeated product details and pricing.
+Category attempt limits allocate the existing global budget; product catalogs still supply
+broad inventory without deep-crawling every SKU. Sitemaps fill gaps after initial navigation;
+observed language alternatives and Shopify product aliases avoid duplicate visits. It preserves
+headings, lists, tables, JSON-LD products/FAQs/reviews and explicit testimonial markup.
+Common paths are a fallback when discovery finds little. Robots apply **before every redirect
+hop**. Registered bare/www hosts are allowed; external brand kits require both an exact
+per-company host allowlist and an explicit site-linked brand/press resource. The committed
+configuration maps Opal to `brandkit.opal.so`. Unrelated external sites remain blocked.
+Limits apply to pages/body/text/time and the crawler does not execute JS.
 All DNS answers must be public; requests connect to a validated IP with the original Host
 and TLS server name, preventing a second DNS resolution from bypassing the check. HTTPX
 proxy environment variables are disabled for crawling. HTTP(S) standard ports only.
@@ -270,31 +311,49 @@ No competitor discovery, social scraping, recommendations, video or campaign fea
 | Variable | Default | Meaning |
 |---|---|---|
 | `DATABASE_URL` | See `.env.example` | Must use `postgresql+psycopg://` |
-| `OPENAI_API_KEY` | Empty | Required for real model extraction |
-| `LLM_PROVIDER` | `openai` | Adapter selected by `build_provider` |
+| `LLM_PROVIDER` | `openai_chatgpt` | Official plan usage; DeepSeek selection is rejected |
+| `OPENAI_API_KEY` | Empty | Required only when using OpenAI |
 | `OPENAI_MODEL` | `gpt-4.1-mini` | Configurable structured-output capable model |
+| `EXTRACTION_MODE` | `draft_first` | `strict` opts into historical citation verification |
+| `FACTUAL_CONTEXT_MAX_CHARS` | `60000` | Factual document-content budget in draft-first mode |
 | `LLM_TIMEOUT_SECONDS` | `90` | Per-attempt total model timeout |
-| `LLM_MAX_ATTEMPTS` | `3` | Model retries for connection/timeout/429/5xx failures |
-| `CRAWL_MAX_PAGES` | `10` | Maximum attempted page URLs per collection, including failures |
+| `LLM_MAX_ATTEMPTS` | `1` | Bounded retries for transient failures or invalid/truncated structured output |
+| `CRAWL_MAX_PAGES` | `20` | Maximum collected content documents (requests have a separate limit) |
+| `CRAWL_CATEGORY_LIMITS` | JSON overrides | Content URL attempt caps; merge with built-in defaults |
+| `CRAWL_SKIP_ALTERNATE_LOCALES` | `true` | Skip alternatives declared with language metadata |
+| `CRAWL_MAX_STYLESHEETS` | `2` | Same-origin CSS checks within the shared fetch budget |
+| `CRAWL_BRAND_ASSET_HOSTS` | Opal mapping in `.env`; otherwise `{}` | Exact company → external brand-kit hosts; linked resources only |
+| `CRAWL_MAX_REQUESTS` | `40` | Top-level fetch operations, including robots, sitemaps, catalogs and CSS |
+| `CRAWL_MAX_ELAPSED_SECONDS` | `90` | Shared wall-clock crawl deadline |
+| `CRAWL_MAX_TOTAL_CHARS` | `140000` | Total stored HTML text; draft factual context capped separately |
 | `CRAWL_TIMEOUT_SECONDS` | `15` | Per-fetch total timeout |
 | `CRAWL_MAX_BYTES` | `2000000` | Decompressed response body limit |
 | `CRAWL_MAX_TEXT_CHARS` | `12000` | Text per document supplied to LLM and stored |
-| `JOB_TIMEOUT_SECONDS` | `240` | Overall extraction attempt time limit |
-| `JOB_LEASE_SECONDS` | `300` | Must exceed job timeout by more than ten seconds |
-| `JOB_MAX_ATTEMPTS` | `3` | Maximum leased attempts including crash recovery |
+| `JOB_TIMEOUT_SECONDS` | `420` | Overall extraction attempt time limit |
+| `JOB_LEASE_SECONDS` | `480` | Must exceed job timeout by more than ten seconds |
+| `JOB_MAX_ATTEMPTS` | `1` | Maximum leased attempts including crash recovery |
 | `WORKER_POLL_SECONDS` | `2` | Idle polling interval |
 | `LOG_LEVEL` | `INFO` | Logs job IDs, stages and safe failure codes |
-| `API_ACCESS_TOKEN` | Empty | Optional shared bearer token for `/v1` |
+| `API_ACCESS_TOKEN` | Empty | Required local access token in ChatGPT mode |
 | `TEST_DATABASE_URL` | Test DB on `5433` | Separate disposable PostgreSQL test database |
 
-Secrets are read from environment variables and never committed. Logs omit document content
-and raw provider response bodies. Both the API and worker need the same configuration.
+`.env` is committed as credential-free development configuration. Keep its key/token fields
+blank; put secrets in ignored `.env.local` or process environment variables. Do not add real
+credentials to the tracked `.env` or `.env.example`. Logs omit document content and raw
+provider response bodies. Both the API and worker need the same configuration.
 PostgreSQL connections use bounded connect, statement and lock timeouts.
 
-To change providers, implement `LLMProvider.extract()` and register it in `build_provider`.
-Return `ExtractionResult` with the same evidence contract; the worker/service stays unchanged.
-Additional enrichment adapters implement `EnrichmentSource.collect()` and return timestamped
-`Document` objects. There is no simulated provider wired into the production factory.
+### Runtime provider and billing policy
+
+`openai_chatgpt` is the local/self-hosted default. Keep `OPENAI_API_KEY_BILLING_ENABLED=false`.
+Blank `FACTUAL_MODEL`/`MARKETING_MODEL` use the model chosen for the signed-in account; any
+override is checked against that account's catalog. Both stages remain modular and use the
+same BIP evidence pipeline. New jobs snapshot the account/model selection when enqueued.
+
+Setting `LLM_PROVIDER=deepseek` now fails with `LLM_PROVIDER_DISABLED`, even with a key.
+Selecting `openai` also fails unless API-key billing is explicitly opted into. No errors,
+usage limits or missing consent switch providers or billing. Hosted commercial ChatGPT-plan
+access remains blocked; it needs separate OpenAI preview approval and client registration.
 
 ## Migrations
 
@@ -328,7 +387,9 @@ Integration tests use the shipped Alembic migrations and truncate application ta
 tests. They refuse database names that do not end in `_test`; never point them at real data.
 If `TEST_DATABASE_URL` is absent, integration tests skip explicitly. No test uses SQLite or
 requires paid LLM calls. The provider boundary test uses the real OpenAI SDK with a mocked
-HTTP transport to verify strict schema serialization and response parsing.
+HTTP transport to verify strict schema serialization, provider routing and response parsing
+for the retained API transport and ChatGPT OAuth/streaming. Tests also run the strategies through PostgreSQL
+draft persistence, review, correction and confirmation with simulated provider HTTP responses.
 
 Tests cover URL-only onboarding, all twelve sections, source traceability, fact/inference
 separation, corrections/confirmation, offering rows/ID reuse, JSONB storage, revision conflicts,
@@ -337,3 +398,24 @@ concurrent skip-locked claims, crawl restrictions and safe LLM errors.
 
 See `VERIFICATION.md` for checks run in the delivery environment and remaining live-service
 verification limits.
+
+## Phase 1B quality comparison
+
+See [the pipeline guide](docs/phase1b.md) and [measured comparison](evaluations/REPORT.md).
+Frozen public-source snapshots, prior Phase 1 profiles and clearly labeled constructed
+regression fixtures allow repeatable checks. Evaluation now replays saved responses only;
+batch live calls are disabled to control costs.
+
+## Evidence quality and selected-offering readiness
+
+Profile responses expose `extraction_mode`, `stages`, `evidence_validation`, `completeness`
+and `claim_review`. Default factual success requires a usable marketable offering with a
+name and description/features/benefits/ingredients/use cases. Without one, a partial draft
+is saved with factual `INSUFFICIENT_DATA` and marketing `SKIPPED`, with no automatic retry.
+Marketing failures preserve the full factual draft. Job `SUCCEEDED` means a draft was saved.
+Evidence validation is `NOT_APPLICABLE` with null acceptance counts in draft-first mode.
+
+Readiness is nonblocking and checks useful product, audience, motivation and creative content;
+valid JSON alone is insufficient. Campaign generation is out of scope and is not declared
+ready automatically. [MVP documentation](docs/draft-first.md) explains the output contracts,
+source limits, historical compatibility and estimated efficiency changes.

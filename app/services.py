@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.errors import DomainError
-from app.models import Brand, ExtractionJob, Profile, now
+from app.models import Brand, ExtractionJob, Profile, SourceDocument, now
 from app.provenance import corrected_provenance
 from app.repository import Repository
 from app.schemas import BIP, CreateBrand, ProfilePatch
@@ -56,25 +56,169 @@ class BrandService:
             raise DomainError("BRAND_EXISTS", "This website is already registered", 409) from exc
         return brand
 
-    def enqueue(self, brand_id: uuid.UUID, replace_existing: bool) -> ExtractionJob:
+    def enqueue(
+        self,
+        brand_id: uuid.UUID,
+        replace_existing: bool,
+        offering_key: str | None = None,
+        chatgpt_account_id=None,
+        factual_model=None,
+        marketing_model=None,
+    ) -> ExtractionJob:
         brand = self.require_brand(brand_id, lock=True)
         active = self.repo.active_job(brand_id)
         if active:
+            if active.kind != "EXTRACTION":
+                raise DomainError("JOB_ACTIVE", "Another brand job is already running", 409)
             self.session.commit()
             return active
         if self.repo.profile(brand_id) and not replace_existing:
             raise DomainError(
                 "PROFILE_EXISTS", "Use replace_existing=true to extract a new draft", 409
             )
-        job = ExtractionJob(brand_id=brand_id, base_revision=brand.revision)
+        job = ExtractionJob(
+            brand_id=brand_id,
+            base_revision=brand.revision,
+            selected_offering_key=offering_key,
+            chatgpt_account_id=chatgpt_account_id,
+            factual_model=factual_model,
+            marketing_model=marketing_model,
+        )
+        self.session.add(job)
+        self.session.commit()
+        return job
+
+    def source_snapshot_id(self, profile):
+        """Bind legacy profiles read-only to the successful extraction that saved them."""
+        if profile.source_job_id:
+            return profile.source_job_id
+        if profile.extracted_at:
+            from datetime import timedelta
+
+            jobs = self.session.scalars(
+                select(ExtractionJob).where(
+                    ExtractionJob.brand_id == profile.brand_id,
+                    ExtractionJob.kind == "EXTRACTION",
+                    ExtractionJob.status == "SUCCEEDED",
+                    ExtractionJob.finished_at >= profile.extracted_at - timedelta(seconds=1),
+                    ExtractionJob.finished_at <= profile.extracted_at + timedelta(seconds=1),
+                )
+            )
+            candidates = [
+                j
+                for j in jobs
+                if self.session.scalar(
+                    select(SourceDocument.id).where(SourceDocument.job_id == j.id).limit(1)
+                )
+            ]
+            if candidates:
+                if len(candidates) > 1 and len(
+                    {
+                        abs((j.finished_at - profile.extracted_at).total_seconds())
+                        for j in candidates
+                    }
+                ) != len(candidates):
+                    raise DomainError(
+                        "SOURCE_SNAPSHOT_AMBIGUOUS",
+                        "Historical snapshot association is ambiguous",
+                        409,
+                    )
+                return min(
+                    candidates,
+                    key=lambda j: abs((j.finished_at - profile.extracted_at).total_seconds()),
+                ).id
+        raise DomainError(
+            "SOURCE_SNAPSHOT_MISSING",
+            "No source snapshot is associated with the saved profile",
+            409,
+        )
+
+    def enqueue_marketing(self, brand_id, request, **binding):
+        from app.draft import usable_offerings
+
+        brand = self.require_brand(brand_id, lock=True)
+        profile = self.require_profile(brand_id)
+        if request.expected_revision is not None:
+            self._revision(brand, request.expected_revision)
+        active = self.repo.active_job(brand_id)
+        if active:
+            if active.kind != "MARKETING":
+                raise DomainError("JOB_ACTIVE", "An extraction is already running", 409)
+            return active
+        bip = self.repo.bip(profile)
+        usable = usable_offerings(bip)
+        if not usable:
+            raise DomainError(
+                "NO_USABLE_OFFERING", "A saved offering with useful context is required", 422
+            )
+        if request.offering_key and request.offering_key not in {o.key for o in usable}:
+            raise DomainError(
+                "OFFERING_NOT_FOUND", "Selected offering is missing or incomplete", 422
+            )
+        source_id = self.source_snapshot_id(profile)
+        job = ExtractionJob(
+            brand_id=brand_id,
+            kind="MARKETING",
+            base_revision=brand.revision,
+            source_job_id=source_id,
+            selected_offering_key=request.offering_key,
+            replace_reviewed=request.replace_reviewed,
+            chatgpt_account_id=binding.get("chatgpt_account_id"),
+            marketing_model=binding.get("marketing_model"),
+        )
         self.session.add(job)
         self.session.commit()
         return job
 
     def read(self, brand_id: uuid.UUID) -> dict:
+        from app.draft import claim_review, completeness
+        from app.intelligence import creative_readiness
+
         brand = self.require_brand(brand_id)
         profile = self.require_profile(brand_id)
+        validation = profile.pipeline_metadata.get("evidence_validation", {})
+        stages = dict(profile.pipeline_metadata.get("stages", {}))
+        # Older SUCCEEDED marketing outcomes measured JSON parsing, not retained evidence.
+        if stages.get("marketing") == "SUCCEEDED" and not validation.get("marketing"):
+            stages["marketing"] = "UNKNOWN"
+        for stage in ("facts", "marketing"):
+            stages.setdefault(stage, "UNKNOWN")
+        stage_errors = dict(profile.pipeline_metadata.get("stage_errors", {}))
+        if stages.get("marketing") == "RUNNING" and profile.source_job_id:
+            source_job = self.session.get(ExtractionJob, profile.source_job_id)
+            if source_job and source_job.status == "FAILED":
+                stages["marketing"] = "FAILED"
+                stage_errors["marketing"] = {
+                    "code": (source_job.error or {}).get("code", "EXTRACTION_FAILED")
+                }
+        from app.discovery_api import summary
+
+        latest = self.session.scalar(
+            select(ExtractionJob)
+            .where(ExtractionJob.brand_id == brand_id, ExtractionJob.kind == "MARKETING")
+            .order_by(ExtractionJob.created_at.desc())
+            .limit(1)
+        )
+        enrichment = (
+            {
+                "job_id": latest.id,
+                "status": latest.status,
+                "marketing_model": latest.marketing_model,
+                "source_job_id": latest.source_job_id,
+                "offering_key": latest.selected_offering_key,
+                "base_revision": latest.base_revision,
+                "poll_url": f"/v1/marketing-enrichments/{latest.id}",
+                "diagnostics": latest.diagnostics,
+                "metrics": latest.metrics,
+                "error": latest.error,
+            }
+            if latest
+            else {}
+        )
         return {
+            **summary(self.session, brand_id),
+            "marketing_enrichment": enrichment,
+            "source_job_id": profile.source_job_id,
             "brand_id": brand.id,
             "revision": brand.revision,
             "status": profile.status,
@@ -87,6 +231,28 @@ class BrandService:
             "extracted_at": profile.extracted_at,
             "updated_at": profile.updated_at,
             "confirmed_at": profile.confirmed_at,
+            "source_coverage": profile.pipeline_metadata.get("source_coverage", {}),
+            "creative_readiness": creative_readiness(
+                self.repo.bip(profile),
+                profile.pipeline_metadata.get("creative_readiness", {}).get(
+                    "requested_offering_key"
+                )
+                or profile.pipeline_metadata.get("creative_readiness", {}).get(
+                    "selected_offering_key"
+                ),
+                profile.provenance,
+                mode=profile.pipeline_metadata.get("extraction_mode", "strict"),
+            ),
+            "extraction_metrics": profile.pipeline_metadata.get("extraction_metrics", {}),
+            "stages": stages,
+            "evidence_validation": validation,
+            "evidence_validation_history": profile.pipeline_metadata.get(
+                "evidence_validation_history", []
+            ),
+            "stage_errors": stage_errors,
+            "extraction_mode": profile.pipeline_metadata.get("extraction_mode", "legacy"),
+            "completeness": completeness(self.repo.bip(profile)),
+            "claim_review": claim_review(self.repo.bip(profile), profile.provenance),
         }
 
     def update(self, brand_id: uuid.UUID, request: ProfilePatch) -> dict:
@@ -107,7 +273,28 @@ class BrandService:
             self.session.commit()
             return self.read(brand_id)
         profile.provenance = corrected_provenance(old, bip, profile.provenance)
+
+        def paths(value, prefix=""):
+            if isinstance(value, dict) and value:
+                return [
+                    p
+                    for key, child in value.items()
+                    for p in paths(child, prefix + "/" + key.replace("~", "~0").replace("/", "~1"))
+                ]
+            return [prefix]
+
+        profile.pipeline_metadata = {
+            **profile.pipeline_metadata,
+            "reviewed_paths": sorted(
+                set(profile.pipeline_metadata.get("reviewed_paths", []))
+                | set(paths(request.changes))
+            ),
+        }
         self.repo.write_bip(brand_id, profile, bip)
+        from app.discovery import link_offerings
+
+        self.session.flush()
+        link_offerings(self.session, brand_id)
         brand.name = bip.brand_identity.name
         brand.revision += 1
         profile.status = "DRAFT"
@@ -128,6 +315,10 @@ class BrandService:
             brand.revision += 1
             profile.status = "CONFIRMED"
             profile.confirmed_at = profile.updated_at = now()
+            profile.provenance = [
+                {**entry, "confirmed_by_user": True, "confirmation_revision": brand.revision}
+                for entry in profile.provenance
+            ]
         self.session.commit()
         return self.read(brand_id)
 

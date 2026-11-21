@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+    <title>Connect ChatGPT — Adjacent AI</title><style>body{font:18px system-ui;max-width:720px;margin:60px auto;padding:20px}
+    button,select{font:inherit;padding:10px;margin:8px 0}button{background:#111;color:white;border-radius:8px;cursor:pointer}
+    label{display:block;margin:20px 0}#message{white-space:pre-wrap}</style></head><body><h1>Connect your ChatGPT plan</h1>
+    <p>For this local/self-hosted installation. Hosted commercial access requires OpenAI approval.</p>
+    <label>Local app access token <input type="password" id="localtoken" autocomplete="off"></label>
+    <button id="load">Load saved accounts</button>
+    <label><input type="checkbox" id="consent"> I agree to use my ChatGPT plan or credits for eligible brand onboarding requests.</label>
+    <select id="account"><option value="">Add another ChatGPT account or workspace</option></select><br>
+    <label><input type="checkbox" id="reconsent"> Ask OpenAI again if plan permission was previously declined</label>
+    <button id="signin">Continue with ChatGPT</button><button id="select">Use selected account</button>
+    <button id="signout">Sign out selected account</button><p id="active"></p>
+    <select id="model"><option value="">Choose a model available to your account</option></select>
+    <button id="save">Use this model</button><p id="message" role="status"></p>
+    <p>Requests never silently switch to API-key billing or DeepSeek. Your app’s charges are separate from ChatGPT plan usage.</p>
+    <button id="resume">Resume after reviewing your ChatGPT usage limits</button>
+    <p><a href="MANAGE_URL">Manage ChatGPT usage</a> · <a href="/docs">Brand onboarding API</a></p>
+    <script nonce="SCRIPT_NONCE">
+    const account=document.querySelector('#account'),model=document.querySelector('#model'),message=document.querySelector('#message');
+    async function call(path,method='GET',body){const r=await fetch('/v1/chatgpt'+path,{method,headers:{'Content-Type':'application/json', ...(document.querySelector('#localtoken').value?{Authorization:'Bearer '+document.querySelector('#localtoken').value}:{})},
+    ...(body?{body:JSON.stringify(body)}:{})});const d=await r.json();if(!r.ok)throw Error(d.error?.message||'Request failed');return d;}
+    async function loadModels(){model.replaceChildren(new Option('Choose a model available to your account',''));if(!account.value)return;
+    const d=await call('/accounts/'+account.value+'/models');for(const m of d.items)model.add(new Option(m.display_name,m.slug));if(d.selected_model)model.value=d.selected_model;}
+    async function load(){const d=await call('/accounts');while(account.options.length>1)account.remove(1);for(const a of d.items){const o=new Option((a.label||'ChatGPT account')+' · '+a.id.slice(0,8)+' · '+a.status,a.id);account.add(o);}
+    if(d.active_account_id)account.value=d.active_account_id;document.querySelector('#active').textContent=d.items.some(a=>a.id===d.active_account_id&&a.plan_usage_enabled)?'Using ChatGPT plan for the active account.':'No active account with authorized ChatGPT plan usage.';
+    if(account.value)await loadModels();}
+    function action(fn){return async()=>{try{message.textContent='';await fn();}catch(e){message.textContent=e.message;}};}
+    account.onchange=action(loadModels);
+    document.querySelector('#signin').onclick=action(async()=>{if(!document.querySelector('#consent').checked)throw Error('Please explicitly consent to ChatGPT plan usage.');
+    const d=await call('/authorizations','POST',{plan_usage_consent:true,account_id:account.value||null,request_plan_consent_again:document.querySelector('#reconsent').checked});location.assign(d.authorization_url);});
+    document.querySelector('#select').onclick=action(async()=>{if(!account.value)throw Error('Choose an account.');await call('/accounts/'+account.value+'/select','POST');location.reload();});
+    document.querySelector('#save').onclick=action(async()=>{if(!account.value||!model.value)throw Error('Choose an account and model.');await call('/accounts/'+account.value+'/model','PUT',{model:model.value});message.textContent='Model selected. Onboarding requests use this ChatGPT account and model.';});
+    document.querySelector('#signout').onclick=action(async()=>{if(!account.value)return;const d=await call('/accounts/'+account.value+'/session','DELETE');message.textContent=d.remote_revocation_confirmed?'Signed out.':'Signed out locally; remote revocation was not confirmed. Disconnect the app in ChatGPT settings.';});
+    document.querySelector('#resume').onclick=action(async()=>{if(!account.value)throw Error('Choose an account.');await call('/accounts/'+account.value+'/resume','POST');message.textContent='Account resumed. No inference was performed.';});
+    document.querySelector('#load').onclick=action(load);</script></body></html>

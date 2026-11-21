@@ -1,0 +1,1165 @@
+{
+  "note": "Observed homepage navigation only, copied from saved Phase 1C snapshots. No brand-kit contents or new crawl.",
+  "sites": {
+    "opal": {
+      "url": "https://opalapp.com/",
+      "fetched_at": "2026-11-16T17:58:16.029701+00:00",
+      "navigation": [
+        {
+          "url": "https://opalapp.com/about",
+          "label": "Our Story"
+        },
+        {
+          "url": "https://opalapp.com/use-cases",
+          "label": "Use Cases"
+        },
+        {
+          "url": "https://opalapp.com/pricing",
+          "label": "Pricing"
+        },
+        {
+          "url": "https://opalapp.com/for-schools",
+          "label": "For Schools"
+        },
+        {
+          "url": "https://opalapp.com/help",
+          "label": "Support"
+        },
+        {
+          "url": "https://opalapp.com/pricing",
+          "label": "Try for free"
+        },
+        {
+          "url": "https://twitter.com/vivianphung/status/1354193262689579014",
+          "label": "Vivian Phung \ud83c\uddfa\ud83c\uddf8 New York, USA iOS Engineer at Instagram"
+        },
+        {
+          "url": "https://twitter.com/kevinbparry/status/1367819256314880002",
+          "label": "Kevin Parry \ud83c\udde8\ud83c\udde6 Toronto, Canada Stop-Motion Animator + Video Wizard"
+        },
+        {
+          "url": "https://www.instagram.com/p/DBq9eBJPHCc/",
+          "label": "Ella Emhoff \ud83c\uddfa\ud83c\uddf8 Brooklyn, NY Artist and Fashion Designer"
+        },
+        {
+          "url": "https://twitter.com/katiewav/status/1324770248449470464",
+          "label": "Katie Chiou \ud83c\uddfa\ud83c\uddf8 New York, USA Platform at FirstMark Capital"
+        },
+        {
+          "url": "https://twitter.com/mehermakes/status/1328059212610605056",
+          "label": "Meher Goel \ud83c\uddfa\ud83c\uddf8 New York, USA Senior Product Designer Etsy"
+        },
+        {
+          "url": "https://twitter.com/cathydinas/status/1320590620210032640",
+          "label": "Cathy Dinas \ud83c\uddfa\ud83c\uddf8 Los Angeles, USA Director of Operations at Backstage Capital"
+        },
+        {
+          "url": "https://twitter.com/vivianphung/status/1354193262689579014",
+          "label": "Vivian Phung \ud83c\uddfa\ud83c\uddf8 New York, USA iOS Engineer at Instagram"
+        },
+        {
+          "url": "https://twitter.com/kevinbparry/status/1367819256314880002",
+          "label": "Kevin Parry \ud83c\udde8\ud83c\udde6 Toronto, Canada Stop-Motion Animator + Video Wizard"
+        },
+        {
+          "url": "https://www.instagram.com/p/DBq9eBJPHCc/",
+          "label": "Ella Emhoff \ud83c\uddfa\ud83c\uddf8 Brooklyn, NY Artist and Fashion Designer"
+        },
+        {
+          "url": "https://twitter.com/katiewav/status/1324770248449470464",
+          "label": "Katie Chiou \ud83c\uddfa\ud83c\uddf8 New York, USA Platform at FirstMark Capital"
+        },
+        {
+          "url": "https://twitter.com/mehermakes/status/1328059212610605056",
+          "label": "Meher Goel \ud83c\uddfa\ud83c\uddf8 New York, USA Senior Product Designer Etsy"
+        },
+        {
+          "url": "https://twitter.com/cathydinas/status/1320590620210032640",
+          "label": "Cathy Dinas \ud83c\uddfa\ud83c\uddf8 Los Angeles, USA Director of Operations at Backstage Capital"
+        },
+        {
+          "url": "https://twitter.com/Jobvo/status/1374722678813306881",
+          "label": "Job van der Voort \ud83c\uddf3\ud83c\uddf1 Amsterdam, NL Co-founder and CEO of Remote"
+        },
+        {
+          "url": "https://twitter.com/francois_bach/status/1354190270917558272",
+          "label": "Frank Bach \ud83c\uddfa\ud83c\uddf8 Los Angeles, CA Lead Designer"
+        },
+        {
+          "url": "https://twitter.com/lily___digital/status/1360497677713088517",
+          "label": "Lily Nguyen \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Computational Designer, Zora"
+        },
+        {
+          "url": "https://twitter.com/stewartsc/status/1354091677485387776",
+          "label": "Stewart Scott-Curran \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Senior Director of Brand at Loom"
+        },
+        {
+          "url": "https://www.instagram.com/clarkishakent/",
+          "label": "Clarkisha \ud83c\uddfa\ud83c\uddf8 USA Critic"
+        },
+        {
+          "url": "https://twitter.com/Jobvo/status/1374722678813306881",
+          "label": "Job van der Voort \ud83c\uddf3\ud83c\uddf1 Amsterdam, NL Co-founder and CEO of Remote"
+        },
+        {
+          "url": "https://twitter.com/francois_bach/status/1354190270917558272",
+          "label": "Frank Bach \ud83c\uddfa\ud83c\uddf8 Los Angeles, CA Lead Designer"
+        },
+        {
+          "url": "https://twitter.com/lily___digital/status/1360497677713088517",
+          "label": "Lily Nguyen \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Computational Designer, Zora"
+        },
+        {
+          "url": "https://twitter.com/stewartsc/status/1354091677485387776",
+          "label": "Stewart Scott-Curran \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Senior Director of Brand at Loom"
+        },
+        {
+          "url": "https://www.instagram.com/clarkishakent/",
+          "label": "Clarkisha \ud83c\uddfa\ud83c\uddf8 USA Critic"
+        },
+        {
+          "url": "https://twitter.com/lily___digital/status/1360497677713088517",
+          "label": "Lily Nguyen \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Computational Designer, Zora"
+        },
+        {
+          "url": "https://www.instagram.com/clarkishakent/",
+          "label": "Clarkisha \ud83c\uddfa\ud83c\uddf8 USA Critic"
+        },
+        {
+          "url": "https://twitter.com/katiewav/status/1324770248449470464",
+          "label": "Katie Chiou \ud83c\uddfa\ud83c\uddf8 New York, USA Platform at FirstMark Capital"
+        },
+        {
+          "url": "https://twitter.com/stewartsc/status/1354091677485387776",
+          "label": "Stewart Scott-Curran \ud83c\uddfa\ud83c\uddf8 San Francisco, USA Senior Director of Brand at Loom"
+        },
+        {
+          "url": "https://twitter.com/vivianphung/status/1354193262689579014",
+          "label": "Vivian Phung \ud83c\uddfa\ud83c\uddf8 New York, USA iOS Engineer at Instagram"
+        },
+        {
+          "url": "https://twitter.com/mehermakes/status/1328059212610605056",
+          "label": "Meher Goel \ud83c\uddfa\ud83c\uddf8 New York, USA Senior Product Designer Etsy"
+        },
+        {
+          "url": "https://twitter.com/marauders/status/1363819069770772482",
+          "label": "Erifili \ud83c\uddec\ud83c\udde7 London, UK Founder TZL Social and TheGenZClub, Forbes 30 under 30 GR."
+        },
+        {
+          "url": "https://twitter.com/cathydinas/status/1320590620210032640",
+          "label": "Cathy Dinas \ud83c\uddfa\ud83c\uddf8 Los Angeles, USA Director of Operations at Backstage Capital"
+        },
+        {
+          "url": "https://twitter.com/hotgirlintech/status/1333225818407911425",
+          "label": "Lex Oiler \ud83c\uddfa\ud83c\uddf8 Los Angeles, USA Founder and CEO of Peachy"
+        },
+        {
+          "url": "https://twitter.com/francois_bach/status/1354190270917558272",
+          "label": "Frank Bach \ud83c\uddfa\ud83c\uddf8 Los Angeles, CA Lead Designer"
+        },
+        {
+          "url": "https://twitter.com/bobbilee19/status/1309634507734097920",
+          "label": "Bobbilee Hartman \ud83c\uddfa\ud83c\uddf8 USA Developer relations at Square"
+        },
+        {
+          "url": "https://twitter.com/Jobvo/status/1374722678813306881",
+          "label": "Job van der Voort \ud83c\uddf3\ud83c\uddf1 Amsterdam, NL Co-founder and CEO of Remote"
+        },
+        {
+          "url": "https://twitter.com/kevinbparry/status/1367819256314880002",
+          "label": "Kevin Parry \ud83c\udde8\ud83c\udde6 Toronto, Canada Stop-Motion Animator + Video Wizard"
+        },
+        {
+          "url": "https://twitter.com/jasonljin/status/1323627535419142145",
+          "label": "Jason Jin \ud83c\uddfa\ud83c\uddf8 New York, USA Founder Bioloopsleep"
+        },
+        {
+          "url": "https://www.instagram.com/p/DBq9eBJPHCc/",
+          "label": "Ella Emhoff \ud83c\uddfa\ud83c\uddf8 Brooklyn, NY Artist and Fashion Designer"
+        },
+        {
+          "url": "https://twitter.com/deeeepka/status/1379733470956691458",
+          "label": "Deepka Rana \ud83c\uddec\ud83c\udde7 London, UK Investor at NorthZone"
+        },
+        {
+          "url": "https://www.nytimes.com/wirecutter/reviews/break-up-with-your-phone/",
+          "label": "Everything You Need to Break Up With Your Phone, From Free Tricks to Phone Safes"
+        },
+        {
+          "url": "https://www.newyorker.com/culture/infinite-scroll/gentle-parenting-my-smartphone-addiction",
+          "label": "Gentle Parenting My Smartphone Addiction"
+        },
+        {
+          "url": "https://www.telegraph.co.uk/money/consumer-affairs/im-spending-100-to-block-social-media/",
+          "label": "I\u2019m spending \u00a3100 to block social media. We\u2019re so hooked on mindless scrolling that companies are now helping us quit"
+        },
+        {
+          "url": "https://www.theguardian.com/thefilter-us/2026/jan/06/how-to-reduce-phone-screen-time",
+          "label": "I asked experts how to reduce screen time \u2013 here\u2019s what they said"
+        },
+        {
+          "url": "https://link.newyorker.com/view/5be9c9c92ddf9c72dc1729d3psxa9.4ewr/1b61e70b",
+          "label": "It\u2019s the third day of 2026.\u00a0Are you resolving to get off your phone this year? Our writers have been grappling with their screen time lately."
+        },
+        {
+          "url": "https://www.wsj.com/health/wellness/what-a-digital-detox-can-do-for-you-e4b0b893",
+          "label": "What a Digital Detox Can Do for You"
+        },
+        {
+          "url": "https://www.latimes.com/california/story/2025-12-31/harvard-westlake-blocks-tiktok-clash-royale-on-student-phones-hows-that-going-down",
+          "label": "Harvard-Westlake blocks TikTok and Clash Royale on student phones. How\u2019s that going down?"
+        },
+        {
+          "url": "https://techcrunch.com/2025/12/25/the-best-distraction-blockers-to-jumpstart-your-focus-in-the-new-year/",
+          "label": "The best distraction blockers to jump-start your focus in the new year"
+        },
+        {
+          "url": "https://www.forbes.com/sites/jaimecatmull/2025/11/21/your-phone-is-costing-you-hours-a-day---and-your-company-millions/",
+          "label": "Future of work piece \u201cYour Phone Is Costing You Hours A Day \u2014 And Your Company Millions\u201d"
+        },
+        {
+          "url": "https://fortune.com/2025/11/19/opal-founder-ceo-kenneth-schlenker-warning-labels-for-social-media-addiction-doomscrolling/",
+          "label": "I helped build the architecture of addiction for social media and I see warning labels coming. That\u2019s just a start."
+        },
+        {
+          "url": "https://www.gq.com/story/real-life-diet-chris-williamson-modern-wisdom",
+          "label": "The Real-Life Diet of Chris Williamson, Who Thinks Fiber Is Coming for Protein\u2019s Throne"
+        },
+        {
+          "url": "https://www.theguardian.com/lifeandstyle/2025/nov/20/hold-an-ice-cube-and-shake-like-a-dog-therapists-on-16-simple-surprising-ways-to-beat-stress",
+          "label": "Hold an ice cube \u2013 and shake like a dog: therapists on 16 simple, surprising ways to beat stress"
+        },
+        {
+          "url": "https://community.opal.so/",
+          "label": "Join Community Forum"
+        },
+        {
+          "url": "https://opalapp.com/quiz",
+          "label": "Try Opal for free"
+        },
+        {
+          "url": "https://opalapp.com/",
+          "label": "English"
+        },
+        {
+          "url": "https://opalapp.com/fr",
+          "label": "French (Standard)"
+        },
+        {
+          "url": "https://opalapp.com/pricing",
+          "label": "Free Trial"
+        },
+        {
+          "url": "https://opalapp.com/pricing",
+          "label": "Pricing"
+        },
+        {
+          "url": "https://opalapp.com/features",
+          "label": "Features"
+        },
+        {
+          "url": "https://apps.apple.com/us/app/opal-screen-time-for-focus/id1497465230",
+          "label": "Download for iOS"
+        },
+        {
+          "url": "https://opalapp.com/mac/download",
+          "label": "Download for Mac"
+        },
+        {
+          "url": "https://opalapp.com/android",
+          "label": "Download for Android"
+        },
+        {
+          "url": "https://scrollingkills.us/",
+          "label": "Scrolling Kills"
+        },
+        {
+          "url": "https://opalapp.com/about",
+          "label": "Our Story"
+        },
+        {
+          "url": "https://opalapp.com/careers",
+          "label": "Careers"
+        },
+        {
+          "url": "https://shop.opal.so/",
+          "label": "Merch Store"
+        },
+        {
+          "url": "https://brandkit.opal.so/press.html",
+          "label": "Press Kit"
+        },
+        {
+          "url": "https://brandkit.opal.so/",
+          "label": "Brand Kit"
+        },
+        {
+          "url": "https://help.opalapp.com/article/how-to-contact-opal-support",
+          "label": "Contact Us"
+        },
+        {
+          "url": "https://opalapp.com/blog/how-to-block-instagram-on-iphone",
+          "label": "How to Block Instagram"
+        },
+        {
+          "url": "https://opalapp.com/blog/how-to-block-tiktok-on-an-iphone",
+          "label": "How to Block TikTok"
+        },
+        {
+          "url": "https://opalapp.com/blog/how-to-block-twitter-on-an-iphone",
+          "label": "How to Block Twitter"
+        },
+        {
+          "url": "https://opalapp.com/blog/how-to-block-facebook-on-an-iphone",
+          "label": "How to Block Facebook"
+        },
+        {
+          "url": "https://opalapp.com/blog/5-ways-to-use-opal-with-shortcuts",
+          "label": "How to use Shortcuts"
+        },
+        {
+          "url": "https://opalapp.com/screentime",
+          "label": "Screen Time"
+        },
+        {
+          "url": "https://community.opalapp.com/",
+          "label": "Community Forum"
+        },
+        {
+          "url": "https://opalapp.com/blog",
+          "label": "Blog"
+        },
+        {
+          "url": "https://opalapp.com/screentime-blogs",
+          "label": "Screen Time Blogs"
+        },
+        {
+          "url": "https://opalapp.com/purchase/focus-coaching",
+          "label": "Focus Coaching"
+        },
+        {
+          "url": "https://opalapp.com/help",
+          "label": "Help Centre"
+        },
+        {
+          "url": "https://opalapp.com/terms",
+          "label": "Terms of Use"
+        },
+        {
+          "url": "https://opalapp.com/terms",
+          "label": "Privacy Policy"
+        },
+        {
+          "url": "https://opalapp.com/students",
+          "label": "For Students"
+        },
+        {
+          "url": "https://opalapp.com/gift",
+          "label": "Gift Cards"
+        },
+        {
+          "url": "https://opalapp.com/blog/opal-saved-humans-over-500-million-hours",
+          "label": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 hours saved with Opal"
+        }
+      ]
+    },
+    "minimalist": {
+      "url": "https://beminimalist.co/products/vitamin-b5-10-moisturizer",
+      "fetched_at": "2026-11-21T10:04:19.028131+00:00",
+      "navigation": [
+        {
+          "url": "https://beminimalist.co/pages/download-app-ios-android",
+          "label": "Kit as Gift(Over \u20b91399) - Only on App Purchases!"
+        },
+        {
+          "url": "https://beminimalist.co/pages/download-app-page",
+          "label": "Get 100 mCash on First App Order"
+        },
+        {
+          "url": "https://beminimalist.co/pages/minimalist-b2g3rdfree-one-product-free",
+          "label": "Upto 33% OFF + Freebies"
+        },
+        {
+          "url": "https://beminimalist.co/pages/minimalist-b2g1-offer",
+          "label": "Buy 2, Get 3rd Free"
+        },
+        {
+          "url": "https://beminimalist.co/search",
+          "label": "Search"
+        },
+        {
+          "url": "https://shopify.com/41096085665/account",
+          "label": "Account"
+        },
+        {
+          "url": "https://beminimalist.co/cart",
+          "label": "\u20b9 0 ( 0 )"
+        },
+        {
+          "url": "https://beminimalist.co/collections",
+          "label": "Shop"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Skin & Body"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-treatment",
+          "label": "Lip"
+        },
+        {
+          "url": "https://beminimalist.co/collections/new-launches",
+          "label": "New Launches"
+        },
+        {
+          "url": "https://beminimalist.co/collections",
+          "label": "Show more"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers",
+          "label": "Best Sellers"
+        },
+        {
+          "url": "https://beminimalist.co/products/salicylic-lha-2-cleanser",
+          "label": "On Sale from \u20b9 269 Salicylic Acid + LHA 2% Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/products/multi-vitamin-spf-50",
+          "label": "On Sale from \u20b9 224 SPF 50 Sunscreen"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-b5-10-moisturizer",
+          "label": "On Sale from \u20b9 314 Vitamin B5 10% Moisturizer"
+        },
+        {
+          "url": "https://beminimalist.co/products/niacinamide-10-with-matmarine",
+          "label": "On Sale from \u20b9 237 Niacinamide 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1",
+          "label": "On Sale from \u20b9 285 Vitamin C 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/products/salicylic-acid-2",
+          "label": "On Sale from \u20b9 237 Salicylic Acid 2% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers",
+          "label": "Show More"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Shop by Concern"
+        },
+        {
+          "url": "https://beminimalist.co/collections/acne-control",
+          "label": "Acne"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-pigmentation",
+          "label": "Pigmentation"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-dryness",
+          "label": "Dryness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "UV Damage"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-underarm-darkness",
+          "label": "Underarm Darkness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-oiliness",
+          "label": "Oiliness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-brightening",
+          "label": "Dullness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-aging",
+          "label": "Aging"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Shop by Ingredients"
+        },
+        {
+          "url": "https://beminimalist.co/collections/vitamin-c",
+          "label": "Vitamin C"
+        },
+        {
+          "url": "https://beminimalist.co/collections/bha-salicylic-acid",
+          "label": "BHA / Salicylic Acid"
+        },
+        {
+          "url": "https://beminimalist.co/collections/retinol",
+          "label": "Retinoid / Retinol"
+        },
+        {
+          "url": "https://beminimalist.co/collections/niacinamide",
+          "label": "Niacinamide"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "UV Filters"
+        },
+        {
+          "url": "https://beminimalist.co/collections/ceramide",
+          "label": "Ceramide"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin",
+          "label": "Skin Care"
+        },
+        {
+          "url": "https://beminimalist.co/collections/cleanser",
+          "label": "Cleanse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-toner",
+          "label": "Tone"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-serum",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-moisturizer",
+          "label": "Moisturize"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "SPF"
+        },
+        {
+          "url": "https://beminimalist.co/collections/eye-treatment",
+          "label": "Under Eye"
+        },
+        {
+          "url": "https://beminimalist.co/collections/bath-body",
+          "label": "Body Care"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-wash",
+          "label": "Cleanse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-underarm-darkness",
+          "label": "Roll On"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-lotion",
+          "label": "Lotion"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-treatment",
+          "label": "Lip"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-pigmentation",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/protect-lip",
+          "label": "Protect"
+        },
+        {
+          "url": "https://beminimalist.co/products/retinal-0-1-face-serum",
+          "label": "New Launch: Retinol 0.1% Serum Our New Anti-Aging Powerhouse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/baby-care",
+          "label": "Baby Care"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-ceramide-vitamin-b5-delicate-cleanser",
+          "label": "\u20b9 539 MRP \u20b9 599 Ceramide & Vitamin B5 Delicate Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-ceramide-squalane-nourishing-lotion",
+          "label": "\u20b9 809 MRP \u20b9 899 Ceramide & Squalane Nourishing Lotion"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-zinc-oxide-b5-healing-ointment",
+          "label": "\u20b9 359 MRP \u20b9 399 Zinc Oxide + B5 Healing Ointment"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-provitamin-d3-massage-oil",
+          "label": "\u20b9 539 MRP \u20b9 599 Provitamin D3 Massage Oil"
+        },
+        {
+          "url": "https://beminimalist.co/collections/baby-care",
+          "label": "Show More"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Shop by Concern"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-fall",
+          "label": "Hair Fall"
+        },
+        {
+          "url": "https://beminimalist.co/collections/damaged-hair",
+          "label": "Damaged Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-dandruff",
+          "label": "Dandruff"
+        },
+        {
+          "url": "https://beminimalist.co/collections/scalp-irritation",
+          "label": "Scalp Irritation"
+        },
+        {
+          "url": "https://beminimalist.co/collections/frizzy-hair",
+          "label": "Frizzy Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/dull-hair",
+          "label": "Dull Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/oily-scalp",
+          "label": "Oily Scalp"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-thinning",
+          "label": "Hair Thinning"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Shop by Ingredients"
+        },
+        {
+          "url": "https://beminimalist.co/products/hair-growth-actives-18",
+          "label": "Capixyl"
+        },
+        {
+          "url": "https://beminimalist.co/collections/damage-repair-range",
+          "label": "Maleic Acid"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-peptide",
+          "label": "Peptide"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-b6-carnitine-03-scalp-serum",
+          "label": "Carnitine"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-serum",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-shampoo",
+          "label": "Shampoo"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-mask",
+          "label": "Mask"
+        },
+        {
+          "url": "https://beminimalist.co/pages/skin-insights",
+          "label": "AI Assistants"
+        },
+        {
+          "url": "https://beminimalist.co/pages/skin-insights",
+          "label": "Skin Insights- Image Analyzer"
+        },
+        {
+          "url": "https://beminimalist.co/pages/minimalist-ai-assistant",
+          "label": "Clare - AI Assistant"
+        },
+        {
+          "url": "https://beminimalist.clickpost.ai/",
+          "label": "Track Order"
+        },
+        {
+          "url": "https://beminimalist.co/search",
+          "label": "Search"
+        },
+        {
+          "url": "https://shopify.com/41096085665/account",
+          "label": "Account"
+        },
+        {
+          "url": "https://beminimalist.co/cart",
+          "label": "\u20b9 0 ( 0 )"
+        },
+        {
+          "url": "https://beminimalist.co/collections",
+          "label": "Shop"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Skin & Body"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-treatment",
+          "label": "Lip"
+        },
+        {
+          "url": "https://beminimalist.co/collections/new-launches",
+          "label": "New Launches"
+        },
+        {
+          "url": "https://beminimalist.co/collections",
+          "label": "Show more"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers",
+          "label": "Best Sellers"
+        },
+        {
+          "url": "https://beminimalist.co/products/salicylic-lha-2-cleanser",
+          "label": "Salicylic Acid + LHA 2% Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/products/multi-vitamin-spf-50",
+          "label": "SPF 50 Sunscreen"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-b5-10-moisturizer",
+          "label": "Vitamin B5 10% Moisturizer"
+        },
+        {
+          "url": "https://beminimalist.co/products/niacinamide-10-with-matmarine",
+          "label": "Niacinamide 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1",
+          "label": "Vitamin C 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/products/salicylic-acid-2",
+          "label": "Salicylic Acid 2% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers",
+          "label": "Show More"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Shop by Concern"
+        },
+        {
+          "url": "https://beminimalist.co/collections/acne-control",
+          "label": "Acne"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-pigmentation",
+          "label": "Pigmentation"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-dryness",
+          "label": "Dryness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "UV Damage"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-underarm-darkness",
+          "label": "Underarm Darkness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-oiliness",
+          "label": "Oiliness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-brightening",
+          "label": "Dullness"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-aging",
+          "label": "Aging"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin-body-1",
+          "label": "Shop by Ingredients"
+        },
+        {
+          "url": "https://beminimalist.co/collections/vitamin-c",
+          "label": "Vitamin C"
+        },
+        {
+          "url": "https://beminimalist.co/collections/bha-salicylic-acid",
+          "label": "BHA / Salicylic Acid"
+        },
+        {
+          "url": "https://beminimalist.co/collections/retinol",
+          "label": "Retinoid / Retinol"
+        },
+        {
+          "url": "https://beminimalist.co/collections/niacinamide",
+          "label": "Niacinamide"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "UV Filters"
+        },
+        {
+          "url": "https://beminimalist.co/collections/ceramide",
+          "label": "Ceramide"
+        },
+        {
+          "url": "https://beminimalist.co/collections/skin",
+          "label": "Skin Care"
+        },
+        {
+          "url": "https://beminimalist.co/collections/cleanser",
+          "label": "Cleanse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-toner",
+          "label": "Tone"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-serum",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/face-moisturizer",
+          "label": "Moisturize"
+        },
+        {
+          "url": "https://beminimalist.co/collections/uv-filters",
+          "label": "SPF"
+        },
+        {
+          "url": "https://beminimalist.co/collections/eye-treatment",
+          "label": "Under Eye"
+        },
+        {
+          "url": "https://beminimalist.co/collections/bath-body",
+          "label": "Body Care"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-wash",
+          "label": "Cleanse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-underarm-darkness",
+          "label": "Roll On"
+        },
+        {
+          "url": "https://beminimalist.co/collections/body-lotion",
+          "label": "Lotion"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-treatment",
+          "label": "Lip"
+        },
+        {
+          "url": "https://beminimalist.co/collections/lip-pigmentation",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/protect-lip",
+          "label": "Protect"
+        },
+        {
+          "url": "https://beminimalist.co/products/retinal-0-1-face-serum",
+          "label": "New Launch: Retinol 0.1% Serum Our New Anti-Aging Powerhouse"
+        },
+        {
+          "url": "https://beminimalist.co/collections/baby-care",
+          "label": "Baby Care"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-ceramide-vitamin-b5-delicate-cleanser",
+          "label": "Ceramide & Vitamin B5 Delicate Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-ceramide-squalane-nourishing-lotion",
+          "label": "Ceramide & Squalane Nourishing Lotion"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-zinc-oxide-b5-healing-ointment",
+          "label": "Zinc Oxide + B5 Healing Ointment"
+        },
+        {
+          "url": "https://beminimalist.co/products/pediatrics-provitamin-d3-massage-oil",
+          "label": "Provitamin D3 Massage Oil"
+        },
+        {
+          "url": "https://beminimalist.co/collections/baby-care",
+          "label": "Show More"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Shop by Concern"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-fall",
+          "label": "Hair Fall"
+        },
+        {
+          "url": "https://beminimalist.co/collections/damaged-hair",
+          "label": "Damaged Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/anti-dandruff",
+          "label": "Dandruff"
+        },
+        {
+          "url": "https://beminimalist.co/collections/scalp-irritation",
+          "label": "Scalp Irritation"
+        },
+        {
+          "url": "https://beminimalist.co/collections/frizzy-hair",
+          "label": "Frizzy Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/dull-hair",
+          "label": "Dull Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/oily-scalp",
+          "label": "Oily Scalp"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-thinning",
+          "label": "Hair Thinning"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Shop by Ingredients"
+        },
+        {
+          "url": "https://beminimalist.co/products/hair-growth-actives-18",
+          "label": "Capixyl"
+        },
+        {
+          "url": "https://beminimalist.co/collections/damage-repair-range",
+          "label": "Maleic Acid"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-peptide",
+          "label": "Peptide"
+        },
+        {
+          "url": "https://beminimalist.co/products/vitamin-b6-carnitine-03-scalp-serum",
+          "label": "Carnitine"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair",
+          "label": "Hair"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-serum",
+          "label": "Treat"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-shampoo",
+          "label": "Shampoo"
+        },
+        {
+          "url": "https://beminimalist.co/collections/hair-mask",
+          "label": "Mask"
+        },
+        {
+          "url": "https://beminimalist.co/pages/skin-insights",
+          "label": "AI Assistants"
+        },
+        {
+          "url": "https://beminimalist.co/pages/skin-insights",
+          "label": "Skin Insights- Image Analyzer"
+        },
+        {
+          "url": "https://beminimalist.co/pages/minimalist-ai-assistant",
+          "label": "Clare - AI Assistant"
+        },
+        {
+          "url": "https://beminimalist.clickpost.ai/",
+          "label": "Track Order"
+        },
+        {
+          "url": "https://shopify.com/41096085665/account",
+          "label": "Account"
+        },
+        {
+          "url": "https://beminimalist.co/cdn-cgi/l/email-protection",
+          "label": "Email"
+        },
+        {
+          "url": "https://www.facebook.com/minimalistinc",
+          "label": "Facebook"
+        },
+        {
+          "url": "https://www.instagram.com/beminimalist__/",
+          "label": "Instagram"
+        },
+        {
+          "url": "https://www.youtube.com/@beminimalist",
+          "label": "YouTube"
+        },
+        {
+          "url": "https://beminimalist.co/products/salicylic-lha-2-cleanser",
+          "label": "Salicylic Acid + LHA 2% Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/salicylic-lha-2-cleanser",
+          "label": "Salicylic Acid + LHA 2% Cleanser"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/multi-vitamin-spf-50",
+          "label": "SPF 50 Sunscreen"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/niacinamide-10-with-matmarine",
+          "label": "Niacinamide 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1",
+          "label": "Vitamin C 10% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/salicylic-acid-2",
+          "label": "Salicylic Acid 2% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/collections/best-sellers/products/alpha-arbutin-2",
+          "label": "Alpha Arbutin 2% Face Serum"
+        },
+        {
+          "url": "https://beminimalist.co/cdn-cgi/l/email-protection",
+          "label": "[email\u00a0protected]"
+        },
+        {
+          "url": "https://beminimalist.co/pages/about",
+          "label": "About Us"
+        },
+        {
+          "url": "https://beminimalist.co/pages/our-values",
+          "label": "Our values"
+        },
+        {
+          "url": "https://beminimalist.co/pages/privacy-policy",
+          "label": "Privacy notice"
+        },
+        {
+          "url": "https://beminimalist.co/pages/cookie-policy",
+          "label": "Cookie Policy"
+        },
+        {
+          "url": "https://beminimalist.co/pages/terms",
+          "label": "Terms & conditions"
+        },
+        {
+          "url": "https://beminimalist.co/pages/disclaimer",
+          "label": "Disclaimer"
+        },
+        {
+          "url": "https://beminimalist.co/pages/corporate-information",
+          "label": "Corporate Information"
+        },
+        {
+          "url": "https://beminimalist.co/pages/media",
+          "label": "Media Outreach"
+        },
+        {
+          "url": "https://beminimalist.co/pages/distribution",
+          "label": "Distributor Queries"
+        },
+        {
+          "url": "https://beminimalist.co/pages/grievances",
+          "label": "Grievance Redressal"
+        },
+        {
+          "url": "https://beminimalist.co/pages/blogs",
+          "label": "Knowledge"
+        },
+        {
+          "url": "https://beminimalist.co/pages/faqs",
+          "label": "FAQs"
+        },
+        {
+          "url": "https://beminimalist.co/pages/shipping-policy",
+          "label": "Shipping Policy"
+        },
+        {
+          "url": "https://beminimalist.co/pages/return-refund-policy",
+          "label": "Return & refund policy"
+        },
+        {
+          "url": "https://beminimalist.co/pages/payment-policy",
+          "label": "Payment Policy"
+        },
+        {
+          "url": "https://beminimalist.clickpost.ai/",
+          "label": "Track order"
+        },
+        {
+          "url": "https://beminimalist.co/pages/download-app-ios-android",
+          "label": "Download App"
+        },
+        {
+          "url": "https://beminimalist.co/pages/reviews-1",
+          "label": "Reviews"
+        },
+        {
+          "url": "https://api.whatsapp.com/send/",
+          "label": "+91 7412 092487"
+        },
+        {
+          "url": "https://beminimalist.co/cdn-cgi/l/email-protection",
+          "label": "[email\u00a0protected]"
+        },
+        {
+          "url": "https://beminimalist.co/pages/get-in-touch",
+          "label": "our contact form"
+        },
+        {
+          "url": "https://beminimalist.co/cdn-cgi/l/email-protection",
+          "label": "[email\u00a0protected]"
+        },
+        {
+          "url": "https://beminimalist.co/cdn-cgi/l/email-protection",
+          "label": "Email"
+        },
+        {
+          "url": "https://www.facebook.com/minimalistinc",
+          "label": "Facebook"
+        },
+        {
+          "url": "https://www.instagram.com/beminimalist__/",
+          "label": "Instagram"
+        },
+        {
+          "url": "https://www.youtube.com/@beminimalist",
+          "label": "YouTube"
+        },
+        {
+          "url": "https://beminimalist.co/",
+          "label": "Minimalist"
+        },
+        {
+          "url": "https://www.shopify.com/",
+          "label": "Powered by Shopify"
+        },
+        {
+          "url": "https://beminimalist.co/collections/all",
+          "label": "Continue browsing"
+        }
+      ]
+    }
+  }
+}
