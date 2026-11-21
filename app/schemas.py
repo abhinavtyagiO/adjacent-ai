@@ -1,14 +1,15 @@
-"""Version 1 BIP contract. Sections are retained even when no evidence is available.
+"""Version 2 BIP contract. Sections are retained even when no evidence is available.
 
 Website-only onboarding is valid. A name is required at confirmation, never guessed
 from a domain. Offering audience and psychology data belong to each offering.
 """
 
+import re
 from datetime import datetime
 from typing import Annotated, Any, Literal, get_args
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 
 from app.crawling.urls import normalize_url
 
@@ -84,6 +85,8 @@ class Persona(Schema):
     buying_triggers: list[str] = Field(default_factory=list)
     objections: list[str] = Field(default_factory=list)
     preferred_channels: list[str] = Field(default_factory=list)
+    adjacent_interests: list[str] = Field(default_factory=list)
+    relatable_situations: list[str] = Field(default_factory=list)
 
 
 class AudienceSegment(Schema):
@@ -107,6 +110,9 @@ class Psychology(Schema):
     purchase_triggers: list[str] = Field(default_factory=list)
     decision_criteria: list[str] = Field(default_factory=list)
     emotional_benefits: list[str] = Field(default_factory=list)
+    adjacent_interests: list[str] = Field(default_factory=list)
+    relatable_situations: list[str] = Field(default_factory=list)
+    emotional_triggers: list[str] = Field(default_factory=list)
 
 
 class Pricing(Schema):
@@ -118,13 +124,33 @@ class Pricing(Schema):
     pricing_url: str | None = None
 
 
+class PricingTier(Schema):
+    name: Name
+    pricing: Pricing = Field(default_factory=Pricing)
+    features: list[str] = Field(default_factory=list)
+
+
+class ScopedClaim(Schema):
+    text: str
+    scope: Literal["BRAND", "OFFERING", "FACILITY", "NEWSLETTER", "CUSTOMER_ANECDOTE"]
+    subject: str | None = None
+
+
 class OfferingData(Schema):
     name: Name
+    key: str | None = None
     kind: Literal["PRODUCT", "SERVICE", "OTHER"] | None = None
+    catalog_level: Literal["FAMILY", "PRODUCT", "VARIANT"] | None = None
+    parent_offering_key: str | None = None
+    variants: list[str] = Field(default_factory=list)
+    supported_platforms: list[str] = Field(default_factory=list)
+    pricing_tiers: list[PricingTier] = Field(default_factory=list)
+    claims: list[ScopedClaim] = Field(default_factory=list)
     description: str | None = None
     url: str | None = None
     features: list[str] = Field(default_factory=list)
     benefits: list[str] = Field(default_factory=list)
+    ingredients: list[str] = Field(default_factory=list)
     use_cases: list[str] = Field(default_factory=list)
     pricing: Pricing = Field(default_factory=Pricing)
     audiences: Audiences = Field(default_factory=Audiences)
@@ -154,6 +180,7 @@ class TrustAndProof(Schema):
     awards: list[str] = Field(default_factory=list)
     metrics: list[str] = Field(default_factory=list)
     guarantees: list[str] = Field(default_factory=list)
+    scoped_claims: list[ScopedClaim] = Field(default_factory=list)
 
 
 class BrandVoice(Schema):
@@ -163,6 +190,7 @@ class BrandVoice(Schema):
     preferred_terms: list[str] = Field(default_factory=list)
     avoided_terms: list[str] = Field(default_factory=list)
     example_phrases: list[str] = Field(default_factory=list)
+    cultural_contexts: list[str] = Field(default_factory=list)
 
 
 class Color(Schema):
@@ -187,6 +215,10 @@ class CreativeContext(Schema):
     available_assets: list[str] = Field(default_factory=list)
     seasonal_context: list[str] = Field(default_factory=list)
     calls_to_action: list[str] = Field(default_factory=list)
+    content_pillars: list[str] = Field(default_factory=list)
+    creative_angles: list[str] = Field(default_factory=list)
+    cultural_contexts: list[str] = Field(default_factory=list)
+    relatable_situations: list[str] = Field(default_factory=list)
 
 
 class MarketingGuardrails(Schema):
@@ -232,14 +264,130 @@ class Citation(Schema):
 
 class LLMEvidence(Schema):
     path: str
-    origin: Literal["WEBSITE", "INFERRED"]
+    origin: Literal["WEBSITE", "CLASSIFIED", "INFERRED"]
     citations: list[Citation] = Field(default_factory=list)
     reasoning: str | None = None
+
+    @field_validator("path")
+    @classmethod
+    def canonical_pointer(cls, value):
+        """Normalize equivalent dotted/indexed paths; unknown paths remain unverifiable."""
+        if re.fullmatch(
+            r"(?:profile\.)?[A-Za-z_][\w]*(?:(?:\.[A-Za-z_\d][\w]*)|(?:\[\d+\]))*", value
+        ):
+            value = value.removeprefix("profile.")
+            value = "/" + re.sub(r"\[(\d+)\]", r".\1", value).replace(".", "/")
+        return value.removeprefix("/profile") if value.startswith("/profile/") else value
 
 
 class ExtractionResult(Schema):
     profile: BIP
     evidence: list[LLMEvidence] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class FactualOffering(Schema):
+    """Catalog-only wire schema keeps reasoning and persona arrays out of call 1."""
+
+    name: Name
+    kind: Literal["PRODUCT", "SERVICE", "OTHER"] | None = None
+    catalog_level: Literal["FAMILY", "PRODUCT", "VARIANT"] | None = None
+    parent_offering_key: str | None = None
+    variants: list[str] = Field(default_factory=list)
+    description: str | None = None
+    url: str | None = None
+    features: list[str] = Field(default_factory=list)
+    benefits: list[str] = Field(default_factory=list)
+    ingredients: list[str] = Field(default_factory=list)
+    use_cases: list[str] = Field(default_factory=list)
+    supported_platforms: list[str] = Field(default_factory=list)
+    pricing: Pricing = Field(default_factory=Pricing)
+    pricing_tiers: list[PricingTier] = Field(default_factory=list)
+    claims: list[ScopedClaim] = Field(default_factory=list)
+
+
+class FactualProfile(Schema):
+    brand_identity: BrandIdentity
+    business_positioning: BusinessPositioning = Field(default_factory=BusinessPositioning)
+    offerings: list[FactualOffering] = Field(default_factory=list)
+    value_propositions: ValuePropositions = Field(default_factory=ValuePropositions)
+    trust_and_proof: TrustAndProof = Field(default_factory=TrustAndProof)
+    visual_identity: VisualIdentity = Field(default_factory=VisualIdentity)
+    marketing_guardrails: MarketingGuardrails = Field(default_factory=MarketingGuardrails)
+    marketing_defaults: MarketingDefaults = Field(default_factory=MarketingDefaults)
+
+
+class FactualResult(Schema):
+    profile: FactualProfile
+    evidence: list[LLMEvidence] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class FactualCitation(Schema):
+    """One verbatim excerpt can support multiple exact scalar pointers."""
+
+    source_id: str
+    quote: str = Field(min_length=1, max_length=1600)
+    paths: list[str] = Field(min_length=1, max_length=200)
+    origin: Literal["WEBSITE", "CLASSIFIED"] = "WEBSITE"
+    reasoning: str | None = None
+
+
+class CitedFactualResult(Schema):
+    """Compact inference wire format; expanded into the existing verification contract."""
+
+    profile: FactualProfile
+    citations: list[FactualCitation] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class OfferingInsight(Schema):
+    offering_key: str
+    audiences: Audiences = Field(default_factory=Audiences)
+    customer_psychology: Psychology = Field(default_factory=Psychology)
+
+
+class MarketingResult(Schema):
+    customer_personas_and_audience_segments: Audiences = Field(default_factory=Audiences)
+    customer_psychology: Psychology = Field(default_factory=Psychology)
+    brand_voice: BrandVoice = Field(default_factory=BrandVoice)
+    creative_context: CreativeContext = Field(default_factory=CreativeContext)
+    offering_insights: list[OfferingInsight] = Field(default_factory=list)
+    evidence: list[LLMEvidence] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
+
+
+class ObservedContent(Schema):
+    existing_content_formats: list[str] = Field(default_factory=list)
+    available_assets: list[str] = Field(default_factory=list)
+    calls_to_action: list[str] = Field(default_factory=list)
+
+
+class DraftFactualProfile(FactualProfile):
+    brand_voice: BrandVoice = Field(default_factory=BrandVoice)
+    creative_context: ObservedContent = Field(default_factory=ObservedContent)
+
+
+class DraftFactualResult(Schema):
+    """Default factual wire contract: no evidence, quotes or pointer generation."""
+
+    profile: DraftFactualProfile
+    warnings: list[str] = Field(default_factory=list)
+
+
+class DraftOfferingInsight(OfferingInsight):
+    explanation: str | None = None
+
+
+class DraftMarketingResult(Schema):
+    """Audience/creative hypotheses; explanations are optional short review notes."""
+
+    customer_personas_and_audience_segments: Audiences = Field(default_factory=Audiences)
+    customer_psychology: Psychology = Field(default_factory=Psychology)
+    brand_voice: BrandVoice = Field(default_factory=BrandVoice)
+    creative_context: CreativeContext = Field(default_factory=CreativeContext)
+    offering_insights: list[DraftOfferingInsight] = Field(default_factory=list)
+    explanation: str | None = None
     warnings: list[str] = Field(default_factory=list)
 
 
@@ -255,6 +403,18 @@ class CreateBrand(Schema):
 
 class ExtractionRequest(Schema):
     replace_existing: bool = False
+    offering_key: str | None = None
+    chatgpt_account_id: UUID | None = None
+    factual_model: str | None = Field(None, min_length=1, max_length=200)
+    marketing_model: str | None = Field(None, min_length=1, max_length=200)
+
+
+class MarketingEnrichmentRequest(Schema):
+    expected_revision: int | None = Field(None, ge=0)
+    offering_key: str | None = None
+    replace_reviewed: StrictBool = False
+    chatgpt_account_id: UUID | None = None
+    marketing_model: str | None = Field(None, min_length=1, max_length=200)
 
 
 class ProfilePatch(Schema):
@@ -272,10 +432,12 @@ class ProvenanceCitation(Citation):
 
 class FieldProvenance(Schema):
     path: str
-    origin: Literal["WEBSITE", "INFERRED", "USER"]
+    origin: Literal["WEBSITE", "CLASSIFIED", "AI_EXTRACTED", "INFERRED", "USER"]
     citations: list[ProvenanceCitation]
     reasoning: str | None
     recorded_at: datetime
+    confirmed_by_user: bool = False
+    confirmation_revision: int | None = None
 
 
 class ProfileResponse(Schema):
@@ -291,3 +453,28 @@ class ProfileResponse(Schema):
     extracted_at: datetime | None
     updated_at: datetime
     confirmed_at: datetime | None
+    source_coverage: dict[str, Any] = Field(default_factory=dict)
+    creative_readiness: dict[str, Any] = Field(default_factory=dict)
+    extraction_metrics: dict[str, Any] = Field(default_factory=dict)
+    stages: dict[
+        str,
+        Literal[
+            "SUCCEEDED",
+            "RUNNING",
+            "FAILED",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_DATA",
+            "SKIPPED",
+            "UNKNOWN",
+        ],
+    ] = Field(default_factory=dict)
+    evidence_validation: dict[str, Any] = Field(default_factory=dict)
+    evidence_validation_history: list[dict[str, Any]] = Field(default_factory=list)
+    stage_errors: dict[str, Any] = Field(default_factory=dict)
+    extraction_mode: Literal["draft_first", "strict", "legacy"] = "legacy"
+    completeness: dict[str, Any] = Field(default_factory=dict)
+    claim_review: list[dict[str, Any]] = Field(default_factory=list)
+    catalog: dict[str, Any] = Field(default_factory=dict)
+    customer_concerns: list[dict[str, Any]] = Field(default_factory=list)
+    marketing_enrichment: dict[str, Any] = Field(default_factory=dict)
+    source_job_id: UUID | None = None

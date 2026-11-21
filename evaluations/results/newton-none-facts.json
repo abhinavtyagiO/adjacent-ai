@@ -1,0 +1,955 @@
+{
+  "profile": {
+    "brand_identity": {
+      "name": "Newton School",
+      "website_url": "https://www.newtonschool.co/",
+      "legal_name": "Incanus Technologies Pvt. Ltd.",
+      "tagline": "Outcome Oriented Education",
+      "description": "Newton School is a neo-university offering AI-driven, industry-focused courses in software development and data science, with placement support to help learners secure tech jobs.",
+      "mission": "Make India the developer powerhouse of the world.",
+      "vision": "A world where talent finds opportunity through tech-driven learning.",
+      "values": [],
+      "founded_year": 2019,
+      "headquarters": null,
+      "operating_regions": [
+        "India"
+      ]
+    },
+    "business_positioning": {
+      "industry": "EdTech / Tech Education",
+      "category": "Tech career education and placement programs",
+      "business_model": "Paid online courses and programs with placement assistance; also offers degree-style NSAT-admission programs",
+      "market_position": "Outcome-oriented neo-university focused on tech job placement",
+      "positioning_statement": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job.",
+      "differentiators": [
+        "Industry-oriented curriculum designed by FAANG/IIT/IIM experts",
+        "Placement assistance with 800+ hiring partners",
+        "AI-driven learning products including AI IDE and AI mock interviews",
+        "Lifetime placement assistance"
+      ],
+      "geographic_markets": [
+        "India"
+      ]
+    },
+    "offerings": [
+      {
+        "name": "Professional Certificate Course in Data Science & AI",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "92% Placement Rate; ₹6–12 LPA Average Package; 1.3 Cr Highest Package.",
+            "scope": "OFFERING",
+            "subject": "Professional Certificate Course in Data Science & AI"
+          }
+        ],
+        "description": "A professional certificate course covering Data Analytics, Data Science and AI with 1:1 mentorship, 20+ industry projects and placement support from Month 4.",
+        "url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+        "features": [
+          "1:1 Mentorship from Industry Experts",
+          "20+ Industry Projects",
+          "Lifetime Placement Assistance",
+          "Curriculum designed by IIT and IIM graduates"
+        ],
+        "benefits": [
+          "Designed to get you placed",
+          "No coding experience required"
+        ],
+        "use_cases": [
+          "Launching a tech career in Data Science",
+          "Upskilling into Data Analytics"
+        ],
+        "pricing": {
+          "model": "Installment / monthly",
+          "amount": "₹7,000 /month; Total: ₹2,45,000*",
+          "currency": "INR",
+          "billing_period": "month",
+          "details": "Scholarship up to ₹40,000 available; flexible payment plans.",
+          "pricing_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Advanced Full Stack Development",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "4500+ Tech Professionals placed.",
+            "scope": "OFFERING",
+            "subject": "Advanced Full Stack Development"
+          }
+        ],
+        "description": "Advanced software development course focused on advanced DSA, system design and interview preparation for software engineers looking for a job change.",
+        "url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development",
+        "features": [
+          "Advanced DSA and Algorithms",
+          "System Design (HLD & LLD)",
+          "Mock Interviews with FAANG Engineers",
+          "Company-Focused Prep"
+        ],
+        "benefits": [
+          "Designed by Software Engineers",
+          "Get Direct Referrals in 800+ companies"
+        ],
+        "use_cases": [
+          "Job change for software engineers",
+          "Interview preparation"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Applied Agentic & GenAI Systems",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "A course on applied Agentic and GenAI systems requiring coding experience, featuring live learning and production-oriented projects.",
+        "url": "https://www.newtonschool.co/",
+        "features": [
+          "90+ Hours of Intensive, Hands-On Live Learning",
+          "Build 10+ Production-oriented, Portfolio-defining Projects",
+          "Faculty Featuring MAANG Engineers and AI Experts"
+        ],
+        "benefits": [],
+        "use_cases": [
+          "Building production-oriented AI projects"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": "Rs. 5,000",
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Coding experience required.",
+          "pricing_url": "https://www.newtonschool.co/"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Newton School of Technology",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "Ranked #22, Qualified for ICPC Asia West; Secured internships with highest stipend of ₹2.5L; 6 first-year students selected for Google Summer of Code.",
+            "scope": "OFFERING",
+            "subject": "Newton School of Technology"
+          }
+        ],
+        "description": "A degree-style program with NSAT exam admission, approved by UGC & NSDC.",
+        "url": "https://www.newtonschool.co/",
+        "features": [
+          "NSAT exam admission",
+          "Approved by UGC & NSDC"
+        ],
+        "benefits": [],
+        "use_cases": [
+          "Undergraduate tech education"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": "Up to 100% scholarship.",
+          "pricing_url": "https://www.newtonschool.co/"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Agentic Generalist",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "An affordable, industry-ready program for working professionals to master Agentic AI without coding and build real AI agents, projects and portfolio.",
+        "url": "https://www.newtonschool.co/agentic-generalist-program",
+        "features": [
+          "4-month curriculum",
+          "No coding required",
+          "Build real AI agents and portfolio"
+        ],
+        "benefits": [],
+        "use_cases": [
+          "Learning Agentic AI",
+          "Building AI agents without coding"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": "₹5,000",
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Block your seat by paying ₹5,000/-.",
+          "pricing_url": "https://www.newtonschool.co/agentic-generalist-program"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "AI Engineering and FDE Integrated Program",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "FREE Claude Tool Subscription; FREE access to AI Mock Interviews; Claude Certified Architect - Foundations worth ₹13,000 included free.",
+            "scope": "OFFERING",
+            "subject": "AI Engineering and FDE Integrated Program"
+          }
+        ],
+        "description": "A 5-month, mentor-led program for software engineers to build agentic AI projects and train as a Forward Deployed Engineer.",
+        "url": "https://www.newtonschool.co/agentic-ai-course",
+        "features": [
+          "22-week curriculum",
+          "100% Online (Live Expert-Led Sessions + Guided Self-Paced Learning)",
+          "Claude Certified Architect - Foundations certification included",
+          "Lifetime Access to Program"
+        ],
+        "benefits": [
+          "Build AI agents and deploy them inside real client businesses"
+        ],
+        "use_cases": [
+          "Career path as AI Engineer or Forward Deployed Engineer"
+        ],
+        "pricing": {
+          "model": "Installment / monthly",
+          "amount": "₹6,000 per month; Total ₹1.8L*",
+          "currency": "INR",
+          "billing_period": "month",
+          "details": "EMI starts from ₹6,000 per month; total ₹1.8L inclusive of taxes.",
+          "pricing_url": "https://www.newtonschool.co/agentic-ai-course"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Newton School Xcelerate",
+        "key": null,
+        "kind": "SERVICE",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [
+          "Data Science Xcelerate",
+          "Advanced Software Development Xcelerate"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "Most learners become placement-ready in 2–4 weeks, and 95% get interview calls within 4 weeks of completing the program.",
+            "scope": "OFFERING",
+            "subject": "Newton School Xcelerate"
+          }
+        ],
+        "description": "A career acceleration program exclusively for Data Analytics & Software professionals, targeting fastest placements with 1 month prep and 1 month referrals.",
+        "url": "https://www.newtonschool.co/courses/newton-school-xcelerate",
+        "features": [
+          "Dedicated 1:1 mentor from a top tech company",
+          "Personalized success manager from Newton School",
+          "Mock interviews, resume review, and interview prep support"
+        ],
+        "benefits": [
+          "Most learners become placement-ready in 2–4 weeks"
+        ],
+        "use_cases": [
+          "Switching to product-based companies or getting a salary hike"
+        ],
+        "pricing": {
+          "model": "EMI / full payment",
+          "amount": "₹8,333/month",
+          "currency": "INR",
+          "billing_period": "month",
+          "details": "EMI starts at ₹8,333/month or full shot payment.",
+          "pricing_url": "https://www.newtonschool.co/courses/newton-school-xcelerate"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": []
+    },
+    "customer_psychology": {
+      "pain_points": [],
+      "desired_outcomes": [],
+      "motivations": [],
+      "fears": [],
+      "objections": [],
+      "purchase_triggers": [],
+      "decision_criteria": [],
+      "emotional_benefits": [],
+      "adjacent_interests": [],
+      "relatable_situations": [],
+      "emotional_triggers": []
+    },
+    "value_propositions": {
+      "primary": "AI-driven, industry-focused courses to secure your dream tech job.",
+      "functional_benefits": [
+        "Industry-oriented curriculum",
+        "AI-driven learning products",
+        "Placement assistance with 800+ hiring partners"
+      ],
+      "emotional_benefits": [
+        "Unlock your dream tech job",
+        "Your first step to find your dream tech job"
+      ],
+      "differentiators": [
+        "Faculty of FAANG and industry experts",
+        "Lifetime placement assistance",
+        "Mock interviews and referrals"
+      ],
+      "reasons_to_believe": [
+        "4,500+ students placed",
+        "800+ hiring partners",
+        "₹1.5 Cr highest package"
+      ]
+    },
+    "trust_and_proof": {
+      "testimonials": [
+        {
+          "quote": "The Mentors helped me with the additional support and my doubts cleared, they analysed my skill and guided me to refine them even further.",
+          "attribution": "Sagrika Keshri",
+          "company": null
+        },
+        {
+          "quote": "Newton School mock interviews played a really vital role in my placement. I gave 4-to or 5 mock interviews that helped me in gaining confidence for my actual interviews and helped me get the job that I dreamed of!",
+          "attribution": "Shaini Ghorai",
+          "company": null
+        }
+      ],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [
+        "4,500+ Students Placed",
+        "800+ Companies Hiring",
+        "₹1.5 Cr Highest Package",
+        "500% Highest Salary Hike"
+      ],
+      "guarantees": [],
+      "scoped_claims": [
+        {
+          "text": "Approved by UGC & NSDC.",
+          "scope": "OFFERING",
+          "subject": "Newton School of Technology"
+        },
+        {
+          "text": "Forbes Quoted Newton School as Job Givers.",
+          "scope": "BRAND",
+          "subject": "Newton School"
+        }
+      ]
+    },
+    "brand_voice": {
+      "tone": [],
+      "personality": [],
+      "language_style": null,
+      "preferred_terms": [],
+      "avoided_terms": [],
+      "example_phrases": [],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [
+        "https://d3dyfaf3iutrxo.cloudfront.net/general/upload/15cd7f7d133245cdbe37cc2e232e6cb6.avif",
+        "https://cdn.prod.website-files.com/62e8d2ea218fb7676b6892a6/671784722241fce77a31cd89_Newton%20School%20Logo%20light.svg"
+      ],
+      "colors": [],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [],
+      "storytelling_angles": [],
+      "existing_content_formats": [],
+      "available_assets": [],
+      "seasonal_context": [],
+      "calls_to_action": [],
+      "content_pillars": [],
+      "creative_angles": [],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [
+        "*GST is applicable",
+        "EMI starts from Rs. 7,950*"
+      ],
+      "compliance_requirements": [],
+      "brand_safety_rules": [],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": "en",
+      "target_regions": [
+        "India"
+      ],
+      "preferred_cta": "Book a Live Class, For Free!",
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": "https://www.newtonschool.co/"
+    }
+  },
+  "evidence": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Newton School – Outcome Oriented Education"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/legal_name",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development",
+          "quote": "Copyright © 2026 Incanus Technologies Pvt. Ltd. All rights reserved."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Newton School – Outcome Oriented Education"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "We are a neo-university with an aim to make India the developer powerhouse of the world."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/vision",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "A world where talent finds opportunity through tech-driven learning."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/founded_year",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "co-founded Newton School, an online learning platform launched in 2019"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/brand_identity/operating_regions",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "make India the developer powerhouse of the world"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+          "quote": "Designed to get you Placed"
+        }
+      ],
+      "reasoning": "Company runs tech education and placement programs."
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "We are a neo-university"
+        }
+      ],
+      "reasoning": "Positions as a neo-university for tech education."
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+          "quote": "₹7,000 /month\nTotal: ₹2,45,000*"
+        }
+      ],
+      "reasoning": "Paid courses with installment and EMI payment options."
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "CLASSIFIED",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Unlock your dream tech job"
+        }
+      ],
+      "reasoning": "Outcome-oriented placement-focused positioning."
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/differentiators",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Industry-oriented curriculum ... AI-driven learning products ... 100% Placement Assistance (Lifetime)"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/business_positioning/geographic_markets",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "make India the developer powerhouse of the world"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/0",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-data-science-v2",
+          "quote": "Professional Certificate Course in Data Science & AI\nMaster Data Analytics, Data Science & AI ... 20+ Industry Projects ... ₹7,000 /month\nTotal: ₹2,45,000*"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/1",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development",
+          "quote": "Advanced Software Development Course ... Get Job Ready for Tech Interviews ... Advanced DSA and Algorithms ... System Design (HLD & LLD)"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/2",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Applied Agentic & GenAI Systems\nRs. 5,000\nCoding exp. required\n- 90+ Hours of Intensive, Hands-On Live Learning"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/3",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Newton School of Technology\nNSAT exam date ... Approved by\nUGC & NSDC ... 35,000+ Students already enrolled"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/4",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/agentic-generalist-program",
+          "quote": "Agentic Generalist ... Master Agentic AI without coding. Newton School's affordable, industry-ready program for working professionals. Build real AI agents, projects & portfolio."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/5",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/agentic-ai-course",
+          "quote": "AI Engineering and FDE Integrated Program ... a 5-month, mentor-led program for software engineers ... EMI Start from\n₹ 6,000 per month\nTotal ₹ 1.8L*"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/offerings/6",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/newton-school-xcelerate",
+          "quote": "Newton School Xcelerate ... 1 Month Prep, 1 Month Referrals ... Data Science Xcelerate ... Advanced Software Development Xcelerate ... EMI starts at ₹8,333/month"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "AI-driven, industry-focused courses in software development and data science to secure your dream tech job."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/functional_benefits",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Industry-oriented curriculum ... AI-driven learning products ... 800+ top companies"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/emotional_benefits",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Unlock your dream tech job ... Your first step to find your dream tech job."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/differentiators",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "100% Placement Assistance (Lifetime)"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Students Placed\n4,500+\nHighest Package\n1.5 Cr ... Companies Hiring\n800+"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/testimonials",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/data-science-reviews-ns",
+          "quote": "The Mentors helped me with the additional support and my doubts cleared, they analysed my skill and guided me to refine them even further."
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/metrics",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Students Placed\n4,500+\nHighest Package\n1.5 Cr ... Highest Salary Hike\n500%"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/courses/professional-certificate-course-in-full-stack-development",
+          "quote": "Forbes Quoted Newton School as Job Givers"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/visual_identity/logo_urls",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "https://cdn.prod.website-files.com/62e8d2ea218fb7676b6892a6/671784722241fce77a31cd89_Newton%20School%20Logo%20light.svg"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_guardrails/legal_disclaimers",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "*GST is applicable"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_defaults/content_language",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Unlock your dream tech job"
+        }
+      ],
+      "reasoning": "Site content is English."
+    },
+    {
+      "path": "/marketing_defaults/target_regions",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/about-us",
+          "quote": "make India the developer powerhouse of the world"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_defaults/preferred_cta",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Book a Live Class, For Free!"
+        }
+      ],
+      "reasoning": null
+    },
+    {
+      "path": "/marketing_defaults/default_landing_page",
+      "origin": "WEBSITE",
+      "citations": [
+        {
+          "source_url": "https://www.newtonschool.co/",
+          "quote": "Your first step to find your dream tech job."
+        }
+      ],
+      "reasoning": null
+    }
+  ],
+  "warnings": [
+    "Headquarters, values, visual colors/fonts, and target marketing channels were not explicitly stated on provided pages and are left null/empty.",
+    "Placement metrics appear in differing figures across pages (e.g. 800+ vs 2,000+ hiring partners); values captured as stated per page."
+  ]
+}

@@ -1,5 +1,66 @@
 # Delivery verification
 
+Latest Phase 1C P0 verification: **16 November 2026**, Python 3.12 / PostgreSQL 16.
+
+- **297 offline tests passed**, including independent marketing-only execution on a seven-product
+  Minimalist profile, saved-source binding, one mocked request, edit/confirmation protection,
+  stale revisions, expired leases, discovery/variant deduplication and safe stream timing.
+- Migration **0004** upgrade, downgrade and re-upgrade verified on the disposable test DB;
+  legacy profile sections/audits survive rollback. Alembic check reports no model/schema drift.
+- Ruff lint/format, Compose configuration and diff checks passed. One pre-existing
+  Starlette/httpx deprecation warning remains.
+- Saved Minimalist data yields seven structured products and source-derived concern signals.
+  A synthetic public product response yields all twelve supplied records without an LLM.
+  Neither is a live full-catalog count, and no count of 83 is assumed.
+- No live inference, live website crawl or production extraction/enrichment job was triggered.
+  The running deployment/database was not migrated or restarted.
+- Standard onboarding adds no primary model call; independent enrichment skips recrawling
+  and factual inference. Expected latency/usage savings are unmeasured live. Real catalog
+  coverage, provider event latency and marketing usefulness require separate authorization.
+
+Apply migration 0004 and rebuild services before a live check. See
+[Phase 1C APIs and architecture](docs/phase1c.md) for rollout and limitations.
+
+## Previous MVP verification
+
+Latest MVP draft-first verification: **15 November 2026**, Python 3.12 / PostgreSQL 16.
+
+- **260 passed**, including citation-free factual/marketing contracts, four-brand fixtures,
+  PostgreSQL draft/edit/confirm/history, strict compatibility and mocked ChatGPT OAuth/SSE.
+- Ruff lint/format, `git diff --check`, Compose configuration and Alembic check passed.
+- No migration required; new metadata uses existing JSONB. BIP-v2 gains optional ingredients.
+- Strict audit/provenance history survives replacement; profile confirmation never approves
+  sensitive claims for advertising. One pre-existing Starlette/httpx warning remains.
+- No live inference, website crawl, account/model discovery or real extraction was triggered.
+  Local API and worker remain stopped. No model/reasoning/deadline/retry/provider changes.
+- Ready for one separately authorized live test after rebuilding/restarting. Real output
+  quality, token usage and latency are unmeasured; reduced citation overhead is an estimate,
+  not an observed speedup. Claim-risk detection is a conservative review aid, not compliance.
+
+See [MVP behavior, contracts and limits](docs/draft-first.md).
+
+## Previous strict-mode verification
+
+Latest verification: 14 November 2026, Python 3.12 and local PostgreSQL 16.
+
+- Full offline suite: **228 passed**, including PostgreSQL/API persistence and mocked OAuth/SSE.
+- Existing Fastlane, Whole Truth and Newton saved-response replays completed without network
+  crawling or inference. Newton's saved marketing remains honestly insufficient.
+- Ruff lint/format and `git diff --check` passed; Alembic detected no schema changes.
+- The 179-uncited-fact regression rejects all 179, saves a sparse DRAFT, reports factual
+  `INSUFFICIENT_EVIDENCE`, skips marketing, and never retries inference. The raw scalar
+  count is 180 including the user-provided website URL anchor.
+- Compact citation expansion rejects unknown source IDs, invented excerpts and unsupported
+  exact names. Existing ingredient/product/price/certification/claim checks remain in place.
+- Separate mocked deadline, disconnection and incomplete-event paths passed.
+- No live LLM calls were made. One existing Starlette/httpx deprecation warning remains.
+
+A later, explicitly authorized single live Minimalist test would measure real model citation
+compliance and latency. Offline tests prove the control flow and validation behavior, not
+real-model quality or speed. See [evidence quality](docs/evidence-quality.md) for details.
+
+## Original delivery record
+
 Verified on 11 November 2026 using Python 3.12.14 and an isolated PostgreSQL 15 server.
 All test data and the temporary API used for smoke checks were local to this task.
 
@@ -33,3 +94,129 @@ Not executed in this environment:
 
 No external company profile, invented company facts, API credential or production data is
 included in the deliverable. Test fixtures are explicitly synthetic.
+
+## DeepSeek strategy update — 12 November 2026
+
+* **75 tests passed** on Python 3.12 and PostgreSQL 15, including both configured providers
+  through async extraction, PostgreSQL draft/source/offerings storage, editing and confirmation.
+* The real SDK is exercised with a mocked HTTP transport for both providers: endpoint,
+  credential, model, strict JSON schema, refusal, truncation and schema validation.
+* Both strategies pass rate-limit retry, bounded timeout and safe authentication-error tests.
+* Environment precedence and the credential-free tracked `.env` are covered by tests.
+* Ruff lint and formatting checks passed. No database schema changes are required.
+* CI now validates Compose configuration as well as running PostgreSQL-backed tests.
+
+DeepSeek uses its documented Responses API schema mode and defaults to `deepseek-flash`.
+A live DeepSeek call was not made because no API key was supplied. Put `DEEPSEEK_API_KEY`
+in ignored `.env.local` to run a real extraction; keep the tracked `.env` credential-free.
+
+## Optional enrichment update — 12 November 2026
+
+107 tests passed against isolated PostgreSQL 16. Regression tests cover all enrichment
+sections, unsupported testimonial removal, preserving supported quotes, clearing inconsistent
+pricing, dropping unnamed offerings and rebuilding nested provenance indexes after filtering.
+Draft persistence and confirmation are verified with missing testimonials, pricing, personas
+and preferences. A missing company name permits a draft but still prevents confirmation.
+Ruff lint/format and diff checks passed. The BIP schema remains intact; no migration is needed.
+Provider tests also verify bounded malformed/truncated-response retries and that diagnostics
+log field locations/types without raw response values.
+
+## Phase 1B — 12 November 2026
+
+- **138 tests passed** against isolated PostgreSQL 16, including two-stage extraction,
+  optional marketing failure preserving factual drafts, both provider HTTP boundaries,
+  scoped/numeric claims, catalog classification, literal-only grouped citation recovery,
+  code-fenced JSON, model/effort overrides, malformed-output usage accounting, JSONB
+  metadata, review corrections, revision fencing and confirmation provenance.
+- Ruff lint/format and diff whitespace checks passed.
+- Alembic 0002 downgrade → upgrade → check passed on the disposable test database;
+  no schema drift was detected.
+- Docker API/worker images built and migration 0002 applied to the local Docker database.
+  Existing profile section checksums, statuses and confirmation timestamps were unchanged.
+- Local HTTP readiness, brand listing, schema v2 and legacy-profile reads returned 200.
+- Actual public-source snapshots and selected model responses are frozen for Fastlane,
+  Whole Truth and Newton; see `evaluations/REPORT.md` for bounded quality measurements,
+  estimated cost assumptions and remaining gaps.
+- Paid comparison calls were stopped at the user's cost constraint. Final fixes were
+  verified with frozen responses and mocked providers only. Batch live evaluation was
+  removed; ordinary tests and recorded replays make no paid model requests.
+
+The default remains DeepSeek Flash, now using effort none for both stages to control cost.
+Independent stage reasoning/model overrides and the retained OpenAI strategy are covered
+by free mocked transport tests. The low-effort comparison is incomplete and is not presented
+as evidence that reasoning improves quality. Newton marketing evidence remains a documented
+limitation of the recorded sample. No further paid call is needed to reproduce the checks.
+
+## Evidence-quality review — offline only
+
+- **173 tests passed** against isolated PostgreSQL 16 (35 additional quality/API cases).
+- Marketing outcomes distinguish parsed-but-empty/mostly-rejected responses with
+  `INSUFFICIENT_EVIDENCE`; provider/schema/timeouts remain `FAILED`. Both preserve facts.
+- Profile API responses expose stage outcomes and per-stage/per-section validation counts,
+  including rejection reasons and safe defaults for unaudited historical profiles.
+- Product readiness checks benefits, detailed audience, motivations and properly scoped
+  source-backed or explicitly user-confirmed claims; null keys never imply selection.
+- Existing Newton/Fastlane/Whole Truth fixtures were replayed without live crawling or
+  model inference. Newton's empty retained marketing projection is insufficient evidence.
+- Ruff lint/format, Alembic check, dependency consistency and diff checks passed. No BIP
+  schema change or database migration is required. One existing Starlette/httpx test-client
+  deprecation warning remains.
+
+No paid inference calls were made during this review. Original raw marketing responses were
+not archived, so original rejected counts cannot be reconstructed from retained-only replays.
+See `evaluations/PHASE1B_REVIEW.md` for detailed counts and remaining limitations.
+
+## Sign in with ChatGPT — 14 November 2026
+
+- **216 offline tests passed** with PostgreSQL 16; OAuth/JWKS/model/SSE calls use
+  MockTransport and generated RSA test keys, never a real login or inference request.
+- Coverage includes PKCE/state/nonce/signature/issuer/audience/expiry, account/workspace
+  binding, missing consent, encrypted owner-only storage, concurrent rotating refresh,
+  revoked/expired sessions, account-specific models, late stream failures/usage limits,
+  no automatic retries/billing fallback, browser-origin protection, PostgreSQL job binding,
+  optional marketing failures preserving factual drafts and encrypted VM session handoff.
+- DeepSeek is blocked in the application factory even if explicitly configured. ChatGPT
+  OAuth never reads an API key; the retained API-key strategy requires explicit billing
+  opt-in and fixes the endpoint to OpenAI. Public/local defaults use plan mode.
+- Alembic 0003 downgrade → upgrade → check passed against the disposable PostgreSQL DB;
+  no schema drift. The BIP v2 contract remains unchanged.
+- Ruff lint/format, dependency consistency, Compose validation, connection-page JavaScript
+  syntax and Docker image builds passed. The API/worker remain stopped.
+
+Actual account eligibility, real OAuth admission and model availability await the user's
+sign-in; they have not been claimed verified. Hosted commercial usage is deliberately blocked
+pending OpenAI preview approval. This is a protected single-workspace local/self-hosted
+installation, not multi-tenant SaaS. Existing test-client deprecation warning remains.
+See `docs/chatgpt-plan.md` for setup, official documentation and preview limitations.
+The local Docker database was upgraded to 0003 with API/worker stopped; existing profile
+section checksums, statuses and confirmation timestamps were unchanged. Stopped service
+containers were recreated with the new configuration to prevent a later start from reusing
+old DeepSeek settings. No sign-in, model listing or inference was performed against a live
+account. Model/eligibility checks remain a user-driven setup step.
+
+## Content-first crawler — 21 November 2026
+
+- **318 offline tests passed** against isolated PostgreSQL 16, with the existing single
+  Starlette/httpx test-client deprecation warning. No tests were skipped in the full run.
+- Saved Opal/Minimalist homepage navigation is replayed with synthetic content responses:
+  Opal's external brand kit and Minimalist's own reviews are visited. Tests do not claim
+  that actual kit contents or colors have been fetched or verified.
+- New checks cover category attempt caps, late proof links in a full candidate set,
+  navigation-label classification, sitemap deferral, declared locales, Shopify aliases,
+  broad public catalog records, literal quotations, scoped CSS/explicit palette signals,
+  asset-host restrictions, CSS robots/shared budgets and factual/marketing context priority.
+- Existing strict evidence, provider, OAuth/SSE, draft checkpoint, marketing-only,
+  PostgreSQL/API and migration-preservation regressions remain green.
+- Ruff lint/format, diff checks, Compose validation and Alembic check passed. No new
+  migration. Docker API/worker/migrate images built successfully (one dependency download
+  timeout was resolved by retrying the build).
+- Local API/worker updated with zero active jobs; readiness returns 200. Checksums of all
+  existing profile rows are unchanged after restart. Runtime uses openai_chatgpt with
+  API-key billing disabled, one LLM/job attempt, unchanged model/effort defaults and
+  120/60-second factual/marketing deadlines. Global crawl ceilings remain 20/40/90.
+
+No live crawl, paid inference or extraction/enrichment enqueue was performed for this
+change. CSS colors remain observed styling, testimonials remain unverified quotations,
+and claim review remains an advertising review aid. Live kit accessibility, palette
+fidelity and marketing usefulness still require a separately authorized check. See
+`docs/content-crawling.md` for exact policy, configuration, coverage diagnostics and limits.

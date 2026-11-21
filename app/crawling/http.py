@@ -5,7 +5,7 @@ import logging
 import socket
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import parse_qs, urlencode, urljoin, urlsplit
 
 import httpx
 
@@ -71,7 +71,24 @@ class PublicFetcher:
     ) -> FetchedPage:
         for _ in range(6):
             try:
+                raw = urlsplit(url)
                 url = normalize_url(url)
+                # Preserve only bounded public catalog pagination. Other query strings
+                # retain the existing canonicalization behavior.
+                import re
+
+                if re.fullmatch(r"/(?:collections/[^/]+/)?products\.json", raw.path):
+                    query = parse_qs(raw.query, strict_parsing=True)
+                    if set(query) - {"page", "limit"} or any(
+                        len(v) != 1 or not v[0].isdigit() for v in query.values()
+                    ):
+                        raise ValueError("Invalid catalog pagination")
+                    if (
+                        not 1 <= int(query.get("page", ["1"])[0]) <= 10
+                        or not 1 <= int(query.get("limit", ["250"])[0]) <= 250
+                    ):
+                        raise ValueError("Catalog pagination exceeds limits")
+                    url += "?" + urlencode({k: v[0] for k, v in query.items()})
             except ValueError as exc:
                 raise DomainError("UNSAFE_URL", "Invalid website or redirect URL") from exc
             parsed = urlsplit(url)
@@ -102,8 +119,18 @@ class PublicFetcher:
                         retryable=response.status_code >= 500 or response.status_code == 429,
                     )
                 media_type = response.headers.get("content-type", "").split(";")[0].lower()
-                if media_type not in {"text/html", "application/xhtml+xml", "text/plain"}:
-                    raise DomainError("UNSUPPORTED_CONTENT", "Website response is not HTML or text")
+                if media_type not in {
+                    "text/html",
+                    "application/xhtml+xml",
+                    "text/plain",
+                    "text/css",
+                    "application/xml",
+                    "text/xml",
+                    "application/json",
+                }:
+                    raise DomainError(
+                        "UNSUPPORTED_CONTENT", "Website response is not supported public text"
+                    )
                 chunks = bytearray()
                 async for chunk in response.aiter_bytes(chunk_size=65_536):
                     chunks.extend(chunk)

@@ -1,0 +1,64 @@
+{
+  "label": "Snapshot capture only",
+  "effort": "low",
+  "cases": {
+    "fastlane": {
+      "source_coverage": {
+        "categories": {
+          "homepage": 1,
+          "use_case": 15,
+          "pricing": 1,
+          "other": 2
+        },
+        "missing_categories": [
+          "brand_story",
+          "category",
+          "product",
+          "customer_story",
+          "faq"
+        ],
+        "pages": 19,
+        "fetch_operations": 21,
+        "sitemaps_checked": 1,
+        "discovered_urls": 128,
+        "text_characters": 140000,
+        "estimated_input_tokens": 46667,
+        "budget_limited": true
+      },
+      "baseline": {
+        "offerings": 4,
+        "named_offerings": [
+          "Starter",
+          "Growth",
+          "Pro",
+          "Enterprise"
+        ],
+        "classified_offerings": 4,
+        "pricing_tiers": 0,
+        "audience_creative_fields": 12,
+        "populated_fields": 85,
+        "inferred_fields": 0,
+        "fields_without_provenance": null
+      },
+      "baseline_coverage": {
+        "pages": 10,
+        "categories": {
+          "comparison": 7,
+          "pricing": 1,
+          "other": 1,
+          "homepage": 1
+        },
+        "missing_categories": [
+          "brand_story",
+          "category",
+          "product",
+          "use_case",
+          "customer_story",
+          "faq"
+        ],
+        "text_characters": 71277
+      }
+    }
+  },
+  "precision_note": "Counts and citation/annotated checks are automatic; semantic factual precision and marketing usefulness require human review. No fabricated score is reported."
+}

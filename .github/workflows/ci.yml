@@ -29,6 +29,7 @@ jobs:
       - run: pip install --no-deps -e .
       - run: ruff check .
       - run: ruff format --check .
+      - run: docker compose config --quiet
       - run: alembic upgrade head
       - run: alembic check
       - run: pytest -q
