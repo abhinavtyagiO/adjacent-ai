@@ -9,6 +9,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.api.routes import router
 from app.chatgpt.routes import router as chatgpt_router
 from app.config import get_settings
+from app.creative.routes import router as creative_router
 from app.db import get_factory
 from app.errors import DomainError
 
@@ -22,10 +23,11 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Brand Intelligence API",
         version="0.1.0",
-        description="Phase 1: website onboarding, evidence-backed drafts and approval.",
+        description="Brand onboarding, intelligence profiles and campaign creative strategy.",
     )
     app.include_router(router)
     app.include_router(chatgpt_router)
+    app.include_router(creative_router)
     # OAuth codes/state in callback query strings must not reach access logs.
     logging.getLogger("uvicorn.access").disabled = True
 

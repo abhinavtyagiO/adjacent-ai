@@ -1,0 +1,2856 @@
+{
+  "fixture_origin": "Frozen 2026-11-21 draft BIP and saved website text; not verified advertising claims or Phase 2 live output.",
+  "brief": {
+    "objective": "Awareness",
+    "audience": "Students and young adults interested in ingredient-conscious skincare",
+    "promotion_scope": "BRAND",
+    "target_platform": "Instagram Reels"
+  },
+  "profile": {
+    "brand_identity": {
+      "name": "Minimalist",
+      "website_url": "https://beminimalist.co/",
+      "legal_name": null,
+      "tagline": null,
+      "description": "A science-led skincare and personal care brand offering products for skin, hair and body concerns.",
+      "mission": "To improve skin health by providing advanced skincare backed by science.",
+      "vision": "Make skincare simple, honest and backed by science, empowering people with trustworthy products and knowledge to make informed choices.",
+      "values": [
+        "Transparency",
+        "Efficacy",
+        "Affordability",
+        "High performance",
+        "Ingredient transparency"
+      ],
+      "founded_year": 2020,
+      "headquarters": null,
+      "operating_regions": [
+        "India",
+        "United States",
+        "United Kingdom",
+        "United Arab Emirates",
+        "Malaysia",
+        "Indonesia"
+      ]
+    },
+    "business_positioning": {
+      "industry": "Beauty and personal care",
+      "category": "Science-led skincare, haircare and body care",
+      "business_model": "Online sale of personal care products",
+      "market_position": "Ingredient-transparent, science-led personal care positioned as accessible and affordable.",
+      "positioning_statement": "Straightforward, research-backed products for targeted skin, hair and body concerns, without unnecessary marketing fluff.",
+      "differentiators": [
+        "Emphasis on ingredient transparency and scientific merit",
+        "Targeted products for specific concerns",
+        "Pricing intended to make experimenting with skincare and haircare routines accessible",
+        "Challenges the assumption that natural ingredients are inherently safe and chemicals inherently unsafe"
+      ],
+      "geographic_markets": [
+        "India",
+        "United States",
+        "United Kingdom",
+        "United Arab Emirates",
+        "Malaysia",
+        "Indonesia"
+      ]
+    },
+    "offerings": [
+      {
+        "name": "Skin & Body",
+        "key": "skin-body",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Skin and body care range including cleansers, serums, moisturizers, sunscreens, body lotions, lip care and underarm care.",
+        "url": "https://beminimalist.co/collections/skin-body-1",
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [
+          "Building a skin and body care routine",
+          "Acne",
+          "Pigmentation",
+          "Ageing",
+          "Dehydration"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Vitamin C",
+        "key": "vitamin-c",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Vitamin C skincare collection including face serums and lip treatment balm.",
+        "url": "https://beminimalist.co/collections/vitamin-c",
+        "features": [],
+        "benefits": [],
+        "ingredients": [
+          "Vitamin C"
+        ],
+        "use_cases": [
+          "Skin-brightening routines"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": [
+            {
+              "name": "Ingredient-conscious brightening shoppers",
+              "description": "People comparing vitamin C options for a brightening routine.",
+              "needs": [
+                "Understand differences between the serum formulas and lip balm"
+              ],
+              "geography": []
+            }
+          ]
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "Similar-looking vitamin C products can be difficult to compare"
+          ],
+          "desired_outcomes": [
+            "A formula suited to their brightening routine"
+          ],
+          "motivations": [
+            "Choose based on ingredients and intended use"
+          ],
+          "fears": [],
+          "objections": [
+            "Unsure which concentration or format fits their needs"
+          ],
+          "purchase_triggers": [],
+          "decision_criteria": [
+            "Vitamin C concentration",
+            "Additional ingredients",
+            "Product format"
+          ],
+          "emotional_benefits": [
+            "Confidence in comparing options"
+          ],
+          "adjacent_interests": [
+            "Ingredient education"
+          ],
+          "relatable_situations": [
+            "Choosing between two daily vitamin C serums"
+          ],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Vitamin C 10% Face Serum",
+        "key": "vitamin-c-10-face-serum",
+        "kind": "PRODUCT",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": "vitamin-c",
+        "variants": [
+          "10ml",
+          "20ml",
+          "30ml"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "Evaluated for safety through patch testing under a dermatologist's supervision.",
+            "scope": "OFFERING",
+            "subject": "Vitamin C 10% Face Serum"
+          },
+          {
+            "text": "88% of subjects felt skin radiance improved in 4 weeks; 90% said dark spots faded after 8 weeks; 93% said skin felt healthier after 4 weeks.",
+            "scope": "OFFERING",
+            "subject": "Vitamin C 10% Face Serum"
+          }
+        ],
+        "description": "Daily face serum for brighter, glowing, healthy-looking skin, formulated for dullness, spots and loss of elasticity.",
+        "url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1",
+        "features": [
+          "Stabilized ethyl ascorbic acid",
+          "1% acetyl glucosamine",
+          "Formulated with polyhydroxy acid and Centella water",
+          "For all skin types and ages 16+"
+        ],
+        "benefits": [
+          "Brightens dull-looking skin",
+          "Gently exfoliates",
+          "Moisturizes skin"
+        ],
+        "ingredients": [
+          "3-O-Ethyl Ascorbic Acid",
+          "Acetyl Glucosamine",
+          "Gluconolactone",
+          "Centella Asiatica Leaf Extract",
+          "Sodium Hyaluronate"
+        ],
+        "use_cases": [
+          "Daily AM and PM routine",
+          "Dullness",
+          "Dark spots"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": "285–629",
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Structured product data lists offers of ₹285, ₹575 and ₹629; not all size-to-price mappings are clear.",
+          "pricing_url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Vitamin C + E + Ferulic 16% Face Serum",
+        "key": "vitamin-c-e-ferulic-16-face-serum",
+        "kind": "PRODUCT",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": "vitamin-c",
+        "variants": [
+          "10ml",
+          "20ml"
+        ],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "Evaluated for safety through patch testing under a dermatologist's supervision.",
+            "scope": "OFFERING",
+            "subject": "Vitamin C + E + Ferulic 16% Face Serum"
+          },
+          {
+            "text": "94% of subjects agreed skin glow improved and dullness reduced; 87% agreed skin looked more even after 6 weeks; 87% agreed spots reduced after 8 weeks.",
+            "scope": "OFFERING",
+            "subject": "Vitamin C + E + Ferulic 16% Face Serum"
+          }
+        ],
+        "description": "Daily skin-brightening serum with 15% stabilized vitamin C and a combined 1% blend of vitamin E and ferulic acid.",
+        "url": "https://beminimalist.co/products/vitamin-c-e-ferulic-16",
+        "features": [
+          "Contains fullerenes",
+          "For all skin types and ages 18+"
+        ],
+        "benefits": [
+          "Brightens skin",
+          "Targets uneven tone, spots and dullness",
+          "Provides antioxidant benefits"
+        ],
+        "ingredients": [
+          "3-O-Ethyl Ascorbic Acid",
+          "Ferulic Acid",
+          "Tocopheryl Acetate",
+          "Fullerenes",
+          "Sodium Hyaluronate",
+          "Panthenol"
+        ],
+        "use_cases": [
+          "Daily AM and PM routine",
+          "Dullness",
+          "Uneven tone",
+          "Spots"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": "332–539",
+          "currency": "INR",
+          "billing_period": null,
+          "details": "Structured product data lists offers of ₹332 and ₹539; the 20ml variant is listed at ₹539, with conflicting structured data elsewhere.",
+          "pricing_url": "https://beminimalist.co/products/vitamin-c-e-ferulic-16"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Vitamin K + Retinal 1% Eye Cream",
+        "key": "vitamin-k-retinal-1-eye-cream",
+        "kind": "PRODUCT",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": "skin-body",
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [
+          {
+            "text": "Evaluated for safety through patch testing under a dermatologist's supervision.",
+            "scope": "OFFERING",
+            "subject": "Vitamin K + Retinal 1% Eye Cream"
+          },
+          {
+            "text": "The page reports reductions in under-eye dark circles and eyebag volume and an increase in hydration, based on in-vitro studies conducted by suppliers; actual results may vary.",
+            "scope": "OFFERING",
+            "subject": "Vitamin K + Retinal 1% Eye Cream"
+          }
+        ],
+        "description": "Lightweight, quick-absorbing under-eye cream for dark circles, puffiness and fine lines.",
+        "url": "https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream",
+        "features": [
+          "Non-tacky formula",
+          "For all skin types and ages 18+",
+          "Recommended for daily PM use"
+        ],
+        "benefits": [
+          "Hydrates the under-eye area",
+          "Targets the appearance of dark circles, puffiness and fine lines"
+        ],
+        "ingredients": [
+          "Vitamin K",
+          "Retinal",
+          "Caffeine",
+          "Peptides",
+          "Zerumbone",
+          "Sodium Hyaluronate"
+        ],
+        "use_cases": [
+          "Under-eye care",
+          "Dark circles",
+          "Puffiness",
+          "Fine lines"
+        ],
+        "pricing": {
+          "model": "One-time purchase",
+          "amount": "449",
+          "currency": "INR",
+          "billing_period": null,
+          "details": null,
+          "pricing_url": "https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": [
+            {
+              "name": "Under-eye care seekers",
+              "description": "People considering a PM product for the appearance of dark circles, puffiness or fine lines.",
+              "needs": [
+                "Clear application and precaution guidance",
+                "A lightweight, non-tacky texture"
+              ],
+              "geography": []
+            }
+          ]
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "Uncertainty about applying an active-containing product near the eyes"
+          ],
+          "desired_outcomes": [
+            "Hydration and care targeted to under-eye appearance"
+          ],
+          "motivations": [
+            "Add a targeted step to a nighttime routine"
+          ],
+          "fears": [],
+          "objections": [
+            "Concern about suitability around the eye area"
+          ],
+          "purchase_triggers": [],
+          "decision_criteria": [
+            "Application precautions",
+            "Texture",
+            "PM use guidance"
+          ],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [
+            "Reviewing directions before adding an eye cream to a PM routine"
+          ],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "UV Filters",
+        "key": "uv-filters",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Sun care collection including SPF 50 and SPF 60 sunscreens, SPF 30 lip balm, body lotion and hair serum.",
+        "url": "https://beminimalist.co/collections/uv-filters",
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [
+          "Sun care for skin, lips, body and hair"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": [
+            {
+              "name": "Sun care routine builders",
+              "description": "People considering sun care formats beyond a face sunscreen.",
+              "needs": [
+                "Understand which formats are intended for face, lips, body and hair"
+              ],
+              "geography": []
+            }
+          ]
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "Uncertainty about choosing among sun care formats"
+          ],
+          "desired_outcomes": [
+            "A sun care routine covering relevant areas"
+          ],
+          "motivations": [
+            "Find a format for each intended use"
+          ],
+          "fears": [],
+          "objections": [
+            "Unsure how products differ in SPF and application"
+          ],
+          "purchase_triggers": [],
+          "decision_criteria": [
+            "Intended application area",
+            "Labeled SPF where specified"
+          ],
+          "emotional_benefits": [],
+          "adjacent_interests": [
+            "Daily skincare routines"
+          ],
+          "relatable_situations": [
+            "Considering lip and body care alongside face sunscreen"
+          ],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Skin Brightening",
+        "key": "skin-brightening",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Skincare for dull skin, including vitamin C serums, glycolic acid cleanser and exfoliating acids.",
+        "url": "https://beminimalist.co/collections/skin-brightening",
+        "features": [],
+        "benefits": [
+          "Targets dull-looking skin"
+        ],
+        "ingredients": [],
+        "use_cases": [
+          "Skin-brightening routines"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Hair Care",
+        "key": "hair-care",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Haircare products for concerns including hair fall and dandruff; the UV filters collection also includes a hair serum.",
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [
+          "Hair fall",
+          "Dandruff",
+          "Haircare routines"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Baby Care",
+        "key": "baby-care",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Baby care product category.",
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Bath & Body",
+        "key": "bath-body",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Bath and body product category; the wider body range includes lotions and underarm care.",
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [
+          "Body care routines"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      },
+      {
+        "name": "Gift",
+        "key": "gift",
+        "kind": "PRODUCT",
+        "catalog_level": "FAMILY",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [],
+        "pricing_tiers": [],
+        "claims": [],
+        "description": "Gift product category.",
+        "url": null,
+        "features": [],
+        "benefits": [],
+        "ingredients": [],
+        "use_cases": [
+          "Gifting"
+        ],
+        "pricing": {
+          "model": null,
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": null,
+          "pricing_url": null
+        },
+        "audiences": {
+          "personas": [],
+          "segments": []
+        },
+        "customer_psychology": {
+          "pain_points": [],
+          "desired_outcomes": [],
+          "motivations": [],
+          "fears": [],
+          "objections": [],
+          "purchase_triggers": [],
+          "decision_criteria": [],
+          "emotional_benefits": [],
+          "adjacent_interests": [],
+          "relatable_situations": [],
+          "emotional_triggers": []
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": [
+        {
+          "name": "Ingredient-conscious brightening shoppers",
+          "description": "People exploring vitamin C serums for dullness or uneven-looking tone who want to understand formula differences.",
+          "needs": [
+            "Clear ingredient and concentration comparisons",
+            "Guidance on incorporating a serum into an AM or PM routine"
+          ],
+          "geography": []
+        },
+        {
+          "name": "Concern-led routine builders",
+          "description": "People assembling skin and body routines around concerns such as dryness, sun care or under-eye appearance.",
+          "needs": [
+            "Help matching product formats to concerns",
+            "Straightforward usage and suitability information"
+          ],
+          "geography": []
+        }
+      ]
+    },
+    "customer_psychology": {
+      "pain_points": [
+        "Difficulty comparing vitamin C formulas",
+        "Uncertainty about where targeted products fit in a routine"
+      ],
+      "desired_outcomes": [
+        "A brighter-looking complexion",
+        "A more informed skin and body care routine"
+      ],
+      "motivations": [
+        "Understand ingredients before choosing a formula",
+        "Address a specific appearance concern with a targeted product"
+      ],
+      "fears": [
+        "Choosing a formula that does not suit their skin"
+      ],
+      "objections": [
+        "Uncertainty about texture, suitability or individual results"
+      ],
+      "purchase_triggers": [
+        "A clear comparison of ingredients and intended uses"
+      ],
+      "decision_criteria": [
+        "Ingredient concentrations",
+        "Intended use and routine guidance",
+        "Texture and suitability"
+      ],
+      "emotional_benefits": [
+        "Confidence in making an informed choice"
+      ],
+      "adjacent_interests": [
+        "Ingredient education",
+        "Sun care routines"
+      ],
+      "relatable_situations": [
+        "Comparing two vitamin C serums while building a daily routine"
+      ],
+      "emotional_triggers": [
+        "Clarity amid conflicting skincare advice"
+      ]
+    },
+    "value_propositions": {
+      "primary": "Accessible, science-led personal care with transparent ingredients and targeted solutions.",
+      "functional_benefits": [
+        "Products for a range of skin, hair and body concerns",
+        "Ingredients and products for building personalized routines"
+      ],
+      "emotional_benefits": [
+        "Greater confidence in making informed skincare choices"
+      ],
+      "differentiators": [
+        "Ingredient transparency",
+        "Science-led product development",
+        "Straightforward communication",
+        "Accessible pricing"
+      ],
+      "reasons_to_believe": [
+        "Product pages identify active ingredients and usage guidance",
+        "Selected products report dermatologist-supervised safety patch testing"
+      ]
+    },
+    "trust_and_proof": {
+      "testimonials": [
+        {
+          "quote": "Takes some time to show the results on the face! Adds an amazing glow on the face once it starts showing results! Loved it :)",
+          "attribution": "Nikhila R.",
+          "company": null
+        },
+        {
+          "quote": "Visibly gives me brighter and more even skin tone and helps to accelerate the fading of scars.",
+          "attribution": "Meenakshi P.",
+          "company": null
+        },
+        {
+          "quote": "I've been loving this eye cream so far! The texture feels nice on the skin, and it fits well into my skincare routine. I'm hoping for good results with dark circles, fine lines, wrinkles and overall under-eye appearance with regular use. A nice addition to my skincare collection! 💗",
+          "attribution": "Deepanshi C.",
+          "company": null
+        },
+        {
+          "quote": "I have used minimalist vitamin c 10% serum earlier daily yet never had any issue this time though i ordered this 16% serum but my skin burns and becomes flaky and extremely dry if I use it two days continuously. I dont know what the problem is. Minimalist is my absolute favourite brand but this serum im sure if its not for my skin or if its too strong of a serum",
+          "attribution": "Nestha C.",
+          "company": null
+        }
+      ],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [],
+      "metrics": [],
+      "guarantees": [],
+      "scoped_claims": [
+        {
+          "text": "The about page states that the brand caters to a community of 300 million+ customers across 5 continents and 17 countries.",
+          "scope": "BRAND",
+          "subject": "Minimalist"
+        },
+        {
+          "text": "The about page describes Minimalist as clinically proven and recommended by dermatologists, without specifying the scope of those claims.",
+          "scope": "BRAND",
+          "subject": "Minimalist"
+        }
+      ]
+    },
+    "brand_voice": {
+      "tone": [
+        "Straightforward",
+        "Informative",
+        "Science-led",
+        "Candid"
+      ],
+      "personality": [
+        "Transparent",
+        "Practical",
+        "Curious"
+      ],
+      "language_style": "Plainspoken brand statements combined with detailed ingredient and formulation explanations.",
+      "preferred_terms": [
+        "Transparency",
+        "Efficacy",
+        "Science",
+        "Ingredients"
+      ],
+      "avoided_terms": [
+        "Chemical-free"
+      ],
+      "example_phrases": [
+        "No unnecessary marketing fluff.",
+        "Make skincare simple, honest, and backed by science.",
+        "Everything is a chemical – water is a chemical – therefore, chemical-free products don’t exist."
+      ],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [
+        "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png",
+        "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png"
+      ],
+      "colors": [
+        {
+          "name": "Wizzy primary",
+          "hex": "#54a5cd",
+          "usage": "Observed website CSS variable; not established as an official brand color."
+        }
+      ],
+      "fonts": [],
+      "imagery_style": null,
+      "design_style": null,
+      "guidelines_url": null
+    },
+    "creative_context": {
+      "content_themes": [
+        "Ingredient transparency",
+        "Building routines around specific concerns"
+      ],
+      "storytelling_angles": [
+        "Move from a skincare question to an informed product choice"
+      ],
+      "existing_content_formats": [
+        "Product pages",
+        "Customer reviews",
+        "Ingredient explanations",
+        "FAQs",
+        "Brand values and about pages",
+        "Collection pages"
+      ],
+      "available_assets": [
+        "Website logos",
+        "Product imagery",
+        "Customer reviews",
+        "Mobile app"
+      ],
+      "seasonal_context": [],
+      "calls_to_action": [
+        "Shop by Category",
+        "Shop by Concerns",
+        "Download Our App"
+      ],
+      "content_pillars": [
+        "Formula education",
+        "Concern-led routine guidance",
+        "Clear usage and suitability information"
+      ],
+      "creative_angles": [
+        "Compare the 10% vitamin C serum with the vitamin C, E and ferulic formula by ingredients, concerns and intended use.",
+        "Show how the UV filters collection spans face, lips, body and hair, without assuming every format has the same SPF.",
+        "Answer a nighttime routine question with the eye cream’s under-eye use, texture and application precautions."
+      ],
+      "cultural_contexts": [],
+      "relatable_situations": [
+        "Reading ingredient labels before choosing a serum",
+        "Adding an under-eye step to a PM routine"
+      ]
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [],
+      "legal_disclaimers": [
+        "Eye cream: For external use only. Avoid applying very close to the eyes. Patch test recommended before use. Store in a cool, dry place."
+      ],
+      "compliance_requirements": [],
+      "brand_safety_rules": [
+        "The brand rejects the claim that chemical-free products exist and challenges blanket assumptions that natural products are inherently safe and effective."
+      ],
+      "approval_requirements": null
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": null,
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": null
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "USER",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/vision",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/founded_year",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/operating_regions/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/geographic_markets/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/ingredients/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/parent_offering_key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/variants/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/variants/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/variants/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/0/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/0/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/0/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/1/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/1/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/claims/1/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/features/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/features/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/features/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/benefits/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/ingredients/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/ingredients/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/ingredients/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/ingredients/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/ingredients/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/pricing/amount",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/pricing/currency",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/2/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/parent_offering_key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/variants/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/variants/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/0/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/0/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/0/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/1/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/1/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/claims/1/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/features/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/benefits/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/ingredients/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/use_cases/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/pricing/amount",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/pricing/currency",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/3/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/parent_offering_key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/0/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/0/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/0/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/1/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/1/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/claims/1/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/features/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/features/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/ingredients/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/use_cases/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/pricing/amount",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/pricing/currency",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/6/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/7/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/8/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/8/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/8/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/8/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/8/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/9/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/10/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/functional_benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/functional_benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/emotional_benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/0/quote",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/0/attribution",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/1/quote",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/1/attribution",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/2/quote",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/2/attribution",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/3/quote",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/3/attribution",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/language_style",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/avoided_terms/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/logo_urls/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/logo_urls/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/0/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/0/hex",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/0/usage",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/legal_disclaimers/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/needs/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/needs/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/pain_points/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/motivations/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/fears/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_benefits/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/adjacent_interests/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_themes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_themes/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/storytelling_angles/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_pillars/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_pillars/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_pillars/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/relatable_situations/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/audiences/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/audiences/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/audiences/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/decision_criteria/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/emotional_benefits/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/1/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/audiences/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/audiences/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/audiences/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/5/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/audiences/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/audiences/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/audiences/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/audiences/segments/0/needs/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/decision_criteria/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/4/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    }
+  ],
+  "documents": [
+    {
+      "url": "https://beminimalist.co/",
+      "text": "Minimalist - Honest, Authentic & Affordable Beauty Products\nMeta description: We believe our products should be accessible to all, but we will never compromise on quality, ensuring only the best products reach you. Our products are priced to allow you to test and play with ingredients to build your perfect skincare or haircare routine, for your ever changing needs.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n## Our Best Sellers\n## Shop by Category\n## Shop by Concerns\n## New Launches\n## The future of personal care is here\nEmbrace Minimalist, where each element is chosen for its scientific merit, offering you authentic, effective skincare solutions.\n### Transparency\n### Efficacy\n### Affordable\n### Only the best\n### Minimalist Trust Circle\n### Download Our App",
+      "fetched_at": "2026-11-21T11:27:25.172193+00:00",
+      "title": "Minimalist - Honest, Authentic & Affordable Beauty Products",
+      "source_type": "website",
+      "metadata": {
+        "category": "homepage",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/pages/reviews-1",
+      "text": "Reviews – Minimalist\nMeta description: Explore Minimalist's reviews page for customer perspectives on the brand and its products, with feedback presented through the dedicated review section.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# Reviews",
+      "fetched_at": "2026-11-21T11:27:25.960134+00:00",
+      "title": "Reviews – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "customer_story",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/pages/reviews-1"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/pages/our-values",
+      "text": "Our values – Minimalist\nMeta description: Founded in 2020 with the belief that beauty industry requires a revolution with respect to TRANSPARENCY. There is lot of inaccurate advice &amp; incorrect claims being made by beauty brands which results in fear mongering, misconceptions and eventually consumers making wrong decisions. For example, the blind march towa\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# Our values\nFounded in 2020 with the belief that beauty industry requires a revolution with respect to TRANSPARENCY. There is lot of inaccurate advice & incorrect claims being made by beauty brands which results in fear mongering, misconceptions and eventually consumers making wrong decisions.\nFor example, the blind march towards beauty products with 'Natural' claims is really concerning. There is a misconception that 100% natural is safe & effective and anything that sounds like a chemical is unsafe. This is completely wrong.\n\"Everything is a chemical – water is a chemical – therefore, chemical-free products don’t exist.\"\nWe wanted to address this issue of lack of transparency through a range of products that are straightforward, honest and do what they claim to do. No unnecessary marketing fluff. And this is how Minimalist was born.",
+      "fetched_at": "2026-11-21T11:27:26.351375+00:00",
+      "title": "Our values – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "brand_story",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/pages/our-values"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/pages/faqs",
+      "text": "FAQs – Minimalist\nMeta description: Find answers to common Minimalist questions about the brand, shipping locations, delivery timelines and returns, with links to further policy details.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# FAQs\nYou can read more about us in the About section\nWe're now globally available, shipping orders from the nearest warehouse for faster delivery to the US, UK, UAE, Malaysia & Indonesia. For international shipping options specific to your location, visit our global website .\nWithin India, we deliver to over 20,000 pincodes with the ease of prepaid or cash on delivery payment.\nWe usually ship within 24 working hours after receiving an order. Once shipped, our logistics partner can take anywhere from 2 to 5 days, to get the order delivered to you. Users in metro cities can expect a faster delivery speed (within 3 days).\nYou can raise a return request to us by dropping us an email at [email protected] and our team will assist you. Return shipments are also managed by us. For more details, please check our return & refund policies page.",
+      "fetched_at": "2026-11-21T11:27:26.890755+00:00",
+      "title": "FAQs – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "faq",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/pages/faqs"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/pages/about",
+      "text": "About – Minimalist\nMeta description: Learn about Minimalist's science-led skincare approach, ingredient transparency and values. Explore our story, workplace culture and career opportunities.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n## About Us\nMinimalist is a high-performance skincare brand rooted in scientific research. It was founded in 2020 with a belief that the skincare industry requires a revolution with respect to transparency of ingredients.\nWith products ranging from cleansers, serums, moisturizers, and sunscreens, Minimalist offers highly efficacious & targeted solutions for a variety of skin, hair, and body concerns like acne, pigmentation, ageing, dehydration, hair fall, and dandruff, amongst others\n## Clinically Proven\n## Recommended by Dermatologist\nOur mission is to improve skin health. Dedicated to this purpose, we make one simple promise—to provide advanced skincare backed by science.\n## Global Expansion\nWe cater to an ever expanding community of 300 million+ customers across 5 continents and 17 countries with a mission to grow further.\n## Our Aspiration\nAt Minimalist, we aim to make skincare simple, honest, and backed by science.We aim to eliminate the guesswork from skincare, empowering individuals with trustworthy products and knowledge to make informed choices.\n## Our Values\nAt Minimalist, we are guided by the following principles, which define our approach to business and our commitment to our stakeholders:\n### High-Performance\n### Transparency\n## Beyond Work\nAt Minimalist, we go beyond work to ensure our employees thrive. Here are some benefits we offer:\nHealth & Well Being\n1. Comprehensive health insurance for employees and their family.\n2. 24*7 On Call Ambulance Service available for all employees\n3. Inhouse Medical room with Nurse available at Manufacturing site\n4. Regular Preventive Health Checkups\nExperience & Celebration\nCelebration is a part of our culture — because we believe that meaningful connections are built beyond the desk. Vibrant festive events, indoor and outdoor sports tournaments, and team get-togethers that bring us closer as a community.\nWork-Life Harmony\nA supportive work environment that values work-life balance.\n## Culture at Minimalist\nWe foster a collaborative and innovative workplace where every idea is valued. Our culture thrives on curiosity, respect, and a shared passion for creating effective skincare solutions.\n## Careers\nWe’re always on the lookout for passionate individuals who align with our values and vision. Whether you’re a skincare enthusiast, a creative mind, or a scientific expert, there’s a place for you at Minimalist.\nLet’s revolutionize skincare together.\n## Employee Testimonials\nDiscover what it's like to be part of the Minimalist journey—straight from the people who make it happen.\nOver the past five years, I’ve witnessed and contributed to a remarkable journey of creativity and growth. The minimalist philosophy of simplicity and purpose drives our innovation, creating a culture where ideas flourish through collaboration.\nLeading a team that values impact over complexity has been immensely fulfilling, and I’m proud to be part of a community that continuously redefines excellence through meaningful, research-backed solutions.\nVice President - Research & Development\nWorking at Minimalist has been an amazing experience. The opportunity of learning, supportive environment, high ethics and excellent corporate governance makes every day rewarding.\nI am proud to be part of a team that values collaborations and respects each other\nVice President - Finance & Accounts\nBeing a part of Minimalist has been an incredibly fulfilling journey. The culture encourages innovation, ownership, and continuous learning, which has helped me grow both professionally and personally. Collaborating with a passionate and driven team has made every challenge an opportunity.\nI'm proud to contribute to a brand that values simplicity, science, and transparency.\nDirector - Human Resource\nDriven by transparency, integrity, and ownership, the culture at Minimalist focuses on innovation and collaboration. The trust from leadership has helped me take calculated risks to drive sustainable business growth.\nThanks to the welcoming people who've never shied away from helping one another, the journey has been a memorable one.\nSr. Growth Manager - Marketplaces\nLeading retail at Minimalist has been a genuinely fulfilling ride. What stands out to me is how aligned our internal culture is with what we deliver—transparency, quality, and integrity aren’t just buzzwords here.\nThe lean structure, open decision-making, and constant push for innovation make it a space where ideas actually turn into action. It’s rare to find a team that values clarity and ownership this deeply.\nSr. Growth Manager - Retail\nMy experience as a Product Manager at Minimalist has been fantastic. I've gained incredible exposure across the entire product lifecycle, with real opportunities to take risks and drive product development.\nThe supportive and collaborative culture here is truly outstanding.\nProduct Manager\nWorking at Minimalist has been a truly meaningful experience. It’s a place where ideas are valued, and purpose drives everything we do. I’ve grown not just as a professional, but as a person, thanks to a team that encourages ownership, collaboration, and honesty.\nBeing part of a brand that stands for science and simplicity makes every day feel impactful.\nBrand Manager\nBeing part of this company has been an incredible journey. The welcoming culture, strong sense of community, and the support I've received from day one have made it feel like more than just a workplace.\nI'm truly grateful for the memories, the learning, and the amazing team I get to grow with every day\nTeam Lead-Customer Support",
+      "fetched_at": "2026-11-21T11:27:28.605584+00:00",
+      "title": "About – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "brand_story",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/pages/about"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/collections/vitamin-c",
+      "text": "Vitamin C – Minimalist\nMeta description: Explore Minimalist vitamin C skincare, including 10% Vitamin C Serum, Vitamin C + E + Ferulic 16% Serum and lip treatment balm for your care routine.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# Vitamin C",
+      "fetched_at": "2026-11-21T11:27:29.113969+00:00",
+      "title": "Vitamin C – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "category",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/collections/vitamin-c"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1",
+      "text": "Vitamin C 10% for Brighter Glowing Skin - Stable & Effective Face Serum with pure Ethyl Ascorbic Acid & 1% Acetyl Glucosamine | Minimalist\nMeta description: Highly stablized and effective Vitamin C serum for brighter & illuminating skin. Best & most potent Vitamin C formula made with pure Ethyl Ascorbic Acid.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n### Offers (5)\nBuy 2, Get the 3rd product for free\nGet Additional 15% Off on orders above ₹1399/-\nGet Additional 10% Off on orders above ₹599/-\nGet additional 5% Off over ₹299+\nBuy 2 Product, Get Minimalist Glass Bottle for Free\n# Vitamin C 10% Face Serum\nFor Brighter, Glowing & Healthy Looking Skin\nA glow-boosting daily serum packaged with the goodness of Vitamin C & Polyhydroxy Acid (PHA) that brightens and tones sun damaged and dull skin with dark spots.\n\"Takes some time to show the results on the face! Adds an amazing glow on the face once it starts showing results! Loved it :) -Nikhila R.\"\n- Made with stabilized Vitamin C derivative \"Ethyl Ascorbic Acid\" that has 86% pure Vitamin C content. That is much higher than 40-50% content present in other Vitamin C derivatives. At a pH of ~4.0 it is highly stable and effective\n- Contains 1% Acetyl Glucosamine (AG), an amino-monosaccharide (simple sugar) and a precursor of hyaluronic acid, that provides skin moisturization, boosts natural Hyaluronic Acid synthesis, and regulates natural exfoliation\n- Boosted with Polyhydroxy Acid (PHA) which are new age hydroxy acids, suitable even for sensitive skin. PHAs gently remove dead skin cells to give skin a glow. Also have antioxidant/chelation, barrier strengthening, and moisturizing effects\n- Formulated in Centella Water to soothe and heal skin Formulated with ET-VC, high purity Ethyl Ascorbic Acid, from Corum Inc, Taiwan\nSkin type: All skin types\nConcerns : Dullness, Spots & Loss of Elasticity\nSuitable for: 16+ years of age\nPregnancy/Lactation: Safe\nAfter cleansing and toning your face, take 2-3 drops of Vitamin C serum on your fingertips with the dropper. Apply it on the face by gently tapping it on the skin. With a circular motion, evenly spread the serum and allow your skin to absorb it. When to use: When to use: AM & PM. Everyday.\nVitamin C is a proven skin-brightener and antioxidant for decades. It boosts collagen formation and effectively targets visible signs of ageing, giving skin the much-needed glow.\n88% subjects felt this serum improved skin radiance in 4 weeks\n90% subjects said their dark spots faded after 8 weeks\n93% subjects said skin felt healthier after 4 weeks of usage\nNote: The product has been evaluated for safety through patch testing under the supervision of a Dermatologist.\n- 10ml\n- 30ml\n- 20ml\n## Ingredients\nProven antioxidant that visibly brightens dull skin and fades dark spots\nNot only lightens skin tone, it also promotes synthesis of Hyaluronic Acid to improve skin hydration\nThey not just exfoliate gently, but also functions as humectants. Also provide protection against UV radiations\nCentella Asiatica Leaf Extract, 3-O-Ethyl Ascorbic Acid, Dimethyl Isosorbide, Ethoxydiglycol, Glycerin, Sodium Gluconate, Acetyl Glucosamine, Gluconolactone, Citric Acid, Pentylene Glycol, Sodium Hyaluronate, Pullulan, Hydroxyethylcellulose, Hydrolyzed Sodium Hyaluronate, Xanthan Gum, Sclerotium Gum, Phenoxyethanol, Ethylhexylglycerin, Lecithin, PEG/PPG-17/6 Copolymer, Trisodium Ethylenediamine Disuccinate, Sodium Citrate\n## You might also like\nOverall rating: 4.1047745 / 5 from 2262 reviews.\n### AI Generated Review Summary\nCustomers have mixed opinions about the Vitamin C 10% Face Serum, with some experiencing visible improvements and a nice glow, while others did not see any change. The formula is praised for being stable and effective, but opinions vary on the feel and suitability for oily or acne-prone skin.\n### Summary topics\n- Visible Improvement ( 6% ): Customers have mixed opinions about the difference this product made on their skin, with some experiencing visible improvements while others did not see any change.\n- Skin Glow ( 5% ): It was highlighted by customers that the product gives a nice glow and leaves skin soft and smooth.\n- Vitamin C Effectiveness ( 4% ): Customers expressed satisfaction with the vitamin C, stating that it is the best and provides great results.\n- Product Formula ( 3% ): Customers raved about the formula, stating that it is stable, effective, and comes at a great price.\n- Skin Suitability ( 16% ): The feedback is varied, some users found the vitamin C serum not suitable for oily or acne prone skin.\nReview topics: [\"weight\",\"results\",\"quality\",\"issues\",\"skin\",\"looks\",\"feels\",\"price\",\"improvement\",\"packaging\",\"glow\",\"delivery\",\"spots\",\"face\",\"formula\",\"serum\",\"texture\",\"acne\",\"bottle\",\"difference\",\"irritation\",\"breakouts\",\"ingredients\",\"works\",\"patches\",\"reduction\",\"pores\",\"vitamin c\",\"expectations\",\"consistency\"].\n### Review highlights\n- \"best serum for dark spots and acne prone skin.\" — Ankit K.\n- \"gives instant glow and your skin looks smooth :heart_eyes::heart_eyes::heart_eyes::heart_eyes:.\" — Shalz\n- \"After trying many vitamin C. I finally found a great formulation with good results.\" — Parul\n### Reviews\n#### Hydration: Keeps my skin feeling\n\"Hydration: Keeps my skin feeling hydrated and fresh without making it oily or greasy.  Heart: I really like this serum. It feels lightweight, absorbs well, and fits easily into my daily skincare routine.  Grail: A great addition to my skincare routine. Definitely worth trying if you're looking for a Vitamin C serum for brighter, healthier-looking skin.  Overall, I'm happy with the product and would love to receive more exciting offers and vouchers on my next order. Looking forward to shopping again!\"\n— Shreyash B. ( 5/5 )\n#### Vitamin C serum\n\"I’ve been using the Minimalist Vitamin C Serum for a few weeks now, and I’m genuinely impressed. It has helped brighten my dull skin and significantly faded some stubborn acne marks. The formula is lightweight, absorbs quickly without feeling sticky, and doesn't cause any breakouts or irritation on my skin. Definitely keeping this as a staple in my morning skincare routine!\"\n— Lucky B. ( 5/5 )\n#### quickly absorbed light weight serum.\n\"quickly absorbed light weight serum. To a certain extent blocks sun rays too. Wonderful product as always from Minimalist.\"\n— Viswanaath V. ( 5/5 )\n#### It works\n\"I first had dark spots and slight dullness on my face and after applying it, it cured them. The results takes time but they are distinct. My skin used to be dull and now it is bright and glowy. it definitely works\"\n— Anx R. ( 5/5 )\n#### Superb product 😁\n\"Big fan of your vitamin c .... really loved it\"\n— Jessica S. ( 5/5 )\n#### It works!\n\"Almost 1.5 years ago , I had really bad hormonal acne breakouts which left behind hyperpigmented marks on my face after which a friend suggested me to use Minimalists serums and I’m so glad I listened to her. I have been using this 10% VitC serum for my morning routine for the last one year along with 10% Niacinamide serum for my night time skin care routine. It worked wonders for me. 90% of my acne marks have gone and it really improved the texture of my skin and also helped remove my tan and evened out my skin tone. As someone with a sensitive skin type, these serums felt extremely light and gentle.  MUST MUST TRY!\"\n— Rit\n## Structured products (JSON-LD)\n[{\"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1\", \"image\": {\"@type\": \"ImageObject\", \"url\": \"https://beminimalist.co/cdn/shop/products/VitaminC10_1200-1-min.png?v=1646543848\", \"image\": \"https://beminimalist.co/cdn/shop/products/VitaminC10_1200-1-min.png?v=1646543848\", \"name\": \"Vitamin C 10% Face Serum\", \"width\": \"1100\", \"height\": \"1600\"}, \"sku\": \"8906128101082\", \"name\": \"Vitamin C 10% Face Serum\", \"description\": \"When to use: AM / PM\\nFrequency: Everyday\", \"category\": \"Skin Care\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": [{\"@type\": \"Offer\", \"sku\": \"8906128101082\", \"gtin13\": 8906128101082, \"availability\": \"http://schema.org/InStock\", \"price\": 285.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=45154750103713\"}, {\"@type\": \"Offer\", \"sku\": \"8906128100139\", \"gtin13\": 8906128100139, \"availability\": \"http://schema.org/InStock\", \"price\": 629.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=45154750070945\"}, {\"@type\": \"Offer\", \"sku\": \"8906128102409\", \"availability\": \"http://schema.org/InStock\", \"price\": 575.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=46819997843617\"}]}, {\"@type\": \"Product\", \"image\": [\"https://beminimalist.co/cdn/shop/products/VitaminC10_1200-1-min.png?v=1646543848&width=480\"], \"sku\": \"8906128101082\", \"name\": \"Vitamin C 10% Face Serum\", \"description\": \"When to use: AM / PM\\nFrequency: Everyday\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": {\"@type\": \"Offer\", \"availability\": \"https://schema.org/InStock\", \"price\": \"285.0\", \"priceCurrency\": \"INR\", \"sku\": \"8906128101082\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=45154750103713\"}}, {\"@type\": \"ProductGroup\", \"@id\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1#json-ld-for-seo\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1\", \"image\": [\"https://beminimalist.co/cdn/shop/products/VitaminC10_1200-1-min.png?v=1646543848&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_02.png?v=1726489863&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_03.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_04.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_05.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_06.png?v=1726489861&width=1100\", \"https://beminimalist.co/cdn/shop/files/VitC_10ml_Variant_ListingImage_09275734-cf64-4a21-ae63-a5784761872d.jpg?v=1758795199&width=1100\"], \"productID\": \"8906128101082\", \"name\": \"Vitamin C 10% Face Serum\", \"description\": \"When to use: AM / PM\\nFrequency: Everyday\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"hasVariant\": [{\"@id\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=45154750103713#json-ld-for-seo-product\", \"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1?variant=45154750103713\", \"inProductGroupWithID\": \"5831331053729\", \"name\": \"Vitamin C 10% Face Serum 10ml\", \"image\": \"https://beminimalist.co/cdn/shop/files/VitC_10ml_Variant_ListingImage_09275734-cf64-4a21-ae63-a5784761872d.jpg?v=1758795199&width=1100\", \"description\": \"When to use: AM / PM\\nFrequency: Everyday\", \"sku\": \"8906128101082\", \"mpn\": \"8906128101082\", \"gtin\": \"8906128101082\", \"gtin13\": \"8906128101082\", \"category\": [\"Skin Care\", \"Cosmetics\", \"Personal Care\", \"Health & Beauty\"], \"weight\": {\"@type\": \"QuantitativeValue\", \"unitText\": \"kg\", \"value\": 0.1}, \"itemCondition\": \"https://schema.org/NewCondition\", \"offers\": [{\"@type\": \"Offer\"",
+      "fetched_at": "2026-11-21T11:27:29.675471+00:00",
+      "title": "Vitamin C 10% for Brighter Glowing Skin - Stable & Effective Face Serum with pure Ethyl Ascorbic Acid & 1% Acetyl Glucosamine | Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "product",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/products/vitamin-c-ethyl-ascorbic-acid-10-acetyl-glucosamine-1"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/collections/uv-filters",
+      "text": "UV Filters – Minimalist\nMeta description: Shop Minimalist sun care with UV filters, from SPF 50 and SPF 60 sunscreens to SPF 30 lip balm, body lotion and hair serum. Explore the full collection.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# UV Filters",
+      "fetched_at": "2026-11-21T11:27:30.573692+00:00",
+      "title": "UV Filters – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "category",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/collections/uv-filters"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/collections/skin-brightening",
+      "text": "Skin Brightening – Minimalist\nMeta description: Explore Minimalist skincare for dull skin, including vitamin C serums, glycolic acid cleanser and exfoliating acids. Browse the skin-brightening range.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# Skin Brightening",
+      "fetched_at": "2026-11-21T11:27:31.086647+00:00",
+      "title": "Skin Brightening – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "category",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/collections/skin-brightening"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/collections/skin-body-1",
+      "text": "Skin & Body – Minimalist\nMeta description: Build your skin and body routine with Minimalist. Browse face cleansers, serums, moisturizers, sunscreens, body lotions, lip care and underarm care.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n# Skin & Body\nBYOB-Collection-Promotion-P3\nSerumEfficacy-P6\nSummerEssentials-P9\n- Previous\n- page 1\n- page 2\n- 1 / 2\n- Next",
+      "fetched_at": "2026-11-21T11:27:31.846557+00:00",
+      "title": "Skin & Body – Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "category",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/collections/skin-body-1"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream",
+      "text": "Vitamin K + Retinal 01% Eye Cream for Dark Circles, Puffiness & Fine Lines - For All Skin Types | Minimalist\nMeta description: Lightweight Under Eye Cream - Rapidly diminish dark circles, puffiness, and fine lines with our potent formula. Vitamin K, Caffeine, and Retinal target specific concerns, while Peptides and Zerumbone address hyperpigmentation. Hyaluronic Acid and Aquaporin ensure deep hydration for a rejuvenated under-eye area.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n### Offers (5)\nBuy 2, Get the 3rd product for free\nGet Additional 15% Off on orders above ₹1399/-\nGet Additional 10% Off on orders above ₹599/-\nGet additional 5% Off over ₹299+\nBuy 2 Product, Get Minimalist Glass Bottle for Free\n# Vitamin K + Retinal 1% Eye Cream\nReduces dark circles, puffiness & fine lines\nA lightweight under-eye cream swiftly combats dark circles, puffiness, and fine lines with a quick-absorbing, non-tacky formula. Vitamin K diminishes dark circles, Caffeine reduces puffiness, and Retinal enhances skin texture. Synergistic Peptides tackle dark circles and puffiness, while Zerumbone addresses hyperpigmentation. Hyaluronic Acid and Aquaporin boosters ensure comprehensive hydration.\n- Vitamin K, a potent ally in tackling dark circles, effectively combats under-eye discoloration and fortifies fragile blood vessels, contributing to a reduction in dark circles\n- Retinal, positioned as the intermediate stage in the conversion from retinol to retinoic acid, showcases remarkable anti-aging attributes. These include the reduction of fine lines & dark circles, all while being significantly better tolerated than Retinoic acid.\n- The trio of Dipeptide-2, Palmitoyl Tetrapeptide-7, and Hesperidin Methyl Chalcone collaborates to reduce capillary permeability, boost lymphatic flow, and mitigate inflammation, resulting in a smoother under-eye area. Palmitoyl Tripeptide-1 and Palmitoyl Tetrapeptide-7, working in tandem, enhance under-eye firmness and contribute to an even skin tone, rejuvenating the under-eye appearance\n- To comprehensively address dark circles, our formulation incorporates Chrysin, N-hydroxysuccinimide, and Zerumbone, targeting and eliminating the root causes of these under-eye concerns. This multi-pronged approach leaves your under-eye area feeling refreshed and visibly brighter. All our ingredients are sourced from leading global suppliers. Our high purity grade Vitamin K is sourced from Mckinely, USA.\nSkin type: All skin types\nConcerns: Dark Circles, Fine lines &  Eye Puffiness\nSuitable for: 18+ years of age\nBased on in-vitro studies conducted by suppliers. (Actual results may vary)\n19% reduction in Under Eye Dark Circle after 8 Weeks\n40mm3 reduction in eyebags volume in 8 weeks\n34% increase in skin hydration in 6 hours compared to placebo\nNote: The product has been evaluated for safety through patch testing under the supervision of a Dermatologist.\nAfter cleansing, apply a small amount onto finger and gently pat around the eye contours.\nWhen to use: PM. Everyday\nWarning: For external use only. Avoid applying very close to the eyes. Patch test recommended before use. Store in cool, dry place.\n## Ingredients\nVitamin K strengthens blood vessel walls, potentially enhancing under-eye microcirculation. This can help in reducing under-eye discoloration and minimizing dark circles.\nAs an intermediary between retinoic acid and retinol, Retinal activates in one step. It's an anti-aging powerhouse, reducing wrinkles and enhancing skin texture.\nCombat under-eye bags with Eyeliss, a unique blend of Hesperidin derivative, Dipeptide-2, and Palmitoyl Tetrapeptide-7. This powerful trio works to reduce capillary vessel permeability, improve lymphatic circulation, and enhance skin firmness and elasticity for a youthful look.\nExperience enhanced firmness and tone in your eye area with the synergistic blend of Palmitoyl Tripeptide-1 and Palmitoyl Tetrapeptide-7 matrikines. Chrysin & N-hydroxysuccinimide target and eliminate the root causes of dark circles and puffiness, clearing away bilirubin and soluble iron for a rejuvenated appearance.\nWater/Aqua, Caprylic/Capric Triglyceride, Niacinamide, Propanediol, Glycerin, Caffeine, Dimethicone, Brassica Glycerides, Diisopropyl Sebacate, Maltodextrin, Glyceryl Glucoside, Butylene Glycol, Glyceryl Stearate SE, Phytonadione Epoxide, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Sodium Hyaluronate, Caprylyl Methicone, Behenyl Alcohol, Pentylene Glycol, PEG-12 Dimethicone/PPG-20 Crosspolymer, Hydrolyzed Sodium Hyaluronate, Carbomer, Phenoxyethanol, Hydroxyethylcellulose, Polyacrylate Crosspolymer-6, Xanthan Gum, Hesperidin Methyl Chalcone, Ethylhexylglycerin, Trisodium Ethylenediamine Disuccinate, Sodium Hydroxide, Retinal, N-Hydroxysuccinimide, Dipeptide-2, Palmitoyl Tetrapeptide-7, Zerumbone, Steareth-20, Chrysin, Palmitoyl Tripeptide-1\n## Explore Best Sellers\nOverall rating: 3.487805 / 5 from 246 reviews.\n### AI Generated Review Summary\nThe eye cream is praised for its effectiveness and hydration, though opinions vary on its results for dark circles and pigmentation. Some users report no visible changes or effects, while others experience itching and watery eyes.\n### Summary topics\n- Cream Effectiveness ( 13% ): It was highlighted by customers that this eye cream is great, effective, and hydrating.\n- Eye Irritation ( 5% ): Customers have mixed opinions about the effectiveness of this eye cream, with some experiencing extreme itching and watery eyes.\n- Product Results ( 13% ): Opinions vary on the results of this product, with some experiencing good results while others did not see any change.\n- Dark Circles Effectiveness ( 17% ): Customers expressed differing viewpoints regarding the effectiveness of this eye cream for reducing dark circles and pigmentation around the eyes.\n- Visible Effect ( 3% ): A few customers stated that they haven't seen any visible effects on dark circles after using the product.\nReview topics: [\"results\",\"skin\",\"feels\",\"cream\",\"circles\",\"eyes\",\"formula\",\"effect\",\"irritation\",\"quantity\",\"wrinkles\",\"works\",\"texture\",\"lines\",\"use\",\"brand\",\"sleep\",\"thankyou\",\"quantity of the product\"].\n### Review highlights\n- \"This is my holy grail eye cream for dark circles and pigmentation around eyes true to its words such a good formulation\" — Anushka L.\n- \"Best Eyecream for Puffy Eyes\" — Neha B.\n- \"Best work for dark circle and fine lines\" — Deeksha S.\n### Reviews\n#### Great formula for stubborn dark circles\n\"I have combination skin and started using this eye cream to target my dark circles, and I am really happy with the results. The formula is lightweight, absorbs quickly without feeling greasy, and layers well under moisturizer. Even on nights when I do not get enough sleep, the skin around my eyes looks much more refreshed and less tired. The visible brightening effect took a few weeks of consistent use, so a little patience is needed, which is why I am giving it 4 stars—overall, it is a solid, effective product!\"\n— Ayush P. ( 4/5 )\n#### Worth Trying\n\"I've been loving this eye cream so far! The texture feels nice on the skin, and it fits well into my skincare routine. I'm hoping for good results with dark circles, fine lines, wrinkles and overall under-eye appearance with regular use. A nice addition to my skincare collection! 💗\"\n— Deepanshi C. ( 5/5 )\n#### Not as they are announc\n## Structured products (JSON-LD)\n[{\"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream\", \"image\": {\"@type\": \"ImageObject\", \"url\": \"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054\", \"image\": \"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"width\": \"1100\", \"height\": \"1600\"}, \"sku\": \"8906128100870\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"description\": \"When to use: PM\\nFrequency: Everyday\", \"category\": \"Skin Care\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": [{\"@type\": \"Offer\", \"sku\": \"8906128100870\", \"gtin13\": 8906128100870, \"availability\": \"http://schema.org/InStock\", \"price\": 449.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489\"}]}, {\"@type\": \"Product\", \"image\": [\"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054&width=480\"], \"sku\": \"8906128100870\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"description\": \"When to use: PM\\nFrequency: Everyday\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": {\"@type\": \"Offer\", \"availability\": \"https://schema.org/InStock\", \"price\": \"449.0\", \"priceCurrency\": \"INR\", \"sku\": \"8906128100870\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489\"}}, {\"@type\": \"ProductGroup\", \"@id\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream#json-ld-for-seo\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream\", \"image\": [\"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_K_Eye_02.png?v=1726489863&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_K_Eye_03.png?v=1726489863&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_K_Eye_04.png?v=1726489863&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_K_Eye_06.png?v=1726489861&width=1100\"], \"productID\": \"8906128100870\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"description\": \"When to use: PM\\nFrequency: Everyday\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"hasVariant\": [{\"@id\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489#json-ld-for-seo-product\", \"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489\", \"inProductGroupWithID\": \"7781035704481\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"image\": \"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054&width=1100\", \"description\": \"When to use: PM\\nFrequency: Everyday\", \"sku\": \"8906128100870\", \"mpn\": \"8906128100870\", \"gtin\": \"8906128100870\", \"gtin13\": \"8906128100870\", \"category\": [\"Eye Masks\", \"Sleeping Aids\", \"Personal Care\", \"Health & Beauty\"], \"weight\": {\"@type\": \"QuantitativeValue\", \"unitText\": \"g\", \"value\": 14.0}, \"itemCondition\": \"https://schema.org/NewCondition\", \"offers\": [{\"@type\": \"Offer\", \"@id\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489#json-ld-for-seo-variant\", \"name\": \"Vitamin K + Retinal 1% Eye Cream\", \"price\": \"449.0\", \"priceCurrency\": \"INR\", \"validFrom\": \"2026-11-20\", \"priceValidUntil\": \"2027-02-19\", \"itemCondition\": \"https://schema.org/NewCondition\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489\", \"image\": \"https://beminimalist.co/cdn/shop/files/KRetinalNew.png?v=1721632054&width=1100\", \"sku\": \"8906128100870\", \"mpn\": \"8906128100870\", \"availability\": \"https://schema.org/InStock\", \"gtin\": \"8906128100870\", \"gtin13\": \"8906128100870\", \"seller\": {\"@type\": \"Organization\", \"name\": \"Minimalist\"}}]}]}, {\"@type\": \"Product\", \"@id\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489#json-ld-for-seo-product\", \"url\": \"https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream?variant=43332855267489\", \"image\": \"https://be",
+      "fetched_at": "2026-11-21T11:27:32.644972+00:00",
+      "title": "Vitamin K + Retinal 01% Eye Cream for Dark Circles, Puffiness & Fine Lines - For All Skin Types | Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "product",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/products/vitamin-k-retinal-01-eye-cream"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    },
+    {
+      "url": "https://beminimalist.co/products/vitamin-c-e-ferulic-16",
+      "text": "Vitamin C + E + Ferulic 16% Serum - A skin-brightening daily serum with stable Vitamin C, Vitamin E & Ferulic Acid | Minimalist\nMeta description: A skin-brightening daily serum with stable Vitamin C at 15% and antioxidants (Vitamin E & Ferulic Acid) at 1% combined.\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG.png?v=1712742891\nLogo URL: https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --wizzy-primary = #54a5cd\n### Offers (5)\nBuy 2, Get the 3rd product for free\nGet Additional 15% Off on orders above ₹1399/-\nGet Additional 10% Off on orders above ₹599/-\nGet additional 5% Off over ₹299+\nBuy 2 Product, Get Minimalist Glass Bottle for Free\n# Vitamin C + E + Ferulic 16% Face Serum\nBrightens & protects skin\nA skin-brightening daily serum with stable Vitamin C at 15% and antioxidants (Vitamin E & Ferulic Acid) at 1% combined.\n\"Visibly gives me brighter and more even skin tone and helps to accelerate the fading of scars. -Meenakshi P.\"\n- Made with stabilized Vitamin C derivative \"Ethyl Ascorbic Acid\" (EAA) that has 86% pure Vitamin C content. This serum delivers EAA in high concentration of 15%\n- 1% blend of 2 potent antioxidants - Vitamin E & Ferulic Acid. Together they not only stabilize the formula, but also improve efficacy of Vitamin C\n- Contains Fullerenes (C60), a new generation antioxidant (the scientists who discovered Fullerenes were awarded Nobel Prize). It is several times more potent than Vitamin C and has strong, long lasting and stable anti-oxidative activity\n- The combination of actives not only brighten the skin, but also scavenge free radicals to reduce redness, skin damage and make skin healthy overall Formulated with ET-VC, high purity Ethyl Ascorbic Acid, from Corum Inc, Taiwan\nSkin type: All skin types\nConcerns : Spots, Uneven Tone & Dull Skin\nSuitable for: 18+ years of age\nAfter cleansing and toning your face, take 2-3 drops of Vitamin C serum on your fingertips with the dropper. Apply it on the face by gently tapping it on the skin. With a circular motion, evenly spread the serum and allow your skin to absorb it. When to use: When to use: AM & PM. Everyday\nA potent everyday serum with stabilised Vitamin C and new age antioxidant Fullerenes to brighten skin and make it healthy & even looking\n94% subjects agreed significant improvement in skin glow & reduction in dullness\n87% subjects agreed skin felt more even looking after 6 weeks\n87% subjects agreed reduction in spots after 8 weeks\nNote: The product has been evaluated for safety through patch testing under the supervision of a Dermatologist.\n- 20ml\n- 10ml\n## Ingredients\nProven antioxidant that visibly brightens dull skin and fades dark spots\nNew-age molecule with strong antioxidant properties to address several skin issues like dullness, UV damage, and aging\nPotent antioxidant that reverses signs of sun damage (UV exposure), and makes skin look even & healthier overall\nWater/Aqua, 3-O-Ethyl Ascorbic Acid, Propanediol, Ethoxydiglycol, 1,2-Hexanediol, Butylene Glycol, Dimethyl Isosorbide, Argan Oil Glycereth-8 Esters, Sodium Hyaluronate, Panthenol, Ferulic Acid, Phenoxyethanol, Sodium Gluconate, Fullerenes, Tocopheryl Acetate, Pentylene Glycol, Citric Acid, Sodium Citrate, Ethylhexylglycerin, PVP, Trisodium Ethylenediamine Disuccinate\n## You might also like\nOverall rating: 3.7591093 / 5 from 494 reviews.\n### AI Generated Review Summary\nThis Vitamin C + E + Ferulic 16% Face Serum is praised for its effective formula and skin benefits, though some customers have mixed feelings about the bottle and packaging.\n### Summary topics\n- Vitamin C Efficacy ( 3% ): Customers expressed satisfaction with the vitamin c, stating it is the best they have ever used.\n- Formula Effectiveness ( 3% ): It was observed by customers that the formula of this product is very effective and does not feel oily.\n- Skin Feel ( 4% ): It was observed by customers that the product makes their skin feel lively, vibrant, and healthier.\n- Overall Results ( 11% ): It was noted by customers that the results they saw were amazing and they were satisfied with the product.\n- Skin Benefits ( 14% ): Customers keep praising the product for its ability to make their skin feel bright, hydrated, and soft.\nReview topics: [\"smell\",\"weight\",\"results\",\"issues\",\"quality\",\"skin\",\"looks\",\"serum\",\"feels\",\"improvement\",\"packaging\",\"use\",\"bottle\",\"spots\",\"formula\",\"works\",\"acne\",\"quantity\",\"glow\",\"effect\",\"face\",\"consistency\",\"texture\",\"vitamin c\",\"reduction\",\"value\",\"irritation\",\"difference\",\"complexion\",\"oil\"].\n### Review highlights\n- \"My skin feels lively and vibrant, thanks minimalist <3\" — Samriddhi S.\n- \"my skin dullness has significantly improved and my skin feels healthier after application.\" — Dikshita C.\n- \"Skin feels bright with usage\" — Swetha P.\n### Reviews\n#### I absolutely love this Vitamin C serum! It is very lightweight, absorbs quickly into the skin, and doesn't feel sticky or greasy at all. I've noticed a visible improvement in my uneven skin tone, and my skin looks healthier and more radiant. It's working really well for my skin. Definitely happy with this purchase! ❤️\n\"I absolutely love this Vitamin C serum! It is very lightweight, absorbs quickly into the skin, and doesn't feel sticky or greasy at all. I've noticed a visible improvement in my uneven skin tone, and my skin looks healthier and more radiant. It's working really well for my skin. Definitely happy with this purchase! ❤️ Thank u minimalist :hands_heart:\"\n— Soni Y. ( 5/5 )\n#### Product is good but not for sensitive skin\n\"I have used minimalist vitamin c 10% serum earlier daily yet never had any issue this time though i ordered this 16% serum but my skin burns and becomes flaky and extremely dry if I use it two days continuously. I dont know what the problem is. Minimalist is my absolute favourite brand but this serum im sure if its not for my skin or if its too strong of a serum\"\n— Nestha C. ( 3/5 )\n#### Scammed of one product\n\"I recently bought two bottles of Serum. While one of them was i believe the right quantity, the other bottle was half empty as compared to the first. It's an expensive item when we see per mL cost and it feels like i have been scammed.\"\n— RAJAT C. ( 1/5 )\n#### Ultimate result\n\"Best vitamin c serum for skin\"\n— Akhilesh k. ( 5/5 )\n#### > Rating: 2/5 > I have been using Minimalist Salicylic 2% + B5 Moisturizer + Sunscreen for 1 month (since 13th Aug) for oily, sensitive skin with small bumps on forehead and nose. I used the serum with a gap as suggested, not daily. > I did not see any visible difference in whiteheads/pigmentation. Small white-yellowish bumps are still coming on forehead and near nose. After applying sunscreen, oiliness increases a lot. Maybe it doesn't suit my skin type. > No major irritation though, packaging and texture are good.\n\"\"I've been using everything for a month now but I don't see any difference, I don't feel anything new, the small acne hasn't stopped appearing and the oiliness has increased even more after applying sunscreen. \"\"\n— ANJ M. ( 5/5 )\n#### It's really good\n\"I have been using it for 4-5 weeks and the changes are slightly visible now  It has reduced the dark spots on my face and giving me a happy glowing skin in the morning  I am using it only at night\"\n— Mansi S. ( 5/5 )\n#### Skin care\n\"yes i have used mutiple brands but i think i would go with minimilst so looking forward for some offers and discounts so i could purchase regularly\"\n— Surya .. ( 5/5 )\n#### Product\n## Structured products (JSON-LD)\n[{\"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16\", \"image\": {\"@type\": \"ImageObject\", \"url\": \"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127\", \"image\": \"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum\", \"width\": \"1100\", \"height\": \"1600\"}, \"sku\": \"8906128100504\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum\", \"description\": \"\\nWhen to use: AM / PM\\nFrequency: Everyday\\n\", \"category\": \"Skin Care\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": [{\"@type\": \"Offer\", \"sku\": \"8906128100504\", \"gtin13\": 8906128100504, \"availability\": \"http://schema.org/InStock\", \"price\": 539.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457\"}, {\"@type\": \"Offer\", \"sku\": \"8906128101907\", \"gtin13\": 8906128101907, \"availability\": \"http://schema.org/InStock\", \"price\": 332.0, \"priceCurrency\": \"INR\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084824225\"}]}, {\"@type\": \"Product\", \"image\": [\"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127&width=480\"], \"sku\": \"8906128100504\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum\", \"description\": \"\\nWhen to use: AM / PM\\nFrequency: Everyday\\n\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"offers\": {\"@type\": \"Offer\", \"availability\": \"https://schema.org/InStock\", \"price\": \"332.0\", \"priceCurrency\": \"INR\", \"sku\": \"8906128100504\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457\"}}, {\"@type\": \"ProductGroup\", \"@id\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16#json-ld-for-seo\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16\", \"image\": [\"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_E_02.png?v=1726489863&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_E_03.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_E_04.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_E_05.png?v=1726489864&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vitamin_C_E_06.png?v=1726489861&width=1100\", \"https://beminimalist.co/cdn/shop/files/Vit_C_E_Ferulic_Serum_10ml.png?v=1783339547&width=840\"], \"productID\": \"8906128100504\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum\", \"description\": \"\\nWhen to use: AM / PM\\nFrequency: Everyday\\n\", \"brand\": {\"@type\": \"Brand\", \"name\": \"Minimalist\"}, \"hasVariant\": [{\"@id\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457#json-ld-for-seo-product\", \"@type\": \"Product\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457\", \"inProductGroupWithID\": \"7320022220961\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum 20ml\", \"image\": \"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127&width=1100\", \"description\": \"\\nWhen to use: AM / PM\\nFrequency: Everyday\\n\", \"sku\": \"8906128100504\", \"mpn\": \"8906128100504\", \"gtin\": \"8906128100504\", \"gtin13\": \"8906128100504\", \"category\": [\"Skin Care\", \"Cosmetics\", \"Personal Care\", \"Health & Beauty\"], \"weight\": {\"@type\": \"QuantitativeValue\", \"unitText\": \"g\", \"value\": 60.0}, \"itemCondition\": \"https://schema.org/NewCondition\", \"offers\": [{\"@type\": \"Offer\", \"@id\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457#json-ld-for-seo-variant\", \"name\": \"Vitamin C + E + Ferulic 16% Face Serum 20ml\", \"price\": \"539.0\", \"priceCurrency\": \"INR\", \"validFrom\": \"2026-11-20\", \"priceValidUntil\": \"2027-02-19\", \"itemCondition\": \"https://schema.org/NewCondition\", \"url\": \"https://beminimalist.co/products/vitamin-c-e-ferulic-16?variant=45880084791457\", \"image\": \"https://beminimalist.co/cdn/shop/files/Vit16New.png?v=1721398127&width=1100\", \"sku\": \"8906128100504\", \"mpn\": \"8906128100504\", \"availability\": \"",
+      "fetched_at": "2026-11-21T11:27:33.192605+00:00",
+      "title": "Vitamin C + E + Ferulic 16% Serum - A skin-brightening daily serum with stable Vitamin C, Vitamin E & Ferulic Acid | Minimalist",
+      "source_type": "website",
+      "metadata": {
+        "category": "product",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--wizzy-primary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#54a5cd",
+            "source_url": "https://beminimalist.co/products/vitamin-c-e-ferulic-16"
+          }
+        ],
+        "brand_asset_links": []
+      }
+    }
+  ],
+  "manual_quality_references": [],
+  "quality_validation": "Automated mocks exercise contracts and diversity checks only. Human live benchmark still required."
+}

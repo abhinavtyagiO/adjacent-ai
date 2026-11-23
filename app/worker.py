@@ -440,6 +440,9 @@ async def serve():
     logging.getLogger("httpx").setLevel(logging.WARNING)
     factory = session_factory(settings.database_url)
     worker = ExtractionWorker(factory, settings, WebsiteSource(settings), build_provider(settings))
+    from app.creative.worker import CreativeWorker
+
+    creative = CreativeWorker(factory, settings, build_provider(settings))
     stop = asyncio.Event()
     loop = asyncio.get_running_loop()
     for sig in (signal.SIGINT, signal.SIGTERM):
@@ -448,7 +451,10 @@ async def serve():
     try:
         while not stop.is_set():
             try:
-                worked = await worker.process_once()
+                # Alternate queues so a busy brand queue cannot starve creative jobs.
+                worked = await creative.process_once()
+                if not stop.is_set():
+                    worked = await worker.process_once() or worked
             except Exception as error:
                 logger.error("worker_poll_failed type=%s", type(error).__name__)
                 worked = False

@@ -220,3 +220,34 @@ change. CSS colors remain observed styling, testimonials remain unverified quota
 and claim review remains an advertising review aid. Live kit accessibility, palette
 fidelity and marketing usefulness still require a separately authorized check. See
 `docs/content-crawling.md` for exact policy, configuration, coverage diagnostics and limits.
+
+## Phase 2A creative strategy — 23 November 2026
+
+- **374 offline tests passed** against disposable PostgreSQL 16, including all 318 Phase 1
+  regressions and 56 new creative checks. The existing Starlette/httpx deprecation warning
+  remains; no tests were skipped in the full run.
+- Campaign creation/editing, immutable BIP/source/brief research binding, distinct candidate
+  contracts, generator/evaluator checkpoints, editing/selection/approval/handoff APIs,
+  safe empty outcomes, partial evaluator failures and append-only regeneration are covered.
+- Real provider strategies run over mocked OAuth/SSE or SDK boundaries. Tests verify
+  selected model/account binding, safe usage accounting, one transport attempt even when
+  global retries allow more, exactly two normal requests, input/output boundaries and no
+  fallback. No actual OAuth account, model discovery or live inference was used by tests.
+- Tests cover literal/normalized duplicates, repeated insights, unsupported capabilities,
+  explicit exclusions, negative customer opinions, conservative claim flags, asset
+  availability, concurrent SKIP LOCKED claims, revision fencing, edits during evaluation,
+  expired leases/usage gaps, and graceful shutdown without claiming another paid job.
+- Migration 0005 downgrade/re-upgrade and Alembic check passed with Phase 1 profile checksums
+  preserved. Ruff lint/format, diff checks, Compose validation and Docker builds passed.
+- Local migration 0005 applied and API/worker updated with no active jobs. Read-only campaign
+  listing for existing Opal and Minimalist returns 200; OpenAPI includes the creative routes.
+  All pre-existing profile-row checksums are unchanged. No campaign, extraction or creative
+  generation job was created in the local production database during rollout.
+
+Opal and Minimalist benchmarks use frozen draft BIPs and saved public-source text from
+21 November. Generator/evaluator outputs and scores in tests are explicitly synthetic.
+The five manual Opal reference concepts remain benchmark metadata, never canned runtime
+outputs. Test success demonstrates contracts and protection behavior, not real creative
+quality, conversion performance, claim approval or asset rights. See `docs/phase2a.md` for
+the optional separately authorized human live-benchmark procedure and remaining limits.
+No live model inference, paid retries, recrawl, rendering or publishing was performed.
