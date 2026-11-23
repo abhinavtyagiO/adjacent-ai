@@ -317,3 +317,13 @@ def test_only_oversized_capability_fails_before_paying_for_generation():
             profile, [], docs(data), CampaignBrief.model_validate(data["brief"]), [], 30000
         )
     assert exc.value.code == "RESEARCH_INSUFFICIENT"
+
+
+def test_destination_preserves_tracking_parameters_and_fragment_without_fetching():
+    url = "https://opalapp.com/pricing?utm_source=instagram&variant=students#plans"
+    brief = CampaignBrief(objective="Awareness", audience="Students", destination_url=url)
+    assert brief.destination_url == url
+    with pytest.raises(ValidationError):
+        CampaignBrief(
+            objective="Awareness", audience="Students", destination_url="javascript:alert(1)"
+        )

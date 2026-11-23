@@ -47,6 +47,7 @@ inspectable. A selected concept based on an outdated brief/BIP cannot be handed 
 
 Objective and either audience or concern are required. Geography, language, platform, CTA,
 destination and references are nullable/optional; no geography or objective is invented.
+Destination tracking parameters and landing-page fragments are preserved; URLs are never fetched.
 `BRAND` scope has no selected offering key. `FAMILY` requires a saved family key; `PRODUCT`
 requires a saved non-family offering key. Families include their children in research.
 The first supported aspect ratio is `9:16`; the explicit default duration is 15 seconds,

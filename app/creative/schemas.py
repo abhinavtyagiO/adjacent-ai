@@ -1,6 +1,7 @@
 """Bounded campaign, generator, evaluator and human review contracts."""
 
 from typing import Annotated, Literal
+from urllib.parse import urlsplit, urlunsplit
 from uuid import UUID
 
 from pydantic import Field, StrictBool, field_validator, model_validator
@@ -35,7 +36,12 @@ class CampaignBrief(Schema):
     @field_validator("destination_url")
     @classmethod
     def destination(cls, value):
-        return normalize_url(value) if value else value  # Never fetched.
+        if not value:
+            return value
+        original = urlsplit(value)
+        validated = urlsplit(normalize_url(value))
+        # Validate host/scheme without discarding campaign tracking or landing anchors.
+        return urlunsplit(validated._replace(query=original.query, fragment=original.fragment))
 
     @model_validator(mode="after")
     def targeting(self):

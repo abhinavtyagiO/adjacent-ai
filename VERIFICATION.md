@@ -223,8 +223,8 @@ fidelity and marketing usefulness still require a separately authorized check. S
 
 ## Phase 2A creative strategy — 23 November 2026
 
-- **374 offline tests passed** against disposable PostgreSQL 16, including all 318 Phase 1
-  regressions and 56 new creative checks. The existing Starlette/httpx deprecation warning
+- **375 offline tests passed** against disposable PostgreSQL 16, including all 318 Phase 1
+  regressions and 57 new creative checks. The existing Starlette/httpx deprecation warning
   remains; no tests were skipped in the full run.
 - Campaign creation/editing, immutable BIP/source/brief research binding, distinct candidate
   contracts, generator/evaluator checkpoints, editing/selection/approval/handoff APIs,
