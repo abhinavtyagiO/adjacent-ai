@@ -77,6 +77,7 @@ def export(client, campaign_id, job_id):
     rejected = job["diagnostics"].get("rejected_candidates", [])
     return {
         "job": job,
+        "runtime": job["diagnostics"].get("runtime"),
         "generator_research": snapshot["payload"],
         "research_binding": {key: value for key, value in snapshot.items() if key != "payload"},
         "generated_candidates": [

@@ -6,7 +6,11 @@ RUN pip install --no-cache-dir -r requirements.lock
 COPY app ./app
 COPY alembic ./alembic
 COPY alembic.ini ./
-RUN pip install --no-deps . && useradd --create-home app && mkdir -p /srv/chatgpt && chown app:app /srv/chatgpt
+# Both services run the source in /srv/app. Keep only one copy of the application.
+RUN useradd --create-home app && mkdir -p /srv/chatgpt && chown app:app /srv/chatgpt
+ARG APP_BUILD_REVISION
+ENV APP_BUILD_REVISION=${APP_BUILD_REVISION}
+LABEL org.opencontainers.image.revision=${APP_BUILD_REVISION}
 USER app
 EXPOSE 8000
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]

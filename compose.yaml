@@ -46,7 +46,7 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
       CHATGPT_AUTH_DIR: /srv/chatgpt
-    command: ["brand-worker"]
+    command: ["python", "-m", "app.worker"]
     restart: unless-stopped
     depends_on:
       migrate: {condition: service_completed_successfully}

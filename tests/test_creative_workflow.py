@@ -575,8 +575,12 @@ async def test_quality_review_persists_payoff_flags_overlap_and_benchmark_export
 ):
     from uuid import UUID
 
+    from app.config import get_settings
+    from app.creative.schemas import CREATIVE_SCHEMA_VERSION
     from evaluations.phase2a import export
 
+    get_settings().app_build_revision = "api-test-build"
+    settings.app_build_revision = "worker-test-build"
     brand, _ = seed(factory)
     before = checksum(factory, brand)
     c = campaign(client, brand)
@@ -618,6 +622,11 @@ async def test_quality_review_persists_payoff_flags_overlap_and_benchmark_export
     assert all(item["evaluation"]["distinction"] for item in report["shortlist"])
     assert len(report["generated_candidates"]) == 6
     assert len(report["stage_usage"]) == 2
+    assert report["runtime"] == {
+        "api_build_revision": "api-test-build",
+        "worker_build_revision": "worker-test-build",
+        "creative_schema_version": CREATIVE_SCHEMA_VERSION,
+    }
     records = {row["candidate"]["candidate_key"]: row for row in report["generated_candidates"]}
     payoff_flags = records["idea-0"]["validation"]["flags"]
     assert any(f["code"] == "UNSUPPORTED_PROMISE" and f["field"] == "payoff" for f in payoff_flags)

@@ -155,6 +155,9 @@ class CampaignService:
             research_id=research.id,
             model=model,
             chatgpt_account_id=binding.get("chatgpt_account_id"),
+            diagnostics={
+                "runtime": {"api_build_revision": self.settings.app_build_revision or None}
+            },
         )
         self.session.add(job)
         self.session.commit()

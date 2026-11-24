@@ -455,3 +455,39 @@ def test_safety_assurances_in_actual_caption_are_blocked(claim):
         f["field"] == "on_screen_copy" and f["code"] == "UNSUPPORTED_SAFETY_ASSURANCE"
         for f in result["flags"]
     )
+
+
+def test_numeric_review_ignores_production_timing_and_keeps_viewer_claims():
+    context = research("opal")
+    candidate = generated(context).candidates[0].model_dump()
+    candidate["candidate_key"] = "idea-1"
+    candidate["story"] = {
+        "opening": "0–3s: A notebook closes.",
+        "development": "[00:03–00:06] A phone lights up.",
+        "product_connection": "6s - Start a focus session.",
+        "payoff": "11–15 seconds: Make space to study.",
+    }
+    candidate["b_roll"] = ["Hold the overhead shot for 3 seconds."]
+    result = check_candidate(Candidate.model_validate(candidate), context)
+    assert not any(flag["code"] == "NUMERIC_STATEMENT_REVIEW" for flag in result["flags"])
+
+    candidate["story"]["payoff"] = "11–15s: Save 30 minutes every day."
+    candidate["on_screen_copy"]["text"] = "Get back 20 minutes today."
+    result = check_candidate(Candidate.model_validate(candidate), context)
+    assert {
+        flag["field"] for flag in result["flags"] if flag["code"] == "NUMERIC_STATEMENT_REVIEW"
+    } == {"payoff", "on_screen_copy"}
+
+
+def test_evaluator_requires_grounding_distinction_and_overlap_groups():
+    from app.creative.schemas import EvaluatorResult
+
+    data = evaluated(generated(research("opal")).candidates).model_dump()
+    for field in ("grounding", "distinction"):
+        invalid = json.loads(json.dumps(data))
+        invalid["evaluations"][0].pop(field)
+        with pytest.raises(ValidationError):
+            EvaluatorResult.model_validate(invalid)
+    data.pop("overlap_groups")
+    with pytest.raises(ValidationError):
+        EvaluatorResult.model_validate(data)

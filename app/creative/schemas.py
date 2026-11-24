@@ -9,6 +9,9 @@ from pydantic import Field, StrictBool, field_validator, model_validator
 from app.crawling.urls import normalize_url
 from app.schemas import Schema
 
+# Bump when the required generator or evaluator output changes.
+CREATIVE_SCHEMA_VERSION = 2
+
 Short = Annotated[str, Field(min_length=1, max_length=200)]
 Text = Annotated[str, Field(min_length=1, max_length=700)]
 Hook = Annotated[str, Field(min_length=1, max_length=180)]

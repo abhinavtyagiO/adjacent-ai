@@ -25,6 +25,16 @@ SAFETY_ASSURANCE = re.compile(
 )
 
 
+# Story fields may start with a cue such as "0–3s:" or "[00:03–00:06]".
+# Only remove the leading cue. Numbers in the remaining story or viewer copy still count.
+STORY_TIMECODE = re.compile(
+    r"^\s*\[?\s*(?:(?:\d+:)?\d+(?:\.\d+)?s?\s*[-–—]\s*)?"
+    r"(?:\d+:\d{2}(?:\.\d+)?|\d+(?:\.\d+)?\s*(?:seconds?|secs?|s))"
+    r"\s*(?:\]\s*:?|:|[-–—])\s*",
+    re.I,
+)
+
+
 def captions(candidate):
     copy = candidate.on_screen_copy
     if isinstance(copy, SingleCaption):
@@ -163,8 +173,6 @@ def check_candidate(candidate, research):
         re.I,
     ):
         flag("SENSITIVE_OR_QUANTIFIED_CLAIM")
-    if re.search(r"\d", text):
-        flag("NUMERIC_STATEMENT_REVIEW")
     if candidate.factual_assumptions:
         flag("FACTUAL_ASSUMPTIONS_REQUIRE_REVIEW")
     if any(i["kind"] in {"EXTRACTED_PROVISIONAL", "USER_ASSERTION"} for i in capabilities):
@@ -175,6 +183,11 @@ def check_candidate(candidate, research):
     surfaces = {**copy_surfaces(candidate), "cta": [candidate.cta]}
     spoken = " ".join(line for lines in surfaces.values() for line in lines)
     for field, lines in surfaces.items():
+        copy = [
+            STORY_TIMECODE.sub("", line) if field in {"story", "payoff"} else line for line in lines
+        ]
+        if any(re.search(r"\d", line) for line in copy):
+            flag("NUMERIC_STATEMENT_REVIEW", field=field)
         if any(AUDIENCE_SAFETY.search(line) for line in lines):
             flag("SENSITIVE_SUITABILITY_CLAIM", field=field)
         if any(AUDIENCE_SAFETY.search(line) and SAFETY_ASSURANCE.search(line) for line in lines):

@@ -15,7 +15,7 @@ from sqlalchemy import func, select
 
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
 from app.creative.provider import CreativeProvider
-from app.creative.schemas import EvaluatorResult, GeneratorResult
+from app.creative.schemas import CREATIVE_SCHEMA_VERSION, EvaluatorResult, GeneratorResult
 from app.creative.validation import add_evaluator_flags, validate_candidates, validate_evaluation
 from app.errors import DomainError
 from app.intelligence import metrics
@@ -173,6 +173,12 @@ class CreativeWorker:
                     job, research = self.current(session, claim)
                     payload, account_id, model = research.payload, job.chatgpt_account_id, job.model
                     job.diagnostics = {
+                        **job.diagnostics,
+                        "runtime": {
+                            **job.diagnostics.get("runtime", {}),
+                            "worker_build_revision": self.settings.app_build_revision or None,
+                            "creative_schema_version": CREATIVE_SCHEMA_VERSION,
+                        },
                         "stage": "preflight",
                         "generator_status": "SKIPPED",
                         "evaluator_status": "SKIPPED",
@@ -207,6 +213,7 @@ class CreativeWorker:
                             )
                         )
                     job.diagnostics = {
+                        **job.diagnostics,
                         **diagnostics,
                         "stage": "evaluator" if accepted else "finished",
                         "generator_status": "SUCCEEDED" if accepted else "INSUFFICIENT_DATA",

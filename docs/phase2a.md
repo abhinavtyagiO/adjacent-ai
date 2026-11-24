@@ -138,4 +138,17 @@ python -m evaluations.phase2a export CAMPAIGN_ID JOB_ID > opal-benchmark.json
 
 The report includes the saved research sent to the generator, all stored candidate outputs, rejected candidates with their flags, the shortlist and its reasons, actual hooks and captions, and model usage and timing for each stage. It also shows any partial failure. A failed response that could not be parsed may have no candidates to export. Both commands leave generation to the separate API step.
 
+The report also includes the API and worker build revisions and the creative schema version
+recorded for that job. Older jobs may show a blank runtime record. To include the Git commit
+in a local Docker build, run these commands from the repository:
+
+```sh
+docker compose build --build-arg APP_BUILD_REVISION="$(git rev-parse HEAD)" api worker migrate
+docker compose up -d --no-build api worker
+```
+
+Docker starts both services from the same copy of the app in `/srv/app`. The worker checks
+numbers in hooks, captions, and other proposed ad copy. A leading story timecode such as
+`0–3s:` and timing in footage instructions are production cues and do not trigger that check.
+
 Rolling back migration `0005` removes the creative tables and keeps the Phase 1 profiles, offerings, sources, and jobs. Back up campaign and concept data before rolling back.
