@@ -428,3 +428,7 @@ Readiness is nonblocking and checks useful product, audience, motivation and cre
 valid JSON alone is insufficient. Campaign generation is out of scope and is not declared
 ready automatically. [MVP documentation](docs/draft-first.md) explains the output contracts,
 source limits, historical compatibility and estimated efficiency changes.
+
+## Writing documentation
+
+Use plain English for new and updated documentation. Follow the [repository writing standard](AGENTS.md#documentation-standard) and use the [Phase 2A guide](docs/phase2a.md) as an example.

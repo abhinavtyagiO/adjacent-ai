@@ -16,7 +16,7 @@ from sqlalchemy import func, select
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
 from app.creative.provider import CreativeProvider
 from app.creative.schemas import EvaluatorResult, GeneratorResult
-from app.creative.validation import validate_candidates, validate_evaluation
+from app.creative.validation import add_evaluator_flags, validate_candidates, validate_evaluation
 from app.errors import DomainError
 from app.intelligence import metrics
 from app.models import Brand, now
@@ -251,7 +251,10 @@ class CreativeWorker:
                                 "INTERNAL_CREATIVE_JUDGMENT_NOT_PERFORMANCE_PREDICTION"
                             ),
                         }
-                        concept.shortlisted = evaluation["selected"]
+                        concept.validation = add_evaluator_flags(concept.validation, evaluation)
+                        concept.shortlisted = (
+                            evaluation["selected"] and concept.validation["eligible"]
+                        )
                         selected += int(concept.shortlisted)
                     job.status = "SUCCEEDED" if selected else "INSUFFICIENT_DATA"
                     job.diagnostics = {
@@ -259,6 +262,9 @@ class CreativeWorker:
                         "stage": "finished",
                         "evaluator_status": "SUCCEEDED",
                         "shortlisted": selected,
+                        "overlap_groups": [
+                            group.model_dump(mode="json") for group in evaluated.overlap_groups
+                        ],
                         "insufficient_shortlist": selected < 5,
                         "insufficiency_reason": evaluated.insufficiency_reason
                         or (

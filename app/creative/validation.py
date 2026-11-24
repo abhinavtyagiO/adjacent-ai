@@ -5,12 +5,92 @@ import re
 import unicodedata
 from difflib import SequenceMatcher
 
-from app.creative.schemas import EvaluatorResult
+from app.creative.research import normalize
+from app.creative.schemas import EvaluatorResult, SingleCaption
 from app.errors import DomainError
 
 
 def normalized(text):
     return re.sub(r"[^\w]+", " ", unicodedata.normalize("NFKC", text).casefold()).strip()
+
+
+AUDIENCE_SAFETY = re.compile(
+    r"\b(?:pregnan\w*|prenatal|expectant mothers?|lactat\w*|breast[ -]?feed\w*"
+    r"|nursing mothers?|p[ae]+diatric|infants?|bab(?:y|ies)|toddlers?|children|kids|newborns?)\b",
+    re.I,
+)
+SAFETY_ASSURANCE = re.compile(
+    r"\b(?:safe|harmless|risk[- ]free|suitable|gentle enough|no side effects)\b",
+    re.I,
+)
+
+
+def captions(candidate):
+    copy = candidate.on_screen_copy
+    if isinstance(copy, SingleCaption):
+        return [copy.text] + ([copy.closing_brand_message] if copy.closing_brand_message else [])
+    return [caption.text for caption in copy.captions] if copy else []
+
+
+def copy_surfaces(candidate):
+    story = candidate.story
+    return {
+        "hooks": [candidate.primary_hook, *candidate.alternative_hooks],
+        "story": [story.opening, story.development, story.product_connection],
+        "closing_line": [candidate.closing_line],
+        "payoff": [story.payoff],
+        "on_screen_copy": captions(candidate),
+    }
+
+
+BLOCKING_GROUNDING = {"PRODUCT_SCOPE_MISMATCH", "UNSUPPORTED_SAFETY_ASSURANCE"}
+
+
+def add_evaluator_flags(validation, evaluation):
+    # Assign fresh JSON so SQLAlchemy persists the new flags along with the shortlist.
+    validation = {**validation, "flags": list(validation["flags"])}
+    grounding = evaluation["grounding"]
+    for field, status in grounding.items():
+        if field == "explanation" or status == "SUPPORTED":
+            continue
+        blocking = status in BLOCKING_GROUNDING
+        validation["flags"].append(
+            {
+                "code": status if status != "NEEDS_REVIEW" else "COPY_GROUNDING_REVIEW",
+                "severity": "BLOCK" if blocking else "REVIEW",
+                "field": field,
+                "source": "EVALUATOR",
+                "message": grounding["explanation"],
+            }
+        )
+        if blocking:
+            validation["eligible"] = False
+    return validation
+
+
+def check_edit(previous, candidate, research, prior_validation):
+    validation = check_candidate(candidate, research)
+    old, new = copy_surfaces(previous), copy_surfaces(candidate)
+    unresolved = []
+    for flag in prior_validation["flags"]:
+        if flag.get("source") != "EVALUATOR":
+            continue
+        field = flag["field"]
+        if [normalized(line) for line in old[field]] == [normalized(line) for line in new[field]]:
+            unresolved.append(flag)
+        else:
+            unresolved.append(
+                {
+                    "code": "EDITED_COPY_NEEDS_REVIEW",
+                    "severity": "REVIEW",
+                    "field": field,
+                    "source": "EVALUATOR",
+                    "message": "This copy changed after the evaluator flagged it. Review it again.",
+                }
+            )
+    validation["flags"].extend(unresolved)
+    validation["eligible"] &= not any(flag["severity"] == "BLOCK" for flag in unresolved)
+    return validation
 
 
 def check_candidate(candidate, research):
@@ -28,10 +108,18 @@ def check_candidate(candidate, research):
         flag("UNKNOWN_RESEARCH_REFERENCE", "BLOCK")
     capabilities = [items[r] for r in candidate.capability_reference_ids if r in items]
     if not any(
-        i["capability"] and normalized(candidate.product_capability) == normalized(i["text"])
+        i["capability"] and normalize(candidate.product_capability) == normalize(i["text"])
         for i in capabilities
     ):
         flag("UNSUPPORTED_PRODUCT_CONNECTION", "BLOCK", "product_capability")
+    if research.get("capability_scope_version") and brief.get("offering_key"):
+        scope_key = brief["offering_key"]
+        if any(
+            item.get("offering_key") != scope_key
+            and not (brief["promotion_scope"] == "FAMILY" and item.get("family_key") == scope_key)
+            for item in capabilities
+        ):
+            flag("PRODUCT_SCOPE_MISMATCH", "BLOCK", "product_capability")
     if any(not i["capability"] for i in capabilities):
         flag("NON_FACTUAL_CAPABILITY_REFERENCE", "BLOCK")
     if normalized(candidate.audience) != normalized(brief.get("audience") or brief.get("concern")):
@@ -84,15 +172,13 @@ def check_candidate(candidate, research):
     opinions = [i for i in items.values() if i["kind"] == "CUSTOMER_OPINION"]
     if any(i["id"] in refs for i in opinions):
         flag("CUSTOMER_OPINION_NOT_AD_APPROVED")
-    spoken = " ".join(
-        [
-            candidate.primary_hook,
-            *candidate.alternative_hooks,
-            *candidate.story.model_dump().values(),
-            candidate.closing_line,
-            candidate.cta,
-        ]
-    )
+    surfaces = {**copy_surfaces(candidate), "cta": [candidate.cta]}
+    spoken = " ".join(line for lines in surfaces.values() for line in lines)
+    for field, lines in surfaces.items():
+        if any(AUDIENCE_SAFETY.search(line) for line in lines):
+            flag("SENSITIVE_SUITABILITY_CLAIM", field=field)
+        if any(AUDIENCE_SAFETY.search(line) and SAFETY_ASSURANCE.search(line) for line in lines):
+            flag("UNSUPPORTED_SAFETY_ASSURANCE", "BLOCK", field)
     for opinion in opinions:
         if len(opinion["text"]) > 20 and normalized(opinion["text"]) in normalized(spoken):
             flag("TESTIMONIAL_USAGE_REQUIRES_REVIEW")
@@ -119,8 +205,18 @@ def check_candidate(candidate, research):
     hooks = [normalized(h) for h in [candidate.primary_hook, *candidate.alternative_hooks]]
     if len(set(hooks)) != len(hooks):
         flag("DUPLICATE_HOOK", "BLOCK")
-    # Text-over-video suggestion only: detect obvious oversize, not a timing guarantee.
-    if len(spoken.split()) > brief["duration_seconds"] * 7:
+    # A reading-time estimate for actual screen copy, separate from scene directions.
+    screen_copy = captions(candidate)
+    if screen_copy:
+        words = sum(len(line.split()) for line in screen_copy)
+        characters = sum(len(line) for line in screen_copy)
+        if (
+            words > brief["duration_seconds"] * 2.5
+            or characters > brief["duration_seconds"] * 14
+            or any(len(line) > 110 for line in screen_copy)
+        ):
+            flag("CAPTION_READABILITY_REVIEW", field="on_screen_copy")
+    elif len(spoken.split()) > brief["duration_seconds"] * 7:
         flag("DURATION_FEASIBILITY_REVIEW")
     return {
         "eligible": not any(f["severity"] == "BLOCK" for f in flags),
@@ -132,6 +228,7 @@ def check_candidate(candidate, research):
 
 def validate_candidates(result, research):
     accepted, rejected, seen_keys, seen_hooks, signatures = [], [], set(), set(), []
+    rejected_candidates = []
     for candidate in result.candidates:
         validation = check_candidate(candidate, research)
         hooks = {normalized(h) for h in [candidate.primary_hook, *candidate.alternative_hooks]}
@@ -171,6 +268,12 @@ def validate_candidates(result, research):
                 )
             )
         else:
+            rejected_candidates.append(
+                {
+                    "candidate": candidate.model_dump(mode="json"),
+                    "validation": validation,
+                }
+            )
             rejected.append(
                 {
                     "candidate_key": candidate.candidate_key,
@@ -182,6 +285,7 @@ def validate_candidates(result, research):
         "accepted": len(accepted),
         "rejected": len(rejected),
         "rejections": rejected,
+        "rejected_candidates": rejected_candidates,
         "below_candidate_target": len(accepted) < 6,
         "limitations": result.limitations,
     }
@@ -200,4 +304,38 @@ def validate_evaluation(result: EvaluatorResult, candidates):
         raise DomainError(
             "EVALUATOR_SELECTION_INVALID", "Evaluator selected more than five concepts", 502
         )
-    return {e.candidate_key: e.model_dump(mode="json") for e in result.evaluations}
+    overlap = {}
+    for group in result.overlap_groups:
+        members = set(group.candidate_keys)
+        if (
+            len(members) != len(group.candidate_keys)
+            or not members <= expected
+            or group.representative_key not in members
+            or members & overlap.keys()
+        ):
+            raise DomainError(
+                "EVALUATOR_OVERLAP_INVALID",
+                "Overlap groups must be disjoint and name a representative from each group",
+                502,
+            )
+        overlap.update(dict.fromkeys(members, group.representative_key))
+    evaluations = {}
+    for entry in result.evaluations:
+        data = entry.model_dump(mode="json")
+        representative = overlap.get(entry.candidate_key)
+        if representative:
+            data["overlap_representative_key"] = representative
+        if (representative and representative != entry.candidate_key) or any(
+            status in BLOCKING_GROUNDING
+            for field, status in data["grounding"].items()
+            if field != "explanation"
+        ):
+            data["selected"] = False
+        if data["selected"] and not entry.distinction:
+            raise DomainError(
+                "EVALUATOR_DISTINCTION_REQUIRED",
+                "Explain what makes each selected idea distinct",
+                502,
+            )
+        evaluations[entry.candidate_key] = data
+    return evaluations

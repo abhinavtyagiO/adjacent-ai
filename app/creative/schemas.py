@@ -77,6 +77,33 @@ class AssetRequirement(Schema):
     research_reference_ids: list[Short] = Field(default_factory=list, max_length=4)
 
 
+class SingleCaption(Schema):
+    treatment: Literal["SINGLE_CAPTION"]
+    text: Hook
+    closing_brand_message: Hook | None = None
+
+
+class CaptionBeat(Schema):
+    beat: Literal["HOOK", "DEVELOPMENT", "PRODUCT_CONNECTION", "PAYOFF"]
+    text: Hook
+
+
+class SequentialCaptions(Schema):
+    treatment: Literal["SEQUENTIAL_CAPTIONS"]
+    captions: list[CaptionBeat] = Field(min_length=4, max_length=4)
+
+    @model_validator(mode="after")
+    def ordered_beats(self):
+        if [caption.beat for caption in self.captions] != [
+            "HOOK",
+            "DEVELOPMENT",
+            "PRODUCT_CONNECTION",
+            "PAYOFF",
+        ]:
+            raise ValueError("Supply hook, development, product connection and payoff in order")
+        return self
+
+
 class Candidate(Schema):
     candidate_key: Annotated[str, Field(min_length=1, max_length=50, pattern=r"^[a-z0-9-]+$")]
     title: Annotated[str, Field(min_length=1, max_length=120)]
@@ -92,6 +119,7 @@ class Candidate(Schema):
     alternative_hooks: list[Hook] = Field(min_length=2, max_length=3)
     story: Story
     production_format: Literal["TEXT_OVER_VIDEO"] = "TEXT_OVER_VIDEO"
+    on_screen_copy: SingleCaption | SequentialCaptions | None = None
     b_roll: list[Short] = Field(min_length=1, max_length=5)
     asset_requirements: list[AssetRequirement] = Field(default_factory=list, max_length=5)
     closing_line: Short
@@ -101,8 +129,14 @@ class Candidate(Schema):
     potential_risks: list[Short] = Field(default_factory=list, max_length=8)
 
 
+class GeneratedCandidate(Candidate):
+    """New model responses require captions. Saved Phase 2A ideas may predate them."""
+
+    on_screen_copy: SingleCaption | SequentialCaptions
+
+
 class GeneratorResult(Schema):
-    candidates: list[Candidate] = Field(min_length=1, max_length=8)
+    candidates: list[GeneratedCandidate] = Field(min_length=1, max_length=8)
     limitations: list[Short] = Field(default_factory=list, max_length=8)
 
 
@@ -116,6 +150,30 @@ class Scores(Schema):
     evidence_and_risk: float = Field(ge=0, le=10)
 
 
+GroundingStatus = Literal[
+    "SUPPORTED",
+    "NEEDS_REVIEW",
+    "UNSUPPORTED_PROMISE",
+    "PRODUCT_SCOPE_MISMATCH",
+    "UNSUPPORTED_SAFETY_ASSURANCE",
+]
+
+
+class CopyGrounding(Schema):
+    hooks: GroundingStatus
+    story: GroundingStatus
+    closing_line: GroundingStatus
+    payoff: GroundingStatus
+    on_screen_copy: GroundingStatus
+    explanation: Short
+
+
+class OverlapGroup(Schema):
+    candidate_keys: list[Short] = Field(min_length=2, max_length=8)
+    representative_key: Short
+    rationale: Short
+
+
 class Evaluation(Schema):
     candidate_key: Short
     scores: Scores
@@ -123,10 +181,13 @@ class Evaluation(Schema):
     weaknesses: list[Short] = Field(default_factory=list, max_length=3)
     selection_rationale: Text
     selected: bool
+    grounding: CopyGrounding
+    distinction: Short | None
 
 
 class EvaluatorResult(Schema):
     evaluations: list[Evaluation] = Field(min_length=1, max_length=8)
+    overlap_groups: list[OverlapGroup] = Field(max_length=4)
     insufficiency_reason: Text | None = None
 
 

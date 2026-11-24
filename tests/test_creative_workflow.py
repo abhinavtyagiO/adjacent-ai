@@ -566,3 +566,73 @@ async def test_generation_history_keeps_failed_jobs_visible(client, factory, set
     history = client.get(f"/v1/campaigns/{c['id']}/generations").json()
     assert len(history["items"]) == 1 and history["items"][0]["id"] == q["id"]
     assert history["items"][0]["status"] == "PARTIAL"
+
+
+async def test_quality_review_persists_payoff_flags_overlap_and_benchmark_export(
+    client,
+    factory,
+    settings,
+):
+    from uuid import UUID
+
+    from evaluations.phase2a import export
+
+    brand, _ = seed(factory)
+    before = checksum(factory, brand)
+    c = campaign(client, brand)
+    queued = enqueue(client, c["id"])
+
+    def revise_candidates(result):
+        result.candidates[0].story.payoff = "Your grades will rise after your first session."
+        result.candidates[5].primary_hook = result.candidates[4].primary_hook
+
+    class MockOverlapTransport(MockCreativeTransport):
+        async def request_structured(self, *args, **kwargs):
+            result = await super().request_structured(*args, **kwargs)
+            if not hasattr(result, "evaluations"):
+                return result
+            data = result.model_dump()
+            data["evaluations"][0]["grounding"].update(
+                payoff="UNSUPPORTED_PROMISE",
+                explanation="App blocking does not support a grade gain.",
+            )
+            data["evaluations"][2]["grounding"].update(
+                closing_line="PRODUCT_SCOPE_MISMATCH",
+                explanation="The closing names another product.",
+            )
+            data["overlap_groups"] = [
+                {
+                    "candidate_keys": ["idea-0", "idea-1"],
+                    "representative_key": "idea-0",
+                    "rationale": "The two angles promise the same uninterrupted study time.",
+                }
+            ]
+            return type(result).model_validate(data)
+
+    transport = MockOverlapTransport(settings, on_generate=revise_candidates)
+    await CreativeWorker(factory, settings, transport).process_once()
+    report = export(client, UUID(c["id"]), UUID(queued["id"]))
+    assert len(transport.calls) == 2
+    assert report["generator_research"] == transport.calls[0]["payload"]["research"]
+    assert report["shortlist_insufficient"] and len(report["shortlist"]) == 3
+    assert all(item["evaluation"]["distinction"] for item in report["shortlist"])
+    assert len(report["generated_candidates"]) == 6
+    assert len(report["stage_usage"]) == 2
+    records = {row["candidate"]["candidate_key"]: row for row in report["generated_candidates"]}
+    payoff_flags = records["idea-0"]["validation"]["flags"]
+    assert any(f["code"] == "UNSUPPORTED_PROMISE" and f["field"] == "payoff" for f in payoff_flags)
+    assert records["idea-1"]["evaluation"]["overlap_representative_key"] == "idea-0"
+    assert not records["idea-2"]["validation"]["eligible"]
+    assert records["idea-5"]["rejected"]
+    assert records["idea-0"]["viewer_copy"]["on_screen_copy"]["treatment"] == "SINGLE_CAPTION"
+    blocked = next(row for row in concepts(client, c["id"]) if row["candidate_key"] == "idea-2")
+    edited = client.patch(
+        f"/v1/concepts/{blocked['id']}",
+        json={
+            "expected_revision": blocked["revision"],
+            "changes": {"title": "New title"},
+        },
+    ).json()
+    assert not edited["validation"]["eligible"]
+    assert edited["original_content"] == blocked["original_content"]
+    assert checksum(factory, brand) == before

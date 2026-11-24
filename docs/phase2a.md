@@ -1,215 +1,141 @@
-# Phase 2A: creative strategy and ideation
+# Phase 2A: Create and review ad ideas
 
-Phase 2A turns a saved BIP and an explicit campaign brief into reviewable short-form ad
-concepts. It never edits the BIP, recrawls a website, fetches a reference URL or repeats
-brand extraction. Rendering, competitor/social ingestion and publishing remain out of scope.
-The feature uses the existing protected single-workspace installation, not multi-tenant SaaS.
+Phase 2A uses a saved Brand Intelligence Profile (BIP) and your campaign brief to suggest short-form ad ideas. You can review the ideas, edit them, and choose one to send to a future production workflow.
 
-## Data flow and persistence
+The app uses research it already saved. It leaves the brand profile as it is and does not crawl the site again or open links in your brief. Phase 2A covers planning and review. Video creation, publishing, and competitor or social media research are outside its scope.
 
-```mermaid
-flowchart TD
-    A[Saved BIP + campaign brief] --> B[Immutable bounded research snapshot]
-    S[Original saved sources + provenance] --> B
-    B --> C[One structured generator request: aim for 6–8 ideas]
-    C --> D[Deterministic validation and diversity checks]
-    D --> E[Persist eligible candidates and diagnostics]
-    E --> F[One structured evaluator request]
-    F --> G[Up to five shortlisted concepts with rationales]
-    E --> H[Partial results if evaluation fails]
-    G --> I[Human edit, review and selection]
-    H --> I
-    I --> J[Versioned structured production handoff]
-```
+## What to put in a brief
 
-Migration **0005** adds four PostgreSQL tables:
+Enter your campaign goal and either the audience you want to reach or the concern you want to address. You can also enter a platform, language, region, call to action (CTA), destination URL, phrases to avoid, and written creative references. Leave optional details blank if you have not decided on them. Destination URLs keep tracking parameters and page anchors.
 
-- `campaigns`: owning brand, editable JSONB brief and revision.
-- `research_snapshots`: immutable context, campaign/BIP revisions and original extraction
-  snapshot ID. A source cannot be deleted while a research snapshot references it.
-- `creative_jobs`: durable lease, account/model binding, stage outcomes, safe error codes,
-  validation diagnostics and usage. A partial unique index allows one active job per campaign.
-- `creative_concepts`: candidate content, original content, hook variants, story, production
-  requirements, deterministic flags, evaluation, revision and selection/review state.
-  Nested fields use JSONB; IDs, ownership, revisions and lifecycle are relational.
+| Scope | What to choose |
+|---|---|
+| `BRAND` | Promote the brand as a whole. Leave the offering key blank. |
+| `FAMILY` | Choose a saved product family. Research includes the products in that family. |
+| `PRODUCT` | Choose one saved offering that is not a family. |
 
-Generations append new rows. They never replace earlier concepts, user edits or a selected
-concept. Scores and shortlist membership are invalidated when a user edits a concept.
-The original generator content remains available. Selecting a different concept explicitly
-clears the previous selection and increments its revision; generation never does so.
+Ideas are designed for vertical, 9:16 video with text on screen (`TEXT_OVER_VIDEO`). The default duration is 15 seconds. You can set it to 5–60 seconds. Start with about 10–20 seconds for a typical short ad.
 
-Every research snapshot preserves the brief actually used. Editing a brief increments the
-campaign revision. BIP and campaign revisions fence the generator checkpoint and evaluator
-publication; stale work cannot overwrite current results. Historical candidates remain
-inspectable. A selected concept based on an outdated brief/BIP cannot be handed off.
+## How an idea becomes a shortlist entry
 
-## Brief and creative contracts
+1. **Save a copy of the research.** The app records the exact versions of the brief and brand profile, along with references to the saved website sources.
+2. **Generate ideas.** The first model call aims for six to eight ideas. Each uses one main reason the audience might pay attention: recognition, curiosity, desire, or relevance.
+3. **Check and save the ideas.** The app checks the format, audience, CTA, product references, excluded phrases, repeated ideas, and production assumptions. It saves the ideas that pass before evaluation starts.
+4. **Build a shortlist.** The second model call reviews each saved idea. It gives strengths, weaknesses, a reason for its decision, and seven scores from 0 to 10. It can choose up to five ideas. The scores describe creative quality as judged by the model. They do not predict clicks, sales, or profit.
 
-Objective and either audience or concern are required. Geography, language, platform, CTA,
-destination and references are nullable/optional; no geography or objective is invented.
-Destination tracking parameters and landing-page fragments are preserved; URLs are never fetched.
-`BRAND` scope has no selected offering key. `FAMILY` requires a saved family key; `PRODUCT`
-requires a saved non-family offering key. Families include their children in research.
-The first supported aspect ratio is `9:16`; the explicit default duration is 15 seconds,
-configurable from 5–60 seconds. The suggested initial range remains about 10–20 seconds.
+An idea can use one of two on-screen text formats:
 
-Each candidate contains a central insight and storytelling mechanism; one primary driver
-(`RECOGNITION`, `CURIOSITY`, `DESIRE`, `RELEVANCE`); audience situation and tension; a
-source-bound capability; one main and 2–3 alternative hooks; opening, development, product
-connection and payoff; B-roll, asset/demo requirements, closing and CTA; research references,
-factual assumptions and risks. Production format is `TEXT_OVER_VIDEO`.
+- `SINGLE_CAPTION` gives you one main overlay and an optional closing brand message.
+- `SEQUENTIAL_CAPTIONS` gives you four captions in order for the hook, development, product connection, and payoff.
 
-The product capability must copy a capability-bearing research item literally. This is a
-conservative trade-off: it makes the benefit connection traceable without another factual
-inference call. Hooks and storytelling can interpret that capability but cannot substantiate
-additional claims. A copied provisional BIP value remains provisional, not verified proof. Values longer than
-the concept capability limit remain research context but are not offered as literal capability
-references; no usable capability means a pre-inference research error.
+Captions contain the words viewers see. Footage and production directions go in separate fields. The app flags captions that may be too long for the chosen duration.
 
-The evaluator must assess every accepted candidate exactly once, return seven bounded
-0–10 creative judgments, concise strengths/weaknesses and a rationale, and select at most
-five. It cannot resurrect rejected candidates or introduce new IDs. Fewer selected concepts
-are allowed and report `insufficient=true`; no selection is `INSUFFICIENT_DATA`. Scores are
-**internal creative judgments, not forecasts of CTR, conversions or profit**.
+Each idea includes the audience situation, the main insight, the product benefit, a main hook and two or three alternatives, and four parts of the story: opening, development, connection to the product, and payoff. It also includes suggested footage, assets or demos to create, a closing line, a CTA, and the assumptions and risks to review.
 
-## Research and evidence boundaries
+If the evaluator chooses fewer than five ideas, the shortlist shows `insufficient: true`. If it chooses none, the job reports `INSUFFICIENT_DATA`. If evaluation fails, the job reports `PARTIAL` and you can still open the saved ideas.
 
-The context builder reads existing offerings, source documents and provenance. It balances
-positioning, voice, audiences, benefits, customer psychology, reviews, visual identity and
-creative themes, reserving room for bounded source passages. Marketing restrictions and
-user brief/reference text are reserved before optional items; oversized mandatory context
-fails before inference rather than silently dropping restrictions. Source metadata retains
-URLs, fetch timestamps and content hashes. Research IDs are path-derived and scoped to
-one immutable snapshot; they are not globally reusable citations.
+The evaluator compares the central message of every idea with the others. It groups ideas that say substantially the same thing, even if they use different hooks or formats. Only the strongest idea the evaluator identifies in each group can make the shortlist. Each shortlisted idea includes a short explanation of what makes it different.
 
-Origins are preserved. A `WEBSITE` observation is labeled source-verified only when the
-original cited quote and value occur in the saved source. `AI_EXTRACTED`/unknown values
-stay provisional; user assertions and `INFERRED` hypotheses stay distinct. Source matching
-is not independent clinical verification. Customer quotes are opinions, with published
-attribution only. A conservative keyword signal marks negative/mixed feedback; all other
-quotes remain sentiment-unassessed. Neither becomes an approved positive endorsement.
+## What the app knows and what you need to check
 
-The generator receives untrusted research/reference text as data. The evaluator receives a
-compact subset containing all referenced items plus brand/voice/visual guidance and mandatory
-restrictions, not another full crawl. No URL in a reference or destination is fetched.
+Research can include brand positioning and voice, product features, audience hypotheses, customer concerns and reviews, visual guidance, and campaign references. The app gives the brief and brand rules priority. If these alone exceed the size limit, the job stops before making a model call. The app picks short excerpts from across the saved pages based on the audience, concern, objective, and selected offering. It skips repeated text, logo links, and common boilerplate. It reserves space for relevant excerpts and customer concerns. The research response shows how many it included or left out. Each excerpt identifies its saved source URL, hash, and line number.
 
-## Validation and review
+For evaluation, the app sends a smaller set of material, including the items the ideas refer to and relevant brand guidance. The evaluator compares the actual hooks, story, closing line, payoff, and captions with the cited capabilities. Unsupported promises get review flags. A product scope mismatch or an unsupported safety assurance blocks selection. Copy about pregnancy, breastfeeding, or suitability for children also gets a review flag.
 
-Checks reject schema violations, unknown IDs, unsupported capability connections, mismatched
-audience/CTA, explicit excluded phrases and avoided terms, normalized duplicate hooks,
-identical insights and sufficiently similar same-mechanism structures, unsupported production
-assumptions and model assertions that assets are already available. `requires_creation=true`
-is required for suggested assets because Phase 2A has no asset ownership/upload attestation.
+- **Product benefits.** An idea must copy its stated product capability from a saved research item and reference that item by ID. This makes it easy to trace the benefit to the right product and family. Long values can still be read as background, but cannot be used as a capability reference if they exceed the field limit. If there is no usable capability, generation stops before a model call.
+- **Website sources.** A website observation gets a source-verified label when its value and cited quote match the saved text. URLs, fetch dates, and content hashes help identify that text. This confirms what appeared on the site. Clinical and advertising claims still need their own review.
+- **Draft facts and opinions.** The app keeps draft extractions, user statements, model hypotheses, and customer opinions separate. It uses simple word checks to flag some negative or mixed reviews. Other reviews are left unrated for sentiment, and none are automatically cleared to use in an ad.
+- **Brand rules and duplicates.** Both model calls receive the brand rules. The app catches some obvious problems, such as identical hooks written with different punctuation, repeated central ideas, and blanket claims about cures or safety. It can miss paraphrases and rules that depend on context.
+- **Assets.** Suggested assets are marked `requires_creation: true`. Check what you already have, what needs to be made, and what requires permission. A mention in the research does not establish ownership or access.
 
-Uncertain numerical, sensitive, testimonial, provisional-fact, asset and duration claims
-remain flagged for review. Obvious blanket cure/safety guarantees are blocked. Full brand
-rules are supplied to both passes and remain visible; natural-language restrictions and
-semantic paraphrases are not completely enforceable through lexical checks. Sentiment,
-audience compatibility, distinctiveness and feasibility checks are deliberately conservative,
-not complete semantic verification. A human must review the actual concepts.
+## Edit, choose, and hand off an idea
 
-`select` reserves a concept for future production. `approve` additionally requires explicit
-human-review, claim-risk and asset-requirement acknowledgments. Both require current research
-and no blocking flags. Approval is **production review only**, never automatic advertising,
-legal or clinical approval; the handoff keeps `advertising_claims_approved=false` and the
-original risks. There is no video rendering or publishing endpoint.
+You can change wording such as the hook, insight, audience situation, story, closing line, CTA, or captions. The original draft stays available. Editing clears the current score and shortlist status because they apply to the earlier wording. A new generation creates new ideas and keeps earlier edits and selections.
 
-## Jobs, cost and failure behavior
+Use **Select** to choose one idea for production. Selecting another clears the earlier selection. Use **Approve** after someone has reviewed the concept and acknowledged the claim and asset risks. Both actions require up-to-date research and an idea with no blocking flags. Approval records a decision about production. The handoff keeps the risks visible and sets `advertising_claims_approved` to `false`.
 
-The existing worker alternates the creative and brand queues. Each creative job receives
-one lease with a maximum of **two inference calls**, one per pass. The adapter reuses the
-configured provider and enqueued account/model, forces a single transport attempt and never
-falls back to a different model or billing source. ChatGPT-plan access/preview restrictions
-and API-key opt-in remain unchanged. DeepSeek remains blocked by the runtime factory.
+The handoff contains the brief and idea in a structured format for Phase 2B. If the brief or brand profile changes, you can still view earlier work. Generate from the latest versions before handing off an idea.
 
-Defaults:
+## Use the API
+
+Follow the setup and sign-in steps in the [README](../README.md). Apply migration `0005` before starting the new worker. For local Python, run `alembic upgrade head`. For Docker, rebuild and start the services. These endpoints use the app's existing bearer token.
+
+[Complete HTTP request examples](../examples/phase2a.http)
+
+| Method | Endpoint | Use it to |
+|---|---|---|
+| POST / GET | `/v1/brands/{brand_id}/campaigns` | Create or list campaigns |
+| GET | `/v1/campaigns/{id}` | Read the brief and its version |
+| PATCH | `/v1/campaigns/{id}/brief` | Edit the brief |
+| POST / GET | `/v1/campaigns/{id}/generations` | Start a job or see past jobs |
+| GET | `/v1/creative-generations/{id}` | Check status, errors, and model usage |
+| GET | `/v1/campaigns/{id}/research/{research_id}` | See the saved copy of the research |
+| GET | `/v1/campaigns/{id}/concepts?job_id=...` | See all saved ideas, including partial results |
+| GET | `/v1/campaigns/{id}/shortlist?job_id=...` | See the shortlisted ideas |
+| GET / PATCH | `/v1/concepts/{id}` | Read or edit one idea |
+| POST | `/v1/concepts/{id}/select` | Choose the idea |
+| POST | `/v1/concepts/{id}/approve` | Record a human production review |
+| GET | `/v1/concepts/{id}/handoff` | Get the structured production handoff |
+
+When editing, send the version you last read as `expected_revision`. A `409` means the version is stale. Fetch the latest version before making your edit. A `422` means the edit is invalid. Updating a list in the brief replaces that list. Editing a story updates only the parts you send. Product capability and research references stay tied to the original idea.
+
+Without `job_id`, the shortlist shows the latest run, even if that run failed. Pass the earlier job ID to see its shortlist. Use the concepts endpoint to see all saved ideas and browse them by page.
+
+## Storage and job limits
+
+Migration `0005` adds four PostgreSQL tables.
+
+| Table | What it stores |
+|---|---|
+| `campaigns` | The brand, editable brief, and brief version |
+| `research_snapshots` | A fixed copy of the research, with brief and BIP versions and the original extraction job ID |
+| `creative_jobs` | Job status, account and model, worker claim, errors, and usage |
+| `creative_concepts` | Original and edited ideas, review flags, scores, and selection |
+
+The app stores nested fields such as briefs, hooks, and scores as JSONB. Database constraints allow one active job and one selected idea per campaign. The worker alternates between the brand and creative queues. It checks that it still owns the job and that the brief and brand profile are current before saving results. An edit made during evaluation takes priority over the evaluator's result for that idea.
+
+A creative job makes at most **two model calls** on the configured account and model. Each call gets one attempt. The app uses the configured billing source without switching to another model or billing method. The existing provider rules and overall job limits apply.
 
 | Setting | Default |
 |---|---:|
-| `CREATIVE_CONTEXT_MAX_CHARS` | 30,000 serialized research characters |
-| `CREATIVE_MAX_INPUT_TOKENS` | 20,000 estimated tokens per request, including schema |
+| `CREATIVE_CONTEXT_MAX_CHARS` | 30,000 characters of research JSON |
+| `CREATIVE_MAX_INPUT_TOKENS` | 20,000 estimated tokens per request, including the response schema |
 | `CREATIVE_GENERATOR_MAX_OUTPUT_TOKENS` | 8,000 |
 | `CREATIVE_EVALUATOR_MAX_OUTPUT_TOKENS` | 4,000 |
-| `CREATIVE_GENERATOR_TIMEOUT_SECONDS` | 120 |
-| `CREATIVE_EVALUATOR_TIMEOUT_SECONDS` | 60 |
+| `CREATIVE_GENERATOR_TIMEOUT_SECONDS` | 120 seconds |
+| `CREATIVE_EVALUATOR_TIMEOUT_SECONDS` | 60 seconds |
 
-The existing overall job deadline, lease and pipeline token budget still apply. Phase 1
-model/effort/deadline/retry settings are unchanged. Character estimates are conservative
-budgeting approximations, not exact tokenization. The ChatGPT preview forbids a server-side
-`max_output_tokens`; its transport uses a local assembled-output size bound and deadline.
-These cannot guarantee an exact server-side billed-token cap. The API-key strategy sends
-its output-token cap directly. Missing usage remains visibly incomplete, never invented.
+The API key provider sends its output limit to the model. The ChatGPT plan provider applies a local response size limit and deadline because the preview does not accept that setting. This cannot guarantee an exact number of tokens billed by the provider.
 
-Candidates are committed before evaluation. Evaluator timeout, invalid/incomplete response,
-invalid selection or stale revision results in `PARTIAL` with saved candidates, failure stage
-and safe code. Generator failure is `FAILED`; zero eligible candidates is `INSUFFICIENT_DATA`
-and skips evaluation. Expired paid leases record a possible usage gap and become terminal (`PARTIAL` when candidates exist),
-never requeued, even if global retry settings allow more attempts. Explicit user requests can
-create a new generation. Lease tokens reject late writes. Human edits made during evaluation
-are never overwritten or given stale evaluation scores.
+If generation fails, the job reports `FAILED`. If all ideas fail the initial checks, the job reports `INSUFFICIENT_DATA` and skips evaluation. If the worker loses its claim on an unfinished job, the app keeps any saved ideas, marks the job finished, and flags possible missing usage. Start a new generation explicitly if you want another run. Logs record IDs, stages, and error codes. Job status also shows timings and token counts when the provider supplies them.
 
-Logs contain IDs, stages and safe exception classes/codes, not raw prompts, private reasoning,
-source text or credentials. Jobs record latency, model, stage, attempt, tokens when supplied,
-validation counts and failure codes. All requests use the existing bearer-token protection.
+## Test the workflow
 
-## API workflow
+Run the Phase 2A tests against a disposable PostgreSQL database:
 
-Use the existing setup and sign-in instructions in the root README. Apply migrations before
-starting the new worker (`alembic upgrade head`, or rebuild and start Docker Compose).
-See [complete HTTP request examples](../examples/phase2a.http) for creation, generation, polling,
-editing, selection, approval and production handoff. These examples require an explicit
-user-authorized live test before submitting a generation request; they are not run by tests.
+```sh
+pytest -q tests/test_creative_strategy.py tests/test_creative_provider.py \
+  tests/test_creative_workflow.py tests/test_creative_migrations.py
+```
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| POST / GET | `/v1/brands/{brand_id}/campaigns` | Create / list campaigns |
-| GET | `/v1/campaigns/{id}` | Retrieve editable brief and revision |
-| PATCH | `/v1/campaigns/{id}/brief` | Correct brief with `expected_revision` |
-| POST / GET | `/v1/campaigns/{id}/generations` | Queue generation / inspect job history |
-| GET | `/v1/creative-generations/{id}` | Status, diagnostics, usage and errors |
-| GET | `/v1/campaigns/{id}/research/{research_id}` | Inspect frozen research |
-| GET | `/v1/campaigns/{id}/concepts?job_id=...` | All saved candidates, including partial jobs |
-| GET | `/v1/campaigns/{id}/shortlist?job_id=...` | Selected evaluator results and insufficiency/stale flags |
-| GET / PATCH | `/v1/concepts/{id}` | Inspect / edit a concept with revision control |
-| POST | `/v1/concepts/{id}/select` | Select for future production |
-| POST | `/v1/concepts/{id}/approve` | Explicit human production review |
-| GET | `/v1/concepts/{id}/handoff` | Structured Phase 2B handoff |
+The tests use saved brand profiles and example model responses. Opal's brief targets students on Instagram Reels. Minimalist's brief targets students and young adults interested in skincare ingredients. Both are awareness campaigns with no region specified. The five manually written Opal ideas serve as comparison material for reviewers and stay out of the model prompts.
 
-Without `job_id`, shortlist reads the latest generation. A failed latest run reports its own
-empty shortlist truthfully; previous work remains available through concepts or its job ID.
-Concept lists are paginated. Brief updates replace supplied arrays; core-insight and situation wording can be edited,
-while capability/reference bindings remain fixed. Story-beat patches merge
-provided beats. Unknown/invalid edits return safe 422 errors; stale revisions return 409.
-Database constraints and row locks protect concurrent jobs, edits and single selection.
+The tests check that the workflow behaves correctly. **A live review is needed to judge whether the ideas are useful.** For an explicitly authorized live check, run one campaign generation per brand, one at a time, using the existing model settings. Save the research, ideas, shortlist, reasons for rejection, timings, and usage. Compare Opal's ideas with the manual examples. For Minimalist, check whether the ideas address real customer concerns, describe ingredients and benefits accurately, and handle negative feedback fairly. For both, ask whether each idea feels distinct, fits the brand, and is feasible to produce.
 
-## Offline benchmarks and optional human live review
+### Prepare and export the Opal benchmark
 
-Run `pytest -q tests/test_creative_strategy.py tests/test_creative_provider.py
- tests/test_creative_workflow.py tests/test_creative_migrations.py` against a disposable
-PostgreSQL database. The full Phase 1 suite must also pass. Provider tests use mocked SDK or
-SSE/OAuth transports and dummy credentials; no test invokes live inference.
+The benchmark uses an awareness campaign for students on Instagram Reels. It uses the brand as a whole, runs for 15 seconds at 9:16, and leaves geography blank. Use the local API with the updated code and the token in `.env.local`.
 
-Frozen Opal/Minimalist inputs in `tests/fixtures/creative/` contain saved 21 November BIP,
-provenance and source text. They remain draft observations, not approved claims. Opal's brief
-is Awareness / Students / Brand / Instagram Reels, with no geography. Its five user-supplied
-manual reference concepts are stored only as benchmark metadata. They never enter runtime
-prompts or become claimed actual generator results. Minimalist uses illustrative awareness
-for students/young adults interested in ingredient-conscious skincare, with no invented region.
+```sh
+python -m evaluations.phase2a prepare OPAL_BRAND_ID > opal-campaign.json
+```
 
-Synthetic mock outputs exercise distinct mechanism/driver contracts, concern-led framing,
-negative opinions, truthful capability references and refusal of guaranteed clinical/safety
-claims. Mock evaluator scores are synthetic. **Passing tests does not validate creative
-quality, usefulness or performance of a real model.**
+This creates or reuses a matching campaign and records the current BIP revision and saved source job. After explicit authorization, follow the generation and polling steps in the HTTP examples for this campaign. Export as soon as the job finishes so the report includes the original evaluations before any human edits.
 
-A later live benchmark requires explicit authorization. Use one campaign per brand and one
-generation each, sequentially, on the existing chosen model; do not change effort or retries.
-Save the research, both outputs, rejection diagnostics, usage, full shortlist and timings.
-A marketer should compare Opal's strategies against the five manual references without
-feeding those references as canned answers, then judge Minimalist for distinct mechanisms,
-concern-led usefulness, accurate ingredients/benefits and treatment of negative feedback.
-Score actual human usefulness, differentiation, claim safety, brand fit and feasibility;
-record both failures and useful ideas. Do not repeat paid runs automatically or claim CTR
-improvement. No such live benchmark is authorized or performed by this implementation.
+```sh
+python -m evaluations.phase2a export CAMPAIGN_ID JOB_ID > opal-benchmark.json
+```
 
-Rollback of 0005 drops only the new creative tables; it preserves Phase 1 profiles, offerings,
-sources and jobs. Back up creative data before a deliberate rollback.
+The report includes the saved research sent to the generator, all stored candidate outputs, rejected candidates with their flags, the shortlist and its reasons, actual hooks and captions, and model usage and timing for each stage. It also shows any partial failure. A failed response that could not be parsed may have no candidates to export. Both commands leave generation to the separate API step.
+
+Rolling back migration `0005` removes the creative tables and keeps the Phase 1 profiles, offerings, sources, and jobs. Back up campaign and concept data before rolling back.

@@ -3,6 +3,7 @@
 import hashlib
 import json
 import re
+from itertools import zip_longest
 
 from app.errors import DomainError
 from app.provenance import leaves
@@ -30,6 +31,116 @@ def validate_focus(brief, bip):
     family = selected.catalog_level == "FAMILY"
     if family != (brief.promotion_scope == "FAMILY"):
         raise DomainError("OFFERING_SCOPE_MISMATCH", "Offering does not match promotion scope", 422)
+
+
+PASSAGE_METADATA = re.compile(
+    r"^(?:logo url|meta description|observed visual declaration|site-linked brand/press resource"
+    r"|canonical url|structured products|theme color|learn more at)\b|https?://",
+    re.I,
+)
+BOILERPLATE = re.compile(
+    r"^(?:all rights reserved|copyright|privacy policy|terms (?:of use|and conditions)"
+    r"|cookie (?:policy|preferences)|sign up for our newsletter|subscribe to our newsletter"
+    r"|download our app|shop by category|shop by concerns)\b",
+    re.I,
+)
+RESEARCH_SIGNAL = re.compile(
+    r"\b(?:reviews?|customers?|users? say|struggl\w*|worr\w*|distract\w*|objections?"
+    r"|hard to|concerns?|problems?|experience\w*|use cases?|helps?|benefits?|designed for"
+    r"|works? by|built for|routines?|feel\w*|burn\w*|irritat\w*|side effects?)\b",
+    re.I,
+)
+STOP_WORDS = set(
+    "a an and are at be by for from has in is it of on or that the to was with you your".split()
+)
+
+
+def terms(text):
+    return {
+        word[:-1] if word.endswith("s") and len(word) > 4 else word
+        for word in re.findall(r"[^\W_]+", normalize(text))
+        if len(word) > 2 and word not in STOP_WORDS
+    }
+
+
+def audience_terms(audience):
+    words = terms(audience)
+    # Common near-neighbours make short briefs useful even when the site uses other wording.
+    if words & {"student", "study", "studying", "school"}:
+        words |= {"student", "study", "studying", "school", "homework", "exam", "class"}
+    return words
+
+
+def ranked_passages(documents, brief, offerings, focus):
+    """Select exact excerpts from across the saved pages and retain their location."""
+    audience = audience_terms(brief.audience or "")
+    concern, objective = terms(brief.concern or ""), terms(brief.objective)
+    if objective & {"awareness", "brand"}:
+        objective |= {"mission", "designed", "built", "help", "benefit", "feature"}
+    if objective & {"consideration", "conversion", "sale"}:
+        objective |= {"question", "review", "price", "compare", "trial", "return"}
+    focused = [offering for offering in offerings if offering.key in focus]
+    product = terms(" ".join(offering.name for offering in focused))
+    selected_urls = {offering.url for offering in focused if offering.url}
+    ranked = []
+    filtered = irrelevant = 0
+    for doc in documents:
+        if doc.source_type == "catalog":
+            continue
+        category = doc.source_metadata.get("category")
+        heading = ""
+        for number, line in enumerate(doc.content.splitlines(), 1):
+            line = line.strip()
+            if not line:
+                continue
+            if (
+                PASSAGE_METADATA.search(line)
+                or BOILERPLATE.search(line)
+                or line == doc.title
+                or line.startswith(("[{", "{", "Press, interview, and media inquiries:"))
+            ):
+                filtered += 1
+                continue
+            if line.startswith("#"):
+                heading = line.lstrip("# ").strip()
+                continue
+            # Long review/FAQ lines are broken at sentence or word boundaries.
+            pieces = re.findall(r".{1,480}(?:\s|$)|\S{481,}", line)
+            for part, piece in enumerate(pieces):
+                piece = piece.strip()
+                if len(piece) > 480 or len(piece.split()) < 5:
+                    filtered += 1
+                    continue
+                if len(piece) < 125 and re.search(
+                    r"\b(?:founding team|founder|director of|chief executive|CEO)\b", piece, re.I
+                ):
+                    filtered += 1
+                    continue
+                words = terms(piece)
+                nearby = terms(heading)
+                score = (
+                    5 * len(words & audience)
+                    + 5 * len(words & concern)
+                    + 4 * len(words & product)
+                    + 2 * len(words & objective)
+                    + min(5, 2 * len(nearby & (audience | concern | product)))
+                    + min(6, 2 * len(RESEARCH_SIGNAL.findall(piece)))
+                    + (4 if doc.url in selected_urls else 0)
+                    + (3 if category in {"customer_story", "use_case", "faq", "brand_story"} else 0)
+                    + (2 if "review" in heading.lower() else 0)
+                )
+                if score:
+                    ranked.append((score, doc, number, part, piece))
+                else:
+                    irrelevant += 1
+    ranked.sort(key=lambda row: (-row[0], row[1].url, row[2], row[3]))
+    seen, passages = set(), []
+    for row in ranked:
+        fingerprint = re.sub(r"[^\w]+", " ", normalize(row[4])).strip()
+        if fingerprint not in seen:
+            seen.add(fingerprint)
+            passages.append(row)
+    return passages, filtered, irrelevant, len(ranked) - len(passages)
 
 
 def build_context(bip, provenance, documents, brief, concerns, max_chars):
@@ -67,7 +178,14 @@ def build_context(bip, provenance, documents, brief, concerns, max_chars):
             "RESEARCH_BUDGET", "Brief or mandatory guardrails exceed context limit", 422
         )
     omitted = 0
-    content_limit = max_chars - 5000 if max_chars >= 14000 else max_chars - 128
+    # Reserve space for the coverage report, plus separate slots for passages and concerns.
+    final_limit = max_chars - 650
+    mandatory_size = len(json.dumps(payload, ensure_ascii=False))
+    spare = max(0, final_limit - mandatory_size)
+    passage_reserve = min(7000, int(spare * 0.24))
+    concern_reserve = min(2200, int(spare * 0.1)) if concerns else 0
+    content_limit = final_limit - passage_reserve - concern_reserve
+    item_limit = 180 - 12 - (min(8, len(concerns)) if concerns else 0)
 
     def add(path, text, kind, origin=None, citations=(), capability=False, **extra):
         nonlocal omitted
@@ -87,16 +205,20 @@ def build_context(bip, provenance, documents, brief, concerns, max_chars):
             item["truncated"] = True
         payload["items"].append(item)
         if (
-            len(payload["items"]) > 180
+            len(payload["items"]) > item_limit
             or len(json.dumps(payload, ensure_ascii=False)) > content_limit
         ):
             payload["items"].pop()
             omitted += 1
+            return False
+        return True
 
     focus = {brief.offering_key} if brief.offering_key else set()
     # Family focus includes its children, never unrelated product claims.
     if brief.promotion_scope == "FAMILY":
         focus.update(o.key for o in bip.offerings if o.parent_offering_key == brief.offering_key)
+    offerings = {offering.key: offering for offering in bip.offerings if offering.key}
+    payload["capability_scope_version"] = 1
     roots = [
         "marketing_guardrails",
         "brand_identity",
@@ -152,6 +274,25 @@ def build_context(bip, provenance, documents, brief, concerns, max_chars):
                 and not any(p in {"audiences", "customer_psychology", "claims"} for p in parts)
             )
             extra = {}
+            if root == "offerings":
+                offering = data[root][int(parts[2])]
+                parent = offerings.get(offering["parent_offering_key"])
+                extra = {
+                    "offering_key": offering["key"],
+                    "offering_name": offering["name"],
+                    "family_key": (
+                        offering["key"]
+                        if offering["catalog_level"] == "FAMILY"
+                        else parent.key
+                        if parent and parent.catalog_level == "FAMILY"
+                        else None
+                    ),
+                    "catalog_level": offering["catalog_level"],
+                }
+            elif brief.offering_key:
+                # General brand positioning is still useful, but cannot substantiate
+                # a promise for one named product or family.
+                capability = False
             if opinion and not path.endswith("/quote"):
                 continue
             if opinion:
@@ -168,38 +309,77 @@ def build_context(bip, provenance, documents, brief, concerns, max_chars):
                 )
                 extra["advertising_use"] = "REQUIRES_HUMAN_REVIEW"
             group.append((path, value, kind, origin, citations, capability, extra))
-        # Cap each section before round-robin allocation; a SKU catalog cannot consume
-        # all room before reviews, audience hypotheses, visuals and creative themes.
         if root == "offerings":
-            group.sort(key=lambda item: not item[5])
+            by_offering = {}
+            for item in group:
+                by_offering.setdefault(item[-1]["offering_key"], []).append(item)
+            for offering_items in by_offering.values():
+                offering_items.sort(key=lambda item: not item[5])
+            group = [item for row in zip_longest(*by_offering.values()) for item in row if item]
         groups.append(group)
-    for index in range(max((len(g) for g in groups), default=0)):
-        for group in groups:
-            if index < len(group):
-                path, value, kind, origin, citations, capability, extra = group[index]
+    # One large section or product should not fill every slot.
+    for row in zip_longest(*groups):
+        for item in row:
+            if item:
+                path, value, kind, origin, citations, capability, extra = item
                 add(path, value, kind, origin, citations, capability, **extra)
-    content_limit = max_chars - 128
-    for i, concern in enumerate(concerns[:12]):
+    omitted_bip_items = omitted
+    item_limit = 180 - 12
+    content_limit = final_limit - passage_reserve
+    target = audience_terms(brief.audience or "") | terms(brief.concern or "")
+    ranked_concerns = sorted(
+        enumerate(concerns),
+        key=lambda entry: -len(terms(json.dumps(entry[1], ensure_ascii=False)) & target),
+    )
+    selected_concerns = sum(
         add(
             f"/website_concerns/{i}", json.dumps(concern, ensure_ascii=False), "WEBSITE_NEED_SIGNAL"
         )
-    # Bounded relevant passages supplement BIP values without resending the crawl.
-    ordered = sorted(
-        documents,
-        key=lambda d: (
-            d.source_metadata.get("category")
-            not in {"customer_story", "use_case", "brand_assets", "faq"}
-        ),
+        for i, concern in ranked_concerns[:8]
     )
-    for i, doc in enumerate(ordered[:12]):
-        if doc.source_type != "catalog":
-            add(
-                f"/source_passages/{i}",
-                doc.content[:900],
-                "SAVED_SOURCE_PASSAGE",
-                source_url=doc.url,
-            )
-    payload["omitted_items"] = omitted
+
+    item_limit = 180
+    content_limit = final_limit
+    passages, filtered, irrelevant, duplicates = ranked_passages(
+        documents, brief, bip.offerings, focus
+    )
+    per_source = {}
+    covered_categories = set()
+    selected_chars = 0
+    for _, doc, line, part, passage in passages:
+        if sum(per_source.values()) == 12:
+            break
+        if per_source.get(doc.url, 0) >= 3:
+            continue
+        source_key = hashlib.sha256(doc.url.encode()).hexdigest()[:16]
+        if add(
+            f"/source_passages/{source_key}/{line}/{part}",
+            passage,
+            "SAVED_SOURCE_PASSAGE",
+            source_url=doc.url,
+            content_hash=doc.content_hash,
+            source_line=line,
+        ):
+            per_source[doc.url] = per_source.get(doc.url, 0) + 1
+            covered_categories.add(doc.source_metadata.get("category") or "unknown")
+            selected_chars += len(passage)
+    selected_passages = sum(per_source.values())
+    payload["coverage"] = {
+        "passages_considered": len(passages),
+        "passages_selected": selected_passages,
+        "passages_omitted": len(passages) - selected_passages,
+        "passage_characters": selected_chars,
+        "passage_sources": len(per_source),
+        "source_categories": sorted(covered_categories),
+        "non_passage_lines_or_chunks_filtered": filtered,
+        "duplicate_passages_omitted": duplicates,
+        "low_relevance_passages_omitted": irrelevant,
+        "concerns_selected": selected_concerns,
+        "concerns_omitted": len(concerns) - selected_concerns,
+    }
+    payload["omitted_items"] = (
+        omitted_bip_items + len(passages) - selected_passages + len(concerns) - selected_concerns
+    )
     # A tiny context cannot claim successful research if all product capabilities were omitted.
     if not any(i["capability"] for i in payload["items"]):
         raise DomainError(

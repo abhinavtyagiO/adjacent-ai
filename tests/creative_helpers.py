@@ -8,7 +8,13 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from app.creative.research import build_context
-from app.creative.schemas import CampaignBrief, Candidate, EvaluatorResult, GeneratorResult
+from app.creative.schemas import (
+    CampaignBrief,
+    Candidate,
+    EvaluatorResult,
+    GeneratedCandidate,
+    GeneratorResult,
+)
 from app.schemas import BIP
 
 FIXTURES = Path(__file__).parent / "fixtures/creative"
@@ -22,6 +28,7 @@ def docs(data):
     return [
         SimpleNamespace(
             url=d["url"],
+            title=d.get("title"),
             content=d["text"],
             fetched_at=datetime.fromisoformat(d["fetched_at"]),
             source_type=d["source_type"],
@@ -145,7 +152,7 @@ def generated(context, name="opal"):
     rows = []
     for i, (title, driver, mechanism, situation, aspiration) in enumerate(SCENARIOS[name]):
         rows.append(
-            Candidate(
+            GeneratedCandidate(
                 candidate_key=f"idea-{i}",
                 title=title,
                 core_insight=f"{situation}; {aspiration}.",
@@ -169,6 +176,7 @@ def generated(context, name="opal"):
                         "Invite the viewer to explore the feature and decide whether it fits."
                     ),
                 },
+                on_screen_copy={"treatment": "SINGLE_CAPTION", "text": title + "?"},
                 b_roll=["A simple everyday scene with readable text overlays"],
                 closing_line="Explore the product and decide what fits.",
                 cta=context["brief"].get("cta") or "Learn more",
@@ -182,6 +190,7 @@ def generated(context, name="opal"):
 
 def evaluated(candidates, count=5):
     return EvaluatorResult(
+        overlap_groups=[],
         evaluations=[
             {
                 "candidate_key": c.candidate_key,
@@ -203,9 +212,17 @@ def evaluated(candidates, count=5):
                     "Illustrative distinct mechanism; no prediction of advertising performance."
                 ),
                 "selected": i < count,
+                "grounding": {
+                    **dict.fromkeys(
+                        ("hooks", "story", "closing_line", "payoff", "on_screen_copy"),
+                        "SUPPORTED",
+                    ),
+                    "explanation": "The copy stays within the supplied capability.",
+                },
+                "distinction": f"Different message through {c.strategic_mechanism}.",
             }
             for i, c in enumerate(candidates)
-        ]
+        ],
     )
 
 

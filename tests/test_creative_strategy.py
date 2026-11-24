@@ -327,3 +327,131 @@ def test_destination_preserves_tracking_parameters_and_fragment_without_fetching
         CampaignBrief(
             objective="Awareness", audience="Students", destination_url="javascript:alert(1)"
         )
+
+
+@pytest.mark.parametrize("brand", ["opal", "minimalist"])
+def test_research_selects_real_passages_beyond_the_prefix_and_filters_metadata(brand):
+    fixture_data = fixture(brand)
+    sources = {doc.url: doc for doc in docs(fixture_data)}
+    context = build_context(
+        BIP.model_validate(fixture_data["profile"]),
+        fixture_data["provenance"],
+        list(sources.values()),
+        CampaignBrief.model_validate(fixture_data["brief"]),
+        [{"description": "Students want a routine that fits between classes."}],
+        30000,
+    )
+    passages = [item for item in context["items"] if item["kind"] == "SAVED_SOURCE_PASSAGE"]
+    coverage = context["coverage"]
+    assert coverage["passages_selected"] == len(passages) > 0
+    assert coverage["passages_omitted"] > 0 and coverage["concerns_selected"] == 1
+    assert coverage["non_passage_lines_or_chunks_filtered"] > 0
+    assert len({item["text"].casefold() for item in passages}) == len(passages)
+    assert any(sources[item["source_url"]].content.find(item["text"]) > 900 for item in passages)
+    for item in passages:
+        doc = sources[item["source_url"]]
+        assert item["text"] in doc.content and item["content_hash"] == doc.content_hash
+        assert "https://" not in item["text"] and "Logo URL" not in item["text"]
+    assert len(json.dumps(context, ensure_ascii=False)) <= 30000
+
+
+def test_product_and_family_scope_are_explicit_in_capability_references():
+    product_key = "vitamin-c-10-face-serum"
+    product = research(
+        "minimalist",
+        brief=CampaignBrief(
+            objective="Awareness",
+            audience="Students",
+            promotion_scope="PRODUCT",
+            offering_key=product_key,
+        ),
+    )
+    capabilities = [item for item in product["items"] if item["capability"]]
+    assert capabilities and all(item["offering_key"] == product_key for item in capabilities)
+    assert all(item["family_key"] == "vitamin-c" for item in capabilities)
+
+    family = research(
+        "minimalist",
+        brief=CampaignBrief(
+            objective="Awareness",
+            audience="Students",
+            promotion_scope="FAMILY",
+            offering_key="vitamin-c",
+        ),
+    )
+    assert {i["family_key"] for i in family["items"] if i["capability"]} == {"vitamin-c"}
+    sibling = next(
+        i
+        for i in family["items"]
+        if i["capability"] and i["offering_key"] == "vitamin-c-e-ferulic-16-face-serum"
+    )
+    candidate = (
+        generated(product, "minimalist")
+        .candidates[0]
+        .model_copy(
+            update={
+                "product_capability": sibling["text"],
+                "capability_reference_ids": [sibling["id"]],
+            }
+        )
+    )
+    product["items"].append(sibling)
+    validation = check_candidate(candidate, product)
+    assert not validation["eligible"]
+    assert any(f["code"] == "PRODUCT_SCOPE_MISMATCH" for f in validation["flags"])
+
+
+def test_caption_contract_supports_two_treatments_and_requires_order_for_new_ideas():
+    from app.creative.schemas import GeneratorResult
+
+    data = generated(research("opal")).model_dump()
+    assert data["candidates"][0]["on_screen_copy"]["treatment"] == "SINGLE_CAPTION"
+    beats = ["HOOK", "DEVELOPMENT", "PRODUCT_CONNECTION", "PAYOFF"]
+    copy = {
+        "treatment": "SEQUENTIAL_CAPTIONS",
+        "captions": [
+            {"beat": beat, "text": text}
+            for beat, text in zip(
+                beats,
+                [
+                    "Another study break?",
+                    "Block the distracting apps.",
+                    "Start a focus session with Opal.",
+                    "Get back to your notes.",
+                ],
+                strict=True,
+            )
+        ],
+    }
+    data["candidates"][0]["on_screen_copy"] = copy
+    assert GeneratorResult.model_validate(data).candidates[0].on_screen_copy.treatment == (
+        "SEQUENTIAL_CAPTIONS"
+    )
+    copy["captions"].reverse()
+    with pytest.raises(ValidationError):
+        GeneratorResult.model_validate(data)
+    data["candidates"][0].pop("on_screen_copy")
+    assert Candidate.model_validate(data["candidates"][0]).on_screen_copy is None
+    with pytest.raises(ValidationError):
+        GeneratorResult.model_validate(data)
+
+
+@pytest.mark.parametrize(
+    "claim",
+    [
+        "Safe during pregnancy.",
+        "Suitable for breastfeeding mothers.",
+        "Harmless for babies and children.",
+        "A risk-free choice for toddlers.",
+    ],
+)
+def test_safety_assurances_in_actual_caption_are_blocked(claim):
+    context = research("minimalist")
+    data = generated(context, "minimalist").candidates[0].model_dump()
+    data["on_screen_copy"] = {"treatment": "SINGLE_CAPTION", "text": claim}
+    result = check_candidate(Candidate.model_validate(data), context)
+    assert not result["eligible"]
+    assert any(
+        f["field"] == "on_screen_copy" and f["code"] == "UNSUPPORTED_SAFETY_ASSURANCE"
+        for f in result["flags"]
+    )

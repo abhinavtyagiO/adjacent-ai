@@ -6,7 +6,7 @@ from sqlalchemy import select
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
 from app.creative.research import build_context, validate_focus
 from app.creative.schemas import CampaignBrief, Candidate
-from app.creative.validation import check_candidate
+from app.creative.validation import check_edit
 from app.errors import DomainError
 from app.models import Brand, CustomerConcern, Profile, SourceDocument, now
 from app.repository import Repository
@@ -183,6 +183,7 @@ class CampaignService:
             "title",
             "b_roll",
             "asset_requirements",
+            "on_screen_copy",
         }
         if set(request.changes) - allowed:
             raise DomainError(
@@ -196,8 +197,11 @@ class CampaignService:
         candidate = validate(Candidate, merged)
         # Validate against the current brief; preserve the original research and generation.
         context = {**research.payload, "brief": campaign.brief}
+        previous = Candidate.model_validate(concept.content)
+        concept.validation = check_edit(previous, candidate, context, concept.validation)
         concept.content = candidate.model_dump(mode="json")
-        concept.validation = check_candidate(candidate, context)
+        if "on_screen_copy" not in merged:
+            concept.content.pop("on_screen_copy")
         concept.revision += 1
         concept.edited_by_user = True
         concept.state, concept.review, concept.shortlisted = "DRAFT", {}, False
