@@ -25,6 +25,14 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: requirements-dev.lock
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
+          cache: npm
+          cache-dependency-path: video-renderer/package-lock.json
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: npm --prefix video-renderer ci --no-audit --no-fund
+      - run: npm --prefix video-renderer run typecheck
       - run: pip install -r requirements-dev.lock
       - run: pip install --no-deps -e .
       - run: ruff check .
@@ -32,4 +40,7 @@ jobs:
       - run: docker compose config --quiet
       - run: alembic upgrade head
       - run: alembic check
-      - run: pytest -q
+      - run: |
+          export RENDER_BROWSER_EXECUTABLE="$(command -v google-chrome)"
+          test -n "$RENDER_BROWSER_EXECUTABLE"
+          RUN_REAL_RENDER=1 pytest -q

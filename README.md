@@ -15,6 +15,10 @@ runnable marketing enrichment. Discovery is separate from deep BIP offerings. Fa
 can be reviewed while marketing is running. [New APIs, migration and architecture](docs/phase1c.md)
 describe source-snapshot binding, edit protection, stream timing and offline verification.
 
+Phase 2B renders an approved creative concept and authorized media as a private video.
+The [video and media guide](docs/phase2b.md) explains how to upload footage, search Pixabay,
+render with Remotion, and download a validated MP4.
+
 ## Quick start with Docker Compose
 
 Requires Docker with Compose v2.24+ (for the optional private environment file).
@@ -23,13 +27,13 @@ Requires Docker with Compose v2.24+ (for the optional private environment file).
 cp -n .env.example .env.local
 # Set a strong API_ACCESS_TOKEN in .env.local; OAuth does not need an OpenAI API key.
 docker compose up --build -d
-docker compose logs -f api worker
+docker compose logs -f api worker render-worker
 ```
 
 The repository includes a credential-free `.env` with `LLM_PROVIDER=openai_chatgpt`. Private
 overrides belong in the ignored `.env.local`, which Compose loads after `.env` for the
 API, worker and migrations. Compose starts PostgreSQL 16, runs Alembic migrations once,
-then starts the API and a separate extraction worker. API: <http://localhost:8000>, Swagger review/testing UI:
+then starts the API and separate extraction and render workers. API: <http://localhost:8000>, Swagger review/testing UI:
 <http://localhost:8000/docs>. `GET /health/ready` checks the database and migration table.
 Ports bind to localhost. Database data persists in the `postgres_data` volume.
 Open <http://127.0.0.1:8000/v1/chatgpt/connect>, enter the local access token, explicitly

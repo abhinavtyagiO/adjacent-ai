@@ -9,3 +9,5 @@ __pycache__/
 .coverage
 
 .local/
+
+video-renderer/node_modules/

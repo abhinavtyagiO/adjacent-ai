@@ -13,6 +13,15 @@ from app.crawling.policy import DEFAULT_LIMITS
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=(".env", ".env.local"), extra="ignore")
 
+    pixabay_api_key: SecretStr | None = None
+    media_storage_path: Path = Path(".local/media")
+    media_max_bytes: int = Field(64 * 1024 * 1024, ge=1024, le=256 * 1024 * 1024)
+    media_process_timeout_seconds: int = Field(45, ge=5, le=180)
+    render_timeout_seconds: int = Field(360, ge=15, le=900)
+    render_package_path: Path = Path("video-renderer")
+    render_browser_executable: Path | None = None
+    render_concurrency: int = Field(2, ge=1, le=4)
+
     database_url: str = "postgresql+psycopg://brand:brand@localhost:5432/brand_intelligence"
     extraction_mode: Literal["draft_first", "strict"] = "draft_first"
     app_build_revision: str = ""
