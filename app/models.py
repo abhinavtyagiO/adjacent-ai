@@ -169,3 +169,7 @@ class CustomerConcern(Base):
         UUID, ForeignKey("extraction_jobs.id", ondelete="CASCADE")
     )
     details: Mapped[dict] = mapped_column(JSONB)
+
+
+# Register Phase 2 tables with the shared Alembic metadata.
+from app.creative import models as creative_models  # noqa: E402,F401

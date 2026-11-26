@@ -105,7 +105,8 @@ def factory(database_url, monkeypatch):
     with factory.begin() as session:
         session.execute(
             text(
-                "TRUNCATE customer_concerns, catalog_products, source_documents, "
+                "TRUNCATE creative_concepts, creative_jobs, research_snapshots, campaigns, "
+                "customer_concerns, catalog_products, source_documents, "
                 "offerings, profiles, extraction_jobs, brands"
             )
         )

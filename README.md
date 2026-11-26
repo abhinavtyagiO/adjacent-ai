@@ -244,6 +244,15 @@ requests. It never reads an API key or Codex's existing login cache. DeepSeek is
 the runtime factory. The legacy OpenAI API-key strategy is retained only behind an explicit
 billing opt-in; it is never a fallback. See [ChatGPT setup](docs/chatgpt-plan.md).
 
+## Creative strategy and ideation (Phase 2A)
+
+Create a campaign from an existing BIP, generate distinct short-form concepts through a
+bounded generator/evaluator pair, review and edit them, then select a structured concept
+for future production. No recrawl or brand-extraction inference is repeated. See the
+[Phase 2A architecture and API guide](docs/phase2a.md) and
+[complete request examples](examples/phase2a.http). Apply migration **0005** and rebuild
+the API/worker before using the new endpoints. No video rendering or publishing is added.
+
 ## Architecture and persistence
 
 ```text
@@ -419,3 +428,7 @@ Readiness is nonblocking and checks useful product, audience, motivation and cre
 valid JSON alone is insufficient. Campaign generation is out of scope and is not declared
 ready automatically. [MVP documentation](docs/draft-first.md) explains the output contracts,
 source limits, historical compatibility and estimated efficiency changes.
+
+## Writing documentation
+
+Use plain English for new and updated documentation. Follow the [repository writing standard](AGENTS.md#documentation-standard) and use the [Phase 2A guide](docs/phase2a.md) as an example.

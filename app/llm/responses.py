@@ -135,6 +135,14 @@ class StructuredResponsesProvider:
         self.base_url = base_url
         self.disable_thinking = disable_thinking
 
+    async def request_structured(
+        self, payload, response_type, prompt, stage, model, effort, max_output_tokens
+    ):
+        """Reusable structured-JSON boundary for downstream modules over this strategy."""
+        return await self._request(
+            payload, response_type, prompt, stage, model, effort, max_output_tokens
+        )
+
     def _documents(self, sources, payload, response_type, prompt):
         # Conservative character estimate, including schema and verified context overhead.
         overhead = (

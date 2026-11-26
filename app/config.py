@@ -15,6 +15,13 @@ class Settings(BaseSettings):
 
     database_url: str = "postgresql+psycopg://brand:brand@localhost:5432/brand_intelligence"
     extraction_mode: Literal["draft_first", "strict"] = "draft_first"
+    app_build_revision: str = ""
+    creative_context_max_chars: int = Field(30000, ge=4000, le=60000)
+    creative_max_input_tokens: int = Field(20000, ge=4000, le=50000)
+    creative_generator_max_output_tokens: int = Field(8000, ge=1024, le=16000)
+    creative_evaluator_max_output_tokens: int = Field(4000, ge=1024, le=8000)
+    creative_generator_timeout_seconds: float = Field(120, gt=0)
+    creative_evaluator_timeout_seconds: float = Field(60, gt=0)
     llm_provider: str = "openai_chatgpt"
     deepseek_api_key: SecretStr | None = None
     deepseek_model: str = "deepseek-flash"

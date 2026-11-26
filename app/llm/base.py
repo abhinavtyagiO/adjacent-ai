@@ -8,7 +8,7 @@ from app.schemas import BIP, ExtractionResult, MarketingResult
 
 
 class LLMProvider(Protocol):
-    """Strategy interface consumed by every LLM step in brand onboarding.
+    """Strategy interface for brand onboarding and structured creative generation.
 
     ExtractionWorker is the context: inject one selected strategy at startup, while
     crawling, evidence validation, review and persistence remain provider-independent.
@@ -16,6 +16,12 @@ class LLMProvider(Protocol):
 
     name: str
     model: str
+
+    async def request_structured(
+        self, payload, response_type, prompt, stage, model, effort, max_output_tokens
+    ):
+        """Schema-validated JSON through the selected transport, with usage accounting."""
+        ...
 
     async def extract_facts(self, website_url: str, sources: SourceBundle) -> ExtractionResult: ...
 

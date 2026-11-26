@@ -1,0 +1,118 @@
+# Phase 2A REST examples (VS Code REST Client / similar HTTP clients).
+# API_TOKEN is the app's local API_ACCESS_TOKEN, not an OpenAI API key.
+# Existing saved brand IDs shown here; replace them for another installation.
+# Generation endpoints use real plan usage: run only after explicit authorization.
+@base = http://127.0.0.1:8000
+# Copy the local app token from ignored .env.local; never commit it.
+@token = REPLACE_WITH_LOCAL_API_ACCESS_TOKEN
+@brandId = 4bc9d79c-741c-4cbe-a263-3c5ac90f57b5
+
+### 1. Create Opal Awareness / Students / Brand campaign. Geography remains unspecified.
+# @name createCampaign
+POST {{base}}/v1/brands/{{brandId}}/campaigns
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "objective": "Awareness",
+  "audience": "Students",
+  "promotion_scope": "BRAND",
+  "target_platform": "Instagram Reels",
+  "aspect_ratio": "9:16",
+  "duration_seconds": 15
+}
+
+@campaignId = {{createCampaign.response.body.id}}
+
+### 2. Retrieve the saved brief and current revision.
+GET {{base}}/v1/campaigns/{{campaignId}}
+Authorization: Bearer {{token}}
+
+### 3. Optional brief correction; revision becomes 2. Skip if unchanged.
+PATCH {{base}}/v1/campaigns/{{campaignId}}/brief
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_revision": 1, "changes": {"cta": "Learn more", "creative_exclusions": ["guaranteed grades"]}}
+
+### 4. Enqueue generation, ONLY when a live two-call test is authorized.
+# Use expected_revision=1 if step 3 was skipped; otherwise 2.
+# @name generate
+POST {{base}}/v1/campaigns/{{campaignId}}/generations
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_revision": 2}
+
+@jobId = {{generate.response.body.id}}
+@researchId = {{generate.response.body.research_id}}
+
+### 5. Poll without resubmitting generation. Wait for a terminal status.
+GET {{base}}/v1/creative-generations/{{jobId}}
+Authorization: Bearer {{token}}
+
+### 6. Inspect frozen sources, provenance kinds, negative opinions and limitations.
+GET {{base}}/v1/campaigns/{{campaignId}}/research/{{researchId}}
+Authorization: Bearer {{token}}
+
+### 7. Inspect shortlist and rationales. It may contain fewer than five.
+# @name shortlist
+GET {{base}}/v1/campaigns/{{campaignId}}/shortlist?job_id={{jobId}}
+Authorization: Bearer {{token}}
+
+### 8. Inspect all candidates even when evaluation failed.
+GET {{base}}/v1/campaigns/{{campaignId}}/concepts?job_id={{jobId}}
+Authorization: Bearer {{token}}
+
+# Copy an actual concept id and revision from step 7 or 8.
+@conceptId = REPLACE_WITH_CONCEPT_UUID
+
+### 9. Human edit: updates revision to 2, resets selection/evaluation; preserves original.
+PATCH {{base}}/v1/concepts/{{conceptId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_revision": 1,
+  "changes": {
+    "primary_hook": "A task deserves your undivided attention.",
+    "story": {"opening": "A student opens an assignment, then reaches for a distracting app."},
+    "cta": "Learn more"
+  }
+}
+
+### 10. Select the concept after checking its flags; revision becomes 3.
+POST {{base}}/v1/concepts/{{conceptId}}/select
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_revision": 2}
+
+### 11. Optional explicit production review; only after a real person has reviewed it.
+# This does not grant advertising/legal/clinical approval or rights to third-party assets.
+POST {{base}}/v1/concepts/{{conceptId}}/approve
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_revision": 3,
+  "human_review_completed": true,
+  "acknowledge_claim_risks": true,
+  "acknowledge_asset_requirements": true
+}
+
+### 12. Structured future-production handoff. No video is rendered.
+GET {{base}}/v1/concepts/{{conceptId}}/handoff
+Authorization: Bearer {{token}}
+
+### Illustrative Minimalist brief (creation only; not an automatic live benchmark).
+POST {{base}}/v1/brands/c8803361-8264-47cd-84a2-5947c4bcd486/campaigns
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "objective": "Awareness",
+  "audience": "Students and young adults interested in ingredient-conscious skincare",
+  "promotion_scope": "BRAND",
+  "target_platform": "Instagram Reels"
+}

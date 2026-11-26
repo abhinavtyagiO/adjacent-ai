@@ -1,0 +1,1629 @@
+{
+  "fixture_origin": "Frozen 2026-11-21 draft BIP and saved website text; not verified advertising claims or Phase 2 live output.",
+  "brief": {
+    "objective": "Awareness",
+    "audience": "Students",
+    "promotion_scope": "BRAND",
+    "target_platform": "Instagram Reels"
+  },
+  "profile": {
+    "brand_identity": {
+      "name": "Opal",
+      "website_url": "https://opalapp.com/",
+      "legal_name": null,
+      "tagline": "Attention on autopilot.",
+      "description": "A screen time app and app blocker that helps people and families manage digital distractions and focus on what matters.",
+      "mission": "Align computers with human well-being.",
+      "vision": "A world where a billion people can focus freely.",
+      "values": [
+        "Human well-being",
+        "Focus",
+        "Technology for human progress, productivity and happiness"
+      ],
+      "founded_year": null,
+      "headquarters": null,
+      "operating_regions": []
+    },
+    "business_positioning": {
+      "industry": "Digital wellbeing and productivity software",
+      "category": "Screen time app and app blocker",
+      "business_model": "Free app with paid PRO plans and contact-priced Teams offering",
+      "market_position": "The press kit describes Opal as the #1 Screen Time app on the App Store; the ranking's methodology and date are not supplied.",
+      "positioning_statement": "An operating system for attention that makes technology work for people by automatically protecting focus and managing screen time.",
+      "differentiators": [
+        "Scheduled and one-off app blocking, including stricter focus modes",
+        "Opal Score combines sleep, focus and rest signals",
+        "Focus milestones reward time spent focused"
+      ],
+      "geographic_markets": []
+    },
+    "offerings": [
+      {
+        "name": "Opal",
+        "key": "opal",
+        "kind": "PRODUCT",
+        "catalog_level": "PRODUCT",
+        "parent_offering_key": null,
+        "variants": [],
+        "supported_platforms": [
+          "iPhone",
+          "Mac",
+          "Android"
+        ],
+        "pricing_tiers": [
+          {
+            "name": "Opal",
+            "pricing": {
+              "model": "Free",
+              "amount": "0",
+              "currency": "USD",
+              "billing_period": "month",
+              "details": "Free forever.",
+              "pricing_url": "https://opalapp.com/pricing"
+            },
+            "features": [
+              "3 Rules"
+            ]
+          },
+          {
+            "name": "Opal PRO",
+            "pricing": {
+              "model": "Paid",
+              "amount": null,
+              "currency": "USD",
+              "billing_period": null,
+              "details": "Monthly, yearly or lifetime plans with a free trial. The pricing page displays $8.33/month, $19.99/month and $399/forever, but the supplied text does not explicitly map the monthly prices to billing options.",
+              "pricing_url": "https://opalapp.com/pricing"
+            },
+            "features": [
+              "Unlimited Rules",
+              "Hard Mode",
+              "Allow Only"
+            ]
+          },
+          {
+            "name": "Teams",
+            "pricing": {
+              "model": "Contact for pricing",
+              "amount": null,
+              "currency": null,
+              "billing_period": null,
+              "details": "Focus for your entire team.",
+              "pricing_url": "https://opalapp.com/pricing"
+            },
+            "features": []
+          }
+        ],
+        "claims": [],
+        "description": "Screen time app and app blocker for managing distractions on phone and desktop.",
+        "url": "https://opalapp.com/",
+        "features": [
+          "Block selected apps on a schedule or time limit",
+          "Scheduled and one-off focus sessions",
+          "Timed focus sessions that lock until the timer runs out",
+          "Opal Score combines sleep, focus and rest signals",
+          "Focus milestones and rewards",
+          "Deep Focus and Brick Mode; Brick Mode permits only essential apps"
+        ],
+        "benefits": [
+          "Reduce digital distractions and manage screen time",
+          "Protect time for focused work, study and family",
+          "Support more intentional technology use"
+        ],
+        "ingredients": [],
+        "use_cases": [
+          "Focused work and meeting deadlines",
+          "Studying, reading and homework",
+          "Screen-free meals and family time",
+          "Limiting social media and winding down for sleep"
+        ],
+        "pricing": {
+          "model": "Free with paid plans",
+          "amount": null,
+          "currency": null,
+          "billing_period": null,
+          "details": "Free plan and PRO plans; students can apply for up to 50% off Opal PRO.",
+          "pricing_url": "https://opalapp.com/pricing"
+        },
+        "audiences": {
+          "personas": [],
+          "segments": [
+            {
+              "name": "Work and study focus seekers",
+              "description": "Potential users who want to set aside time for a task without selected app distractions.",
+              "needs": [
+                "Scheduled or one-off focus sessions"
+              ],
+              "geography": []
+            },
+            {
+              "name": "Intentional screen-time planners",
+              "description": "Potential users who want boundaries around scrolling and shared offline time.",
+              "needs": [
+                "App rules suited to meals or winding down"
+              ],
+              "geography": []
+            }
+          ]
+        },
+        "customer_psychology": {
+          "pain_points": [
+            "Distracting apps compete with planned activities"
+          ],
+          "desired_outcomes": [
+            "Make room for focused work or time with family"
+          ],
+          "motivations": [
+            "Set boundaries in advance",
+            "Recognize focused time through milestones"
+          ],
+          "fears": [],
+          "objections": [
+            "A locked session may feel too restrictive",
+            "Paid-feature availability may be unclear"
+          ],
+          "purchase_triggers": [
+            "An upcoming deadline",
+            "A new screen-free routine"
+          ],
+          "decision_criteria": [
+            "Control over apps and session timing",
+            "Device and plan compatibility"
+          ],
+          "emotional_benefits": [
+            "A sense of control over screen time"
+          ],
+          "adjacent_interests": [
+            "Study planning",
+            "Family routines"
+          ],
+          "relatable_situations": [
+            "Checking social media during homework"
+          ],
+          "emotional_triggers": [
+            "Wanting to give a task or loved ones undivided attention"
+          ]
+        },
+        "value_propositions": []
+      }
+    ],
+    "customer_personas_and_audience_segments": {
+      "personas": [],
+      "segments": [
+        {
+          "name": "Work and study focus seekers",
+          "description": "People looking to protect time for deadlines, reading or homework from distracting apps.",
+          "needs": [
+            "Scheduled blocks for recurring focus time",
+            "One-off sessions for a specific task"
+          ],
+          "geography": []
+        },
+        {
+          "name": "Intentional screen-time planners",
+          "description": "People or parents seeking boundaries around scrolling, meals and family time.",
+          "needs": [
+            "Rules for selected distracting apps",
+            "Access to essential apps during stricter focus periods"
+          ],
+          "geography": []
+        }
+      ]
+    },
+    "customer_psychology": {
+      "pain_points": [
+        "Checking social apps interrupts work or study",
+        "Scrolling competes with family time or winding down"
+      ],
+      "desired_outcomes": [
+        "Protect a planned focus session",
+        "Be more present during offline moments"
+      ],
+      "motivations": [
+        "Make screen-time boundaries less dependent on in-the-moment decisions",
+        "Celebrate focused time through milestones"
+      ],
+      "fears": [
+        "Blocking could prevent access to something important"
+      ],
+      "objections": [
+        "Uncertainty about how restrictive a locked session will feel",
+        "Uncertainty about which features are free or paid"
+      ],
+      "purchase_triggers": [
+        "An approaching deadline or exam",
+        "A desire to establish a screen-free meal routine"
+      ],
+      "decision_criteria": [
+        "Control over blocked apps and session timing",
+        "Availability on their devices and clarity about plan features"
+      ],
+      "emotional_benefits": [
+        "A sense of agency over attention",
+        "Greater presence during time away from screens"
+      ],
+      "adjacent_interests": [
+        "Time management and study routines",
+        "Family screen-time habits"
+      ],
+      "relatable_situations": [
+        "Opening a social app while trying to finish a task",
+        "Reaching for a phone at the dinner table"
+      ],
+      "emotional_triggers": [
+        "The satisfaction of making space for a meaningful task",
+        "Wanting to be present with family"
+      ]
+    },
+    "value_propositions": {
+      "primary": "Protect focus automatically so people can make technology work for them, not against them.",
+      "functional_benefits": [
+        "Block distracting apps",
+        "Structure focused time with rules and sessions",
+        "See a combined measure of technology and wellbeing signals"
+      ],
+      "emotional_benefits": [
+        "Feel more present",
+        "Find balance between technology and offline life"
+      ],
+      "differentiators": [
+        "Opal Score",
+        "Focus milestone rewards",
+        "Scheduled and stricter blocking modes"
+      ],
+      "reasons_to_believe": [
+        "Available on iPhone, Mac and Android",
+        "Apple Design Award Finalist"
+      ]
+    },
+    "trust_and_proof": {
+      "testimonials": [
+        {
+          "quote": "This app has changed my life",
+          "attribution": null,
+          "company": null
+        }
+      ],
+      "customer_names": [],
+      "case_studies": [],
+      "certifications": [],
+      "awards": [
+        "Apple Design Award Finalist"
+      ],
+      "metrics": [
+        "Press kit states that Opal is trusted by millions of users worldwide.",
+        "Press kit states that Opal users have saved over 500 million hours to date."
+      ],
+      "guarantees": [
+        "30-day money-back guarantee for purchases made via Stripe; iPhone app purchases are processed by Apple and cannot be refunded directly by Opal."
+      ],
+      "scoped_claims": [
+        {
+          "text": "#1 Screen Time app on the App Store, according to the press kit; methodology and date are not provided.",
+          "scope": "BRAND",
+          "subject": "Opal"
+        },
+        {
+          "text": "Opal users have saved over 500 million hours to date, according to the press kit.",
+          "scope": "BRAND",
+          "subject": "Opal"
+        }
+      ]
+    },
+    "brand_voice": {
+      "tone": [
+        "Encouraging",
+        "Direct",
+        "Conversational"
+      ],
+      "personality": [
+        "Empathetic",
+        "Motivating",
+        "Playful"
+      ],
+      "language_style": "Plain, second-person language about focus and everyday distractions, with occasional energetic or playful phrasing.",
+      "preferred_terms": [
+        "focus",
+        "screen time",
+        "distractions"
+      ],
+      "avoided_terms": [],
+      "example_phrases": [
+        "Attention on autopilot.",
+        "Less scrolling, more living.",
+        "Improve your focus, find your flow.",
+        "God-mode productivity"
+      ],
+      "cultural_contexts": []
+    },
+    "visual_identity": {
+      "logo_urls": [
+        "https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg",
+        "https://brandkit.opal.so/Images/Gem_Burst_Logo.jpg"
+      ],
+      "colors": [
+        {
+          "name": "Black",
+          "hex": null,
+          "usage": "Brand kit describes pure black as part of the color system; focus gems always appear on pure black."
+        },
+        {
+          "name": "White",
+          "hex": null,
+          "usage": "Brand kit describes pure white as part of the color system."
+        },
+        {
+          "name": "Secondary gray",
+          "hex": "#888888",
+          "usage": "Observed website CSS secondary variable, not identified as an official brand color."
+        }
+      ],
+      "fonts": [
+        "SF Pro Text"
+      ],
+      "imagery_style": "3D focus gems, official app screenshots, product videos and provided brand imagery.",
+      "design_style": "Black-and-white color system; gradients reserved for in-app milestone moments, not backgrounds or dominant elements.",
+      "guidelines_url": "https://brandkit.opal.so/index.html"
+    },
+    "creative_context": {
+      "content_themes": [
+        "Making space for work, study and offline life",
+        "Choosing screen-time boundaries that fit the moment"
+      ],
+      "storytelling_angles": [
+        "Show a familiar distraction followed by a purposeful focus session"
+      ],
+      "existing_content_formats": [
+        "Focus and wellbeing articles",
+        "Use-case pages",
+        "Launch and product videos",
+        "Press coverage",
+        "Creative collaborations"
+      ],
+      "available_assets": [
+        "Opal logos and app icon",
+        "Focus gem imagery",
+        "Official app screenshots",
+        "Product videos",
+        "Founder headshots",
+        "Press releases and brand imagery"
+      ],
+      "seasonal_context": [],
+      "calls_to_action": [
+        "Start free",
+        "Watch our new launch video",
+        "Apply for Opal Scholarship",
+        "Check out our Youtube channel"
+      ],
+      "content_pillars": [
+        "Scheduled and one-off focus sessions",
+        "Intentional screen time with family and offline activities"
+      ],
+      "creative_angles": [
+        "Deadline mode: show a one-off session that blocks selected apps while someone works on a task.",
+        "Dinner without the scroll: frame scheduled blocking as a way to make room for family time.",
+        "Choose your boundary: demonstrate the difference between selected-app blocking and Brick Mode's essential-app access."
+      ],
+      "cultural_contexts": [],
+      "relatable_situations": []
+    },
+    "marketing_guardrails": {
+      "prohibited_claims": [],
+      "sensitive_topics": [
+        "ADHD and mental health",
+        "Screen addiction and anxiety"
+      ],
+      "legal_disclaimers": [],
+      "compliance_requirements": [],
+      "brand_safety_rules": [
+        "Use the logo as provided; do not recreate, recolor, stretch or apply effects.",
+        "Use the app icon as provided; do not crop, reshape, add borders, shadows or another container.",
+        "Place focus gems on pure black; do not crop, recolor or overlay text.",
+        "Do not crop or annotate official app screenshots; use only provided brand imagery.",
+        "Reserve gradients for in-app milestone moments, not backgrounds or dominant elements."
+      ],
+      "approval_requirements": "Brand kit asks users to reach out before publishing if unsure or if a use case is not covered."
+    },
+    "marketing_defaults": {
+      "objectives": [],
+      "target_channels": [],
+      "content_language": null,
+      "target_regions": [],
+      "preferred_cta": null,
+      "budget": null,
+      "video_duration_seconds": null,
+      "aspect_ratio": null,
+      "default_landing_page": null
+    }
+  },
+  "provenance": [
+    {
+      "path": "/brand_identity/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/website_url",
+      "origin": "USER",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/tagline",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/mission",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/vision",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_identity/values/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/industry",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/category",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/business_model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/market_position",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/positioning_statement",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/business_positioning/differentiators/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/key",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/kind",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/catalog_level",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/supported_platforms/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/supported_platforms/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/supported_platforms/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/amount",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/currency",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/billing_period",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/0/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/pricing/currency",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/features/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/1/features/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/2/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/2/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/2/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing_tiers/2/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/description",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/features/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/benefits/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/use_cases/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing/model",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing/details",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/pricing/pricing_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/primary",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/functional_benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/functional_benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/functional_benefits/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/emotional_benefits/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/emotional_benefits/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/differentiators/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/value_propositions/reasons_to_believe/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/testimonials/0/quote",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/awards/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/metrics/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/metrics/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/guarantees/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/0/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/text",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/scope",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/trust_and_proof/scoped_claims/1/subject",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/tone/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/personality/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/language_style",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/preferred_terms/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/brand_voice/example_phrases/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/logo_urls/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/logo_urls/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/0/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/0/usage",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/1/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/1/usage",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/2/name",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/2/hex",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/colors/2/usage",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/fonts/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/imagery_style",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/design_style",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/visual_identity/guidelines_url",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/existing_content_formats/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/available_assets/5",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/calls_to_action/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/sensitive_topics/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/sensitive_topics/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/0",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/1",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/2",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/3",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/brand_safety_rules/4",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/marketing_guardrails/approval_requirements",
+      "origin": "AI_EXTRACTED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/0/needs/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_personas_and_audience_segments/segments/1/needs/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/pain_points/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/desired_outcomes/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/motivations/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/fears/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/objections/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/purchase_triggers/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_benefits/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_benefits/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/adjacent_interests/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/relatable_situations/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/customer_psychology/emotional_triggers/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_themes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_themes/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/storytelling_angles/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_pillars/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/content_pillars/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/creative_context/creative_angles/2",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/0/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/0/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/0/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/1/name",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/1/description",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/audiences/segments/1/needs/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/pain_points/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/desired_outcomes/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/motivations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/motivations/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/objections/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/objections/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/purchase_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/purchase_triggers/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/decision_criteria/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/decision_criteria/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/emotional_benefits/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/adjacent_interests/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/adjacent_interests/1",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/relatable_situations/0",
+      "origin": "INFERRED",
+      "citations": []
+    },
+    {
+      "path": "/offerings/0/customer_psychology/emotional_triggers/0",
+      "origin": "INFERRED",
+      "citations": []
+    }
+  ],
+  "documents": [
+    {
+      "url": "https://opalapp.com/",
+      "text": "Opal: Screen Time App and App Blocker\nMeta description: Opal blocks distracting apps on a schedule or time limit and scores your focus every day. Works on iPhone, Android and Mac. Start free.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n# Attention on autopilot.\nOpal protects your focus automatically, so you can make technology work for you, not against you.\nWatch our new launch video\n### 5 to 6 hours. That’s the average time you’ll spend on your phone today — often without realizing. It’s time to fight back.\n#### Your day in one score\nOpal Score combines signals from your sleep, focus, and rest into a single measure of how technology aligns with your wellbeing.\n#### Set your Rules\nTake control of your day by blocking the apps of your choice, whether it's on your phone or desktop.\n#### Tap into focus\nChoose what you want to focus on, set the length, and lock in until the timer runs out.\n### Unlock precious Milestones\nDiscover beautiful rewards that celebrate every moment of focus\n### Available on iPhone, Mac and Android\nBetter than screen time settings, Opal helps you focus on what matters so you can make the most out of every day.\n### Average time saved thanks to Opal\n#### saved daily\n#### saved each year\n#### of life reclaimed\nStay focused and minimize disruptions with proven, effective results.\nAchieve significantly more each day with enhanced efficiency.\nExperience a substantial boost in mental well-being and overall life balance.\n### “This app has changed my life”\nHear how Opal transforms lives, directly from those who've made the journey\nNew York, USA\niOS Engineer at Instagram\nToronto, Canada\nStop-Motion Animator + Video Wizard\nParis, France\nJournalist\nBrooklyn, NY\nArtist and Fashion Designer\nPlatform at FirstMark Capital\nSenior Product Designer Etsy\nLos Angeles, USA\nDirector of Operations at Backstage Capital\nActivist\nNew Zealand\nMusician\nUSA\nNeuroscientist\nDigital Creator\nEntrepreneur\nProfessional Coach. Founder of HighOutput\nLos Angeles, CA\nPro Soccer Player\nAmsterdam, NL\nCo-founder and CEO of Remote\nLead Designer\nSan Francisco, USA\nComputational Designer, Zora\nSenior Director of Brand at Loom\nCritic\nMetro Manila, PH\nODC1, Prev. founding team at Avion School (YC W21)\nDeveloper relations at Square\nLondon, UK\nInvestor at NorthZone\nFounder TZL Social and TheGenZClub, Forbes 30 under 30 GR.\nWife/Mom\nFounder\nFounder and CEO of Peachy\nFounder Bioloopsleep\n### Opal in the press\n### Stay in the Loop\nJoin the community and learn how other Gems use Opal for focus\nCheck out our Youtube channel to learn more about Opal\n## Improve your focus, find your flow.",
+      "fetched_at": "2026-11-21T11:25:57.379823+00:00",
+      "title": "Opal: Screen Time App and App Blocker",
+      "source_type": "website",
+      "metadata": {
+        "category": "homepage",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://brandkit.opal.so/press.html",
+      "text": "Opal Press Kit: Screen Time App Media Resources\nMeta description: Press kit for Opal, the screen time app and Apple Design Award Finalist. Founder bios, headshots, product videos, press releases, and media coverage.\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --secondary = #888\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/index.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/index.html\n# Press Kit\nPress, interview, and media inquiries: Denae, Communications (denae@opal.so)\n## About Opal\nOpal is the #1 Screen Time app on the App Store. We build tools that help people and families focus on what matters: less scrolling, more living. Apple Design Award Finalist. Trusted by millions of users worldwide.\nLearn more at opal.so/about\n## Kenneth Schlenker\nKenneth Schlenker is the founder and CEO of Opal, the free and fun app to focus better and control screen time. Opal users have saved over 500 million hours to date. Opal raised from Adjacent, Speedinvest, and founders of Duolingo, Pinterest, Mistral and more, on a mission to align computers with human well-being.\nPreviously, Kenneth founded and served as CEO of the online marketplace ArtList which listed $100M of inventory from collectors, auction houses, and galleries, and was acquired by artnet (FRA: ART). Kenneth trained on product and data at Google, where he worked on Maps, YouTube, and Adwords. Official headshots and portraits below, high resolution and ready for editorial use. Hover to download.\n## Olivia Yokubonis\nHost of Olivia Unplugged. Official headshots and video content, ready for editorial or social use.\n## In the Press\nOfficial announcements and featured coverage.\n## All Press Assets\nDownload individual files by category.",
+      "fetched_at": "2026-11-21T11:25:58.147211+00:00",
+      "title": "Opal Press Kit: Screen Time App Media Resources",
+      "source_type": "website",
+      "metadata": {
+        "category": "brand_assets",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--secondary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#888",
+            "source_url": "https://brandkit.opal.so/press.html"
+          }
+        ],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/index.html",
+            "label": "Brand Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/index.html",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://opalapp.com/use-cases",
+      "text": "Opal Use Cases\nMeta description: Focus is essential for students, work, parents and wellbeing & more. Find out how Opal can help you focus on what matters most to you.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711a3a06cce362965b_apple-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e74fa81341aaabbc_amazon-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b3e47602ea6997a4_shopify-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37193cbacedb044acd0_square-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3721d944b637f0a712d_headspace-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37037b067f2853a1305_google-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371cd526a18c8fe0815_etsy-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711edb84078f482f18_accenture-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370cd526a18c8fe0755_deloitte-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3717041cc821780a1bf_snapchat-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b4effb2a99e0a8ea_loom-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e210fd2d2244a4a5_dropbox-logo-container.svg\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n### Better Focus to Everyone\nFocus is essential to all parts of life. Find out how Opal can help you focus on what matters most to you.\nBoost productivity, maintain energy, balance family time\nAce exams, improve sleep, better manage ADHD\nBalance family time, focus during dinner, guide habits\nFight addiction, reconnect with nature, alleviate anxiety\nA phone policy that benefits students and faculty alike\n### God-mode productivity\nOpal helps you boost productivity, maintain energy, balance family time. Use Scheduled and One Off sessions to ensure your focus is protected. Or even go \"hardcore\" with Deep Focus or Brick Mode\n### Featured Blocks\nTemporarily brick your phone, only essential apps are allowed.\nKeep distractions at bay during your optimal productive hours.\nThis Timeout session helps you meet that deadline.\nCommit to an hour of distraction-free work every afternoon.\n### Featured Articles\n### Focus today, win tomorrow\nYou're being bombarded by distractions from everywhere: Social Media, DMs and you can easiy lose hours on TikTok when you really study for that exams in a few days. If that sounds like you then Opal is your new best friend.\nBlock distractions and create the conditions to crush your exams.\nBlock social apps when you start feeling that mindless itch.\nDedicate time to your reading list without any distractions.\nCreate dedicated distraction-free time for your homework.\n### Apply for Opal Scholarship\nOpal offers students up to 50% off Opal Pro\n### Your kids are watching you\nFoster a positive and healthy digital environment for your family with Opal. Reduce screen time during meals or when spending time together.\nBe present with your second half without any distractions.\nBlock distractions while you drive and keep your eyes on the road!\nDedicate time to cook with your family without screens.\nDedicate evenings on weekends to uninterrupted family time.\n### Leave my dopamine alone\nEmbrace a healthier lifestyle. Whether you’re looking to practice mindfulness, improve sleep quality, or simply spend more time offline, Opal helps you find balance and peace in your daily life.\nMake the most of each weekend, limiting social media to a few minutes.\nNo scrolling at the gym to optimize your performance.\nWind down and fall asleep faster without your phone.\nSet aside an hour in the evening to relax and decompress.\n## Improve your focus, find your flow.",
+      "fetched_at": "2026-11-21T11:25:58.440793+00:00",
+      "title": "Opal Use Cases",
+      "source_type": "website",
+      "metadata": {
+        "category": "use_case",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://opalapp.com/about",
+      "text": "About Opal\nMeta description: Read about the vision behind Opal and learn more about our team and investors.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66fa7013efa64f6ca62438ab_yt_logo_rgb_dark.avif\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n### An Operating System for Attention\nOpal O.S.'s mission is to to align computers with human well-being. We believe in the power of technology for human progress, productivity and happiness.\n### Get Inspired\nOpal collaborates with creatives who are as passionate about focus as we are\nQuinn, USA\nRoberto, USA\nJeffrey, USA\n### A Billion users\nHuman attention is in crisis. Soon, managing your attention will be as normal as managing your diet. We’re building for a world where a billion people can focus freely.\nCheck out our Youtube channel to learn more about Opal\n### World-class investors\nWe’re committed to building Opal for the long term. We are backed by builders of generation-defining companies who are aligned with our mission.\nAdjacent\nSpeedinvest\nNight Capital\nCo-founder, Pinterest\nCEO of Moment\nCo-founder, Duolingo\nCo-founder Alan, Mistral\n### Our Team\nHere is the global team building the product and expanding our mission.\nSenior iOS Engineer\nDesign Engineer\nOpal for Schools Lead\nFreelance ADHD Brand Partner\nCreative Director\nVP of Communications\nCreative Ads Producer\nLead Android Engineer\nGrowth\nLead Backend Engineer\nFounding Data Scientist\nCofounder & CEO\nSoftware Engineer\nVideo Ads Creator Intern\nQA Specialist\nVP, People\nMarketing Director\nCofounder & CTO\nYouth Engagement & Success Manager\nBrand Designer\nSocial Media Manager\nSenior Android Engineer\nSupport Lead\nPeople Ops\nFinance Lead\nUGC Manager\nGrowth Manager\n### Opal in the press",
+      "fetched_at": "2026-11-21T11:25:58.530346+00:00",
+      "title": "About Opal",
+      "source_type": "website",
+      "metadata": {
+        "category": "brand_story",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://brandkit.opal.so/index.html",
+      "text": "Opal Brand Kit — Screen Time App Brand Assets & Guidelines\nMeta description: Official brand kit for Opal, the screen time app and Apple Design Award Finalist. Download logos, colors, typography, and brand guidelines for the Opal app.\nLogo URL: https://brandkit.opal.so/Images/Gem_Burst_Logo.jpg\nObserved visual declaration [OBSERVED_WEBSITE_STYLE]: --secondary = #888\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\n# Opal Brand Kit\nEverything you need to represent Opal — the screen time app and Apple Design Award Finalist. Assets, guidelines, and usage rules — all in one place.\n## Color System\nBuilt on pure black and white. Gradients are reserved for in-app milestone moments — never as backgrounds or dominant elements.\n## Type System\nSF Pro Text across all touchpoints. Five weights — Light to Bold — covering every use case from ambient labels to hero headlines.\n## Logo Usage\nAlways use as provided. Never recreate, recolor, stretch, or apply effects.\n## App Icon\nUse as provided. Do not crop, reshape, add borders, or modify.\n### Opal App Icon\nDisplay at its original rounded-square shape. Do not place inside another container or add shadows.\n## Focus Gems\n3D gems representing focus milestones. Always on pure black. Never crop, recolor, or overlay text.\n## App Screenshots\nOfficial screenshots. Scroll to browse, hover to download. Do not crop or annotate.\n## App in Motion\nProduct videos showcasing Opal's key features. Click to play. Download for partner materials or social.\n## Brand Imagery\nKey visuals for partner materials. Use only provided files.\n## Do's & Don'ts\nNon-negotiable. Reach out before publishing if unsure.\n### Do\n### Don't\n## All Assets\nTap a category to expand, then download individual files.\n### Press Kit\nFounder headshots, app videos, Olivia Unplugged content, and press releases.\n## Questions?\nNeed a custom asset or have a use case not covered here? Reach out before publishing.",
+      "fetched_at": "2026-11-21T11:25:58.935288+00:00",
+      "title": "Opal Brand Kit — Screen Time App Brand Assets & Guidelines",
+      "source_type": "website",
+      "metadata": {
+        "category": "brand_assets",
+        "testimonials": [],
+        "visual_signals": [
+          {
+            "kind": "NAMED_CSS_COLOR",
+            "name": "--secondary",
+            "scope": "OBSERVED_WEBSITE_STYLE",
+            "value": "#888",
+            "source_url": "https://brandkit.opal.so/index.html"
+          }
+        ],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "View Press Kit →"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://opalapp.com/blog/why-procrastination-is-detrimental-to-your-life",
+      "text": "Why Procrastination Is Detrimental To Your Life And How To Overcome It | Opal\nMeta description: Discover the harmful effects of procrastination on your life and learn effective strategies to overcome it.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711a3a06cce362965b_apple-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e74fa81341aaabbc_amazon-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b3e47602ea6997a4_shopify-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37193cbacedb044acd0_square-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3721d944b637f0a712d_headspace-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37037b067f2853a1305_google-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371cd526a18c8fe0815_etsy-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711edb84078f482f18_accenture-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370cd526a18c8fe0755_deloitte-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3717041cc821780a1bf_snapchat-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b4effb2a99e0a8ea_loom-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e210fd2d2244a4a5_dropbox-logo-container.svg\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n# Why Procrastination Is Detrimental To Your Life And How To Overcome It\nDiscover the harmful effects of procrastination on your life and learn effective strategies to overcome it.\nJuly 13, 2023\nWe all procrastinate from time to time; it's part of being human. But procrastination can be detrimental if it's left unchecked. It can affect our relationships, mental health, and even our financial well being.\nIn this article, we'll discuss the psychology behind why we procrastinate, the consequences of procrastination, and strategies to overcome it. We'll also talk about procrastination in relation to specific mental health conditions, goal-setting, time management, and productivity.\nWith this knowledge, you'll be able to make the changes needed to overcome procrastination and live a better life.\n‍\n## Key Takeaways\n- Procrastination can have a major impact on your job, grades, and life, and chronic procrastination can negatively affect mental health, social relationships, and financial well-being.\n- The causes of procrastination include cognitive distortions, present bias, depression, ADHD , and different behavioral styles of procrastination, such as perfectionism, dreamer, defier, worrier, crisis-maker, and overdoer.\n- Strategies to overcome procrastination include breaking tasks into smaller steps, setting deadlines, rewarding yourself for completing tasks, making a to-do list with due dates, recognizing warning signs, eliminating distractions, and increasing productivity.\n- Procrastination is not a sign of laziness but is connected to mental health challenges, and overcoming procrastination requires the right knowledge, tools, and support, such as finding an accountability partner, visualizing the end result, practicing self-compassion, and using organizational strategies like time management and prioritizing tasks.\n## The Science Behind Procrastination\nYou may be familiar with the effects and causes of procrastination, but do you know the science behind it?\nProcrastination is a behavior that involves delaying a task or tasks, usually due to a lack of motivation, interest, or energy. It can have a detrimental effect on physical and mental health due to the stress and anxiety caused by procrastination.\nThe science behind procrastination is complex, and it is connected to the psychological concept of time management, which plays a crucial role in self-regulation. Time management can help people to manage their emotions, tasks, and energy. Poor time management can have negative consequences, such as increased stress and decreased productivity.\nTo overcome procrastination, it is important to understand the science behind it and to use strategies such as breaking tasks into manageable chunks, setting deadlines, and rewarding yourself for completing tasks. It is also important to identify warning signs of procrastination, eliminate distractions, and practice self-compassion.\nWith the right knowledge, tools, and support, you can learn to manage your time and overcome procrastination.\nTo learn more about the consequences of procrastination, read on.\n## The Consequences of Procrastination\nBy continually delaying tasks, you're putting yourself at risk of serious consequences. Procrastination can lead to poor health, poor performance, negative emotions, and even health problems.\nWhy is procrastination bad? It can cause stress, anxiety, and even depression. It can also lead to a lack of motivation, self-doubt, and a feeling of helplessness.\nFurthermore, procrastination can lead to poor time management, resulting in missed deadlines, a decline in productivity, and a lack of focus. These consequences can negatively impact an individual's physical, mental, and emotional health.\nTo make matters worse, procrastination can lead to feelings of guilt, shame, and regret. All of these consequences can have a lasting impact on a person's life.\nTransitioning into the psychology of procrastination can help us better understand the root causes of procrastination and how to overcome it.\n## The Psychology of Procrastination\nWe all procrastinate from time to time, but for some, it can become a major problem leading to serious physical and mental health issues. Procrastination may be a symptom of underlying psychological issues that can be detrimental to one's well-being if left unchecked.\nHere are some of the ways procrastination can affect us:\n- Procrastination can lead to an increase in stress levels and physical health issues such as headaches, stomach problems, and fatigue.\n- Procrastination can have a negative impact on our mental health, leading to depression, anxiety, and low self-esteem.\n- Procrastination can also lead to poor study habits and difficulty managing time.\n- Those with ADHD and other mental health conditions may struggle with procrastination even more.\nIt can be difficult to find the motivation and self-control necessary to manage procrastination.\nThe longer we procrastinate, the more difficult it can be to break the cycle.\nUnderstanding the psychology of procrastination is the first step to managing it and reducing its effects on our physical and mental health.\n## The Cost of Procrastination\nProcrastination is like a slow-burning fuse, gradually eroding away at our personal and professional lives without us even realizing it. The effects of procrastination can be far-reaching and long-lasting, impacting physical health, academic performance, job performance, and self-esteem.\nProcrastination isn't only detrimental to our mental health, but it can also have serious implications for our physical health. Studies have shown that it can lead to increased stress levels, poor sleep habits, and poor eating habits. This can then lead to physical health issues such as fatigue, headaches, and depression.\nIn addition, procrastination can lead to poor academic performance, as students who procrastinate are more likely to receive lower grades. It can also have a negative impact on job performance, as those who procrastinate are more likely to miss deadlines and not meet expectations.\nFinally, procrastination can lead to a decrease in self-esteem, as those who procrastinate may feel overwhelmed and discouraged. The constant cycle of putting off tasks can have a negative effect on our overall sense of accomplishment and self-worth.\nThe long-term effects of procrastination can be detrimental to our physical and mental health and can have a negative impact on our lives. Transforming our habits and taking action now can help us to break the cycle and lead healthier, more productive lives.\n## Overcoming Procrastination\nWe understand how difficult it can be to take control of your day and break the cycle of procrastination. But it's possible to do so with the right knowledge, tools, and support.\nOne of the most important steps to overcoming procrastination is to make a to-do list and set deadlines. This will help you prioritize tasks and stay organized. Breaking tasks down into smaller steps can also be helpful in making them more manageable.\nAdditionally, recognizing warning signs and eliminating distractions is key in achieving focus. Physical health is also closely linked to procrastination. Chronic procrastination can lead to sleep deprivation, irregular eating patterns, and unhealthy regimens, all of which can take a toll on physical health.\nLow self-esteem can also be a result of procrastination, as well as depression, anxiety, and poor study habits. Self-regulation plays a role in substance use disorders and other conditions that involve impulse control.\nTo break this cycle, it's important to practice self-compassion and be mindful of your thoughts, feelings, and behaviors. Changing your mindset is the next step in the journey of overcoming procrastination.\n## Changing Your Mindset\nChanging your mindset is key to making progress and achieving your goals. To overcome procrastination, it's important to understand why you put things off and why it's detrimental to your physical health and overall well-being.\nFirst, recognize that procrastination is a habit that can be broken with effort and practice. It's important to be aware of any anxiety or fear you may be feeling and to take action to address them. It might feel uncomfortable at first, but it's important to take the first step and start the task.\nAllowing yourself to become overwhelmed by the task is not helpful and can lead to more procrastination. Reframing tasks into smaller, more achievable goals can help you break through the cycle of procrastination and gain momentum. Accurately assessing what you can realistically accomplish in a given time frame can help you stay focused and productive.\nFinally, it's important to be gentle with yourself and keep in mind that progress is more important than perfection.\n## Accountability and Support\nHaving an accountability partner and a supportive network can help you stay on track and make progress towards your goals. It's important to have people in your life who understand your goals and can help keep you accountable.\nA supportive network provides encouragement and moral support to help you stay on track and keep going even when you feel like giving up. Here are a few ways to get started on finding an accountability partner and forming a supportive network:\n- Reach out to family and friends. Ask them to check in with you regularly and provide feedback and encouragement.\n- Join an online or local support group with other people who have similar goals and interests.\n- Connect with a mentor or coach who can provide advice and guidance.\nHaving an accountability partner and a supportive network can help you stay motivated and overcome procrastination . It's important to remember that procrastination is not a sign of laziness but is connected to mental health challenges. With the right knowledge, tools, and support, you can break the cycle of procrastination and take back control of your health and well-being. The power of habits and consistency can be a powerful tool in this process.\n",
+      "fetched_at": "2026-11-21T11:25:59.40018+00:00",
+      "title": "Why Procrastination Is Detrimental To Your Life And How To Overcome It | Opal",
+      "source_type": "website",
+      "metadata": {
+        "category": "audience_content",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://opalapp.com/blog/why-cant-i-focus",
+      "text": "Unfocused and Unproductive: Why Can't I Focus? | Opal\nMeta description: Let's shed light on the science behind focus, explore common causes of difficulty focusing and provide techniques to improve focus.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711a3a06cce362965b_apple-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e74fa81341aaabbc_amazon-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b3e47602ea6997a4_shopify-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37193cbacedb044acd0_square-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3721d944b637f0a712d_headspace-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37037b067f2853a1305_google-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371cd526a18c8fe0815_etsy-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711edb84078f482f18_accenture-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370cd526a18c8fe0755_deloitte-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3717041cc821780a1bf_snapchat-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b4effb2a99e0a8ea_loom-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e210fd2d2244a4a5_dropbox-logo-container.svg\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n# Unfocused and Unproductive: Why Can't I Focus?\nLet's shed light on the science behind focus, explore common causes of difficulty focusing and provide techniques to improve focus.\nMay 31, 2023\nIn today's fast-paced and technology-driven world, maintaining focus has become increasingly challenging. Many of us find ourselves struggling to concentrate on tasks, constantly succumbing to distractions, and feeling unproductive at the end of the day.\nIf you often wonder, \"Why can't I focus?\" you're not alone.\nThis article aims to shed light on the science behind focus, explore common causes of difficulty focusing and provide techniques to improve focus.\n## The Science of Focus\n### Understanding the Concept of Attention\nFocus is not a singular entity; rather, it encompasses various cognitive processes. Attention, a fundamental aspect of focus, involves the ability to direct mental resources toward specific stimuli or tasks while filtering out irrelevant information. It is influenced by both internal and external factors.\n### The Role of Neurotransmitters\nNeurotransmitters, such as dopamine and norepinephrine, play a crucial role in regulating focus. These brain chemicals or messengers facilitate communication between old and new brain cells and impact attention, motivation, and arousal levels. Imbalances in neurotransmitter levels can disrupt focus and concentration.\n### The Relationship Between Focus and Productivity\nFocus and productivity go hand in hand. When we can concentrate on a task without distractions, we become more efficient and accomplish more in less time. Conversely, a lack of focus or trouble focusing leads to procrastination, reduced output, and feelings of frustration.\n### The Effects of Chronic Stress on Focus\nChronic stress can wreak havoc on our ability to focus. Prolonged exposure to stress hormones, such as cortisol, can impair memory and cognitive function, decrease attention span, and contribute to mental fatigue. Managing stress is vital for maintaining optimal focus.\n## Common Causes of Difficulty Focusing\n### Digital Distractions\nThe omnipresence of smartphones, social media, and constant notifications has made digital distractions a significant obstacle to focus. The temptation to check emails or scroll through social feeds can derail our attention and diminish productivity.\n### Lack of Sleep\nSleep deprivation is a well-known enemy of focus. When we don't get enough restorative sleep, our cognitive abilities suffer, and our ability to concentrate declines and we have trouble focusing. Prioritizing sleep hygiene is essential for enhancing focus.\n### Poor Nutrition\nA balanced diet fuels our brain, and certain nutrients directly impact focus and mental energy. A deficiency in vitamins, minerals, or omega-3 fatty acids can affect cognitive function or our brain health. Optimal nutrition is vital for maintaining a sharp mind.\n### Physical Environment\nOur surroundings play a significant role in our ability to focus. Cluttered workspaces, excessive noise, and inadequate lighting can all hinder concentration and have a deleterious on our mental and physical health. Creating a conducive physical environment is essential for fostering focus.\n### Mental Health Conditions\nMental health conditions such as anxiety, depression, and ADHD (attention deficit hyperactivity disorder) can significantly impact focus. Addressing underlying mental health concerns through therapy or medication can help alleviate difficulties in concentration.\n## Techniques for Improving Focus\n### Time-Blocking\nTime-blocking involves allocating specific time slots for different tasks or activities. This technique helps create a structured schedule, reduces the chances of multitasking, and uses your attention span on one task at a time.\n### Pomodoro Technique\nThe Pomodoro Technique is a time management method that involves working in focused bursts followed by short breaks. Typically, you work for 25 minutes, followed by a 5-minute break. This strategy helps maintain motivation and prevents mental fatigue.\n### Mindfulness Meditation\nMindfulness meditation trains the mind to stay present and aware, reducing distractions and improving focus. Regular practice can enhance your attention span, reduce stress, and lessen any difficulty concentrating.\n### Exercise\nPhysical exercise has been shown to have a positive impact on preventing a lack of focus. Engaging in regular exercise, whether it's cardio, strength training, or yoga, can boost focus and mental energy.\n### Cognitive Behavioral Therapy\nCognitive Behavioral Therapy (CBT) can be beneficial for combatting any lack of focus, especially when mental health conditions contribute to a lessened attention span. CBT helps individuals identify and challenge negative thought patterns that cause trouble focusing.\n## The Role of Technology in Focus\n### The Negative Effects of Technology on Focus\nWhile technology can be a powerful tool, excessive use, and constant connectivity can cause us to lose focus. Endless notifications, social media scrolling, and information overload can cause trouble concentrating on important tasks.\n### Ways To Use Technology To Improve Focus\nTechnology can also be harnessed to enhance focus. Productivity apps, focus-oriented browser extensions, and time-management tools can help us stay organized, minimize distractions, and optimize our workflow.\n### The Rise of Digital Detox\nRecognizing the negative impact of technology on focus, many individuals are embracing digital detoxes . Setting boundaries, unplugging from devices, and dedicating tech-free time can rejuvenate our attention span, reduce brain fog and increase productivity.\n## Workplace Strategies for Enhancing Focus\n### Creating a Distraction-Free Workspace\nDesigning a workspace that minimizes distractions is crucial for maintaining focus. Eliminate unnecessary clutter, establish clear boundaries, block website apps and optimize lighting and acoustics to create an environment conducive to concentration.\n### Collaboration vs. Isolation\nWhile collaboration is essential, striking a balance between collaborative and individual work is key. Create designated periods for intense focus and solitary work, and establish guidelines for effective collaboration to improve work performance.\n### Flexible Work Schedules\nFlexible work schedules, such as remote work or flextime, can empower individuals to work during their most productive hours. Allowing employees to align their work with their natural rhythms can enhance focus and productivity.\n### Encouraging Breaks\nRegular breaks throughout the workday are crucial for maintaining focus. Short breaks allow the brain to recharge, prevent brain fog, and promote sustained attention. Encourage employees to take breaks and provide spaces for relaxation.\n## Lifestyle Changes for Better Focus\n### Importance of Sleep Hygiene\nPrioritizing sleep hygiene is essential for optimal focus. Establish a consistent sleep routine, create a sleep-friendly environment, and practice relaxation techniques to ensure enough rest.\n### Eating Habits and Focus\nNutrition plays a vital role in cognitive function. Consuming a balanced diet rich in fruits, vegetables, whole grains, and healthy fats can support brain health and enhance focus.\n### The Benefits of Physical Activity\nEngaging in regular physical activity improves blood flow to the brain, releases mood-enhancing endorphins, and enhances cognitive function. Incorporating exercise into your daily routine can boost focus and mental clarity.\n### How To Balance Work and Leisure\nBalancing work and leisure is crucial for maintaining focus and avoiding burnout . Prioritize leisure activities that promote relaxation, hobbies that stimulate creativity, and quality time spent with loved ones.\n## Navigating Distractions\n### Identifying and Eliminating Distractions\nIdentifying the sources of distractions is the first step in combating them. Whether it's turning off notifications, setting boundaries with coworkers, or using website blockers, eliminating distractions is essential for maintaining focus.\n### Techniques for Staying Focused in Distracting Environments\nIn distracting environments, employing techniques like wearing noise-canceling headphones, using focus-enhancing music or white noise, or practicing visualization can help maintain concentration and block out distractions.\n### Managing Interruptions\nInterruptions are inevitable, but managing them effectively can limit their impact on focus. Communicate your availability, set boundaries, and politely decline non-urgent interruptions to safeguard your concentration.\n## When To Seek Professional Help\n### Signs That Difficulty Focusing May Be a Symptom of an Underlying Condition\nPersistent difficulty focusing, especially when accompanied by other symptoms such as chronic fatigue, mood disturbances, or memory problems, may indicate an underlying condition. Seek professional help if these symptoms significantly impact your daily life.\n### Overview of Common Mental Health Conditions That Affect Focus\nConditions like anxiety disorders, depression, ADHD, and others can impair focus and concentration. Understanding the characteristics of these conditions can help you identify if they might be contributing to your difficulties.\n### How To Find Help\nIf you suspect an underlying condition affecting your focus, consult with a healthcare professional. They can provide a comprehensive evaluation, offer appropriate diagnosis and treatment options, and support you in improving your focus and overall well-being.\n## Beat the Distraction Trap and Reclaim Your Focus With Opal\nStruggling to maintain focus is a common issue faced by many individuals in today's modern world. By implementing these techniques, it is possible to regain control over our attention and enhance our productivity and overall quality of life. So, let's take proactive steps towards sharpening our focus and toward our full potential.\nTake charge of your screen time and regain focus and product",
+      "fetched_at": "2026-11-21T11:25:59.926666+00:00",
+      "title": "Unfocused and Unproductive: Why Can't I Focus? | Opal",
+      "source_type": "website",
+      "metadata": {
+        "category": "audience_content",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://opalapp.com/pricing",
+      "text": "Opal Pricing: Free and Opal PRO Plans\nMeta description: Opal is free with 3 Rules. Opal PRO adds unlimited Rules, Hard Mode and Allow Only, on yearly, monthly or lifetime plans with a free trial.\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/66353d6a3b7542a6cf2520d4_opal-logo.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711a3a06cce362965b_apple-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e74fa81341aaabbc_amazon-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b3e47602ea6997a4_shopify-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37193cbacedb044acd0_square-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3721d944b637f0a712d_headspace-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f37037b067f2853a1305_google-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371cd526a18c8fe0815_etsy-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3711edb84078f482f18_accenture-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370cd526a18c8fe0755_deloitte-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f3717041cc821780a1bf_snapchat-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f370b4effb2a99e0a8ea_loom-logo-container.svg\nLogo URL: https://cdn.prod.website-files.com/5ffc51a847b677701a3da52b/6638f371e210fd2d2244a4a5_dropbox-logo-container.svg\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/press.html\nSite-linked brand/press resource (contents may be unfetched): https://brandkit.opal.so/\n### Make Focus Easier.\n#### Opal\nFree, forever\n# $ 0 /month\nLevel up your focus\n# $ 8.33 /month\n# $ 19.99 /month\n# $ 399 /forever\n#### Teams\nFocus for your entire team\n# Contact for pricing\n#### Are you a student?\nOpal offers students up to 50% off Opal Pro\n### FAQ\nSimply log in with the same credentials you purchased your membership with and you should have Opal Pro! If that doesn't work for you, head to Settings and tap Restore Purchase to do it manually. Read more here .\nIf you'd like to keep using Opal for free, cancelling your subscription is quick and easy. Read more here.\nIf you're unsatisfied with Opal we are happy to offer you 30 Day Money Back Guarantee for purchases made via Stripe. Please note that purchases made through iPhone app are processed by Apple and can't be refunded by Opal directly. Read more here.\nYes! Simply head here to apply.\nQuestion: How do I redeem my subscription in the app?\nAnswer: Log in with the same credentials you purchased your membership with and you should have Opal PRO. If that doesn't work, go to Settings and tap Restore Purchase.\nQuestion: How can I cancel my subscription?\nAnswer: If you'd like to keep using Opal for free, cancelling your subscription is quick and easy. Step-by-step instructions are in the Opal Help Center.\nQuestion: Do you have a money back guarantee?\nAnswer: Opal offers a 30-day money back guarantee for purchases made via Stripe. Purchases made through the iPhone app are processed by Apple and can't be refunded by Opal directly.\nQuestion: Do you offer student discounts?\nAnswer: Yes. Students get up to 50% off Opal PRO at https://opalapp.com/student-discount.",
+      "fetched_at": "2026-11-21T11:26:00.008623+00:00",
+      "title": "Opal Pricing: Free and Opal PRO Plans",
+      "source_type": "website",
+      "metadata": {
+        "category": "pricing",
+        "testimonials": [],
+        "visual_signals": [],
+        "brand_asset_links": [
+          {
+            "url": "https://brandkit.opal.so/press.html",
+            "label": "Press Kit"
+          },
+          {
+            "url": "https://brandkit.opal.so/",
+            "label": "Brand Kit"
+          }
+        ]
+      }
+    }
+  ],
+  "manual_quality_references": [
+    {
+      "title": "The five-minute trap",
+      "psychological_drivers": [
+        "RECOGNITION"
+      ]
+    },
+    {
+      "title": "Your timetable forgot one thing",
+      "psychological_drivers": [
+        "CURIOSITY"
+      ]
+    },
+    {
+      "title": "The evening you wanted",
+      "psychological_drivers": [
+        "DESIRE"
+      ]
+    },
+    {
+      "title": "Exam mode isn't a phone setting",
+      "psychological_drivers": [
+        "RELEVANCE"
+      ]
+    },
+    {
+      "title": "Make your focus visible",
+      "psychological_drivers": [
+        "CURIOSITY",
+        "DESIRE"
+      ]
+    }
+  ],
+  "quality_validation": "Automated mocks exercise contracts and diversity checks only. Human live benchmark still required."
+}
