@@ -30,7 +30,11 @@ jobs:
           node-version: '22.20.0'
           cache: npm
           cache-dependency-path: video-renderer/package-lock.json
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - run: |
+          if ! command -v ffmpeg || ! command -v ffprobe; then
+            sudo apt-get update
+            sudo apt-get install -y ffmpeg
+          fi
       - run: npm --prefix video-renderer ci --no-audit --no-fund
       - run: npm --prefix video-renderer run typecheck
       - run: pip install -r requirements-dev.lock
