@@ -14,7 +14,7 @@ from sqlalchemy.engine import make_url
 
 from app.config import Settings
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
-from app.creative.schemas import ConceptSelection
+from app.creative.schemas import ConceptPatch, ConceptSelection
 from app.creative.service import CampaignService, view
 from app.db import session_factory
 from app.models import Brand, ExtractionJob
@@ -139,13 +139,34 @@ def render(args, report, entry, settings):
     paths = generate_media(
         args.template, source_dir, report["generator_research"]["brief"]["duration_seconds"]
     )
+    copy = entry["content"]
+    legacy = not copy.get("on_screen_copy")
+    label = f"{args.label} · {media_label}"
     with factory() as session:
-        brand_id, concept_id = clone_concept(session, report, entry, args.label)
-        # Exercise the production approval path on the clone for this offline test.
-        approved = CampaignService(session, settings).select(
+        brand_id, concept_id = clone_concept(session, report, entry, label)
+        # Add and review explicit captions only on the benchmark clone.
+        campaigns = CampaignService(session, settings)
+        revision = entry["revision"]
+        if legacy:
+            updated = campaigns.update_concept(
+                concept_id,
+                ConceptPatch(
+                    expected_revision=revision,
+                    changes={
+                        "on_screen_copy": {
+                            "treatment": "SINGLE_CAPTION",
+                            "text": copy["primary_hook"],
+                        }
+                    },
+                ),
+            )
+            if not updated.validation.get("eligible"):
+                raise RuntimeError("The saved hook needs review before using it as a caption")
+            revision = updated.revision
+        approved = campaigns.select(
             concept_id,
             ConceptSelection(
-                expected_revision=entry["revision"],
+                expected_revision=revision,
                 human_review_completed=True,
                 acknowledge_claim_risks=True,
                 acknowledge_asset_requirements=True,
@@ -163,8 +184,6 @@ def render(args, report, entry, settings):
             )
             for path in paths
         ]
-        copy = entry["content"]
-        legacy = not copy.get("on_screen_copy")
         spec = service.create_spec(
             concept_id,
             CreateVideoSpec(
@@ -172,12 +191,8 @@ def render(args, report, entry, settings):
                 template=args.template,
                 background_asset_id=assets[0].id if video_background else None,
                 product_asset_ids=[] if video_background else [asset.id for asset in assets],
-                final_captions={"treatment": "SINGLE_CAPTION", "text": copy["primary_hook"]}
-                if legacy
-                else None,
-                confirm_legacy_captions=legacy,
                 confirm_media_use=True,
-                brand_label=f"{args.label} · {media_label}",
+                brand_label=label if len(label) <= 40 else None,
             ),
         )
         write_json(args.output / "video-spec.json", view(spec))

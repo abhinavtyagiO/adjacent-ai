@@ -13,15 +13,25 @@ from sqlalchemy import Float, Integer, cast, or_, select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
+from app.api.read_models import Page, RenderRecord, RenderStatus
 from app.api.routes import authorize
+from app.api.workflow_views import (
+    WORKSPACE_WORKFLOW,
+    InternalSearch,
+    MediaRecord,
+    RenderJobRecord,
+    StockSearch,
+    VideoSpecRecord,
+)
 from app.config import get_settings
+from app.creative.models import Campaign, CreativeConcept
 from app.creative.service import require, view
 from app.db import get_session
 from app.errors import DomainError
 from app.models import Brand, now
 from app.video.models import MediaAsset, MediaSearchCache, RenderJob, VideoArtifact, VideoSpec
 from app.video.pixabay import PixabayMediaProvider, canonical_query, existing_stock
-from app.video.schemas import CreateVideoSpec, ImportStock, RenderRequest, VideoSpecPatch
+from app.video.schemas import CreateVideoSpec, ImportStock, RenderRequest, VideoPlan, VideoSpecPatch
 from app.video.service import VideoService
 from app.video.storage import LocalStorage
 
@@ -52,7 +62,20 @@ def asset_view(row):
     }
 
 
-@router.post("/brands/{brand_id}/media", status_code=201)
+@router.post(
+    "/brands/{brand_id}/media",
+    status_code=201,
+    openapi_extra={
+        "requestBody": {
+            "required": True,
+            "content": {
+                "application/octet-stream": {"schema": {"type": "string", "format": "binary"}}
+            },
+        }
+    },
+    responses={201: {"model": MediaRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 async def upload(
     brand_id: UUID,
     request: Request,
@@ -87,7 +110,11 @@ async def upload(
         return asset_view(result)
 
 
-@router.get("/brands/{brand_id}/media")
+@router.get(
+    "/brands/{brand_id}/media",
+    responses={200: {"model": Page[MediaRecord]}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def list_media(
     brand_id: UUID,
     session: DB,
@@ -119,7 +146,11 @@ MediaKind = Literal["IMAGE", "VIDEO"]
 Orientation = Literal["PORTRAIT", "LANDSCAPE", "SQUARE"]
 
 
-@router.get("/brands/{brand_id}/media/search")
+@router.get(
+    "/brands/{brand_id}/media/search",
+    responses={200: {"model": InternalSearch | StockSearch}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def search_media(
     brand_id: UUID,
     session: DB,
@@ -187,7 +218,12 @@ def search_media(
     return {"items": matches, "source": "PIXABAY", "search_id": search_id, "cache_hit": cache_hit}
 
 
-@router.post("/brands/{brand_id}/media/pixabay", status_code=201)
+@router.post(
+    "/brands/{brand_id}/media/pixabay",
+    status_code=201,
+    responses={201: {"model": MediaRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def import_stock(brand_id: UUID, request: ImportStock, session: DB):
     """Download just one user-selected result. Stock is eligible as background only."""
     require(session, Brand, brand_id)
@@ -240,7 +276,11 @@ def import_stock(brand_id: UUID, request: ImportStock, session: DB):
     return asset_view(asset)
 
 
-@router.get("/brands/{brand_id}/media/{asset_id}")
+@router.get(
+    "/brands/{brand_id}/media/{asset_id}",
+    responses={200: {"model": MediaRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_media(brand_id: UUID, asset_id: UUID, session: DB):
     return asset_view(scoped_asset(brand_id, asset_id, session))
 
@@ -250,22 +290,40 @@ def asset_thumbnail(brand_id: UUID, asset_id: UUID, session: DB):
     return object_response(scoped_asset(brand_id, asset_id, session).thumbnail_key, "image/jpeg")
 
 
-@router.post("/concepts/{concept_id}/video-specs", status_code=201)
+@router.post(
+    "/concepts/{concept_id}/video-specs",
+    status_code=201,
+    responses={201: {"model": VideoSpecRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def create_spec(concept_id: UUID, request: CreateVideoSpec, session: DB):
     return view(VideoService(session, get_settings()).create_spec(concept_id, request))
 
 
-@router.get("/video-specs/{spec_id}")
+@router.get(
+    "/video-specs/{spec_id}",
+    responses={200: {"model": VideoSpecRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_spec(spec_id: UUID, session: DB):
     return view(require(session, VideoSpec, spec_id))
 
 
-@router.patch("/video-specs/{spec_id}")
+@router.patch(
+    "/video-specs/{spec_id}",
+    responses={200: {"model": VideoSpecRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def update_spec(spec_id: UUID, request: VideoSpecPatch, session: DB):
     return view(VideoService(session, get_settings()).edit_spec(spec_id, request))
 
 
-@router.post("/video-specs/{spec_id}/renders", status_code=202)
+@router.post(
+    "/video-specs/{spec_id}/renders",
+    status_code=202,
+    responses={202: {"model": RenderJobRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def enqueue(spec_id: UUID, request: RenderRequest, session: DB):
     job = VideoService(session, get_settings()).enqueue(spec_id, request.expected_revision)
     return job_view(job, session)
@@ -287,7 +345,60 @@ def job_view(job, session):
     return values | {"poll_url": f"/v1/renders/{job.id}"}
 
 
-@router.get("/renders/{job_id}")
+@router.get(
+    "/brands/{brand_id}/renders", response_model=Page[RenderRecord], tags=["workspace-dashboard"]
+)
+def list_renders(
+    brand_id: UUID,
+    session: DB,
+    limit: Annotated[int, Query(ge=1, le=100)] = 20,
+    offset: Annotated[int, Query(ge=0)] = 0,
+    status: Annotated[RenderStatus | None, Query()] = None,
+    spec_id: UUID | None = None,
+):
+    """List render summaries for a brand without returning storage paths or job leases."""
+    require(session, Brand, brand_id)
+    statement = (
+        select(RenderJob, VideoArtifact.id, CreativeConcept.content["title"].astext)
+        .join(VideoSpec, RenderJob.spec_id == VideoSpec.id)
+        .join(Campaign, VideoSpec.campaign_id == Campaign.id)
+        .join(CreativeConcept, VideoSpec.concept_id == CreativeConcept.id)
+        .outerjoin(VideoArtifact, VideoArtifact.id == RenderJob.id)
+        .where(Campaign.brand_id == brand_id)
+    )
+    if status:
+        statement = statement.where(RenderJob.status == status)
+    if spec_id:
+        statement = statement.where(RenderJob.spec_id == spec_id)
+    rows = session.execute(
+        statement.order_by(RenderJob.created_at.desc(), RenderJob.id.desc())
+        .limit(limit)
+        .offset(offset)
+    )
+    return {
+        "items": [
+            RenderRecord(
+                id=job.id,
+                spec_id=job.spec_id,
+                spec_revision=job.spec_revision,
+                status=job.status,
+                concept_title=title or "Video render",
+                duration_seconds=job.inputs["duration_frames"] / job.inputs["fps"],
+                preview_url=f"/v1/renders/{job.id}/preview" if artifact_id else None,
+                created_at=job.created_at,
+            )
+            for job, artifact_id, title in rows
+        ],
+        "limit": limit,
+        "offset": offset,
+    }
+
+
+@router.get(
+    "/renders/{job_id}",
+    responses={200: {"model": RenderJobRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_job(job_id: UUID, session: DB):
     return job_view(require(session, RenderJob, job_id), session)
 
@@ -345,3 +456,36 @@ def video(
 @router.get("/renders/{job_id}/preview")
 def preview(job_id: UUID, session: DB):
     return object_response(require(session, VideoArtifact, job_id).thumbnail_key, "image/jpeg")
+
+
+@router.get("/video-specs/{spec_id}/media/{asset_id}")
+def preview_spec_asset(
+    spec_id: UUID,
+    asset_id: UUID,
+    session: DB,
+    range_header: Annotated[str | None, Header(alias="Range")] = None,
+):
+    """Stream only media bound to this saved spec for private composition preview."""
+    spec = require(session, VideoSpec, spec_id)
+    plan = VideoPlan.model_validate(spec.payload)
+    refs = [scene.asset for scene in plan.products]
+    if plan.background:
+        refs.append(plan.background)
+    ref = next((entry for entry in refs if entry.asset_id == asset_id), None)
+    if ref is None:
+        raise DomainError("MEDIA_NOT_FOUND", "This media is not in the saved video setup", 404)
+    asset = scoped_asset(plan.brand_id, asset_id, session)
+    if (
+        asset.status != "READY"
+        or asset.details.get("usage_permission") != "CAMPAIGN_RENDER"
+        or VideoService.reference(asset) != ref
+    ):
+        raise DomainError("MEDIA_CHANGED", "The media no longer matches the saved setup", 409)
+    content_type = {
+        "mp4": "video/mp4",
+        "webm": "video/webm",
+        "jpg": "image/jpeg",
+        "png": "image/png",
+        "webp": "image/webp",
+    }[ref.extension]
+    return object_response(ref.object_key, content_type, range_header, "inline")

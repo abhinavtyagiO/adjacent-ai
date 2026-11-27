@@ -10,7 +10,7 @@ from pathlib import Path
 from sqlalchemy import select, text
 
 from app.creative.models import Campaign, CreativeConcept
-from app.creative.schemas import SingleCaption
+from app.creative.schemas import Candidate, SingleCaption
 from app.creative.service import CampaignService, require, revision, validate
 from app.errors import DomainError
 from app.models import Brand, now
@@ -233,22 +233,10 @@ class VideoService:
             raise DomainError(
                 "MEDIA_PERMISSION_REQUIRED", "Confirm permission to use the media", 422
             )
-        approved = handoff["concept"].get("on_screen_copy")
-        if approved:
-            from app.creative.schemas import Candidate
-
-            if request.final_captions is not None:
-                raise DomainError(
-                    "CAPTION_OVERRIDE", "Edit and reapprove the concept to change copy", 422
-                )
-            copy = Candidate.model_validate(handoff["concept"]).on_screen_copy
-        elif request.confirm_legacy_captions and request.final_captions:
-            copy = request.final_captions
-        else:
+        copy = self.approved_copy(handoff)
+        if request.final_captions is not None and request.final_captions != copy:
             raise DomainError(
-                "FINAL_CAPTIONS_REQUIRED",
-                "Provide and confirm final captions for this older concept",
-                422,
+                "CAPTION_OVERRIDE", "Edit and reapprove the concept to change copy", 422
             )
         options = DisplayOptions.model_validate(
             request.model_dump(include=set(DisplayOptions.model_fields))
@@ -303,6 +291,17 @@ class VideoService:
         return row
 
     @staticmethod
+    def approved_copy(handoff):
+        """Use only structured captions from the production-approved concept revision."""
+        if not handoff["concept"].get("on_screen_copy"):
+            raise DomainError(
+                "FINAL_CAPTIONS_REQUIRED",
+                "Add structured captions to the concept and approve that revision",
+                422,
+            )
+        return validate(Candidate, handoff["concept"]).on_screen_copy
+
+    @staticmethod
     def validate_overlays(handoff, options):
         if options.cta_overlay and options.cta_overlay != handoff["concept"]["cta"]:
             raise DomainError("CTA_OVERRIDE", "Use the approved CTA exactly as written", 422)
@@ -310,15 +309,37 @@ class VideoService:
             raise DomainError(
                 "BRAND_OVERLAY_TOO_LONG", "Use a brand label of up to 40 characters", 422
             )
+        if options.brand_label and options.brand_label != handoff["review"].get(
+            "approved_brand_label"
+        ):
+            raise DomainError(
+                "BRAND_OVERLAY_NOT_APPROVED",
+                "Use the brand name recorded at concept approval, or leave it blank",
+                422,
+            )
         if options.cta_overlay and len(options.cta_overlay) > 60:
             raise DomainError("CTA_TOO_LONG", "The approved CTA is too long for this overlay", 422)
 
     def current(self, plan):
         handoff = self.approved_handoff(plan.concept_id, plan.concept_revision)
-        if handoff["campaign_revision"] != plan.campaign_revision:
+        if (
+            handoff["brand_id"] != plan.brand_id
+            or handoff["campaign_id"] != plan.campaign_id
+            or handoff["campaign_revision"] != plan.campaign_revision
+            or handoff["brief"]["duration_seconds"] * plan.fps != plan.duration_frames
+        ):
             raise DomainError(
                 "VIDEO_SPEC_STALE", "Recompile the video from the current concept", 409
             )
+        copy = self.approved_copy(handoff)
+        captions = [caption.model_dump() for caption in plan.captions]
+        if copy.treatment != plan.caption_treatment or captions != compile_captions(
+            copy, plan.duration_frames
+        ):
+            raise DomainError(
+                "CAPTION_OVERRIDE", "The video does not match the approved caption copy", 422
+            )
+        self.validate_overlays(handoff, plan)
         if plan.background:
             asset = self.asset(plan.brand_id, plan.background.asset_id, "VIDEO", "BACKGROUND")
             if self.reference(asset) != plan.background:
@@ -337,15 +358,12 @@ class VideoService:
     def edit_spec(self, spec_id, request):
         row = require(self.session, VideoSpec, spec_id, True)
         revision(row, request.expected_revision)
-        plan = VideoPlan.model_validate(row.payload)
-        handoff = self.current(plan)
         changes = request.changes.model_dump(exclude_unset=True)
         if changes.get("audio") == "BACKGROUND" and not request.confirm_media_use:
             raise DomainError(
                 "MEDIA_PERMISSION_REQUIRED", "Confirm permission to use the audio", 422
             )
         updated = validate(VideoPlan, {**row.payload, **changes})
-        self.validate_overlays(handoff, updated)
         self.current(updated)
         row.payload, row.updated_at = updated.model_dump(mode="json"), now()
         row.revision += 1

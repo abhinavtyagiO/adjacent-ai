@@ -269,6 +269,11 @@ class CampaignService:
             "production_approval_only": True,
             "advertising_claims_approved": False,
         }
+        if approve:
+            # Freeze the brand's display name alongside the approved wording.
+            concept.review["approved_brand_label"] = (
+                brand.name if brand.name and len(brand.name) <= 40 else None
+            )
         concept.updated_at = now()
         self.session.commit()
         return concept

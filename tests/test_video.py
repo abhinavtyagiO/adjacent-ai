@@ -2,11 +2,13 @@
 
 import os
 from types import SimpleNamespace
+from uuid import UUID, uuid4
 
 import pytest
 from fastapi.testclient import TestClient
 
 from app.config import get_settings
+from app.creative.models import CreativeConcept
 from app.creative.schemas import SingleCaption
 from app.creative.service import require
 from app.errors import DomainError
@@ -198,10 +200,53 @@ async def test_spec_permissions_stale_claim_and_worker_failure(
         media_client.post(route, json={**payload, "expected_concept_revision": 1}).status_code
         == 409
     )
-    response = media_client.post(route, json=payload)
+    unreviewed_copy = {"treatment": "SINGLE_CAPTION", "text": "Unreviewed copy"}
+    rejected = media_client.post(route, json={**payload, "final_captions": unreviewed_copy})
+    assert rejected.status_code == 422 and rejected.json()["error"]["code"] == "CAPTION_OVERRIDE"
+    rejected = media_client.post(route, json={**payload, "brand_label": "Unreviewed label"})
+    assert rejected.status_code == 422
+    assert rejected.json()["error"]["code"] == "BRAND_OVERLAY_NOT_APPROVED"
+
+    # Older approved concepts must go through concept review to add caption copy.
+    with factory.begin() as db:
+        row = require(db, CreativeConcept, UUID(concept["id"]))
+        row.content = {key: value for key, value in row.content.items() if key != "on_screen_copy"}
+    legacy = media_client.post(
+        route, json={**payload, "final_captions": unreviewed_copy, "confirm_legacy_captions": True}
+    )
+    assert legacy.status_code == 422 and legacy.json()["error"]["code"] == "FINAL_CAPTIONS_REQUIRED"
+    with factory.begin() as db:
+        require(db, CreativeConcept, UUID(concept["id"])).content = concept["content"]
+
+    response = media_client.post(route, json={**payload, "brand_label": "Opal"})
     assert response.status_code == 201, response.text
     spec = response.json()
     assert spec["payload"]["captions"][0]["text"] == concept["content"]["on_screen_copy"]["text"]
+    base = f"/v1/video-specs/{spec['id']}"
+    asset_url = f"{base}/media/{asset['id']}"
+    assert media_client.get(asset_url, headers={"Authorization": ""}).status_code == 401
+    assert media_client.get(f"{base}/media/{uuid4()}").status_code == 404
+    ranged = media_client.get(asset_url, headers={"Range": "bytes=0-31"})
+    assert ranged.status_code == 206 and len(ranged.content) == 32
+    rejected = media_client.patch(
+        base,
+        json={
+            "expected_revision": 1,
+            "confirm_media_use": True,
+            "changes": {"brand_label": "Unreviewed label"},
+        },
+    )
+    assert rejected.status_code == 422
+    assert rejected.json()["error"]["code"] == "BRAND_OVERLAY_NOT_APPROVED"
+    with factory.begin() as db:
+        row = require(db, VideoSpec, UUID(spec["id"]))
+        first, *rest = spec["payload"]["captions"]
+        row.payload = {**row.payload, "captions": [{**first, "text": "Unreviewed copy"}, *rest]}
+    tampered = media_client.post(f"{base}/renders", json={"expected_revision": 1})
+    assert tampered.status_code == 422 and tampered.json()["error"]["code"] == "CAPTION_OVERRIDE"
+    with factory.begin() as db:
+        require(db, VideoSpec, UUID(spec["id"])).payload = spec["payload"]
+
     job = media_client.post(
         f"/v1/video-specs/{spec['id']}/renders", json={"expected_revision": 1}
     ).json()
@@ -213,8 +258,8 @@ async def test_spec_permissions_stale_claim_and_worker_failure(
         == job["id"]
     )
     with factory.begin() as db:
-        row = require(db, VideoSpec, __import__("uuid").UUID(spec["id"]))
-        row.revision += 1
+        row = require(db, VideoSpec, UUID(spec["id"]))
+        row.payload = {**row.payload, "fit": "contain"}
     renderer = SimpleNamespace(render=lambda *_: pytest.fail("Stale work must not render"))
     worker = RenderWorker(factory, get_settings(), renderer=renderer)
     assert worker.process_once()
@@ -250,6 +295,24 @@ async def test_real_text_over_broll_render_and_seek(media_client, factory, setti
     played = media_client.get(done["artifact"]["play_url"], headers={"Range": "bytes=0-31"})
     assert played.status_code == 206 and len(played.content) == 32
     assert media_client.get(done["artifact"]["preview_url"]).status_code == 200
+    history = media_client.get(f"/v1/brands/{brand}/renders?status=SUCCEEDED")
+    assert history.status_code == 200
+    assert history.json()["items"] == [
+        {
+            "id": done["id"],
+            "spec_id": done["spec_id"],
+            "spec_revision": 1,
+            "status": "SUCCEEDED",
+            "concept_title": concept["content"]["title"],
+            "duration_seconds": 15,
+            "preview_url": done["artifact"]["preview_url"],
+            "created_at": history.json()["items"][0]["created_at"],
+        }
+    ]
+    assert not media_client.get(f"/v1/brands/{brand}/renders?status=FAILED").json()["items"]
+    other = media_client.post("/v1/brands", json={"website_url": "https://other-history.example/"})
+    assert other.status_code == 201
+    assert not media_client.get(f"/v1/brands/{other.json()['id']}/renders").json()["items"]
 
 
 def create_photo(path, color):

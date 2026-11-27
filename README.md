@@ -19,6 +19,9 @@ Phase 2B renders an approved creative concept and authorized media as a private 
 The [video and media guide](docs/phase2b.md) explains how to upload footage, search Pixabay,
 render with Remotion, and download a validated MP4.
 
+Phase 2C connects brand research, campaign ideas, media selection, and video production
+in a local workspace. Use the [frontend setup guide](docs/phase2c.md) to run it.
+
 ## Quick start with Docker Compose
 
 Requires Docker with Compose v2.24+ (for the optional private environment file).
