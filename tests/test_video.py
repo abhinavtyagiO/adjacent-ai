@@ -250,6 +250,24 @@ async def test_real_text_over_broll_render_and_seek(media_client, factory, setti
     played = media_client.get(done["artifact"]["play_url"], headers={"Range": "bytes=0-31"})
     assert played.status_code == 206 and len(played.content) == 32
     assert media_client.get(done["artifact"]["preview_url"]).status_code == 200
+    history = media_client.get(f"/v1/brands/{brand}/renders?status=SUCCEEDED")
+    assert history.status_code == 200
+    assert history.json()["items"] == [
+        {
+            "id": done["id"],
+            "spec_id": done["spec_id"],
+            "spec_revision": 1,
+            "status": "SUCCEEDED",
+            "concept_title": concept["content"]["title"],
+            "duration_seconds": 15,
+            "preview_url": done["artifact"]["preview_url"],
+            "created_at": history.json()["items"][0]["created_at"],
+        }
+    ]
+    assert not media_client.get(f"/v1/brands/{brand}/renders?status=FAILED").json()["items"]
+    other = media_client.post("/v1/brands", json={"website_url": "https://other-history.example/"})
+    assert other.status_code == 201
+    assert not media_client.get(f"/v1/brands/{other.json()['id']}/renders").json()["items"]
 
 
 def create_photo(path, color):

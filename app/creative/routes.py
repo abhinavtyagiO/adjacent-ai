@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, Query, Response
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.api.read_models import CampaignRecord, Page
 from app.api.routes import authorize, extraction_binding
 from app.config import get_settings
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
@@ -41,7 +42,11 @@ def create_campaign(brand_id: UUID, brief: CampaignBrief, session: DB, response:
     return view(campaign)
 
 
-@router.get("/brands/{brand_id}/campaigns")
+@router.get(
+    "/brands/{brand_id}/campaigns",
+    response_model=Page[CampaignRecord],
+    tags=["workspace-dashboard"],
+)
 def list_campaigns(
     brand_id: UUID,
     session: DB,

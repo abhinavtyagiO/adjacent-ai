@@ -5,6 +5,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Header, Query, Response
 from sqlalchemy.orm import Session
 
+from app.api.read_models import BrandRecord, Page
 from app.config import get_settings
 from app.db import get_session
 from app.discovery_api import summary as discovery_summary
@@ -123,7 +124,7 @@ def create_brand(data: CreateBrand, session: DB, response: Response):
     }
 
 
-@router.get("/brands")
+@router.get("/brands", response_model=Page[BrandRecord], tags=["workspace-dashboard"])
 def list_brands(
     session: DB,
     limit: Annotated[int, Query(ge=1, le=100)] = 20,

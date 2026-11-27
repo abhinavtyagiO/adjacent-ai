@@ -13,8 +13,10 @@ from sqlalchemy import Float, Integer, cast, or_, select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
+from app.api.read_models import Page, RenderRecord, RenderStatus
 from app.api.routes import authorize
 from app.config import get_settings
+from app.creative.models import Campaign, CreativeConcept
 from app.creative.service import require, view
 from app.db import get_session
 from app.errors import DomainError
@@ -285,6 +287,52 @@ def job_view(job, session):
             "preview_url": f"/v1/renders/{job.id}/preview",
         }
     return values | {"poll_url": f"/v1/renders/{job.id}"}
+
+
+@router.get(
+    "/brands/{brand_id}/renders", response_model=Page[RenderRecord], tags=["workspace-dashboard"]
+)
+def list_renders(
+    brand_id: UUID,
+    session: DB,
+    limit: Annotated[int, Query(ge=1, le=100)] = 20,
+    offset: Annotated[int, Query(ge=0)] = 0,
+    status: Annotated[RenderStatus | None, Query()] = None,
+):
+    """List render summaries for a brand without returning storage paths or job leases."""
+    require(session, Brand, brand_id)
+    statement = (
+        select(RenderJob, VideoArtifact.id, CreativeConcept.content["title"].astext)
+        .join(VideoSpec, RenderJob.spec_id == VideoSpec.id)
+        .join(Campaign, VideoSpec.campaign_id == Campaign.id)
+        .join(CreativeConcept, VideoSpec.concept_id == CreativeConcept.id)
+        .outerjoin(VideoArtifact, VideoArtifact.id == RenderJob.id)
+        .where(Campaign.brand_id == brand_id)
+    )
+    if status:
+        statement = statement.where(RenderJob.status == status)
+    rows = session.execute(
+        statement.order_by(RenderJob.created_at.desc(), RenderJob.id.desc())
+        .limit(limit)
+        .offset(offset)
+    )
+    return {
+        "items": [
+            RenderRecord(
+                id=job.id,
+                spec_id=job.spec_id,
+                spec_revision=job.spec_revision,
+                status=job.status,
+                concept_title=title or "Video render",
+                duration_seconds=job.inputs["duration_frames"] / job.inputs["fps"],
+                preview_url=f"/v1/renders/{job.id}/preview" if artifact_id else None,
+                created_at=job.created_at,
+            )
+            for job, artifact_id, title in rows
+        ],
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 @router.get("/renders/{job_id}")

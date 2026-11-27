@@ -44,3 +44,46 @@ jobs:
           export RENDER_BROWSER_EXECUTABLE="$(command -v google-chrome)"
           test -n "$RENDER_BROWSER_EXECUTABLE"
           RUN_REAL_RENDER=1 pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: brand
+          POSTGRES_PASSWORD: brand
+          POSTGRES_DB: phase2c_frontend_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U brand -d phase2c_frontend_test"
+          --health-interval 2s --health-timeout 5s --health-retries 30
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://brand:brand@localhost:5432/phase2c_frontend_test
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.14.1'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: pip install -r requirements.lock
+      - run: npm --prefix frontend ci
+      - run: |
+          PYTHONPATH=. python frontend/scripts/export_openapi.py
+          npm --prefix frontend run api:generate
+          git diff --exit-code -- frontend/openapi.json frontend/src/api/generated
+      - run: npm --prefix frontend run typecheck
+      - run: npm --prefix frontend run build
+      - run: npm --prefix frontend test
+      - run: |
+          command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+          export PLAYWRIGHT_CHROMIUM_EXECUTABLE="$(command -v google-chrome)"
+          test -n "$PLAYWRIGHT_CHROMIUM_EXECUTABLE"
+          npm --prefix frontend run test:e2e
