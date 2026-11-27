@@ -1,4 +1,4 @@
-import {defineConfig, devices} from '@playwright/test';
+import {chromium, defineConfig, devices} from '@playwright/test';
 
 export const fixturePassphrase = 'local-fixture-passphrase';
 export const fixtureBackendToken = 'playwright-fixture-backend-token';
@@ -23,7 +23,10 @@ export default defineConfig({
       url: 'http://127.0.0.1:8016/health/ready',
       reuseExistingServer: false,
       timeout: 60_000,
-      env: {API_ACCESS_TOKEN: fixtureBackendToken},
+      env: {
+        API_ACCESS_TOKEN: fixtureBackendToken,
+        RENDER_BROWSER_EXECUTABLE: executablePath ?? chromium.executablePath(),
+      },
     },
     {
       command: 'npm run start -- --port 3016',

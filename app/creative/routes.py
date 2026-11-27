@@ -9,6 +9,14 @@ from sqlalchemy.orm import Session
 
 from app.api.read_models import CampaignRecord, Page
 from app.api.routes import authorize, extraction_binding
+from app.api.workflow_views import (
+    WORKSPACE_WORKFLOW,
+    ConceptRecord,
+    CreativeGeneration,
+    ProductionHandoff,
+    ResearchRecord,
+    Shortlist,
+)
 from app.config import get_settings
 from app.creative.models import Campaign, CreativeConcept, CreativeJob, ResearchSnapshot
 from app.creative.schemas import (
@@ -35,7 +43,12 @@ def job_view(job):
     return {**view(job), "poll_url": f"/v1/creative-generations/{job.id}"}
 
 
-@router.post("/brands/{brand_id}/campaigns", status_code=201)
+@router.post(
+    "/brands/{brand_id}/campaigns",
+    status_code=201,
+    responses={201: {"model": CampaignRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def create_campaign(brand_id: UUID, brief: CampaignBrief, session: DB, response: Response):
     campaign = service(session).create(brand_id, brief)
     response.headers["Location"] = f"/v1/campaigns/{campaign.id}"
@@ -64,17 +77,30 @@ def list_campaigns(
     return {"items": [view(r) for r in rows], "limit": limit, "offset": offset}
 
 
-@router.get("/campaigns/{campaign_id}")
+@router.get(
+    "/campaigns/{campaign_id}",
+    responses={200: {"model": CampaignRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_campaign(campaign_id: UUID, session: DB):
     return view(require(session, Campaign, campaign_id))
 
 
-@router.patch("/campaigns/{campaign_id}/brief")
+@router.patch(
+    "/campaigns/{campaign_id}/brief",
+    responses={200: {"model": CampaignRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def update_brief(campaign_id: UUID, request: BriefPatch, session: DB):
     return view(service(session).update(campaign_id, request))
 
 
-@router.post("/campaigns/{campaign_id}/generations", status_code=202)
+@router.post(
+    "/campaigns/{campaign_id}/generations",
+    status_code=202,
+    responses={202: {"model": CreativeGeneration}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def generate_concepts(
     campaign_id: UUID, request: GenerationRequest, session: DB, response: Response
 ):
@@ -86,7 +112,11 @@ def generate_concepts(
     return job_view(job)
 
 
-@router.get("/campaigns/{campaign_id}/generations")
+@router.get(
+    "/campaigns/{campaign_id}/generations",
+    responses={200: {"model": Page[CreativeGeneration]}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def list_generations(
     campaign_id: UUID,
     session: DB,
@@ -104,12 +134,20 @@ def list_generations(
     return {"items": [job_view(row) for row in rows], "limit": limit, "offset": offset}
 
 
-@router.get("/creative-generations/{job_id}")
+@router.get(
+    "/creative-generations/{job_id}",
+    responses={200: {"model": CreativeGeneration}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_generation(job_id: UUID, session: DB):
     return job_view(require(session, CreativeJob, job_id))
 
 
-@router.get("/campaigns/{campaign_id}/research/{research_id}")
+@router.get(
+    "/campaigns/{campaign_id}/research/{research_id}",
+    responses={200: {"model": ResearchRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_research(campaign_id: UUID, research_id: UUID, session: DB):
     require(session, Campaign, campaign_id)
     research = require(session, ResearchSnapshot, research_id)
@@ -118,7 +156,11 @@ def get_research(campaign_id: UUID, research_id: UUID, session: DB):
     return view(research)
 
 
-@router.get("/campaigns/{campaign_id}/concepts")
+@router.get(
+    "/campaigns/{campaign_id}/concepts",
+    responses={200: {"model": Page[ConceptRecord]}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def list_concepts(
     campaign_id: UUID,
     session: DB,
@@ -141,7 +183,11 @@ def list_concepts(
     return {"items": [view(r) for r in rows], "limit": limit, "offset": offset}
 
 
-@router.get("/campaigns/{campaign_id}/shortlist")
+@router.get(
+    "/campaigns/{campaign_id}/shortlist",
+    responses={200: {"model": Shortlist}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def shortlist(campaign_id: UUID, session: DB, job_id: UUID | None = None):
     campaign = require(session, Campaign, campaign_id)
     job = (
@@ -177,12 +223,20 @@ def shortlist(campaign_id: UUID, session: DB, job_id: UUID | None = None):
     }
 
 
-@router.get("/concepts/{concept_id}")
+@router.get(
+    "/concepts/{concept_id}",
+    responses={200: {"model": ConceptRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_concept(concept_id: UUID, session: DB):
     return view(require(session, CreativeConcept, concept_id))
 
 
-@router.patch("/concepts/{concept_id}")
+@router.patch(
+    "/concepts/{concept_id}",
+    responses={200: {"model": ConceptRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def edit_concept(concept_id: UUID, request: ConceptPatch, session: DB):
     return view(service(session).update_concept(concept_id, request))
 
@@ -192,11 +246,19 @@ def select_concept(concept_id: UUID, request: ConceptSelection, session: DB):
     return view(service(session).select(concept_id, request))
 
 
-@router.post("/concepts/{concept_id}/approve")
+@router.post(
+    "/concepts/{concept_id}/approve",
+    responses={200: {"model": ConceptRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def approve_concept(concept_id: UUID, request: ConceptSelection, session: DB):
     return view(service(session).select(concept_id, request, approve=True))
 
 
-@router.get("/concepts/{concept_id}/handoff")
+@router.get(
+    "/concepts/{concept_id}/handoff",
+    responses={200: {"model": ProductionHandoff}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def production_handoff(concept_id: UUID, session: DB):
     return service(session).handoff(concept_id)

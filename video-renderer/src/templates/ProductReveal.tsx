@@ -1,6 +1,7 @@
-import {AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Img, interpolate, useCurrentFrame} from "remotion";
 import {BrandOverlay} from "../components/BrandOverlay";
 import {Caption} from "../components/Caption";
+import {compositionMedia} from "../media-url";
 import type {RenderProps} from "../types";
 
 /** Pan and zoom only the uploaded product photos. Crossfade into each new photo. */
@@ -19,7 +20,7 @@ export function ProductReveal(props: RenderProps) {
       });
       const opacity = blending && scene === current ? (frame - current.start_frame) / fade : 1;
       return <AbsoluteFill key={scene.file} style={{opacity}}>
-        <Img src={staticFile(scene.file)} style={{
+        <Img src={compositionMedia(scene.file)} style={{
           width: "100%", height: "100%", objectFit: props.fit,
           transform: `translateY(${(progress - 0.5) * 16}px) scale(${1.02 + progress * 0.08})`,
         }}/>

@@ -134,7 +134,7 @@ class RenderWorker:
 
     def check_current(self, session, job, plan):
         spec = require(session, VideoSpec, job.spec_id, True)
-        if spec.revision != job.spec_revision:
+        if spec.revision != job.spec_revision or spec.payload != job.inputs:
             raise DomainError("VIDEO_SPEC_STALE", "The VideoSpec changed during rendering", 409)
         service = VideoService(session, self.settings, self.storage)
         service.current(plan)

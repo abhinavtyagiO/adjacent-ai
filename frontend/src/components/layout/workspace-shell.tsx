@@ -9,10 +9,10 @@ import {Button} from '@/components/ui/button';
 import {brandName, workspaceHref} from '@/features/brands/labels';
 import {Wordmark} from './wordmark';
 
-export const sectionNames = ['overview', 'brand', 'campaigns', 'videos', 'settings'] as const;
+export const sectionNames = ['overview', 'brand', 'campaigns', 'videos', 'media', 'settings'] as const;
 export type WorkspaceSection = typeof sectionNames[number];
 
-const nav: {key: WorkspaceSection | 'media'; name: string}[] = [
+const nav: {key: WorkspaceSection; name: string}[] = [
   {key: 'overview', name: 'Overview'},
   {key: 'brand', name: 'Brand'},
   {key: 'campaigns', name: 'Campaigns'},
@@ -46,11 +46,12 @@ export function WorkspaceShell({selected, brands, section, children}: {
           <label htmlFor="workspace-brand">Switch brand</label>
           <select id="workspace-brand" value={selected?.id ?? ''} onChange={event => {
             if (!event.currentTarget.value) return;
-            router.push(workspaceHref(event.currentTarget.value));
+            router.push(event.currentTarget.value === 'new' ? '/workspace/new-brand' : workspaceHref(event.currentTarget.value));
             setOpen(false);
           }}>
             {!selected && <option value="" disabled>Choose a brand</option>}
             {brands.map(brand => <option key={brand.id} value={brand.id}>{brandName(brand)}</option>)}
+            <option value="new">Add a brand…</option>
           </select>
           <ChevronDown size={16} aria-hidden="true" />
         </div> : <div className="brand-switcher brand-switcher-empty"><span>My workspace</span><small>No brands available</small></div>}
@@ -59,14 +60,14 @@ export function WorkspaceShell({selected, brands, section, children}: {
             const current = section === key;
             const href = key === 'settings'
               ? selected ? workspaceHref(selected.id, 'settings') : '/workspace/settings'
-              : selected && key !== 'media'
+              : selected
                 ? workspaceHref(selected.id, key === 'overview' ? undefined : key)
                 : undefined;
             return href
               ? <Link key={key} href={href} className="nav-link" onClick={() => setOpen(false)}
                   aria-current={current ? 'page' : undefined}>{name}</Link>
               : <span key={key} className="nav-link nav-link--unavailable" aria-disabled="true"
-                  title={key === 'media' ? 'Media tools are part of the video slice' : 'Select a brand first'}>{name}</span>;
+                  title='Select a brand first'>{name}</span>;
           })}
         </nav>
         <Link className="workspace-account" href={selected ? workspaceHref(selected.id, 'settings') : '/workspace/settings'}>

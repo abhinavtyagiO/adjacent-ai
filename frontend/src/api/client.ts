@@ -6,13 +6,27 @@ export async function gatewayFetch<T>(url: string, options: RequestInit = {}): P
   });
   const data = await response.json().catch(() => null);
   if (!response.ok) {
-    throw new WorkspaceApiError(data?.error?.message || 'Could not load workspace data.', response.status);
+    const error = data?.error;
+    const fields = error?.fields ?? error?.details?.fields;
+    const issues = Array.isArray(fields)
+      ? fields.map(field => [Array.isArray(field.path)
+        ? field.path.filter((part: string) => part !== 'body').join('.')
+        : '', field.message ?? field.type].filter(Boolean).join(' · ')).filter(Boolean)
+      : [];
+    throw new WorkspaceApiError(
+      issues.length ? issues.join(' / ') : error?.message || 'Could not load workspace data.',
+      response.status, error?.code,
+    );
   }
   return data as T;
 }
 
 export class WorkspaceApiError extends Error {
-  constructor(message: string, public readonly status: number) {
+  constructor(message: string, public readonly status: number, public readonly code?: string) {
     super(message);
   }
+}
+
+export function privateMediaUrl(path?: string | null) {
+  return path?.startsWith('/v1/') ? '/api/backend' + path : undefined;
 }

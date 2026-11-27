@@ -8,7 +8,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
 import {Skeleton} from '@/components/ui/skeleton';
 
 export function LoadError({error, retry}: {error: Error; retry: () => void}) {
-  const expired = error instanceof WorkspaceApiError && error.status === 401;
+  const expired = error instanceof WorkspaceApiError && error.code === 'SESSION_REQUIRED';
   return <Alert variant="destructive" role="alert">
     <AlertCircle aria-hidden="true" />
     <AlertTitle>{expired ? 'Session expired' : 'Could not load this section'}</AlertTitle>

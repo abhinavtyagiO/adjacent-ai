@@ -1,8 +1,16 @@
+import {fileURLToPath} from 'node:url';
 import type {NextConfig} from 'next';
+
+// The renderer package and browser Player must share one Remotion context.
+const remotion = fileURLToPath(new URL('./node_modules/remotion', import.meta.url));
 
 const config: NextConfig = {
   poweredByHeader: false,
   devIndicators: false,
+  webpack(config) {
+    config.resolve.alias.remotion = remotion;
+    return config;
+  },
   async headers() {
     return [{
       source: '/:path*',

@@ -3,9 +3,19 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Header, Query, Response
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.read_models import BrandRecord, Page
+from app.api.workflow_views import (
+    WORKSPACE_WORKFLOW,
+    BrandDetail,
+    CatalogPage,
+    ExtractionRecord,
+    Offerings,
+    RegisteredBrand,
+    Sources,
+)
 from app.config import get_settings
 from app.db import get_session
 from app.discovery_api import summary as discovery_summary
@@ -110,7 +120,12 @@ def job_view(job: ExtractionJob) -> dict:
     }
 
 
-@router.post("/brands", status_code=201)
+@router.post(
+    "/brands",
+    status_code=201,
+    responses={201: {"model": RegisteredBrand}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def create_brand(data: CreateBrand, session: DB, response: Response):
     """Register a website. Crawling starts only after POST /brands/{id}/extractions."""
     brand = BrandService(session).create(data)
@@ -137,7 +152,11 @@ def list_brands(
     }
 
 
-@router.get("/brands/{brand_id}")
+@router.get(
+    "/brands/{brand_id}",
+    responses={200: {"model": BrandDetail}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_brand(brand_id: uuid.UUID, session: DB):
     service = BrandService(session)
     brand = service.require_brand(brand_id)
@@ -153,7 +172,12 @@ def get_brand(brand_id: uuid.UUID, session: DB):
     }
 
 
-@router.post("/brands/{brand_id}/extractions", status_code=202)
+@router.post(
+    "/brands/{brand_id}/extractions",
+    status_code=202,
+    responses={202: {"model": ExtractionRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def extract_brand(
     brand_id: uuid.UUID, session: DB, response: Response, request: ExtractionRequest | None = None
 ):
@@ -169,7 +193,34 @@ def extract_brand(
     return job_view(job)
 
 
-@router.get("/extractions/{job_id}")
+@router.get(
+    "/brands/{brand_id}/extractions",
+    responses={200: {"model": Page[ExtractionRecord]}},
+    tags=[WORKSPACE_WORKFLOW],
+)
+def list_extractions(
+    brand_id: uuid.UUID,
+    session: DB,
+    limit: Annotated[int, Query(ge=1, le=100)] = 20,
+    offset: Annotated[int, Query(ge=0)] = 0,
+):
+    """Recover saved research jobs after navigation or a reload."""
+    BrandService(session).require_brand(brand_id)
+    rows = session.scalars(
+        select(ExtractionJob)
+        .where(ExtractionJob.brand_id == brand_id, ExtractionJob.kind == "EXTRACTION")
+        .order_by(ExtractionJob.created_at.desc(), ExtractionJob.id.desc())
+        .limit(limit)
+        .offset(offset)
+    )
+    return {"items": [job_view(row) for row in rows], "limit": limit, "offset": offset}
+
+
+@router.get(
+    "/extractions/{job_id}",
+    responses={200: {"model": ExtractionRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_extraction(job_id: uuid.UUID, session: DB):
     job = session.get(ExtractionJob, job_id)
     if not job:
@@ -183,23 +234,31 @@ def profile_schema():
     return {"schema_version": 2, "schema": BIP.model_json_schema()}
 
 
-@router.get("/brands/{brand_id}/profile", response_model=ProfileResponse)
+@router.get("/brands/{brand_id}/profile", response_model=ProfileResponse, tags=[WORKSPACE_WORKFLOW])
 def get_profile(brand_id: uuid.UUID, session: DB):
     return BrandService(session).read(brand_id)
 
 
-@router.patch("/brands/{brand_id}/profile", response_model=ProfileResponse)
+@router.patch(
+    "/brands/{brand_id}/profile", response_model=ProfileResponse, tags=[WORKSPACE_WORKFLOW]
+)
 def patch_profile(brand_id: uuid.UUID, request: ProfilePatch, session: DB):
     """Recursively merge fields; replace supplied arrays; mark changed leaves USER and DRAFT."""
     return BrandService(session).update(brand_id, request)
 
 
-@router.post("/brands/{brand_id}/profile/confirm", response_model=ProfileResponse)
+@router.post(
+    "/brands/{brand_id}/profile/confirm", response_model=ProfileResponse, tags=[WORKSPACE_WORKFLOW]
+)
 def confirm_profile(brand_id: uuid.UUID, request: ConfirmProfile, session: DB):
     return BrandService(session).confirm(brand_id, request.expected_revision)
 
 
-@router.get("/brands/{brand_id}/offerings")
+@router.get(
+    "/brands/{brand_id}/offerings",
+    responses={200: {"model": Offerings}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def list_offerings(brand_id: uuid.UUID, session: DB):
     service = BrandService(session)
     service.require_brand(brand_id)
@@ -211,7 +270,11 @@ def list_offerings(brand_id: uuid.UUID, session: DB):
     }
 
 
-@router.get("/brands/{brand_id}/sources")
+@router.get(
+    "/brands/{brand_id}/sources",
+    responses={200: {"model": Sources}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def list_sources(brand_id: uuid.UUID, session: DB):
     service = BrandService(session)
     service.require_brand(brand_id)
@@ -232,7 +295,12 @@ def list_sources(brand_id: uuid.UUID, session: DB):
     }
 
 
-@router.post("/brands/{brand_id}/marketing-enrichments", status_code=202)
+@router.post(
+    "/brands/{brand_id}/marketing-enrichments",
+    status_code=202,
+    responses={202: {"model": ExtractionRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def enrich_marketing(
     brand_id: uuid.UUID,
     session: DB,
@@ -248,7 +316,11 @@ def enrich_marketing(
     return job_view(job)
 
 
-@router.get("/marketing-enrichments/{job_id}")
+@router.get(
+    "/marketing-enrichments/{job_id}",
+    responses={200: {"model": ExtractionRecord}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_marketing_enrichment(job_id: uuid.UUID, session: DB):
     job = session.get(ExtractionJob, job_id)
     if not job or job.kind != "MARKETING":
@@ -256,7 +328,11 @@ def get_marketing_enrichment(job_id: uuid.UUID, session: DB):
     return job_view(job)
 
 
-@router.get("/brands/{brand_id}/catalog")
+@router.get(
+    "/brands/{brand_id}/catalog",
+    responses={200: {"model": CatalogPage}},
+    tags=[WORKSPACE_WORKFLOW],
+)
 def get_catalog(
     brand_id: uuid.UUID,
     session: DB,

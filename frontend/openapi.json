@@ -1,6 +1,109 @@
 {
   "components": {
     "schemas": {
+      "ArtifactMetadata": {
+        "properties": {
+          "media": {
+            "$ref": "#/components/schemas/RenderMediaInfo"
+          },
+          "validated": {
+            "title": "Validated",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "media",
+          "validated"
+        ],
+        "title": "ArtifactMetadata",
+        "type": "object"
+      },
+      "AssetRef": {
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": {
+            "format": "uuid",
+            "title": "Asset Id",
+            "type": "string"
+          },
+          "content_hash": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "extension": {
+            "enum": [
+              "mp4",
+              "webm",
+              "jpg",
+              "png",
+              "webp"
+            ],
+            "title": "Extension",
+            "type": "string"
+          },
+          "object_key": {
+            "title": "Object Key",
+            "type": "string"
+          },
+          "render_hash": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Render Hash",
+            "type": "string"
+          }
+        },
+        "required": [
+          "asset_id",
+          "content_hash",
+          "render_hash",
+          "object_key",
+          "extension"
+        ],
+        "title": "AssetRef",
+        "type": "object"
+      },
+      "AssetRequirement": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Description",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "STOCK_BROLL",
+              "APP_SCREENSHOT",
+              "PRODUCT_DEMO",
+              "BRAND_ASSET"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "requires_creation": {
+            "default": true,
+            "title": "Requires Creation",
+            "type": "boolean"
+          },
+          "research_reference_ids": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 4,
+            "title": "Research Reference Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "description"
+        ],
+        "title": "AssetRequirement",
+        "type": "object"
+      },
       "AudienceSegment": {
         "additionalProperties": false,
         "properties": {
@@ -113,6 +216,74 @@
           "brand_identity"
         ],
         "title": "BIP",
+        "type": "object"
+      },
+      "BrandDetail": {
+        "properties": {
+          "catalog": {
+            "additionalProperties": true,
+            "title": "Catalog",
+            "type": "object"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "customer_concerns": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Customer Concerns",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "profile_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BrandProfileStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "website_url": {
+            "title": "Website Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "website_url",
+          "name",
+          "revision",
+          "created_at",
+          "profile_status",
+          "catalog",
+          "customer_concerns"
+        ],
+        "title": "BrandDetail",
         "type": "object"
       },
       "BrandIdentity": {
@@ -664,6 +835,204 @@
         "title": "CampaignRecord",
         "type": "object"
       },
+      "Candidate": {
+        "additionalProperties": false,
+        "properties": {
+          "alternative_hooks": {
+            "items": {
+              "maxLength": 180,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 3,
+            "minItems": 2,
+            "title": "Alternative Hooks",
+            "type": "array"
+          },
+          "asset_requirements": {
+            "items": {
+              "$ref": "#/components/schemas/AssetRequirement"
+            },
+            "maxItems": 5,
+            "title": "Asset Requirements",
+            "type": "array"
+          },
+          "audience": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Audience",
+            "type": "string"
+          },
+          "audience_situation": {
+            "maxLength": 700,
+            "minLength": 1,
+            "title": "Audience Situation",
+            "type": "string"
+          },
+          "b_roll": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "B Roll",
+            "type": "array"
+          },
+          "candidate_key": {
+            "maxLength": 50,
+            "minLength": 1,
+            "pattern": "^[a-z0-9-]+$",
+            "title": "Candidate Key",
+            "type": "string"
+          },
+          "capability_reference_ids": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Capability Reference Ids",
+            "type": "array"
+          },
+          "closing_line": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Closing Line",
+            "type": "string"
+          },
+          "core_insight": {
+            "maxLength": 700,
+            "minLength": 1,
+            "title": "Core Insight",
+            "type": "string"
+          },
+          "cta": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Cta",
+            "type": "string"
+          },
+          "factual_assumptions": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 8,
+            "title": "Factual Assumptions",
+            "type": "array"
+          },
+          "on_screen_copy": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SingleCaption"
+              },
+              {
+                "$ref": "#/components/schemas/SequentialCaptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "On Screen Copy"
+          },
+          "potential_risks": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 8,
+            "title": "Potential Risks",
+            "type": "array"
+          },
+          "primary_hook": {
+            "maxLength": 180,
+            "minLength": 1,
+            "title": "Primary Hook",
+            "type": "string"
+          },
+          "problem_or_aspiration": {
+            "maxLength": 700,
+            "minLength": 1,
+            "title": "Problem Or Aspiration",
+            "type": "string"
+          },
+          "product_capability": {
+            "maxLength": 700,
+            "minLength": 1,
+            "title": "Product Capability",
+            "type": "string"
+          },
+          "production_format": {
+            "const": "TEXT_OVER_VIDEO",
+            "default": "TEXT_OVER_VIDEO",
+            "title": "Production Format",
+            "type": "string"
+          },
+          "psychological_driver": {
+            "enum": [
+              "RECOGNITION",
+              "CURIOSITY",
+              "DESIRE",
+              "RELEVANCE"
+            ],
+            "title": "Psychological Driver",
+            "type": "string"
+          },
+          "research_reference_ids": {
+            "items": {
+              "maxLength": 200,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 10,
+            "minItems": 1,
+            "title": "Research Reference Ids",
+            "type": "array"
+          },
+          "story": {
+            "$ref": "#/components/schemas/Story"
+          },
+          "strategic_mechanism": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Strategic Mechanism",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "candidate_key",
+          "title",
+          "core_insight",
+          "psychological_driver",
+          "strategic_mechanism",
+          "audience",
+          "audience_situation",
+          "problem_or_aspiration",
+          "product_capability",
+          "capability_reference_ids",
+          "primary_hook",
+          "alternative_hooks",
+          "story",
+          "b_roll",
+          "closing_line",
+          "cta",
+          "research_reference_ids"
+        ],
+        "title": "Candidate",
+        "type": "object"
+      },
       "CaptionBeat": {
         "additionalProperties": false,
         "properties": {
@@ -689,6 +1058,19 @@
           "text"
         ],
         "title": "CaptionBeat",
+        "type": "object"
+      },
+      "CaptionGrounding": {
+        "properties": {
+          "explanation": {
+            "title": "Explanation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "explanation"
+        ],
+        "title": "CaptionGrounding",
         "type": "object"
       },
       "CaptionStyle": {
@@ -734,6 +1116,127 @@
         "title": "CaptionStyle",
         "type": "object"
       },
+      "CatalogItem": {
+        "properties": {
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Categories",
+            "type": "array"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "image_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Image Url"
+          },
+          "linked_offering_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Linked Offering Key"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "categories"
+        ],
+        "title": "CatalogItem",
+        "type": "object"
+      },
+      "CatalogPage": {
+        "properties": {
+          "available_categories": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Available Categories",
+            "type": "array"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogItem"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "limit",
+          "offset",
+          "total",
+          "available_categories"
+        ],
+        "title": "CatalogPage",
+        "type": "object"
+      },
       "Color": {
         "additionalProperties": false,
         "properties": {
@@ -774,6 +1277,40 @@
         "title": "Color",
         "type": "object"
       },
+      "ConceptEvaluation": {
+        "properties": {
+          "distinction": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Distinction"
+          },
+          "grounding": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CaptionGrounding"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "selection_rationale": {
+            "title": "Selection Rationale",
+            "type": "string"
+          }
+        },
+        "required": [
+          "selection_rationale"
+        ],
+        "title": "ConceptEvaluation",
+        "type": "object"
+      },
       "ConceptPatch": {
         "additionalProperties": false,
         "properties": {
@@ -794,6 +1331,115 @@
           "changes"
         ],
         "title": "ConceptPatch",
+        "type": "object"
+      },
+      "ConceptRecord": {
+        "properties": {
+          "campaign_id": {
+            "format": "uuid",
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "content": {
+            "$ref": "#/components/schemas/Candidate"
+          },
+          "evaluation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ConceptEvaluation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "job_id": {
+            "format": "uuid",
+            "title": "Job Id",
+            "type": "string"
+          },
+          "review": {
+            "$ref": "#/components/schemas/ConceptReview"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "shortlisted": {
+            "title": "Shortlisted",
+            "type": "boolean"
+          },
+          "state": {
+            "enum": [
+              "DRAFT",
+              "SELECTED",
+              "APPROVED"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "validation": {
+            "$ref": "#/components/schemas/ConceptValidation"
+          }
+        },
+        "required": [
+          "id",
+          "campaign_id",
+          "job_id",
+          "revision",
+          "state",
+          "shortlisted",
+          "content",
+          "review",
+          "validation",
+          "evaluation"
+        ],
+        "title": "ConceptRecord",
+        "type": "object"
+      },
+      "ConceptReview": {
+        "properties": {
+          "approved_brand_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved Brand Label"
+          },
+          "human_review_completed": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Human Review Completed"
+          },
+          "reviewed_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reviewed At"
+          }
+        },
+        "title": "ConceptReview",
         "type": "object"
       },
       "ConceptSelection": {
@@ -824,6 +1470,27 @@
           "expected_revision"
         ],
         "title": "ConceptSelection",
+        "type": "object"
+      },
+      "ConceptValidation": {
+        "properties": {
+          "eligible": {
+            "title": "Eligible",
+            "type": "boolean"
+          },
+          "flags": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewFlag"
+            },
+            "title": "Flags",
+            "type": "array"
+          }
+        },
+        "required": [
+          "eligible",
+          "flags"
+        ],
+        "title": "ConceptValidation",
         "type": "object"
       },
       "ConfirmProfile": {
@@ -1061,6 +1728,219 @@
         "title": "CreativeContext",
         "type": "object"
       },
+      "CreativeGeneration": {
+        "properties": {
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "campaign_id": {
+            "format": "uuid",
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "title": "Diagnostics",
+            "type": "object"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JobError"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "metrics": {
+            "additionalProperties": true,
+            "title": "Metrics",
+            "type": "object"
+          },
+          "model": {
+            "title": "Model",
+            "type": "string"
+          },
+          "poll_url": {
+            "title": "Poll Url",
+            "type": "string"
+          },
+          "research_id": {
+            "format": "uuid",
+            "title": "Research Id",
+            "type": "string"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "error",
+          "created_at",
+          "started_at",
+          "finished_at",
+          "diagnostics",
+          "poll_url",
+          "campaign_id",
+          "research_id",
+          "model",
+          "attempts",
+          "metrics"
+        ],
+        "title": "CreativeGeneration",
+        "type": "object"
+      },
+      "ExtractionRecord": {
+        "properties": {
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "brand_id": {
+            "format": "uuid",
+            "title": "Brand Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "title": "Diagnostics",
+            "type": "object"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JobError"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "EXTRACTION",
+              "MARKETING"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "metrics": {
+            "additionalProperties": true,
+            "title": "Metrics",
+            "type": "object"
+          },
+          "poll_url": {
+            "title": "Poll Url",
+            "type": "string"
+          },
+          "source_job_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Job Id"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "error",
+          "created_at",
+          "started_at",
+          "finished_at",
+          "diagnostics",
+          "poll_url",
+          "brand_id",
+          "kind",
+          "attempts",
+          "metrics",
+          "source_job_id"
+        ],
+        "title": "ExtractionRecord",
+        "type": "object"
+      },
       "ExtractionRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1190,6 +2070,34 @@
         "title": "FieldProvenance",
         "type": "object"
       },
+      "FrameText": {
+        "additionalProperties": false,
+        "properties": {
+          "end_frame": {
+            "exclusiveMinimum": 0.0,
+            "title": "End Frame",
+            "type": "integer"
+          },
+          "start_frame": {
+            "minimum": 0.0,
+            "title": "Start Frame",
+            "type": "integer"
+          },
+          "text": {
+            "maxLength": 180,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "start_frame",
+          "end_frame"
+        ],
+        "title": "FrameText",
+        "type": "object"
+      },
       "GenerationRequest": {
         "additionalProperties": false,
         "properties": {
@@ -1276,6 +2184,63 @@
           "confirm_rights"
         ],
         "title": "ImportStock",
+        "type": "object"
+      },
+      "InternalSearch": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MediaRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "search_id": {
+            "title": "Search Id",
+            "type": "null"
+          },
+          "source": {
+            "const": "INTERNAL",
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "items",
+          "search_id"
+        ],
+        "title": "InternalSearch",
+        "type": "object"
+      },
+      "JobError": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "JobError",
         "type": "object"
       },
       "MarketingDefaults": {
@@ -1486,6 +2451,149 @@
         "title": "MarketingGuardrails",
         "type": "object"
       },
+      "MediaDetails": {
+        "properties": {
+          "audio_streams": {
+            "title": "Audio Streams",
+            "type": "integer"
+          },
+          "creator": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Creator"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds"
+          },
+          "height": {
+            "title": "Height",
+            "type": "integer"
+          },
+          "orientation": {
+            "title": "Orientation",
+            "type": "string"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "width": {
+            "title": "Width",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "description",
+          "tags",
+          "width",
+          "height",
+          "orientation",
+          "duration_seconds",
+          "audio_streams"
+        ],
+        "title": "MediaDetails",
+        "type": "object"
+      },
+      "MediaRecord": {
+        "properties": {
+          "acquired_at": {
+            "format": "date-time",
+            "title": "Acquired At",
+            "type": "string"
+          },
+          "brand_id": {
+            "format": "uuid",
+            "title": "Brand Id",
+            "type": "string"
+          },
+          "details": {
+            "$ref": "#/components/schemas/MediaDetails"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "media_type": {
+            "enum": [
+              "IMAGE",
+              "VIDEO"
+            ],
+            "title": "Media Type",
+            "type": "string"
+          },
+          "purpose": {
+            "enum": [
+              "BACKGROUND",
+              "PRODUCT",
+              "BRAND"
+            ],
+            "title": "Purpose",
+            "type": "string"
+          },
+          "source_type": {
+            "enum": [
+              "UPLOAD",
+              "PIXABAY"
+            ],
+            "title": "Source Type",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "thumbnail_url": {
+            "title": "Thumbnail Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "brand_id",
+          "media_type",
+          "purpose",
+          "source_type",
+          "status",
+          "details",
+          "thumbnail_url",
+          "acquired_at"
+        ],
+        "title": "MediaRecord",
+        "type": "object"
+      },
       "ModelSelection": {
         "properties": {
           "model": {
@@ -1665,6 +2773,192 @@
         "title": "OfferingData",
         "type": "object"
       },
+      "OfferingRecord": {
+        "additionalProperties": false,
+        "properties": {
+          "audiences": {
+            "$ref": "#/components/schemas/Audiences"
+          },
+          "benefits": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Benefits",
+            "type": "array"
+          },
+          "catalog_level": {
+            "anyOf": [
+              {
+                "enum": [
+                  "FAMILY",
+                  "PRODUCT",
+                  "VARIANT"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Catalog Level"
+          },
+          "claims": {
+            "items": {
+              "$ref": "#/components/schemas/ScopedClaim"
+            },
+            "title": "Claims",
+            "type": "array"
+          },
+          "customer_psychology": {
+            "$ref": "#/components/schemas/Psychology"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          },
+          "features": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Features",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "ingredients": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Ingredients",
+            "type": "array"
+          },
+          "key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Key"
+          },
+          "kind": {
+            "anyOf": [
+              {
+                "enum": [
+                  "PRODUCT",
+                  "SERVICE",
+                  "OTHER"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Kind"
+          },
+          "name": {
+            "maxLength": 300,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "parent_offering_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Offering Key"
+          },
+          "pricing": {
+            "$ref": "#/components/schemas/Pricing"
+          },
+          "pricing_tiers": {
+            "items": {
+              "$ref": "#/components/schemas/PricingTier"
+            },
+            "title": "Pricing Tiers",
+            "type": "array"
+          },
+          "supported_platforms": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supported Platforms",
+            "type": "array"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "use_cases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Use Cases",
+            "type": "array"
+          },
+          "value_propositions": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Value Propositions",
+            "type": "array"
+          },
+          "variants": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Variants",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ],
+        "title": "OfferingRecord",
+        "type": "object"
+      },
+      "Offerings": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/OfferingRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "Offerings",
+        "type": "object"
+      },
       "OptionChanges": {
         "additionalProperties": false,
         "properties": {
@@ -1788,6 +3082,110 @@
           "offset"
         ],
         "title": "Page[CampaignRecord]",
+        "type": "object"
+      },
+      "Page_ConceptRecord_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ConceptRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "limit",
+          "offset"
+        ],
+        "title": "Page[ConceptRecord]",
+        "type": "object"
+      },
+      "Page_CreativeGeneration_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/CreativeGeneration"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "limit",
+          "offset"
+        ],
+        "title": "Page[CreativeGeneration]",
+        "type": "object"
+      },
+      "Page_ExtractionRecord_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ExtractionRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "limit",
+          "offset"
+        ],
+        "title": "Page[ExtractionRecord]",
+        "type": "object"
+      },
+      "Page_MediaRecord_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/MediaRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "limit": {
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "limit",
+          "offset"
+        ],
+        "title": "Page[MediaRecord]",
         "type": "object"
       },
       "Page_RenderRecord_": {
@@ -2009,6 +3407,88 @@
           "name"
         ],
         "title": "PricingTier",
+        "type": "object"
+      },
+      "ProductScene": {
+        "additionalProperties": false,
+        "properties": {
+          "asset": {
+            "$ref": "#/components/schemas/AssetRef"
+          },
+          "end_frame": {
+            "exclusiveMinimum": 0.0,
+            "title": "End Frame",
+            "type": "integer"
+          },
+          "start_frame": {
+            "minimum": 0.0,
+            "title": "Start Frame",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "asset",
+          "start_frame",
+          "end_frame"
+        ],
+        "title": "ProductScene",
+        "type": "object"
+      },
+      "ProductionHandoff": {
+        "properties": {
+          "brand_id": {
+            "format": "uuid",
+            "title": "Brand Id",
+            "type": "string"
+          },
+          "brief": {
+            "$ref": "#/components/schemas/CampaignBrief"
+          },
+          "campaign_id": {
+            "format": "uuid",
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "campaign_revision": {
+            "title": "Campaign Revision",
+            "type": "integer"
+          },
+          "concept": {
+            "$ref": "#/components/schemas/Candidate"
+          },
+          "concept_id": {
+            "format": "uuid",
+            "title": "Concept Id",
+            "type": "string"
+          },
+          "concept_revision": {
+            "title": "Concept Revision",
+            "type": "integer"
+          },
+          "review": {
+            "$ref": "#/components/schemas/ConceptReview"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "validation": {
+            "$ref": "#/components/schemas/ConceptValidation"
+          }
+        },
+        "required": [
+          "concept_id",
+          "concept_revision",
+          "campaign_id",
+          "campaign_revision",
+          "brand_id",
+          "brief",
+          "concept",
+          "review",
+          "validation",
+          "state"
+        ],
+        "title": "ProductionHandoff",
         "type": "object"
       },
       "ProfilePatch": {
@@ -2354,6 +3834,206 @@
         "title": "Psychology",
         "type": "object"
       },
+      "RegisteredBrand": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "website_url": {
+            "title": "Website Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "website_url",
+          "name",
+          "revision",
+          "created_at"
+        ],
+        "title": "RegisteredBrand",
+        "type": "object"
+      },
+      "RenderJobRecord": {
+        "properties": {
+          "artifact": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RenderOutput"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "diagnostics": {
+            "additionalProperties": true,
+            "title": "Diagnostics",
+            "type": "object"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JobError"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "inputs": {
+            "$ref": "#/components/schemas/VideoPlan"
+          },
+          "poll_url": {
+            "title": "Poll Url",
+            "type": "string"
+          },
+          "spec_id": {
+            "format": "uuid",
+            "title": "Spec Id",
+            "type": "string"
+          },
+          "spec_revision": {
+            "title": "Spec Revision",
+            "type": "integer"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "error",
+          "created_at",
+          "started_at",
+          "finished_at",
+          "diagnostics",
+          "poll_url",
+          "spec_id",
+          "spec_revision",
+          "inputs"
+        ],
+        "title": "RenderJobRecord",
+        "type": "object"
+      },
+      "RenderMediaInfo": {
+        "properties": {
+          "audio_streams": {
+            "title": "Audio Streams",
+            "type": "integer"
+          },
+          "codec": {
+            "title": "Codec",
+            "type": "string"
+          },
+          "duration_seconds": {
+            "title": "Duration Seconds",
+            "type": "number"
+          },
+          "file_bytes": {
+            "title": "File Bytes",
+            "type": "integer"
+          },
+          "frame_rate": {
+            "title": "Frame Rate",
+            "type": "number"
+          }
+        },
+        "required": [
+          "codec",
+          "duration_seconds",
+          "frame_rate",
+          "audio_streams",
+          "file_bytes"
+        ],
+        "title": "RenderMediaInfo",
+        "type": "object"
+      },
+      "RenderOutput": {
+        "properties": {
+          "download_url": {
+            "title": "Download Url",
+            "type": "string"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/ArtifactMetadata"
+          },
+          "play_url": {
+            "title": "Play Url",
+            "type": "string"
+          },
+          "preview_url": {
+            "title": "Preview Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "metadata",
+          "play_url",
+          "download_url",
+          "preview_url"
+        ],
+        "title": "RenderOutput",
+        "type": "object"
+      },
       "RenderRecord": {
         "properties": {
           "concept_title": {
@@ -2433,6 +4113,111 @@
         "title": "RenderRequest",
         "type": "object"
       },
+      "ResearchItem": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "origin": {
+            "title": "Origin",
+            "type": "string"
+          },
+          "source_urls": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Source Urls",
+            "type": "array"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "origin",
+          "source_urls"
+        ],
+        "title": "ResearchItem",
+        "type": "object"
+      },
+      "ResearchPayload": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ResearchItem"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "ResearchPayload",
+        "type": "object"
+      },
+      "ResearchRecord": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/ResearchPayload"
+          }
+        },
+        "required": [
+          "id",
+          "payload"
+        ],
+        "title": "ResearchRecord",
+        "type": "object"
+      },
+      "ReviewFlag": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message"
+          },
+          "severity": {
+            "title": "Severity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "severity"
+        ],
+        "title": "ReviewFlag",
+        "type": "object"
+      },
       "ScopedClaim": {
         "additionalProperties": false,
         "properties": {
@@ -2493,6 +4278,43 @@
           "captions"
         ],
         "title": "SequentialCaptions",
+        "type": "object"
+      },
+      "Shortlist": {
+        "properties": {
+          "insufficient": {
+            "title": "Insufficient",
+            "type": "boolean"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ConceptRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "job": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreativeGeneration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stale": {
+            "default": false,
+            "title": "Stale",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "items",
+          "job",
+          "insufficient"
+        ],
+        "title": "Shortlist",
         "type": "object"
       },
       "SignInRequest": {
@@ -2558,6 +4380,230 @@
           "text"
         ],
         "title": "SingleCaption",
+        "type": "object"
+      },
+      "SourceRecord": {
+        "properties": {
+          "content_hash": {
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "fetched_at": {
+            "format": "date-time",
+            "title": "Fetched At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "job_id": {
+            "format": "uuid",
+            "title": "Job Id",
+            "type": "string"
+          },
+          "source_type": {
+            "title": "Source Type",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "job_id",
+          "source_type",
+          "url",
+          "title",
+          "fetched_at",
+          "content_hash"
+        ],
+        "title": "SourceRecord",
+        "type": "object"
+      },
+      "Sources": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SourceRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "title": "Sources",
+        "type": "object"
+      },
+      "StockRecord": {
+        "properties": {
+          "creator": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Creator"
+          },
+          "duration_seconds": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration Seconds"
+          },
+          "height": {
+            "title": "Height",
+            "type": "integer"
+          },
+          "license_url": {
+            "title": "License Url",
+            "type": "string"
+          },
+          "media_type": {
+            "enum": [
+              "IMAGE",
+              "VIDEO"
+            ],
+            "title": "Media Type",
+            "type": "string"
+          },
+          "preview_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preview Url"
+          },
+          "provider_asset_id": {
+            "title": "Provider Asset Id",
+            "type": "string"
+          },
+          "source_url": {
+            "title": "Source Url",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "width": {
+            "title": "Width",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "provider_asset_id",
+          "media_type",
+          "source_url",
+          "preview_url",
+          "creator",
+          "license_url",
+          "tags",
+          "width",
+          "height",
+          "duration_seconds"
+        ],
+        "title": "StockRecord",
+        "type": "object"
+      },
+      "StockSearch": {
+        "properties": {
+          "cache_hit": {
+            "title": "Cache Hit",
+            "type": "boolean"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/StockRecord"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "search_id": {
+            "title": "Search Id",
+            "type": "string"
+          },
+          "source": {
+            "const": "PIXABAY",
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "items",
+          "search_id",
+          "cache_hit"
+        ],
+        "title": "StockSearch",
+        "type": "object"
+      },
+      "Story": {
+        "additionalProperties": false,
+        "properties": {
+          "development": {
+            "maxLength": 260,
+            "minLength": 1,
+            "title": "Development",
+            "type": "string"
+          },
+          "opening": {
+            "maxLength": 260,
+            "minLength": 1,
+            "title": "Opening",
+            "type": "string"
+          },
+          "payoff": {
+            "maxLength": 260,
+            "minLength": 1,
+            "title": "Payoff",
+            "type": "string"
+          },
+          "product_connection": {
+            "maxLength": 260,
+            "minLength": 1,
+            "title": "Product Connection",
+            "type": "string"
+          }
+        },
+        "required": [
+          "opening",
+          "development",
+          "product_connection",
+          "payoff"
+        ],
+        "title": "Story",
         "type": "object"
       },
       "Testimonial": {
@@ -2749,6 +4795,200 @@
         "title": "ValuePropositions",
         "type": "object"
       },
+      "VideoPlan": {
+        "additionalProperties": false,
+        "properties": {
+          "audio": {
+            "default": "SILENT",
+            "enum": [
+              "SILENT",
+              "BACKGROUND"
+            ],
+            "title": "Audio",
+            "type": "string"
+          },
+          "background": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssetRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "brand_id": {
+            "format": "uuid",
+            "title": "Brand Id",
+            "type": "string"
+          },
+          "brand_label": {
+            "anyOf": [
+              {
+                "maxLength": 180,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand Label"
+          },
+          "campaign_id": {
+            "format": "uuid",
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "campaign_revision": {
+            "minimum": 1.0,
+            "title": "Campaign Revision",
+            "type": "integer"
+          },
+          "caption_treatment": {
+            "enum": [
+              "SINGLE_CAPTION",
+              "SEQUENTIAL_CAPTIONS"
+            ],
+            "title": "Caption Treatment",
+            "type": "string"
+          },
+          "captions": {
+            "items": {
+              "$ref": "#/components/schemas/FrameText"
+            },
+            "maxItems": 4,
+            "minItems": 1,
+            "title": "Captions",
+            "type": "array"
+          },
+          "codec": {
+            "const": "H264",
+            "default": "H264",
+            "title": "Codec",
+            "type": "string"
+          },
+          "concept_id": {
+            "format": "uuid",
+            "title": "Concept Id",
+            "type": "string"
+          },
+          "concept_revision": {
+            "minimum": 1.0,
+            "title": "Concept Revision",
+            "type": "integer"
+          },
+          "cta_overlay": {
+            "anyOf": [
+              {
+                "maxLength": 180,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cta Overlay"
+          },
+          "duration_frames": {
+            "maximum": 1800.0,
+            "minimum": 150.0,
+            "multipleOf": 30.0,
+            "title": "Duration Frames",
+            "type": "integer"
+          },
+          "fit": {
+            "default": "cover",
+            "enum": [
+              "cover",
+              "contain"
+            ],
+            "title": "Fit",
+            "type": "string"
+          },
+          "format": {
+            "const": "MP4",
+            "default": "MP4",
+            "title": "Format",
+            "type": "string"
+          },
+          "fps": {
+            "const": 30,
+            "default": 30,
+            "title": "Fps",
+            "type": "integer"
+          },
+          "height": {
+            "const": 1920,
+            "default": 1920,
+            "title": "Height",
+            "type": "integer"
+          },
+          "pixel_format": {
+            "const": "yuv420p",
+            "default": "yuv420p",
+            "title": "Pixel Format",
+            "type": "string"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/ProductScene"
+            },
+            "maxItems": 5,
+            "title": "Products",
+            "type": "array"
+          },
+          "renderer_version": {
+            "const": "1.0.0",
+            "default": "1.0.0",
+            "title": "Renderer Version",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Schema Version",
+            "type": "integer"
+          },
+          "style": {
+            "$ref": "#/components/schemas/CaptionStyle"
+          },
+          "template": {
+            "enum": [
+              "TEXT_OVER_BROLL",
+              "PRODUCT_REVEAL"
+            ],
+            "title": "Template",
+            "type": "string"
+          },
+          "template_version": {
+            "const": 1,
+            "default": 1,
+            "title": "Template Version",
+            "type": "integer"
+          },
+          "width": {
+            "const": 1080,
+            "default": 1080,
+            "title": "Width",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "template",
+          "brand_id",
+          "campaign_id",
+          "campaign_revision",
+          "concept_id",
+          "concept_revision",
+          "duration_frames",
+          "caption_treatment",
+          "captions"
+        ],
+        "title": "VideoPlan",
+        "type": "object"
+      },
       "VideoSpecPatch": {
         "additionalProperties": false,
         "properties": {
@@ -2771,6 +5011,41 @@
           "changes"
         ],
         "title": "VideoSpecPatch",
+        "type": "object"
+      },
+      "VideoSpecRecord": {
+        "properties": {
+          "campaign_id": {
+            "format": "uuid",
+            "title": "Campaign Id",
+            "type": "string"
+          },
+          "concept_id": {
+            "format": "uuid",
+            "title": "Concept Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/VideoPlan"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "concept_id",
+          "campaign_id",
+          "revision",
+          "payload"
+        ],
+        "title": "VideoSpecRecord",
         "type": "object"
       },
       "VisualIdentity": {
@@ -2987,7 +5262,9 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RegisteredBrand"
+                }
               }
             },
             "description": "Successful Response"
@@ -3003,7 +5280,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Create Brand"
+        "summary": "Create Brand",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}": {
@@ -3041,7 +5321,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/BrandDetail"
+                }
               }
             },
             "description": "Successful Response"
@@ -3057,7 +5339,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Get Brand"
+        "summary": "Get Brand",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/campaigns": {
@@ -3186,7 +5471,9 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -3204,7 +5491,8 @@
         },
         "summary": "Create Campaign",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -3292,7 +5580,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogPage"
+                }
               }
             },
             "description": "Successful Response"
@@ -3308,7 +5598,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Get Catalog"
+        "summary": "Get Catalog",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/catalog/{product_id}": {
@@ -3430,6 +5723,87 @@
       }
     },
     "/v1/brands/{brand_id}/extractions": {
+      "get": {
+        "description": "Recover saved research jobs after navigation or a reload.",
+        "operationId": "list_extractions_v1_brands__brand_id__extractions_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "brand_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Brand Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ExtractionRecord_"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Extractions",
+        "tags": [
+          "workspace-workflow"
+        ]
+      },
       "post": {
         "description": "Enqueue durable work and return immediately. Repeated triggers reuse an active job.",
         "operationId": "extract_brand_v1_brands__brand_id__extractions_post",
@@ -3482,7 +5856,9 @@
           "202": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -3498,7 +5874,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Extract Brand"
+        "summary": "Extract Brand",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/marketing-enrichments": {
@@ -3553,7 +5932,9 @@
           "202": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -3569,7 +5950,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Enrich Marketing"
+        "summary": "Enrich Marketing",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/media": {
@@ -3630,7 +6014,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Page_MediaRecord_"
+                }
               }
             },
             "description": "Successful Response"
@@ -3648,7 +6034,8 @@
         },
         "summary": "List Media",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       },
       "post": {
@@ -3727,11 +6114,24 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "201": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/MediaRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -3749,7 +6149,8 @@
         },
         "summary": "Upload",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -3799,7 +6200,9 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/MediaRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -3817,7 +6220,8 @@
         },
         "summary": "Import Stock",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -3963,7 +6367,17 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/InternalSearch"
+                    },
+                    {
+                      "$ref": "#/components/schemas/StockSearch"
+                    }
+                  ],
+                  "title": "Response 200 Search Media V1 Brands  Brand Id  Media Search Get"
+                }
               }
             },
             "description": "Successful Response"
@@ -3981,7 +6395,8 @@
         },
         "summary": "Search Media",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -4030,7 +6445,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/MediaRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -4048,7 +6465,8 @@
         },
         "summary": "Get Media",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -4154,7 +6572,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Offerings"
+                }
               }
             },
             "description": "Successful Response"
@@ -4170,7 +6590,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "List Offerings"
+        "summary": "List Offerings",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/profile": {
@@ -4226,7 +6649,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Get Profile"
+        "summary": "Get Profile",
+        "tags": [
+          "workspace-workflow"
+        ]
       },
       "patch": {
         "description": "Recursively merge fields; replace supplied arrays; mark changed leaves USER and DRAFT.",
@@ -4291,7 +6717,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Patch Profile"
+        "summary": "Patch Profile",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/profile/confirm": {
@@ -4357,7 +6786,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Confirm Profile"
+        "summary": "Confirm Profile",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/brands/{brand_id}/renders": {
@@ -4418,6 +6850,23 @@
                 }
               ],
               "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "spec_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Spec Id"
             }
           },
           {
@@ -4501,7 +6950,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Sources"
+                }
               }
             },
             "description": "Successful Response"
@@ -4517,7 +6968,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "List Sources"
+        "summary": "List Sources",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/campaigns/{campaign_id}": {
@@ -4555,7 +7009,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -4573,7 +7029,8 @@
         },
         "summary": "Get Campaign",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -4622,7 +7079,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -4640,7 +7099,8 @@
         },
         "summary": "Update Brief",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -4719,7 +7179,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ConceptRecord_"
+                }
               }
             },
             "description": "Successful Response"
@@ -4737,7 +7199,8 @@
         },
         "summary": "List Concepts",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -4799,7 +7262,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Page_CreativeGeneration_"
+                }
               }
             },
             "description": "Successful Response"
@@ -4817,7 +7282,8 @@
         },
         "summary": "List Generations",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       },
       "post": {
@@ -4864,7 +7330,9 @@
           "202": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CreativeGeneration"
+                }
               }
             },
             "description": "Successful Response"
@@ -4882,7 +7350,8 @@
         },
         "summary": "Generate Concepts",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -4931,7 +7400,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ResearchRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -4949,7 +7420,8 @@
         },
         "summary": "Get Research",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5005,7 +7477,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/Shortlist"
+                }
               }
             },
             "description": "Successful Response"
@@ -5023,7 +7497,8 @@
         },
         "summary": "Shortlist",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5502,7 +7977,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -5520,7 +7997,8 @@
         },
         "summary": "Get Concept",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       },
       "patch": {
@@ -5567,7 +8045,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -5585,7 +8065,8 @@
         },
         "summary": "Edit Concept",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5634,7 +8115,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -5652,7 +8135,8 @@
         },
         "summary": "Approve Concept",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5691,7 +8175,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ProductionHandoff"
+                }
               }
             },
             "description": "Successful Response"
@@ -5709,7 +8195,8 @@
         },
         "summary": "Production Handoff",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5825,7 +8312,9 @@
           "201": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/VideoSpecRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -5843,7 +8332,8 @@
         },
         "summary": "Create Spec",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -5882,7 +8372,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/CreativeGeneration"
+                }
               }
             },
             "description": "Successful Response"
@@ -5900,7 +8392,8 @@
         },
         "summary": "Get Generation",
         "tags": [
-          "creative strategy"
+          "creative strategy",
+          "workspace-workflow"
         ]
       }
     },
@@ -5939,7 +8432,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -5955,7 +8450,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Get Extraction"
+        "summary": "Get Extraction",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/marketing-enrichments/{job_id}": {
@@ -5993,7 +8491,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/ExtractionRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -6009,7 +8509,10 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Get Marketing Enrichment"
+        "summary": "Get Marketing Enrichment",
+        "tags": [
+          "workspace-workflow"
+        ]
       }
     },
     "/v1/profile-schema": {
@@ -6092,7 +8595,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RenderJobRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -6110,7 +8615,8 @@
         },
         "summary": "Get Job",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     },
@@ -6289,7 +8795,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/VideoSpecRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -6307,7 +8815,8 @@
         },
         "summary": "Get Spec",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       },
       "patch": {
@@ -6354,7 +8863,9 @@
           "200": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/VideoSpecRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -6371,6 +8882,91 @@
           }
         },
         "summary": "Update Spec",
+        "tags": [
+          "Video",
+          "workspace-workflow"
+        ]
+      }
+    },
+    "/v1/video-specs/{spec_id}/media/{asset_id}": {
+      "get": {
+        "description": "Stream only media bound to this saved spec for private composition preview.",
+        "operationId": "preview_spec_asset_v1_video_specs__spec_id__media__asset_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "spec_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Spec Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "asset_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Asset Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Range",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Range"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Authorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview Spec Asset",
         "tags": [
           "Video"
         ]
@@ -6421,7 +9017,9 @@
           "202": {
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/RenderJobRecord"
+                }
               }
             },
             "description": "Successful Response"
@@ -6439,7 +9037,8 @@
         },
         "summary": "Enqueue",
         "tags": [
-          "Video"
+          "Video",
+          "workspace-workflow"
         ]
       }
     }

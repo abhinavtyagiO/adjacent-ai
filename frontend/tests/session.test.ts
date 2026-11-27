@@ -1,5 +1,5 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import {dashboardPath} from '@/lib/server/backend';
+import {workflowRequest} from '@/lib/server/backend';
 import {isLocalRequest, localConfig, newLocalSession, validLocalSession} from '@/lib/server/session';
 
 vi.mock('server-only', () => ({}));
@@ -42,10 +42,23 @@ describe('server-side local access', () => {
     expect(isLocalRequest(config, new Headers({host: '127.0.0.1:3000', origin: 'http://127.0.0.1:3000'}), true)).toBe(true);
   });
 
-  it('allows only dashboard reads and recognized query parameters', () => {
+  it('allows workspace reads and recognized query parameters', () => {
     const query = new URLSearchParams({limit: '5', unrecognized: 'ignored'});
-    expect(dashboardPath(['v1', 'brands'], query)).toBe('/v1/brands?limit=5');
-    expect(dashboardPath(['v1', 'chatgpt', 'accounts'], query)).toBeNull();
-    expect(dashboardPath(['v1', 'brands', '..', 'renders'], query)).toBeNull();
+    expect(workflowRequest('GET', ['v1', 'brands'], query)?.path).toBe('/v1/brands?limit=5');
+    expect(workflowRequest('GET', ['v1', 'chatgpt', 'accounts'], query)).toBeNull();
+    expect(workflowRequest('GET', ['v1', 'brands', '..', 'renders'], query)).toBeNull();
+  });
+
+  it('routes only explicit mutations, uploads and range-readable media', () => {
+    const id = 'c8803361-8264-47cd-84a2-5947c4bcd486';
+    const query = new URLSearchParams({purpose: 'BACKGROUND', confirm_rights: 'true', token: 'drop-me'});
+    expect(workflowRequest('POST', ['v1', 'brands', id, 'media'], query)).toEqual({
+      path: `/v1/brands/${id}/media?purpose=BACKGROUND&confirm_rights=true`, upload: true, media: false,
+    });
+    expect(workflowRequest('GET', ['v1', 'video-specs', id, 'media', id], query)).toEqual({
+      path: `/v1/video-specs/${id}/media/${id}`, upload: false, media: true,
+    });
+    expect(workflowRequest('POST', ['v1', 'brands', id, 'media', id], query)).toBeNull();
+    expect(workflowRequest('PATCH', ['v1', 'renders', id, 'video'], query)).toBeNull();
   });
 });
