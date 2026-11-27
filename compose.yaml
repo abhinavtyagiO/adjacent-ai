@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:16-alpine
+    networks: [default, media-render]
     environment:
       POSTGRES_USER: brand
       POSTGRES_PASSWORD: brand
@@ -25,7 +26,7 @@ services:
       db: {condition: service_healthy}
   api:
     build: .
-    volumes: ["chatgpt_credentials:/srv/chatgpt"]
+    volumes: ["chatgpt_credentials:/srv/chatgpt", "media_data:/srv/media"]
     env_file:
       - path: .env
       - path: .env.local
@@ -33,6 +34,7 @@ services:
     environment:
       DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
       CHATGPT_AUTH_DIR: /srv/chatgpt
+      MEDIA_STORAGE_PATH: /srv/media
     ports: ["127.0.0.1:8000:8000"]
     depends_on:
       migrate: {condition: service_completed_successfully}
@@ -48,6 +50,24 @@ services:
       CHATGPT_AUTH_DIR: /srv/chatgpt
     command: ["python", "-m", "app.worker"]
     restart: unless-stopped
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+  render-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.render
+    environment:
+      DATABASE_URL: postgresql+psycopg://brand:brand@db:5432/brand_intelligence
+      MEDIA_STORAGE_PATH: /srv/media
+      RENDER_BROWSER_EXECUTABLE: /usr/bin/chromium
+    volumes: ["media_data:/srv/media"]
+    networks: [media-render]
+    init: true
+    cpus: 2
+    mem_limit: 3g
+    pids_limit: 384
+    shm_size: 512mb
+    stop_grace_period: 11m
     depends_on:
       migrate: {condition: service_completed_successfully}
   test-db:
@@ -68,3 +88,8 @@ volumes:
   postgres_data:
 
   chatgpt_credentials:
+  media_data:
+
+networks:
+  media-render:
+    internal: true

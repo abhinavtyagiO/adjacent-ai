@@ -12,6 +12,7 @@ from app.config import get_settings
 from app.creative.routes import router as creative_router
 from app.db import get_factory
 from app.errors import DomainError
+from app.video.routes import router as video_router
 
 
 def create_app() -> FastAPI:
@@ -28,6 +29,7 @@ def create_app() -> FastAPI:
     app.include_router(router)
     app.include_router(chatgpt_router)
     app.include_router(creative_router)
+    app.include_router(video_router)
     # OAuth codes/state in callback query strings must not reach access logs.
     logging.getLogger("uvicorn.access").disabled = True
 

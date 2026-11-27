@@ -1,0 +1,129 @@
+@base = http://127.0.0.1:8000/v1
+@token = YOUR_LOCAL_ACCESS_TOKEN
+@brand = BRAND_UUID
+@concept = CONCEPT_UUID
+@background = BACKGROUND_ASSET_UUID
+@product = PRODUCT_UPLOAD_UUID
+@spec = VIDEO_SPEC_UUID
+@render = RENDER_JOB_UUID
+@searchId = STOCK_SEARCH_ID
+@stockAsset = STOCK_PROVIDER_ASSET_ID
+
+### Review the concept and approve the current revision before compiling
+POST {{base}}/concepts/{{concept}}/approve
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_revision": 1,
+  "human_review_completed": true,
+  "acknowledge_claim_risks": true,
+  "acknowledge_asset_requirements": true
+}
+
+### Upload an authorized clip (raw bytes)
+POST {{base}}/brands/{{brand}}/media?purpose=BACKGROUND&confirm_rights=true&description=Students%20working&tags=study,desk
+Authorization: Bearer {{token}}
+Content-Type: video/mp4
+
+< ./background.mp4
+
+### Upload an authorized product photograph
+POST {{base}}/brands/{{brand}}/media?purpose=PRODUCT&confirm_rights=true&tags=jacket
+Authorization: Bearer {{token}}
+Content-Type: image/jpeg
+
+< ./product.jpg
+
+### Search the brand library first and Pixabay when eligible
+GET {{base}}/brands/{{brand}}/media/search?q=study%20desk&media_type=VIDEO&orientation=PORTRAIT&min_width=240&min_height=240&min_duration=15&search_pixabay=true
+Authorization: Bearer {{token}}
+
+### Import a selected Pixabay result
+POST {{base}}/brands/{{brand}}/media/pixabay
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "search_id": "{{searchId}}",
+  "provider_asset_id": "{{stockAsset}}",
+  "media_type": "VIDEO",
+  "confirm_rights": true
+}
+
+### List private assets
+GET {{base}}/brands/{{brand}}/media
+Authorization: Bearer {{token}}
+
+### Render the captions from an approved concept over a clip
+POST {{base}}/concepts/{{concept}}/video-specs
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_concept_revision": 2,
+  "template": "TEXT_OVER_BROLL",
+  "background_asset_id": "{{background}}",
+  "confirm_media_use": true,
+  "audio": "SILENT",
+  "fit": "cover"
+}
+
+### Or use authorized product photos
+POST {{base}}/concepts/{{concept}}/video-specs
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_concept_revision": 2,
+  "template": "PRODUCT_REVEAL",
+  "product_asset_ids": ["{{product}}"],
+  "confirm_media_use": true,
+  "fit": "contain"
+}
+
+### Review the exact spec
+GET {{base}}/video-specs/{{spec}}
+Authorization: Bearer {{token}}
+
+### Change the caption style before starting a job
+PATCH {{base}}/video-specs/{{spec}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "expected_revision": 1,
+  "changes": {
+    "style": {
+      "position": "TOP",
+      "font_size": 62,
+      "color": "#FFFFFF",
+      "backdrop": "#101010",
+      "safe_margin": 100
+    }
+  }
+}
+
+### Start a job from the current revision
+POST {{base}}/video-specs/{{spec}}/renders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{"expected_revision": 2}
+
+### Poll until SUCCEEDED or FAILED
+GET {{base}}/renders/{{render}}
+Authorization: Bearer {{token}}
+
+### Preview the frame
+GET {{base}}/renders/{{render}}/preview
+Authorization: Bearer {{token}}
+
+### Seekable playback
+GET {{base}}/renders/{{render}}/video
+Authorization: Bearer {{token}}
+Range: bytes=0-65535
+
+### Download the finished MP4
+GET {{base}}/renders/{{render}}/video?download=true
+Authorization: Bearer {{token}}

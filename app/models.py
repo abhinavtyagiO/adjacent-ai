@@ -173,3 +173,4 @@ class CustomerConcern(Base):
 
 # Register Phase 2 tables with the shared Alembic metadata.
 from app.creative import models as creative_models  # noqa: E402,F401
+from app.video import models as video_models  # noqa: E402,F401
